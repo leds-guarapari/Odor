@@ -3,14 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Odor.Views.MenuPage"
              xmlns:pages="clr-namespace:Odor.Views">
-  <MasterDetailPage.Master>
-    <pages:MenuPageMaster x:Name="MasterPage" />
-  </MasterDetailPage.Master>
-  <MasterDetailPage.Detail>
-    <NavigationPage>
-      <x:Arguments>
-        <pages:MenuPageDetail />
-      </x:Arguments>
-    </NavigationPage>
-  </MasterDetailPage.Detail>
+    <MasterDetailPage.Master>
+        <ContentPage Title="Odor" Padding="0">
+            <ContentPage.Content>
+                <StackLayout>
+                    <Grid BackgroundColor="#03A9F4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="1"
+                               Grid.Row="2"
+                               Text="{Binding User.Name}"
+                               TextColor="White" FontSize="Large" />
+                    </Grid>
+                    <TableView Intent="Menu">
+                        <TableSection>
+                            <ViewCell >
+                                <StackLayout Padding="15,10">
+                                    <Label Text="Perfil" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell >
+                                <StackLayout Padding="15,10">
+                                    <Label Text="Odor" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell >
+                                <StackLayout Padding="15,10">
+                                    <Label Text="Sobre" VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableView>
+                </StackLayout>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <pages:MenuPageDetail />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
 </MasterDetailPage>

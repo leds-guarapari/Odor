@@ -20,13 +20,7 @@ namespace Odor.Views
         {
             base.OnAppearing();
             viewModel.LoadUserCommand.Execute(null);
-            if (this.viewModel.User != null && this.viewModel.User.Id != null && this.viewModel.User.Id.Length > 0)
-            {
-                Navigation.PushModalAsync(new MenuPage());
-            } else
-            {
-                Navigation.PushModalAsync(new UserPage());
-            }
+            Navigation.PushModalAsync(new MenuPage(viewModel));
         }
 
     }

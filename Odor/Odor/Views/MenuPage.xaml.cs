@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Odor.Models;
+using Odor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +14,24 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : MasterDetailPage
     {
-        public MenuPage()
+
+        private UserViewModel viewModel;
+
+        public MenuPage(UserViewModel viewModel)
         {
             InitializeComponent();
-            MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            BindingContext = this.viewModel = new UserViewModel();
+            User user = this.viewModel.User;
+            if (user != null && user.Id != null && user.Id.Length > 0)
+            {
+                Detail = new NavigationPage(new MasterPage());
+            } else
+            {
+                Detail = new NavigationPage(new UserPage());
+            }
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        /*private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as MenuPageMenuItem;
             if (item == null)
@@ -31,6 +44,7 @@ namespace Odor.Views
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;
-        }
+        }*/
+
     }
 }
