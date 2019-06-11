@@ -13,14 +13,20 @@ namespace Odor.Views
         public MainPage()
         {
             InitializeComponent();
-            this.viewModel = new UserViewModel();
-            BindingContext = this.viewModel;
+            BindingContext = this.viewModel = new UserViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             viewModel.LoadUserCommand.Execute(null);
+            if (this.viewModel.User != null && this.viewModel.User.Id != null && this.viewModel.User.Id.Length > 0)
+            {
+                Navigation.PushModalAsync(new MenuPage());
+            } else
+            {
+                Navigation.PushModalAsync(new UserPage());
+            }
         }
 
     }

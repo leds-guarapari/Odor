@@ -11,7 +11,7 @@ namespace Odor.ViewModels
 
         public User User;
 
-        public Command LoadUserCommand { get; set; }
+        public Command LoadUserCommand { get; private set; }
 
         public UserViewModel()
         {
@@ -33,7 +33,7 @@ namespace Odor.ViewModels
             }
             finally
             {
-                IsBusy = false;
+                this.IsBusy = false;
             }
         }
 

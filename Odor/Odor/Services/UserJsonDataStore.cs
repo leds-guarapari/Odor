@@ -1,6 +1,7 @@
 ﻿using Odor.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
@@ -18,7 +19,14 @@ namespace Odor.Services
 
         public UserJsonDataStore()
         {
-            this.user = serializer.ReadObject(File.Open(path, FileMode.OpenOrCreate)) as User;
+            try
+            {
+                this.user = serializer.ReadObject(File.Open(path, FileMode.OpenOrCreate)) as User;
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
         }
 
         public Task<bool> Add(User user)
@@ -43,9 +51,17 @@ namespace Odor.Services
 
         public Task<bool> Update(User user)
         {
-            this.user = user;
-            serializer.WriteObject(File.OpenWrite(path), this.user);
-            return Task.FromResult(true);
+            try
+            {
+                serializer.WriteObject(File.OpenWrite(path), this.user);
+                this.user = user;
+                return Task.FromResult(true);
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+                return Task.FromResult(false);
+            }
         }
     }
 }
