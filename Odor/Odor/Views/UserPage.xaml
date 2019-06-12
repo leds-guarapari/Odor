@@ -11,7 +11,7 @@
             <Image Source="odor_color.png"
                    HeightRequest="80"
                    HorizontalOptions="CenterAndExpand" />
-            <Label Text="Informe os dados abaixo para cadastro no aplicativo." HorizontalOptions="Center" />
+            <Label Text="Cadastro de informações pessoais" Margin="10" HorizontalOptions="Center" />
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
             <Entry x:Name="Name" Margin="20" Placeholder="Nome completo"></Entry>
             <Entry x:Name="Number" Margin="20" Keyboard="Numeric" Placeholder="Telefone"></Entry>
