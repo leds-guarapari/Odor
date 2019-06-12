@@ -25,26 +25,31 @@ namespace Odor.Views
             if (user != null && user.Id != null && user.Id.Length > 0)
             {
                 Detail = new NavigationPage(new MasterPage());
+                IsPresented = true;
             } else
             {
                 Detail = new NavigationPage(new UserPage());
+                IsPresented = false;
             }
         }
 
-        /*private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void GoUserPage(object sender, EventArgs args)
         {
-            var item = e.SelectedItem as MenuPageMenuItem;
-            if (item == null)
-                return;
-
-            var page = (Page)Activator.CreateInstance(item.TargetType);
-            page.Title = item.Title;
-
-            Detail = new NavigationPage(page);
+            User user = this.viewModel.User;
+            Detail.Navigation.PushAsync(new UserPage());
             IsPresented = false;
+        }
 
-            MasterPage.ListView.SelectedItem = null;
-        }*/
+        private void GoOdorPage(object sender, EventArgs args)
+        {
+            Detail.Navigation.PushAsync(new OdorPage());
+            IsPresented = false;
+        }
 
+        private void GoAboutPage(object sender, EventArgs args)
+        {
+            Detail.Navigation.PushAsync(new AboutPage());
+            IsPresented = false;
+        }
     }
 }

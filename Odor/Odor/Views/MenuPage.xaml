@@ -31,17 +31,17 @@
                     </Grid>
                     <TableView Intent="Menu">
                         <TableSection>
-                            <ViewCell >
+                            <ViewCell Tapped="GoUserPage">
                                 <StackLayout Padding="15,10">
                                     <Label Text="Perfil" VerticalTextAlignment="Center"/>
                                 </StackLayout>
                             </ViewCell>
-                            <ViewCell >
+                            <ViewCell Tapped="GoOdorPage">
                                 <StackLayout Padding="15,10">
                                     <Label Text="Odor" VerticalTextAlignment="Center"/>
                                 </StackLayout>
                             </ViewCell>
-                            <ViewCell >
+                            <ViewCell Tapped="GoAboutPage">
                                 <StackLayout Padding="15,10">
                                     <Label Text="Sobre" VerticalTextAlignment="Center"/>
                                 </StackLayout>
