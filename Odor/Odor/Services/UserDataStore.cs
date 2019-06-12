@@ -6,18 +6,19 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.UserJsonDataStore))]
+[assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.UserDataStore))]
 namespace Odor.Services
 {
-    public class UserJsonDataStore : IDataStore<User>
+    class UserDataStore : IDataStore<User>
     {
+
         private string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "user.json");
 
         private DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(User));
 
         private User user;
 
-        public UserJsonDataStore()
+        public UserDataStore()
         {
             try
             {
