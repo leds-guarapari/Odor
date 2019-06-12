@@ -57,7 +57,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <pages:MenuPageDetail />
+                <pages:MasterPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>
