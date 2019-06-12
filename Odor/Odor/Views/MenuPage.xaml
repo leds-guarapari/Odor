@@ -19,10 +19,15 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
+                        <Image Source="odor.png"
+                               HeightRequest="80"
+                               HorizontalOptions="Center" />
                         <Label Grid.Column="1"
                                Grid.Row="2"
-                               Text="{Binding User.Name}"
-                               TextColor="White" FontSize="Large" />
+                               Text="{Binding User.FirstName}"
+                               TextColor="White"
+                               FontSize="Large"
+                               HorizontalOptions="Center" />
                     </Grid>
                     <TableView Intent="Menu">
                         <TableSection>
