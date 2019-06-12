@@ -12,7 +12,6 @@ namespace Odor
 		public App ()
 		{
 			InitializeComponent();
-
 			MainPage = new MainPage();
 		}
 

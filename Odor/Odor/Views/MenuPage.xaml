@@ -14,14 +14,16 @@
                             <ColumnDefinition Width="10"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="80"/>
                             <RowDefinition Height="80"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
-                        <Image Source="odor.png"
-                               HeightRequest="80"
-                               HorizontalOptions="Center" />
+                        <Image Grid.Column="1"
+                               Grid.Row="1"
+                               Source="odor.png"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="StartAndExpand" />
                         <Label Grid.Column="1"
                                Grid.Row="2"
                                Text="{Binding User.FirstName}"

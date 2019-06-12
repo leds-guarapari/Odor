@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:behavior="clr-namespace:Odor.Behaviors"
              x:Class="Odor.Views.UserPage"
              Title="Perfil">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salvar" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="Name" Placeholder="Nome completo"></Entry>
-            <Entry x:Name="Number" Keyboard="Numeric" Placeholder="Telefone">
-                <Entry.Behaviors>
-                    <behavior:PhoneMaskedBehavior Mask="(XX) XXXXX-XXXX" />
-                </Entry.Behaviors>
-            </Entry>
+        <StackLayout Padding="10">
+            <Image Source="odor_color.png"
+                   HeightRequest="80"
+                   HorizontalOptions="CenterAndExpand" />
+            <Label Text="Informe os dados abaixo para cadastro no aplicativo." />
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
+            <Entry x:Name="Name" Margin="20" Placeholder="Nome completo"></Entry>
+            <Entry x:Name="Number" Margin="20" Keyboard="Numeric" Placeholder="Telefone"></Entry>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

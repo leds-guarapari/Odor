@@ -19,8 +19,8 @@ namespace Odor.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.LoadUserCommand.Execute(null);
-            Application.Current.MainPage = new MenuPage(viewModel);
+            this.viewModel.LoadUserCommand.Execute(null);
+            Navigation.PushModalAsync(new MenuPage(this.viewModel));
         }
 
     }

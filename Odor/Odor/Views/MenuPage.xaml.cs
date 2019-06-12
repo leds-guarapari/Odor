@@ -21,14 +21,16 @@ namespace Odor.Views
         {
             InitializeComponent();
             BindingContext = this.viewModel = new UserViewModel();
+            Detail = new NavigationPage(new MasterPage());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             User user = this.viewModel.User;
-            if (user != null && user.Id != null && user.Id.Length > 0)
+            if (user == null || string.IsNullOrEmpty(user.Id))
             {
-                Detail = new NavigationPage(new MasterPage());
-                IsPresented = true;
-            } else
-            {
-                Detail = new NavigationPage(new UserPage());
+                Detail.Navigation.PushAsync(new UserPage());
                 IsPresented = false;
             }
         }

@@ -3,19 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Odor.Views.MasterPage"
              Title="Odor">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Novo" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="10">
             <ListView>
                 <ListView.Header>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Header" />
+                    <StackLayout Orientation="Horizontal" Margin="20">
+                        <Label Text="Confira a listagem de odores ou clique em Novo." />
                     </StackLayout>
                 </ListView.Header>
-                <ListView.Footer>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Footer" />
-                    </StackLayout>
-                </ListView.Footer>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell />
