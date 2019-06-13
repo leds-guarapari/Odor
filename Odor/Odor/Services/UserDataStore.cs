@@ -3,22 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
+using Newtonsoft.Json;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.UserDataStore))]
 namespace Odor.Services
 {
     class UserDataStore : IDataStore<User>
     {
-
-        private string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "user.json");
-
         private FirebaseClient firebase = new FirebaseClient(Configuration.Path);
-
-        private DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(User));
 
         private User user = new User();
 
@@ -26,7 +21,10 @@ namespace Odor.Services
         {
             try
             {
-                this.user = serializer.ReadObject(File.Open(path, FileMode.OpenOrCreate)) as User;
+                this.user = JsonConvert.DeserializeObject<User>(
+                    File.ReadAllText(Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        Configuration.File)));
             }
             catch (Exception exception)
             {
@@ -38,15 +36,17 @@ namespace Odor.Services
         {
             try
             {
-                /* return firebase
+                firebase
                     .Child("users")
                     .PostAsync(user)
                     .ContinueWith(task => {
                         user.Id = task.Result.Key;
                         this.user = user;
-                        serializer.WriteObject(File.OpenWrite(path), this.user);
-                        return Task.FromResult(true);
-                    }).Result; */
+                    });
+                File.WriteAllText(Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                            Configuration.File),
+                            JsonConvert.SerializeObject(this.user, Formatting.Indented));
                 return Task.FromResult(true);
             }
             catch (Exception exception)
@@ -75,15 +75,18 @@ namespace Odor.Services
         {
             try
             {
-                /* return firebase
+                firebase
                     .Child("users")
                     .Child(user.Id)
-                    .PutAsync(user)
-                    .ContinueWith(task => {
-                        this.user = user;
-                        serializer.WriteObject(File.OpenWrite(path), this.user);
-                        return Task.FromResult(true);
-                    }).Result; */
+                    .PutAsync(new User
+                    {
+                        Name = user.Name,
+                        Number = user.Number
+                    });
+                File.WriteAllText(Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                            Configuration.File),
+                            JsonConvert.SerializeObject(this.user, Formatting.Indented));
                 return Task.FromResult(true);
             }
             catch (Exception exception)

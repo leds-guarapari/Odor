@@ -9,7 +9,6 @@ namespace Odor.ViewModels
 {
     public class UserViewModel : BaseViewModel<User>
     {
-
         public User User { get; set; }
 
         public Command LoadUserCommand { get; private set; }
@@ -58,6 +57,5 @@ namespace Odor.ViewModels
                 this.IsBusy = false;
             }
         }
-
     }
 }

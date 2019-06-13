@@ -12,6 +12,7 @@
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
             <Entry x:Name="Name" Text="{Binding User.Name}" Margin="20" Placeholder="Nome completo"></Entry>
             <Entry x:Name="Number" Text="{Binding User.Number}" Margin="20" Keyboard="Numeric" Placeholder="Telefone"></Entry>
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsRunning="False" WidthRequest="50" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
