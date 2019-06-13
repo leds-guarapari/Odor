@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Odor.Views.MasterPage"
-             Title="Odor">
+             x:Class="Odor.Views.MasterPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Novo" />
     </ContentPage.ToolbarItems>
@@ -10,8 +9,9 @@
         <StackLayout Padding="10">
             <ListView>
                 <ListView.Header>
-                    <StackLayout Orientation="Horizontal" Margin="20">
-                        <Label Text="Confira a listagem de odores ou clique em Novo." />
+                    <StackLayout>
+                        <Label Text="Listagem de odores" Margin="10" HorizontalOptions="Center" />
+                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
                     </StackLayout>
                 </ListView.Header>
                 <ListView.ItemTemplate>

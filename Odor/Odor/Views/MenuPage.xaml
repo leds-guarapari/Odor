@@ -14,8 +14,8 @@
                             <ColumnDefinition Width="10"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
-                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="200"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
@@ -23,13 +23,7 @@
                                Grid.Row="1"
                                Source="odor.png"
                                HorizontalOptions="CenterAndExpand"
-                               VerticalOptions="StartAndExpand" />
-                        <Label Grid.Column="1"
-                               Grid.Row="2"
-                               Text="{Binding User.FirstName}"
-                               TextColor="White"
-                               FontSize="Large"
-                               HorizontalOptions="Center" />
+                               VerticalOptions="CenterAndExpand" />
                     </Grid>
                     <TableView Intent="Menu">
                         <TableSection>

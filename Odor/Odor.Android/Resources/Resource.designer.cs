@@ -3724,8 +3724,20 @@ namespace Odor.Droid
 			// aapt resource value: 0x7f090027
 			public const int abc_toolbar_collapse_description = 2131296295;
 			
+			// aapt resource value: 0x7f09003e
+			public const int app_name = 2131296318;
+			
 			// aapt resource value: 0x7f090036
 			public const int appbar_scrolling_view_behavior = 2131296310;
+			
+			// aapt resource value: 0x7f090040
+			public const int back4app_app_id = 2131296320;
+			
+			// aapt resource value: 0x7f090041
+			public const int back4app_dotnet_key = 2131296321;
+			
+			// aapt resource value: 0x7f09003f
+			public const int back4app_server_url = 2131296319;
 			
 			// aapt resource value: 0x7f090037
 			public const int bottom_sheet_behavior = 2131296311;

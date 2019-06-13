@@ -1,11 +1,6 @@
 ﻿using Odor.Models;
 using Odor.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,11 +12,11 @@ namespace Odor.Views
 
         private UserViewModel viewModel;
 
-        public MenuPage(UserViewModel viewModel)
+        public MenuPage()
         {
             InitializeComponent();
             BindingContext = this.viewModel = new UserViewModel();
-            Detail = new NavigationPage(new MasterPage());
+            this.viewModel.LoadUserCommand.Execute(null);
         }
 
         protected override void OnAppearing()

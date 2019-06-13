@@ -11,13 +11,5 @@ namespace Odor.Models
         public string Name { get; set; }
         [DataMember]
         public string Number { get; set; }
-
-        public string FirstName
-        {
-            get
-            {
-                return this.Name?.Split(' ')[0] ?? "";
-            }
-        }
     }
 }

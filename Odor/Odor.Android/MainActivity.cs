@@ -1,11 +1,7 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Parse;
 
 namespace Odor.Droid
 {
@@ -18,6 +14,17 @@ namespace Odor.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+                        
+            // Back4App Initialization
+            ParseClient.Initialize(new ParseClient.Configuration
+            {
+                ApplicationId = "zgls9IIOj4bC0TA18w32I5u5hLBFwmwty8MvNwC8",
+                WindowsKey = "Pfm8qjNMd1eV1B0IIRjxeHRWkC5wR3QiMgx7Jufc",
+                Server = "https://parseap.back4app.com"
+            });
+
+            // Save the current installation to Back4App
+            ParseInstallation.CurrentInstallation.SaveAsync();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());

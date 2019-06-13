@@ -8,9 +8,6 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Image Source="odor_color.png"
-                   HeightRequest="80"
-                   HorizontalOptions="CenterAndExpand" />
             <Label Text="Cadastro de informações pessoais" Margin="10" HorizontalOptions="Center" />
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
             <Entry x:Name="Name" Margin="20" Placeholder="Nome completo"></Entry>
