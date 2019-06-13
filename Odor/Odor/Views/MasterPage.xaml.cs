@@ -16,5 +16,10 @@ namespace Odor.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void GoOdorPage(object sender, EventArgs args)
+        {
+            MessagingCenter.Send(string.Empty, "Odor");
+        }
+    }
 }

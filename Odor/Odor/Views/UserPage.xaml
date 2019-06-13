@@ -4,14 +4,14 @@
              x:Class="Odor.Views.UserPage"
              Title="Perfil">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salvar" />
+        <ToolbarItem Text="Salvar" Clicked="SaveClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Cadastro de informações pessoais" Margin="10" HorizontalOptions="Center" />
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
-            <Entry x:Name="Name" Margin="20" Placeholder="Nome completo"></Entry>
-            <Entry x:Name="Number" Margin="20" Keyboard="Numeric" Placeholder="Telefone"></Entry>
+            <Entry x:Name="Name" Text="{Binding User.Name}" Margin="20" Placeholder="Nome completo"></Entry>
+            <Entry x:Name="Number" Text="{Binding User.Number}" Margin="20" Keyboard="Numeric" Placeholder="Telefone"></Entry>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

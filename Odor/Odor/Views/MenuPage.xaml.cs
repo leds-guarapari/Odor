@@ -17,23 +17,28 @@ namespace Odor.Views
             InitializeComponent();
             BindingContext = this.viewModel = new UserViewModel();
             this.viewModel.LoadUserCommand.Execute(null);
+            MessagingCenter.Subscribe<string, string>(this, "Menu", (Title, Message) => {
+                DisplayAlert(Title, Message, "Ok");
+            });
+            MessagingCenter.Subscribe<string>(this, "Odor", (Id) => {
+                Detail.Navigation.PushAsync(new OdorPage());
+                IsPresented = false;
+            });
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            User user = this.viewModel.User;
-            if (user == null || string.IsNullOrEmpty(user.Id))
+            if (string.IsNullOrEmpty(this.viewModel.User.Id))
             {
-                Detail.Navigation.PushAsync(new UserPage());
+                Detail.Navigation.PushAsync(new UserPage(this.viewModel.User));
                 IsPresented = false;
             }
         }
 
         private void GoUserPage(object sender, EventArgs args)
         {
-            User user = this.viewModel.User;
-            Detail.Navigation.PushAsync(new UserPage());
+            Detail.Navigation.PushAsync(new UserPage(this.viewModel.User));
             IsPresented = false;
         }
 
