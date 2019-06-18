@@ -11,12 +11,16 @@ namespace Odor.ViewModels
     {
         public User User { get; set; }
 
-        public Command LoadUserCommand { get; private set; }
-
         public UserViewModel()
         {
-            LoadUserCommand = new Command(async () => await ExecuteLoadUserCommand());
-            MessagingCenter.Subscribe<UserPage, User>(this, "AddUser", async (page, user) =>
+            MessagingCenter.Subscribe<string>(this, "GetUser", async (user) =>
+            {
+                if (string.IsNullOrEmpty((this.User = await DataStore.Get(this.User)).Id))
+                {
+                    MessagingCenter.Send(string.Empty, "User");
+                }
+            });
+            MessagingCenter.Subscribe<User>(this, "AddUser", async (user) =>
             {
                 if (await DataStore.Add(user))
                 {
@@ -26,7 +30,7 @@ namespace Odor.ViewModels
                     MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
                 }
             });
-            MessagingCenter.Subscribe<UserPage, User>(this, "UpdateUser", async (page, user) =>
+            MessagingCenter.Subscribe<User>(this, "UpdateUser", async (user) =>
             {
                 if (await DataStore.Update(user))
                 {
@@ -37,25 +41,6 @@ namespace Odor.ViewModels
                     MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
                 }
             });
-        }
-
-        private async Task ExecuteLoadUserCommand()
-        {
-            if (this.IsBusy)
-                return;
-            this.IsBusy = true;
-            try
-            {
-                User = await DataStore.Get(User);
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-            finally
-            {
-                this.IsBusy = false;
-            }
         }
     }
 }

@@ -10,13 +10,12 @@ namespace Odor.Views
     public partial class MenuPage : MasterDetailPage
     {
 
-        private UserViewModel viewModel;
+        private readonly UserViewModel viewModel;
 
         public MenuPage()
         {
             InitializeComponent();
             BindingContext = this.viewModel = new UserViewModel();
-            this.viewModel.LoadUserCommand.Execute(null);
             MessagingCenter.Subscribe<string, string>(this, "Menu", (Title, Message) => {
                 DisplayAlert(Title, Message, "Ok");
             });
@@ -24,16 +23,11 @@ namespace Odor.Views
                 Detail.Navigation.PushAsync(new OdorPage());
                 IsPresented = false;
             });
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            if (string.IsNullOrEmpty(this.viewModel.User.Id))
-            {
+            MessagingCenter.Subscribe<string>(this, "User", (Id) => {
                 Detail.Navigation.PushAsync(new UserPage(this.viewModel.User));
                 IsPresented = false;
-            }
+            });
+            MessagingCenter.Send(string.Empty, "GetUser");
         }
 
         private void GoUserPage(object sender, EventArgs args)

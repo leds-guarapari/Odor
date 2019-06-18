@@ -4,15 +4,17 @@
              x:Class="Odor.Views.UserPage"
              Title="Perfil">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salvar" Clicked="SaveClicked" />
+        <ToolbarItem Text="Salvar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Cadastro de informações pessoais" Margin="10" HorizontalOptions="Center" />
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
-            <Entry x:Name="Name" Text="{Binding User.Name}" Margin="20" Placeholder="Nome completo"></Entry>
-            <Entry x:Name="Number" Text="{Binding User.Number}" Margin="20" Keyboard="Numeric" Placeholder="Telefone"></Entry>
-            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsRunning="False" WidthRequest="50" HeightRequest="50" />
+            <Entry x:Name="Name" Text="{Binding User.Name}" Margin="10, 0" Placeholder="Nome completo" IsSpellCheckEnabled="false" IsTextPredictionEnabled="false"></Entry>
+            <Label Text="Digite o nome completo" Margin="15, 0" HorizontalOptions="Start" FontSize="Micro" />
+            <Entry x:Name="Number" Text="{Binding User.Number}" Margin="10, 0" Keyboard="Telephone" Placeholder="Telefone"></Entry>
+            <Label Text="Digite o telefone com DDD" Margin="15, 0" HorizontalOptions="Start" FontSize="Micro" />
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

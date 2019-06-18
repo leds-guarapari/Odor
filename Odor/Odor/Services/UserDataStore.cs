@@ -13,24 +13,9 @@ namespace Odor.Services
 {
     class UserDataStore : IDataStore<User>
     {
-        private FirebaseClient firebase = new FirebaseClient(Configuration.Path);
+        private readonly FirebaseClient firebase = new FirebaseClient(Configuration.Path);
 
         private User user = new User();
-
-        public UserDataStore()
-        {
-            try
-            {
-                this.user = JsonConvert.DeserializeObject<User>(
-                    File.ReadAllText(Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        Configuration.File)));
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-        }
 
         public Task<bool> Add(User user)
         {
@@ -42,11 +27,11 @@ namespace Odor.Services
                     .ContinueWith(task => {
                         user.Id = task.Result.Key;
                         this.user = user;
-                    });
-                File.WriteAllText(Path.Combine(
+                        File.WriteAllText(Path.Combine(
                             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                             Configuration.File),
                             JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                    });
                 return Task.FromResult(true);
             }
             catch (Exception exception)
@@ -63,6 +48,17 @@ namespace Odor.Services
 
         public Task<User> Get(User user)
         {
+            try
+            {
+                this.user = JsonConvert.DeserializeObject<User>(
+                    File.ReadAllText(Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        Configuration.File)));
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
             return Task.FromResult(this.user);
         }
 
@@ -82,11 +78,14 @@ namespace Odor.Services
                     {
                         Name = user.Name,
                         Number = user.Number
-                    });
-                File.WriteAllText(Path.Combine(
+                    })
+                    .ContinueWith(task => {
+                        this.user = user;
+                        File.WriteAllText(Path.Combine(
                             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                             Configuration.File),
                             JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                    });
                 return Task.FromResult(true);
             }
             catch (Exception exception)

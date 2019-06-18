@@ -2,43 +2,52 @@
 using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Odor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class UserPage : ContentPage
+	public partial class UserPage : ContentPage, INotifyPropertyChanged
     {
         public User User { get; set; }
+
+        public ICommand SaveCommand { get; private set; }
 
         public UserPage (User user)
 		{
 			InitializeComponent ();
             this.User = user;
+            SaveCommand = new Command(async () => { IsBusy = true; await Save(); }, () => !string.IsNullOrEmpty(User.Name) && !string.IsNullOrEmpty(User.Number) );
             BindingContext = this;
         }
 
-        void SaveClicked(object sender, EventArgs e)
+        async Task Save()
         {
-            if (string.IsNullOrEmpty(User.Name) || string.IsNullOrEmpty(User.Number))
+            await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
             {
-                DisplayAlert("Aviso", "Dados obrigatórios.", "Ok");
-            }
-            else
-            {
-                //IsLoading = true;
-                //Thread.Sleep(5000);
                 if (string.IsNullOrEmpty(User.Id))
                 {
-                    MessagingCenter.Send(this, "AddUser", User);
+                    MessagingCenter.Send(User, "AddUser");
                 }
                 else
                 {
-                    MessagingCenter.Send(this, "UpdateUser", User);
+                    MessagingCenter.Send(User, "UpdateUser");
                 }
-                //IsLoading = false;
-                Navigation.PopToRootAsync();
+            }));
+            await Navigation.PopToRootAsync();
+        }
+
+        private bool isBusy = false;
+        public new bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
             }
         }
     }
