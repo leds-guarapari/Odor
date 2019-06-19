@@ -12,16 +12,52 @@ namespace Odor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UserPage : ContentPage, INotifyPropertyChanged
     {
+
         public User User { get; set; }
 
         public ICommand SaveCommand { get; private set; }
 
+        public ICommand ValidateCommand { get; private set; }
+
+        public ICommand InvalidateNameCommand { get; private set; }
+
+        public ICommand InvalidateNumberCommand { get; private set; }
+
         public UserPage (User user)
 		{
 			InitializeComponent ();
-            this.User = user;
-            SaveCommand = new Command(async () => { IsBusy = true; await Save(); }, () => !string.IsNullOrEmpty(User.Name) && !string.IsNullOrEmpty(User.Number) );
+            this.User = new User {
+                Id = user.Id,
+                Name = user.Name,
+                Number = user.Number
+            };
+            SaveCommand = new Command(async () => { await this.Dispatch(); });
+            ValidateCommand = new Command<object>((sender) => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });
+            InvalidateNameCommand = new Command<object>((sender) => { this.IsInvalidateName = string.IsNullOrWhiteSpace(this.User.Name); });
+            InvalidateNumberCommand = new Command<object>((sender) => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
             BindingContext = this;
+        }
+
+        private void NameTextChanged(object sender, TextChangedEventArgs args)
+        {
+            InvalidateNameCommand.Execute(sender);
+            ValidateCommand.Execute(sender);
+        }
+
+        private void NumberTextChanged(object sender, TextChangedEventArgs args)
+        {
+            InvalidateNumberCommand.Execute(sender);
+            ValidateCommand.Execute(sender);
+        }
+
+
+        async Task Dispatch()
+        {
+            if (this.IsValidate && !this.IsBusy)
+            {
+                this.IsBusy = true;
+                await this.Save();
+            }
         }
 
         async Task Save()
@@ -38,6 +74,39 @@ namespace Odor.Views
                 }
             }));
             await Navigation.PopToRootAsync();
+        }
+
+        private bool isInvalidateName = false;
+        public bool IsInvalidateName
+        {
+            get { return isInvalidateName; }
+            set
+            {
+                isInvalidateName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool isInvalidateNumber = false;
+        public bool IsInvalidateNumber
+        {
+            get { return isInvalidateNumber; }
+            set
+            {
+                isInvalidateNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool isValidate = false;
+        public bool IsValidate
+        {
+            get { return isValidate; }
+            set
+            {
+                isValidate = value;
+                OnPropertyChanged();
+            }
         }
 
         private bool isBusy = false;

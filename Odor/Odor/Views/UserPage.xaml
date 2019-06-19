@@ -10,10 +10,12 @@
         <StackLayout Padding="10">
             <Label Text="Cadastro de informações pessoais" Margin="10" HorizontalOptions="Center" />
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
-            <Entry x:Name="Name" Text="{Binding User.Name}" Margin="10, 0" Placeholder="Nome completo" IsSpellCheckEnabled="false" IsTextPredictionEnabled="false"></Entry>
-            <Label Text="Digite o nome completo" Margin="15, 0" HorizontalOptions="Start" FontSize="Micro" />
-            <Entry x:Name="Number" Text="{Binding User.Number}" Margin="10, 0" Keyboard="Telephone" Placeholder="Telefone"></Entry>
-            <Label Text="Digite o telefone com DDD" Margin="15, 0" HorizontalOptions="Start" FontSize="Micro" />
+            <Label Text="Digite o nome e sobrenome" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" />
+            <Entry x:Name="Name" Text="{Binding User.Name}" Margin="10, 0" Placeholder="Nome completo" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" TextChanged="NameTextChanged"></Entry>
+            <Label Text="O nome é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateName}" HorizontalOptions="Start" FontSize="Small" />
+            <Label Text="Digite o telefone com DDD" Margin="15, 20, 15, 0" HorizontalOptions="Start" FontSize="Small" />
+            <Entry x:Name="Number" Text="{Binding User.Number}" Margin="10, 0" Keyboard="Telephone" Placeholder="Telefone" TextChanged="NumberTextChanged"></Entry>
+            <Label Text="O telefone é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateNumber}" HorizontalOptions="Start" FontSize="Small" />
             <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
