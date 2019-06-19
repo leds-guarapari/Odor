@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Odor.Models
+﻿namespace Odor.Models
 {
     public class User
     {

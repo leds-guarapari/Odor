@@ -7,16 +7,16 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <ListView>
+            <ListView ItemsSource="{Binding Odors}">
                 <ListView.Header>
                     <StackLayout>
                         <Label Text="Listagem de odores" Margin="10" HorizontalOptions="Center" />
-                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
+                        <BoxView HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 10" HeightRequest="1" Color="LightGray"/>
                     </StackLayout>
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell />
+                        <TextCell Text="{Binding Id}" Detail="{Binding Intensity}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

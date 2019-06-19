@@ -1,26 +1,19 @@
-﻿using Odor.Models;
-using Odor.Views;
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Odor.ViewModels
 {
-    public class UserViewModel : BaseViewModel<User>
+    public class UserViewModel : BaseViewModel<Models.User>
     {
-        public User User { get; set; }
+        public Models.User User { get; set; }
 
         public UserViewModel()
         {
-            MessagingCenter.Subscribe<string>(this, "GetUser", async (user) =>
+            this.User = new Models.User();
+            MessagingCenter.Subscribe<string>(this, "GetUser", async (Id) =>
             {
-                if (string.IsNullOrEmpty((this.User = await DataStore.Get(this.User)).Id))
-                {
-                    MessagingCenter.Send(string.Empty, "User");
-                }
+                MessagingCenter.Send((this.User = await DataStore.Get(new Models.User { Id = Id })).Id, "User");
             });
-            MessagingCenter.Subscribe<User>(this, "AddUser", async (user) =>
+            MessagingCenter.Subscribe<Models.User>(this, "AddUser", async (user) =>
             {
                 if (await DataStore.Add(user))
                 {
@@ -31,7 +24,7 @@ namespace Odor.ViewModels
                     MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
                 }
             });
-            MessagingCenter.Subscribe<User>(this, "UpdateUser", async (user) =>
+            MessagingCenter.Subscribe<Models.User>(this, "UpdateUser", async (user) =>
             {
                 if (await DataStore.Update(user))
                 {

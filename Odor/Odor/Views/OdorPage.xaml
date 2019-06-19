@@ -3,13 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Odor.Views.OdorPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salvar" />
+        <ToolbarItem Text="Salvar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="10">
+            <Label Text="Cadastro de Odor" Margin="10" HorizontalOptions="Center" />
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
+            <Label Text="Como descreve a intensidade do odor?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" />
+            <Picker Title="Intensidade" Margin="10, 0" SelectedItem="{Binding Odor.Intensity}" >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Desagradável</x:String>
+                        <x:String>Muito desagradável</x:String>
+                        <x:String>Insuportável</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

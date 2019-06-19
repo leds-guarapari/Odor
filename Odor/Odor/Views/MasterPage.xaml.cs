@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Odor.ViewModels;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,11 +8,11 @@ namespace Odor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MasterPage : ContentPage
 	{
-		public MasterPage ()
+        public MasterPage (OdorViewModel OdorViewModel)
 		{
 			InitializeComponent ();
-		}
-
+            BindingContext = OdorViewModel;
+        }
         private void GoOdorPage(object sender, EventArgs args)
         {
             MessagingCenter.Send(string.Empty, "Odor");

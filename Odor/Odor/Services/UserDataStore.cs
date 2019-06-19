@@ -1,5 +1,4 @@
-﻿using Odor.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -11,13 +10,12 @@ using Newtonsoft.Json;
 [assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.UserDataStore))]
 namespace Odor.Services
 {
-    class UserDataStore : IDataStore<User>
+    class UserDataStore : IDataStore<Models.User>
     {
         private readonly FirebaseClient firebase = new FirebaseClient(Configuration.Path);
 
-        private User user = new User();
-
-        public Task<bool> Add(User user)
+        private Models.User user = new Models.User();
+        public Task<bool> Add(Models.User user)
         {
             try
             {
@@ -28,8 +26,7 @@ namespace Odor.Services
                         user.Id = task.Result.Key;
                         this.user = user;
                         File.WriteAllText(Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                            Configuration.File),
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Configuration.File),
                             JsonConvert.SerializeObject(this.user, Formatting.Indented));
                     });
                 return Task.FromResult(true);
@@ -40,41 +37,14 @@ namespace Odor.Services
                 return Task.FromResult(false);
             }
         }
-
-        public Task<bool> Delete(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> Get(User user)
-        {
-            try
-            {
-                this.user = JsonConvert.DeserializeObject<User>(
-                    File.ReadAllText(Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        Configuration.File)));
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-            return Task.FromResult(this.user);
-        }
-
-        public Task<IEnumerable<User>> On(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Update(User user)
+        public Task<bool> Update(Models.User user)
         {
             try
             {
                 firebase
                     .Child("users")
                     .Child(user.Id)
-                    .PutAsync(new User
+                    .PutAsync(new Models.User
                     {
                         Name = user.Name,
                         Number = user.Number
@@ -82,8 +52,7 @@ namespace Odor.Services
                     .ContinueWith(task => {
                         this.user = user;
                         File.WriteAllText(Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                            Configuration.File),
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Configuration.File),
                             JsonConvert.SerializeObject(this.user, Formatting.Indented));
                     });
                 return Task.FromResult(true);
@@ -93,6 +62,32 @@ namespace Odor.Services
                 Debug.WriteLine(exception);
                 return Task.FromResult(false);
             }
+        }
+        public Task<bool> Delete(Models.User user)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<Models.User> Get(Models.User user)
+        {
+            try
+            {
+                this.user = JsonConvert.DeserializeObject<Models.User>(
+                    File.ReadAllText(Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Configuration.File)));
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
+            return Task.FromResult(this.user);
+        }
+        public Task<IEnumerable<Models.User>> Query(Models.User user)
+        {
+            throw new NotImplementedException();
+        }
+        public void On(Models.User user, Action<Models.User> action)
+        {
+            throw new NotImplementedException();
         }
     }
 }

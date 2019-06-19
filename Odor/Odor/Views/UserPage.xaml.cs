@@ -1,7 +1,4 @@
-﻿using Odor.Models;
-using System;
-using System.ComponentModel;
-using System.Threading;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -12,21 +9,15 @@ namespace Odor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UserPage : ContentPage, INotifyPropertyChanged
     {
-
-        public User User { get; set; }
-
+        public Models.User User { get; set; }
         public ICommand SaveCommand { get; private set; }
-
         public ICommand ValidateCommand { get; private set; }
-
         public ICommand InvalidateNameCommand { get; private set; }
-
         public ICommand InvalidateNumberCommand { get; private set; }
-
-        public UserPage (User user)
+        public UserPage (Models.User user)
 		{
 			InitializeComponent ();
-            this.User = new User {
+            this.User = new Models.User {
                 Id = user.Id,
                 Name = user.Name,
                 Number = user.Number
@@ -37,20 +28,16 @@ namespace Odor.Views
             InvalidateNumberCommand = new Command<object>((sender) => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
             BindingContext = this;
         }
-
         private void NameTextChanged(object sender, TextChangedEventArgs args)
         {
             InvalidateNameCommand.Execute(sender);
             ValidateCommand.Execute(sender);
         }
-
         private void NumberTextChanged(object sender, TextChangedEventArgs args)
         {
             InvalidateNumberCommand.Execute(sender);
             ValidateCommand.Execute(sender);
         }
-
-
         async Task Dispatch()
         {
             if (this.IsValidate && !this.IsBusy)
@@ -59,23 +46,21 @@ namespace Odor.Views
                 await this.Save();
             }
         }
-
         async Task Save()
         {
             await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
             {
-                if (string.IsNullOrEmpty(User.Id))
+                if (string.IsNullOrEmpty(this.User.Id))
                 {
-                    MessagingCenter.Send(User, "AddUser");
+                    MessagingCenter.Send(this.User, "AddUser");
                 }
                 else
                 {
-                    MessagingCenter.Send(User, "UpdateUser");
+                    MessagingCenter.Send(this.User, "UpdateUser");
                 }
             }));
             await Navigation.PopToRootAsync();
         }
-
         private bool isInvalidateName = false;
         public bool IsInvalidateName
         {
@@ -86,7 +71,6 @@ namespace Odor.Views
                 OnPropertyChanged();
             }
         }
-
         private bool isInvalidateNumber = false;
         public bool IsInvalidateNumber
         {
@@ -97,7 +81,6 @@ namespace Odor.Views
                 OnPropertyChanged();
             }
         }
-
         private bool isValidate = false;
         public bool IsValidate
         {
@@ -108,7 +91,6 @@ namespace Odor.Views
                 OnPropertyChanged();
             }
         }
-
         private bool isBusy = false;
         public new bool IsBusy
         {

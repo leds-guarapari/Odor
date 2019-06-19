@@ -9,7 +9,6 @@ namespace Odor.ViewModels
 {
     public class BaseViewModel<T> : INotifyPropertyChanged
     {
-
         public IDataStore<T> DataStore => DependencyService.Get<IDataStore<T>>();
 
         private bool isBusy = false;
@@ -18,7 +17,6 @@ namespace Odor.ViewModels
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
-
         protected bool SetProperty<P>(ref P storage, P value,
             [CallerMemberName]string propertyName = null,
             Action onChanged = null)
