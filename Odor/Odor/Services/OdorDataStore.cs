@@ -18,7 +18,10 @@ namespace Odor.Services
             {
                 firebase
                     .Child("odors")
-                    .PostAsync(odor);
+                    .PostAsync(odor)
+                    .ContinueWith(task => {
+                        odor.Id = task.Result.Key;
+                    });
                 return Task.FromResult(true);
             }
             catch (Exception exception)
@@ -42,8 +45,9 @@ namespace Odor.Services
                         Longitude = odor.Longitude,
                         Address = odor.Address,
                         Type = odor.Type,
-                        Duration = odor.Duration,
-                        DateTime = odor.DateTime
+                        Date = odor.Date,
+                        Begin = odor.Begin,
+                        End = odor.End
                     });
                 return Task.FromResult(true);
             }
@@ -75,9 +79,7 @@ namespace Odor.Services
             {
                 var result = firebase
                     .Child("odors")
-                    .OrderByKey()
-                    .StartAt(odor.Id)
-                    .LimitToFirst(1)
+                    .Child(odor.Id)
                     .OnceAsync<Models.Odor>()
                     .Result
                     .Last();
@@ -122,6 +124,7 @@ namespace Odor.Services
                 var observable = firebase
                     .Child("odors")
                     .OrderBy("UserId")
+                    .EqualTo(odor.UserId)
                     .AsObservable<Models.Odor>()
                     .Subscribe(result =>
                     {

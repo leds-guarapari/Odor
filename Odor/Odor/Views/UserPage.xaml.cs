@@ -23,20 +23,20 @@ namespace Odor.Views
                 Number = user.Number
             };
             SaveCommand = new Command(async () => { await this.Dispatch(); });
-            ValidateCommand = new Command<object>((sender) => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });
-            InvalidateNameCommand = new Command<object>((sender) => { this.IsInvalidateName = string.IsNullOrWhiteSpace(this.User.Name); });
-            InvalidateNumberCommand = new Command<object>((sender) => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
+            ValidateCommand = new Command(() => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });
+            InvalidateNameCommand = new Command(() => { this.IsInvalidateName = string.IsNullOrWhiteSpace(this.User.Name); });
+            InvalidateNumberCommand = new Command(() => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
             BindingContext = this;
         }
         private void NameTextChanged(object sender, TextChangedEventArgs args)
         {
-            InvalidateNameCommand.Execute(sender);
-            ValidateCommand.Execute(sender);
+            InvalidateNameCommand.Execute(null);
+            ValidateCommand.Execute(null);
         }
         private void NumberTextChanged(object sender, TextChangedEventArgs args)
         {
-            InvalidateNumberCommand.Execute(sender);
-            ValidateCommand.Execute(sender);
+            InvalidateNumberCommand.Execute(null);
+            ValidateCommand.Execute(null);
         }
         async Task Dispatch()
         {
@@ -44,6 +44,10 @@ namespace Odor.Views
             {
                 this.IsBusy = true;
                 await this.Save();
+            } else
+            {
+                InvalidateNameCommand.Execute(null);
+                InvalidateNumberCommand.Execute(null);
             }
         }
         async Task Save()

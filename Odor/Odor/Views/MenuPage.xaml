@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Odor.Views.MenuPage">
+             x:Class="Odor.Views.MenuPage"
+             Visual="Material">
     <MasterDetailPage.Master>
         <ContentPage Title="Odor" Padding="0">
             <ContentPage.Content>
                 <StackLayout>
-                    <Grid BackgroundColor="#03A9F4">
+                    <Grid BackgroundColor="{StaticResource ColorPrimaryDark}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="*"/>
@@ -14,13 +15,14 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10"/>
-                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="150"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
                         <Image Grid.Column="1"
                                Grid.Row="1"
                                Source="odor.png"
+                               HeightRequest="75"
                                HorizontalOptions="CenterAndExpand"
                                VerticalOptions="CenterAndExpand" />
                     </Grid>

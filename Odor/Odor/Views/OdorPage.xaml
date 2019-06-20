@@ -1,24 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Odor.Views.OdorPage">
+             x:Class="Odor.Views.OdorPage"
+             Visual="Material">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salvar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Label Text="Cadastro de Odor" Margin="10" HorizontalOptions="Center" />
+            <Label Text="Cadastro de odor" Margin="10" HorizontalOptions="Center" />
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
-            <Label Text="Como descreve a intensidade do odor?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" />
-            <Picker Title="Intensidade" Margin="10, 0" SelectedItem="{Binding Odor.Intensity}" >
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Desagradável</x:String>
-                        <x:String>Muito desagradável</x:String>
-                        <x:String>Insuportável</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <Label Text="Como descreve a intensidade do odor? De qual tipo?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+            <StackLayout Orientation="Horizontal" Margin="10, 0">
+                <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Desagradável</x:String>
+                            <x:String>Muito desagradável</x:String>
+                            <x:String>Insuportável</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}" HorizontalOptions="FillAndExpand">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Químico</x:String>
+                            <x:String>Apodrecido</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <Label Text="De onde veio o odor?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+            <Entry Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"></Entry>
+            <Label Text="Qual o dia do odor? Em que horário de início e fim?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+            <StackLayout Orientation="Horizontal" Margin="10, 0">
+                <DatePicker Date="{Binding Odor.Date}" />
+                <TimePicker Time="{Binding Odor.Begin}" />
+                <TimePicker Time="{Binding Odor.End}" />
+            </StackLayout>
             <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
         </StackLayout>
     </ContentPage.Content>

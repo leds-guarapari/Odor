@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,8 +23,9 @@ namespace Odor.Views
                 Longitude = odor.Longitude,
                 Address = odor.Address,
                 Type = odor.Type,
-                Duration = odor.Duration,
-                DateTime = odor.DateTime
+                Date = odor.Date,
+                Begin = odor.Begin,
+                End = odor.End
             };
             SaveCommand = new Command(async () => { await this.Dispatch(); });
             BindingContext = this;

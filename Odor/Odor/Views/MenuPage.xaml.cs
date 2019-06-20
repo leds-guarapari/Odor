@@ -28,7 +28,16 @@ namespace Odor.Views
                 }
                 else
                 {
-                    Detail.Navigation.PushAsync(new OdorPage(this.OdorViewModel.Odors.Where(odor => odor.Id.Equals(Id)).FirstOrDefault() ?? new Models.Odor { UserId = this.UserViewModel.User.Id }));
+                    Detail.Navigation.PushAsync(
+                        new OdorPage(this.OdorViewModel.Odors.Where(element => element.Id.Equals(Id)).FirstOrDefault() ??
+                        new Models.Odor {
+                            UserId = this.UserViewModel.User.Id,
+                            Intensity = "Desagradável",
+                            Type = "Químico",
+                            Date = DateTime.Today,
+                            Begin = DateTime.Now.TimeOfDay.Subtract(TimeSpan.FromHours(1)),
+                            End = DateTime.Now.TimeOfDay
+                        }));
                 }
                 IsPresented = false;
             });

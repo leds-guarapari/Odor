@@ -26,14 +26,15 @@ namespace Odor.ViewModels
             {
                 if (await DataStore.Update(odor))
                 {
-                    Models.Odor Odor = this.Odors.Where(o => o.Id.Equals(odor.Id)).FirstOrDefault();
+                    Models.Odor Odor = this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault();
                     Odor.Intensity = odor.Intensity;
                     Odor.Latitude = odor.Latitude;
                     Odor.Longitude = odor.Longitude;
                     Odor.Address = odor.Address;
                     Odor.Type = odor.Type;
-                    Odor.Duration = odor.Duration;
-                    Odor.DateTime = odor.DateTime;
+                    Odor.Date = odor.Date;
+                    Odor.Begin = odor.Begin;
+                    Odor.End = odor.End;
                     MessagingCenter.Send("Sucesso", "Menu", "Informações sobre odor atualizados.");
                 }
                 else
