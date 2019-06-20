@@ -25,7 +25,9 @@
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Químico</x:String>
-                            <x:String>Apodrecido</x:String>
+                            <x:String>Podrido</x:String>
+                            <x:String>Fumaça</x:String>
+                            <x:String>Poeira</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
