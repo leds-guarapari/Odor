@@ -3,11 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Odor.Views.MapsPage"
              Visual="Material">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Selecionar" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <WebView Source="{Binding Tile}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Navigated="WebViewNavigated" Navigating="WebViewNavigating" />
+            <StackLayout MinimumHeightRequest="150" Padding="10">
+                <Label Text="Endereço" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                <Label Text="{Binding Address}" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" />
+                <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odor.Android", "Odor\Odor.Android\Odor.Android.csproj", "{F8D3CE34-5104-4C99-9B8E-337D1FA26241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odor", "Odor\Odor\Odor.csproj", "{96BD17D3-FD5B-460F-BAAF-75E9F18FD538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Odor", "Odor\Odor\Odor.csproj", "{96BD17D3-FD5B-460F-BAAF-75E9F18FD538}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

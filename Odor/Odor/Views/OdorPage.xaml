@@ -12,7 +12,7 @@
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
             <Label Text="Como descreve a intensidade do odor? De qual tipo?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
             <StackLayout Orientation="Horizontal" Margin="10, 0">
-                <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}">
+                <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}" HorizontalOptions="FillAndExpand">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Desagradável</x:String>
@@ -21,7 +21,7 @@
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
-                <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}" HorizontalOptions="FillAndExpand">
+                <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Químico</x:String>
@@ -31,12 +31,20 @@
                 </Picker>
             </StackLayout>
             <Label Text="De onde veio o odor?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
-            <Entry Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"></Entry>
-            <Label Text="Qual o dia do odor? Em que horário de início e fim?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
             <StackLayout Orientation="Horizontal" Margin="10, 0">
-                <DatePicker Date="{Binding Odor.Date}" />
-                <TimePicker Time="{Binding Odor.Begin}" />
-                <TimePicker Time="{Binding Odor.End}" />
+                <Label Text="{Binding Odor.Address}" Margin="5, 0" HorizontalOptions="StartAndExpand"></Label>
+                <Button Text="Pesquisar" Clicked="AddressClicked" BackgroundColor="{StaticResource ColorPrimaryDark}"></Button>
+            </StackLayout>
+            <Label Text="Qual o dia do odor? Qual o horário de início e término?" Margin="15, 20, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+            <StackLayout Orientation="Horizontal" Margin="10, 10">
+                <Label Text="Dia" Margin="5, 5, 0, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                <Label Text="Início" Margin="0, 5, 0, 0" HorizontalOptions="CenterAndExpand" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                <Label Text="Término" Margin="0, 5, 5, 0" HorizontalOptions="End" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="10, 0">
+                <DatePicker Date="{Binding Odor.Date}" HorizontalOptions="Start" />
+                <TimePicker Time="{Binding Odor.Begin}" HorizontalOptions="CenterAndExpand" />
+                <TimePicker Time="{Binding Odor.End}" HorizontalOptions="End" />
             </StackLayout>
             <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
         </StackLayout>

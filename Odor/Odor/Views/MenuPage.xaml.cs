@@ -34,6 +34,7 @@ namespace Odor.Views
                             UserId = this.UserViewModel.User.Id,
                             Intensity = "Desagradável",
                             Type = "Químico",
+                            Address = "Não me recordo.",
                             Date = DateTime.Today,
                             Begin = DateTime.Now.TimeOfDay.Subtract(TimeSpan.FromHours(1)),
                             End = DateTime.Now.TimeOfDay

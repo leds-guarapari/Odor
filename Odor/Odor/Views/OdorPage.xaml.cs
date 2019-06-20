@@ -63,5 +63,9 @@ namespace Odor.Views
                 OnPropertyChanged();
             }
         }
+        private async void AddressClicked(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new MapsPage(this.Odor), true);
+        }
     }
 }
