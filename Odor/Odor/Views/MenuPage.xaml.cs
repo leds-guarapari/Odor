@@ -78,6 +78,8 @@ namespace Odor.Views
         {
             try
             {
+                // TODO pegar somente uma vez, quando a pessoa abre o aplicativo (fazer uma thread)
+                // guardar o último valor salvo
                 return await Geolocation.GetLastKnownLocationAsync();
             }
             catch (Exception exception)
