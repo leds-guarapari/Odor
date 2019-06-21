@@ -9,9 +9,9 @@
     <ContentPage.Content>
         <StackLayout>
             <WebView Source="{Binding Tile}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Navigated="WebViewNavigated" Navigating="WebViewNavigating" />
-            <StackLayout MinimumHeightRequest="150" Padding="10">
-                <Label Text="Endereço" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
-                <Label Text="{Binding Address}" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" />
+            <StackLayout MinimumHeightRequest="100" Padding="10">
+                <Label Text="Endereço" Margin="15, 10, 15, 0" HorizontalOptions="Start" VerticalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                <Label Text="{Binding Address}" Margin="15, 10, 15, 0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="Small" />
                 <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
             </StackLayout>
         </StackLayout>

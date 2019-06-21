@@ -5,7 +5,6 @@ namespace Odor.ViewModels
     public class UserViewModel : BaseViewModel<Models.User>
     {
         public Models.User User { get; set; }
-
         public UserViewModel()
         {
             this.User = new Models.User();

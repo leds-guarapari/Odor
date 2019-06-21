@@ -1,6 +1,9 @@
 ﻿using Odor.ViewModels;
 using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +13,6 @@ namespace Odor.Views
     public partial class MenuPage : MasterDetailPage
     {
         private readonly OdorViewModel OdorViewModel;
-
         private readonly UserViewModel UserViewModel;
         public MenuPage()
         {
@@ -18,23 +20,26 @@ namespace Odor.Views
             this.OdorViewModel = new OdorViewModel();
             BindingContext = this.UserViewModel = new UserViewModel();
             Detail = new NavigationPage(new MasterPage(this.OdorViewModel));
-            MessagingCenter.Subscribe<string, string>(this, "Menu", (Title, Message) => {
-                DisplayAlert(Title, Message, "Ok");
+            MessagingCenter.Subscribe<string, string>(this, "Menu", async (Title, Message) => {
+                await DisplayAlert(Title, Message, "Ok");
             });
-            MessagingCenter.Subscribe<string>(this, "Odor", (Id) => {
+            MessagingCenter.Subscribe<string>(this, "Odor", async (Id) => {
                 if (string.IsNullOrEmpty(this.UserViewModel.User.Id))
                 {
-                    Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
+                    await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
                 }
                 else
                 {
-                    Detail.Navigation.PushAsync(
+                    Location location = await Location();
+                    await Detail.Navigation.PushAsync(
                         new OdorPage(this.OdorViewModel.Odors.Where(element => element.Id.Equals(Id)).FirstOrDefault() ??
                         new Models.Odor {
                             UserId = this.UserViewModel.User.Id,
                             Intensity = "Desagradável",
                             Type = "Químico",
-                            Address = "Não me recordo.",
+                            Latitude = location.Latitude,
+                            Longitude = location.Longitude,
+                            Address = "Não informado.",
                             Date = DateTime.Today,
                             Begin = DateTime.Now.TimeOfDay.Subtract(TimeSpan.FromHours(1)),
                             End = DateTime.Now.TimeOfDay
@@ -42,10 +47,10 @@ namespace Odor.Views
                 }
                 IsPresented = false;
             });
-            MessagingCenter.Subscribe<string>(this, "User", (Id) => {
+            MessagingCenter.Subscribe<string>(this, "User", async (Id) => {
                 if (string.IsNullOrEmpty(Id))
                 {
-                    Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
+                    await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
                     IsPresented = false;
                 }
                 else
@@ -55,19 +60,31 @@ namespace Odor.Views
             });
             MessagingCenter.Send(string.Empty, "GetUser");
         }
-        private void GoUserPage(object sender, EventArgs args)
+        private async void GoUserPage(object sender, EventArgs args)
         {
-            Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
+            await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
             IsPresented = false;
         }
         private void GoOdorPage(object sender, EventArgs args)
         {
             MessagingCenter.Send(string.Empty, "Odor");
         }
-        private void GoAboutPage(object sender, EventArgs args)
+        private async void GoAboutPage(object sender, EventArgs args)
         {
-            Detail.Navigation.PushAsync(new AboutPage());
+            await Detail.Navigation.PushAsync(new AboutPage());
             IsPresented = false;
+        }
+        public static async Task<Location> Location()
+        {
+            try
+            {
+                return await Geolocation.GetLastKnownLocationAsync();
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
+            return await Task.FromResult(new Location(-20.2635, -40.2660));
         }
     }
 }

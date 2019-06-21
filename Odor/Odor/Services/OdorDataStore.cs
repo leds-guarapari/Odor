@@ -11,12 +11,12 @@ namespace Odor.Services
 {
     class OdorDataStore : IDataStore<Models.Odor>
     {
-        private readonly FirebaseClient firebase = new FirebaseClient(Configuration.Path);
+        private readonly FirebaseClient Firebase = new FirebaseClient(ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath);
         public Task<bool> Add(Models.Odor odor)
         {
             try
             {
-                firebase
+                this.Firebase
                     .Child("odors")
                     .PostAsync(odor)
                     .ContinueWith(task => {
@@ -34,7 +34,7 @@ namespace Odor.Services
         {
             try
             {
-                firebase
+                this.Firebase
                     .Child("odors")
                     .Child(odor.Id)
                     .PutAsync(new Models.Odor
@@ -61,7 +61,7 @@ namespace Odor.Services
         {
             try
             {
-                firebase
+                this.Firebase
                     .Child("odors")
                     .Child(odor.Id)
                     .DeleteAsync();
@@ -77,7 +77,7 @@ namespace Odor.Services
         {
             try
             {
-                var result = firebase
+                var result = this.Firebase
                     .Child("odors")
                     .Child(odor.Id)
                     .OnceAsync<Models.Odor>()
@@ -98,7 +98,7 @@ namespace Odor.Services
             IEnumerable<Models.Odor> odors = new List<Models.Odor>();
             try
             {
-                var results = firebase
+                var results = this.Firebase
                     .Child("odors")
                     .OrderBy("UserId")
                     .EqualTo(odor.UserId)
@@ -121,7 +121,7 @@ namespace Odor.Services
         {
             try
             {
-                var observable = firebase
+                var observable = this.Firebase
                     .Child("odors")
                     .OrderBy("UserId")
                     .EqualTo(odor.UserId)

@@ -12,22 +12,22 @@ namespace Odor.Services
 {
     class UserDataStore : IDataStore<Models.User>
     {
-        private readonly FirebaseClient firebase = new FirebaseClient(Configuration.Path);
+        private readonly FirebaseClient Firebase = new FirebaseClient(ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath);
+
+        private readonly string File = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigurationManager.Configuration.UserFile);
 
         private Models.User user = new Models.User();
         public Task<bool> Add(Models.User user)
         {
             try
             {
-                firebase
+                this.Firebase
                     .Child("users")
                     .PostAsync(user)
-                    .ContinueWith(task => {
+                    .ContinueWith((Task<FirebaseObject<Models.User>> task) => {
                         user.Id = task.Result.Key;
                         this.user = user;
-                        File.WriteAllText(Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Configuration.File),
-                            JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                        System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
                     });
                 return Task.FromResult(true);
             }
@@ -41,7 +41,7 @@ namespace Odor.Services
         {
             try
             {
-                firebase
+                this.Firebase
                     .Child("users")
                     .Child(user.Id)
                     .PutAsync(new Models.User
@@ -51,9 +51,7 @@ namespace Odor.Services
                     })
                     .ContinueWith(task => {
                         this.user = user;
-                        File.WriteAllText(Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Configuration.File),
-                            JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                        System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
                     });
                 return Task.FromResult(true);
             }
@@ -71,9 +69,7 @@ namespace Odor.Services
         {
             try
             {
-                this.user = JsonConvert.DeserializeObject<Models.User>(
-                    File.ReadAllText(Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Configuration.File)));
+                this.user = JsonConvert.DeserializeObject<Models.User>(System.IO.File.ReadAllText(this.File));
             }
             catch (Exception exception)
             {
