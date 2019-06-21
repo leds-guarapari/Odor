@@ -49,13 +49,22 @@ namespace Odor.Services
     }
     public class ConfigurationManager
     {
-        private static Configuration configuration;
-        public static Configuration Configuration {
+        public static IContainer Container { get; set; }
+        private static IConfiguration configuration;
+        public static IConfiguration Configuration {
             get
             {
                 if (configuration ==  null)
                 {
-                    configuration = new Configuration();
+                    try
+                    {
+                        configuration = Container.Resolve<IConfiguration>();
+                    }
+                    catch(Exception exception)
+                    {
+                        Debug.WriteLine(exception);
+                        configuration = new Configuration();
+                    }
                 }
                 return configuration;
             }

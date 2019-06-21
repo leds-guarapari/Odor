@@ -1,5 +1,7 @@
 ﻿using Xamarin.Forms;
 using Odor.Views;
+using Autofac;
+using Odor.Services;
 
 namespace Odor
 {
@@ -8,6 +10,9 @@ namespace Odor
 		public App ()
 		{
 			InitializeComponent();
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterModule(new ConfigurationModule());
+            ConfigurationManager.Container = builder.Build();
             MainPage = new MenuPage();
         }
 		protected override void OnStart ()
