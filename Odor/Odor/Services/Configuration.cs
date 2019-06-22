@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using Module = Autofac.Module;
 using Newtonsoft.Json;
-using System.Reflection;
-using System.IO;
-using System.Linq;
 using System;
 using System.Diagnostics;
+using System.Reflection;
+using System.Linq;
+using System.IO;
+using Xamarin.Essentials;
+using System.Threading;
 
 namespace Odor.Services
 {
@@ -14,8 +16,16 @@ namespace Odor.Services
         string UserFile { get; set; }
         string FirebaseRealtimeDatabasePath { get; set; }
         string GeomapTilePattern { get; set; }
+        string GeomapTileMatch { get; set; }
+        string GeomapResponseLanguage { get; set; }
         int GeomapDefaultZoom { get; set; }
         string GeocoderApiKey { get; set; }
+        string OdorIntensity { get; set; }
+        string OdorType { get; set; }
+        double OdorLatitude { get; set; }
+        double OdorLongitude { get; set; }
+        string OdorAddress { get; set; }
+        int OdorBeginSubtract { get; set; }
     }
     public class Configuration : IConfiguration
     {
@@ -24,8 +34,17 @@ namespace Odor.Services
         public string UserFile { get; set; }
         public string FirebaseRealtimeDatabasePath { get; set; }
         public string GeomapTilePattern { get; set; }
+        public string GeomapTileMatch { get; set; }
+        public string GeomapResponseLanguage { get; set; }
         public int GeomapDefaultZoom { get; set; }
         public string GeocoderApiKey { get; set; }
+        public string OdorIntensity { get; set; }
+        public string OdorType { get; set; }
+        public double OdorLatitude { get; set; }
+        public double OdorLongitude { get; set; }
+        public string OdorAddress { get; set; }
+        public int OdorBeginSubtract { get; set; }
+
     }
     public class ConfigurationModule : Module
     {
@@ -40,6 +59,31 @@ namespace Odor.Services
                     Configuration configuration = JsonConvert.DeserializeObject<Configuration>(reader.ReadToEnd()) ?? new Configuration();
                     builder.Register<IConfiguration>(register => configuration).SingleInstance();
                 }
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
+        }
+    }
+    public class LocationModule : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            try
+            {
+                new Thread(() => GetLocation(builder)).Start();
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
+        }
+        private void GetLocation(ContainerBuilder builder)
+        {
+            try
+            {
+                builder.Register<Location>(register => Geolocation.GetLastKnownLocationAsync().Result).SingleInstance();
             }
             catch (Exception exception)
             {
@@ -67,6 +111,36 @@ namespace Odor.Services
                     }
                 }
                 return configuration;
+            }
+        }
+        private static Location location;
+        public static Location Location
+        {
+            get
+            {
+                if (location == null)
+                {
+                    location = new Location();
+                    try
+                    {
+                        double latitude = Configuration.OdorLatitude;
+                        double longitude = Configuration.OdorLongitude;
+                        location = new Location(latitude, longitude);
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.WriteLine(exception);
+                    }
+                    try
+                    {
+                        location = Container.Resolve<Location>();
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.WriteLine(exception);
+                    }
+                }
+                return location;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenCage.Geocode;
+using System;
 
 namespace Odor.Models
 {
@@ -10,6 +11,7 @@ namespace Odor.Models
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Address { get; set; }
+        public Location Location { get; set; }
         public string Type { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Begin { get; set; }

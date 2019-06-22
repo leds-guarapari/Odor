@@ -1,4 +1,5 @@
-﻿using Odor.ViewModels;
+﻿using Odor.Services;
+using Odor.ViewModels;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -30,20 +31,23 @@ namespace Odor.Views
                 }
                 else
                 {
-                    Location location = await Location();
                     await Detail.Navigation.PushAsync(
-                        new OdorPage(this.OdorViewModel.Odors.Where(element => element.Id.Equals(Id)).FirstOrDefault() ??
-                        new Models.Odor {
-                            UserId = this.UserViewModel.User.Id,
-                            Intensity = "Desagradável",
-                            Type = "Químico",
-                            Latitude = location.Latitude,
-                            Longitude = location.Longitude,
-                            Address = "Não informado.",
-                            Date = DateTime.Today,
-                            Begin = DateTime.Now.TimeOfDay.Subtract(TimeSpan.FromHours(1)),
-                            End = DateTime.Now.TimeOfDay
-                        }));
+                        new OdorPage(
+                            this.OdorViewModel.Odors.Where(element => element.Id.Equals(Id)).FirstOrDefault() ??
+                            new Models.Odor {
+                                UserId = this.UserViewModel.User.Id,
+                                Intensity = ConfigurationManager.Configuration.OdorIntensity,
+                                Type = ConfigurationManager.Configuration.OdorType,
+                                Latitude = ConfigurationManager.Configuration.OdorLatitude,
+                                Longitude = ConfigurationManager.Configuration.OdorLongitude,
+                                Address = ConfigurationManager.Configuration.OdorAddress,
+                                Date = DateTime.Today,
+                                Begin = DateTime.Now.TimeOfDay.Subtract(
+                                    TimeSpan.FromHours(
+                                        ConfigurationManager.Configuration.OdorBeginSubtract)),
+                                End = DateTime.Now.TimeOfDay
+                            })
+                        );
                 }
                 IsPresented = false;
             });
@@ -73,20 +77,6 @@ namespace Odor.Views
         {
             await Detail.Navigation.PushAsync(new AboutPage());
             IsPresented = false;
-        }
-        public static async Task<Location> Location()
-        {
-            try
-            {
-                // TODO pegar somente uma vez, quando a pessoa abre o aplicativo (fazer uma thread)
-                // guardar o último valor salvo
-                return await Geolocation.GetLastKnownLocationAsync();
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-            return await Task.FromResult(new Location(-20.2635, -40.2660));
         }
     }
 }

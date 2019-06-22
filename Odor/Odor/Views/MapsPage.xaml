@@ -4,7 +4,7 @@
              x:Class="Odor.Views.MapsPage"
              Visual="Material">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Selecionar" />
+        <ToolbarItem Text="Selecionar" Command="{Binding SelectCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -12,6 +12,7 @@
             <StackLayout MinimumHeightRequest="100" Padding="10">
                 <Label Text="Endereço" Margin="15, 10, 15, 0" HorizontalOptions="Start" VerticalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
                 <Label Text="{Binding Address}" Margin="15, 10, 15, 0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" FontSize="Small" />
+                <Button Text="Obter" Clicked="OnButtonClicked" BackgroundColor="{StaticResource ColorPrimaryDark}"></Button>
                 <ActivityIndicator HorizontalOptions="Center" VerticalOptions="EndAndExpand" Color="LightGray" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" />
             </StackLayout>
         </StackLayout>

@@ -33,10 +33,7 @@
                 </Picker>
             </StackLayout>
             <Label Text="De onde veio o odor?" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
-            <StackLayout Orientation="Horizontal" Margin="10, 0">
-                <Label Text="{Binding Odor.Address}" Margin="5, 0" HorizontalOptions="StartAndExpand"></Label>
-                <Button Text="Pesquisar" Clicked="AddressClicked" BackgroundColor="{StaticResource ColorPrimaryDark}"></Button>
-            </StackLayout>
+            <Button Text="Mapa" Clicked="OnButtonClicked" BackgroundColor="{StaticResource ColorPrimaryDark}"></Button>
             <Label Text="Qual o dia do odor? Qual o horário de início e término?" Margin="15, 20, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
             <StackLayout Orientation="Horizontal" Margin="10, 10">
                 <Label Text="Dia" Margin="5, 5, 0, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />

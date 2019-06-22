@@ -22,6 +22,7 @@ namespace Odor.Views
                 Latitude = odor.Latitude,
                 Longitude = odor.Longitude,
                 Address = odor.Address,
+                Location = odor.Location,
                 Type = odor.Type,
                 Date = odor.Date,
                 Begin = odor.Begin,
@@ -63,7 +64,7 @@ namespace Odor.Views
                 OnPropertyChanged();
             }
         }
-        private async void AddressClicked(object sender, EventArgs args)
+        private async void OnButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new MapsPage(this.Odor), true);
         }
