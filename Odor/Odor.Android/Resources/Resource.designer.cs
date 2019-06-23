@@ -8420,26 +8420,26 @@ namespace Odor.Droid
 			// aapt resource value: 0x7f020055
 			public const int avd_hide_password = 2130837589;
 			
-			// aapt resource value: 0x7f020158
-			public const int avd_hide_password_1 = 2130837848;
-			
 			// aapt resource value: 0x7f020159
-			public const int avd_hide_password_2 = 2130837849;
+			public const int avd_hide_password_1 = 2130837849;
 			
 			// aapt resource value: 0x7f02015a
-			public const int avd_hide_password_3 = 2130837850;
+			public const int avd_hide_password_2 = 2130837850;
+			
+			// aapt resource value: 0x7f02015b
+			public const int avd_hide_password_3 = 2130837851;
 			
 			// aapt resource value: 0x7f020056
 			public const int avd_show_password = 2130837590;
 			
-			// aapt resource value: 0x7f02015b
-			public const int avd_show_password_1 = 2130837851;
-			
 			// aapt resource value: 0x7f02015c
-			public const int avd_show_password_2 = 2130837852;
+			public const int avd_show_password_1 = 2130837852;
 			
 			// aapt resource value: 0x7f02015d
-			public const int avd_show_password_3 = 2130837853;
+			public const int avd_show_password_2 = 2130837853;
+			
+			// aapt resource value: 0x7f02015e
+			public const int avd_show_password_3 = 2130837854;
 			
 			// aapt resource value: 0x7f020057
 			public const int begin = 2130837591;
@@ -9182,11 +9182,11 @@ namespace Odor.Droid
 			// aapt resource value: 0x7f02014d
 			public const int notification_icon_background = 2130837837;
 			
-			// aapt resource value: 0x7f020156
-			public const int notification_template_icon_bg = 2130837846;
-			
 			// aapt resource value: 0x7f020157
-			public const int notification_template_icon_low_bg = 2130837847;
+			public const int notification_template_icon_bg = 2130837847;
+			
+			// aapt resource value: 0x7f020158
+			public const int notification_template_icon_low_bg = 2130837848;
 			
 			// aapt resource value: 0x7f02014e
 			public const int notification_tile_bg = 2130837838;
@@ -9204,13 +9204,16 @@ namespace Odor.Droid
 			public const int person = 2130837842;
 			
 			// aapt resource value: 0x7f020153
-			public const int place = 2130837843;
+			public const int phone = 2130837843;
 			
 			// aapt resource value: 0x7f020154
-			public const int tooltip_frame_dark = 2130837844;
+			public const int place = 2130837844;
 			
 			// aapt resource value: 0x7f020155
-			public const int tooltip_frame_light = 2130837845;
+			public const int tooltip_frame_dark = 2130837845;
+			
+			// aapt resource value: 0x7f020156
+			public const int tooltip_frame_light = 2130837846;
 			
 			static Drawable()
 			{

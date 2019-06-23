@@ -42,9 +42,7 @@ namespace Odor.Views
                                 Longitude = ConfigurationManager.Configuration.OdorLongitude,
                                 Address = ConfigurationManager.Configuration.OdorAddress,
                                 Date = DateTime.Today,
-                                Begin = DateTime.Now.TimeOfDay.Subtract(
-                                    TimeSpan.FromHours(
-                                        ConfigurationManager.Configuration.OdorBeginSubtract)),
+                                Begin = DateTime.Now.TimeOfDay,
                                 End = DateTime.Now.TimeOfDay
                             })
                         );

@@ -29,18 +29,21 @@
                     <TableView Intent="Menu">
                         <TableSection>
                             <ViewCell Tapped="GoUserPage">
-                                <StackLayout Padding="15,10">
-                                    <Label Text="Perfil" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal" Padding="15,10">
+                                    <Image Source="person.png" />
+                                    <Label Text="Perfil" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell Tapped="GoOdorPage">
-                                <StackLayout Padding="15,10">
-                                    <Label Text="Odor" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal" Padding="15,10">
+                                    <Image Source="blur.png" />
+                                    <Label Text="Odor" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell Tapped="GoAboutPage">
-                                <StackLayout Padding="15,10">
-                                    <Label Text="Sobre" VerticalTextAlignment="Center"/>
+                                <StackLayout Orientation="Horizontal" Padding="15,10">
+                                    <Image Source="about.png" />
+                                    <Label Text="Sobre" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                         </TableSection>

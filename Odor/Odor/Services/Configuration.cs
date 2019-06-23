@@ -25,7 +25,6 @@ namespace Odor.Services
         double OdorLatitude { get; set; }
         double OdorLongitude { get; set; }
         string OdorAddress { get; set; }
-        int OdorBeginSubtract { get; set; }
     }
     public class Configuration : IConfiguration
     {
@@ -43,8 +42,6 @@ namespace Odor.Services
         public double OdorLatitude { get; set; }
         public double OdorLongitude { get; set; }
         public string OdorAddress { get; set; }
-        public int OdorBeginSubtract { get; set; }
-
     }
     public class ConfigurationModule : Module
     {
