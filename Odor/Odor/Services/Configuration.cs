@@ -1,13 +1,13 @@
 ﻿using Autofac;
-using Module = Autofac.Module;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
-using System.Reflection;
-using System.Linq;
 using System.IO;
-using Xamarin.Essentials;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
+using Xamarin.Essentials;
+using Module = Autofac.Module;
 
 namespace Odor.Services
 {
@@ -92,16 +92,17 @@ namespace Odor.Services
     {
         public static IContainer Container { get; set; }
         private static IConfiguration configuration;
-        public static IConfiguration Configuration {
+        public static IConfiguration Configuration
+        {
             get
             {
-                if (configuration ==  null)
+                if (configuration == null)
                 {
                     try
                     {
                         configuration = Container.Resolve<IConfiguration>();
                     }
-                    catch(Exception exception)
+                    catch (Exception exception)
                     {
                         Debug.WriteLine(exception);
                         configuration = new Configuration();

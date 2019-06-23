@@ -4,7 +4,7 @@
              x:Class="Odor.Views.MapsPage"
              Visual="Material">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Selecionar" Command="{Binding SelectCommand}" />
+        <ToolbarItem Text="Confirmar" Command="{Binding ConfirmCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -28,7 +28,7 @@
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"
                 HeightRequest="120"
-                Margin="15, 0, 15, 60"
+                Margin="15, 0, 15, 70"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End">
                 <Frame OutlineColor="Accent">

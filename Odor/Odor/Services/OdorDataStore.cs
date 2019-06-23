@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Linq;
-using Firebase.Database;
-using Firebase.Database.Query;
+using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.OdorDataStore))]
 namespace Odor.Services
@@ -19,7 +19,8 @@ namespace Odor.Services
                 this.Firebase
                     .Child("odors")
                     .PostAsync(odor)
-                    .ContinueWith(task => {
+                    .ContinueWith(task =>
+                    {
                         odor.Id = task.Result.Key;
                     });
                 return Task.FromResult(true);
@@ -109,7 +110,7 @@ namespace Odor.Services
                 {
                     Models.Odor Odor = result.Object;
                     Odor.Id = result.Key;
-                    ((List<Models.Odor>) odors).Add(Odor);
+                    ((List<Models.Odor>)odors).Add(Odor);
                 }
             }
             catch (Exception exception)

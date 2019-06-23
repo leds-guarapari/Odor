@@ -51,6 +51,7 @@
                     </StackLayout>
                     <Button Text="Mapa" Clicked="OnButtonClicked" BackgroundColor="{StaticResource ColorPrimaryDark}" HorizontalOptions="End" />
                 </StackLayout>
+                <Label Text="{Binding Address}" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" />
                 <Label Text="Qual o dia do odor? Qual o horário de início e término?" Margin="15, 20, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
                 <Grid Margin="10, 0">
                     <Grid.RowDefinitions>
@@ -85,7 +86,8 @@
                 HorizontalOptions="End"
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="Transparent"
-                Source="delete.png" />
+                Source="delete.png"
+                Clicked="OnDeleteButtonClicked" />
             <ActivityIndicator
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"

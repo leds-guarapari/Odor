@@ -6,37 +6,38 @@ using Xamarin.Forms.Xaml;
 
 namespace Odor.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class UserPage : ContentPage, INotifyPropertyChanged
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class UserPage : ContentPage, INotifyPropertyChanged
     {
         public Models.User User { get; set; }
         public ICommand SaveCommand { get; private set; }
         public ICommand ValidateCommand { get; private set; }
         public ICommand InvalidateNameCommand { get; private set; }
         public ICommand InvalidateNumberCommand { get; private set; }
-        public UserPage (Models.User user)
-		{
-			InitializeComponent ();
-            this.User = new Models.User {
+        public UserPage(Models.User user)
+        {
+            InitializeComponent();
+            this.User = new Models.User
+            {
                 Id = user.Id,
                 Name = user.Name,
                 Number = user.Number
             };
-            SaveCommand = new Command(async () => { await this.Dispatch(); });
-            ValidateCommand = new Command(() => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });
-            InvalidateNameCommand = new Command(() => { this.IsInvalidateName = string.IsNullOrWhiteSpace(this.User.Name); });
-            InvalidateNumberCommand = new Command(() => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
+            this.SaveCommand = new Command(async () => { await this.Dispatch(); });
+            this.ValidateCommand = new Command(() => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });
+            this.InvalidateNameCommand = new Command(() => { this.IsInvalidateName = string.IsNullOrWhiteSpace(this.User.Name); });
+            this.InvalidateNumberCommand = new Command(() => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
             BindingContext = this;
         }
         private void NameTextChanged(object sender, TextChangedEventArgs args)
         {
-            InvalidateNameCommand.Execute(null);
-            ValidateCommand.Execute(null);
+            this.InvalidateNameCommand.Execute(null);
+            this.ValidateCommand.Execute(null);
         }
         private void NumberTextChanged(object sender, TextChangedEventArgs args)
         {
-            InvalidateNumberCommand.Execute(null);
-            ValidateCommand.Execute(null);
+            this.InvalidateNumberCommand.Execute(null);
+            this.ValidateCommand.Execute(null);
         }
         async Task Dispatch()
         {
@@ -44,10 +45,11 @@ namespace Odor.Views
             {
                 this.IsBusy = true;
                 await this.Save();
-            } else
+            }
+            else
             {
-                InvalidateNameCommand.Execute(null);
-                InvalidateNumberCommand.Execute(null);
+                this.InvalidateNameCommand.Execute(null);
+                this.InvalidateNumberCommand.Execute(null);
             }
         }
         async Task Save()
@@ -68,40 +70,40 @@ namespace Odor.Views
         private bool isInvalidateName = false;
         public bool IsInvalidateName
         {
-            get { return isInvalidateName; }
+            get { return this.isInvalidateName; }
             set
             {
-                isInvalidateName = value;
+                this.isInvalidateName = value;
                 OnPropertyChanged();
             }
         }
         private bool isInvalidateNumber = false;
         public bool IsInvalidateNumber
         {
-            get { return isInvalidateNumber; }
+            get { return this.isInvalidateNumber; }
             set
             {
-                isInvalidateNumber = value;
+                this.isInvalidateNumber = value;
                 OnPropertyChanged();
             }
         }
         private bool isValidate = false;
         public bool IsValidate
         {
-            get { return isValidate; }
+            get { return this.isValidate; }
             set
             {
-                isValidate = value;
+                this.isValidate = value;
                 OnPropertyChanged();
             }
         }
         private bool isBusy = false;
         public new bool IsBusy
         {
-            get { return isBusy; }
+            get { return this.isBusy; }
             set
             {
-                isBusy = value;
+                this.isBusy = value;
                 OnPropertyChanged();
             }
         }

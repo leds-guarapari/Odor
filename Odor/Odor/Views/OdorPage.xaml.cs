@@ -9,11 +9,11 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdorPage : ContentPage
     {
-        public Models.Odor Odor {get; set;}
+        public Models.Odor Odor { get; set; }
         public ICommand SaveCommand { get; private set; }
-        public OdorPage (Models.Odor odor)
-		{
-			InitializeComponent ();
+        public OdorPage(Models.Odor odor)
+        {
+            InitializeComponent();
             this.Odor = new Models.Odor
             {
                 Id = odor.Id,
@@ -28,7 +28,12 @@ namespace Odor.Views
                 Begin = odor.Begin,
                 End = odor.End
             };
+            this.Address = this.Odor.Address;
             SaveCommand = new Command(async () => { await this.Dispatch(); });
+            MessagingCenter.Subscribe<string>(this, "Address", (Address) =>
+            {
+                this.Address = Address;
+            });
             BindingContext = this;
         }
         async Task Dispatch()
@@ -54,6 +59,27 @@ namespace Odor.Views
             }));
             await Navigation.PopToRootAsync();
         }
+        async Task Delete()
+        {
+            await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
+            {
+                if (!string.IsNullOrEmpty(this.Odor.Id))
+                {
+                    MessagingCenter.Send(this.Odor, "DeleteOdor");
+                }
+            }));
+            await Navigation.PopToRootAsync();
+        }
+        private string address = string.Empty;
+        public string Address
+        {
+            get { return this.address; }
+            set
+            {
+                this.address = value;
+                OnPropertyChanged();
+            }
+        }
         private bool isBusy = false;
         public new bool IsBusy
         {
@@ -67,6 +93,14 @@ namespace Odor.Views
         private async void OnButtonClicked(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new MapsPage(this.Odor), true);
+        }
+        private async void OnDeleteButtonClicked(object sender, EventArgs e)
+        {
+            if (await this.DisplayAlert("Confirmação", "Você realmente quer excluir este odor?", "Excluir", "Cancelar"))
+            {
+                this.IsBusy = true;
+                await this.Delete();
+            }
         }
     }
 }

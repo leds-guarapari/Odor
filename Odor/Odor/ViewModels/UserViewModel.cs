@@ -18,7 +18,8 @@ namespace Odor.ViewModels
                 {
                     this.User = user;
                     MessagingCenter.Send("Sucesso", "Menu", "Informações pessoais cadastradas.");
-                } else
+                }
+                else
                 {
                     MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
                 }

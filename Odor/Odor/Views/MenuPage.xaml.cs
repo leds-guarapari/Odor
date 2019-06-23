@@ -1,10 +1,7 @@
 ﻿using Odor.Services;
 using Odor.ViewModels;
 using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,10 +18,12 @@ namespace Odor.Views
             this.OdorViewModel = new OdorViewModel();
             BindingContext = this.UserViewModel = new UserViewModel();
             Detail = new NavigationPage(new MasterPage(this.OdorViewModel));
-            MessagingCenter.Subscribe<string, string>(this, "Menu", async (Title, Message) => {
+            MessagingCenter.Subscribe<string, string>(this, "Menu", async (Title, Message) =>
+            {
                 await DisplayAlert(Title, Message, "Ok");
             });
-            MessagingCenter.Subscribe<string>(this, "Odor", async (Id) => {
+            MessagingCenter.Subscribe<string>(this, "Odor", async (Id) =>
+            {
                 if (string.IsNullOrEmpty(this.UserViewModel.User.Id))
                 {
                     await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
@@ -34,7 +33,8 @@ namespace Odor.Views
                     await Detail.Navigation.PushAsync(
                         new OdorPage(
                             this.OdorViewModel.Odors.Where(element => element.Id.Equals(Id)).FirstOrDefault() ??
-                            new Models.Odor {
+                            new Models.Odor
+                            {
                                 UserId = this.UserViewModel.User.Id,
                                 Intensity = ConfigurationManager.Configuration.OdorIntensity,
                                 Type = ConfigurationManager.Configuration.OdorType,
@@ -49,7 +49,8 @@ namespace Odor.Views
                 }
                 IsPresented = false;
             });
-            MessagingCenter.Subscribe<string>(this, "User", async (Id) => {
+            MessagingCenter.Subscribe<string>(this, "User", async (Id) =>
+            {
                 if (string.IsNullOrEmpty(Id))
                 {
                     await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));

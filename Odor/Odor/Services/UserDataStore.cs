@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using Firebase.Database;
-using Firebase.Database.Query;
-using Newtonsoft.Json;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.UserDataStore))]
 namespace Odor.Services
@@ -24,7 +24,8 @@ namespace Odor.Services
                 this.Firebase
                     .Child("users")
                     .PostAsync(user)
-                    .ContinueWith((Task<FirebaseObject<Models.User>> task) => {
+                    .ContinueWith((Task<FirebaseObject<Models.User>> task) =>
+                    {
                         user.Id = task.Result.Key;
                         this.user = user;
                         System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
@@ -49,7 +50,8 @@ namespace Odor.Services
                         Name = user.Name,
                         Number = user.Number
                     })
-                    .ContinueWith(task => {
+                    .ContinueWith(task =>
+                    {
                         this.user = user;
                         System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
                     });
