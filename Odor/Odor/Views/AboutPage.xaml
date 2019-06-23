@@ -4,7 +4,13 @@
              x:Class="Odor.Views.AboutPage"
              Visual="Material">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="10">
+            <Label Text="Informações sobre o Aplicativo" Margin="10" HorizontalOptions="Center" />
+            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
+            <Image Source="logo.png" HeightRequest="150" Margin="0, 10" HorizontalOptions="Center" />
+            <Label Text="Você acessou este aplicativo por que percebeu algum tipo de odor ou mau cheiro." Margin="15, 10, 15, 0" HorizontalOptions="Center" FontSize="Small" />
+            <Label Text="Obrigado pela participação!" Margin="15, 20, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+            <Label Text="{Binding Organization}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" FontSize="Small" TextColor="Black" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -13,6 +13,7 @@ namespace Odor.Services
 {
     public interface IConfiguration
     {
+        string Organization { get; set; }
         string UserFile { get; set; }
         string FirebaseRealtimeDatabasePath { get; set; }
         string GeomapTilePattern { get; set; }
@@ -30,6 +31,7 @@ namespace Odor.Services
     {
         [JsonConstructor]
         public Configuration() { }
+        public string Organization { get; set; }
         public string UserFile { get; set; }
         public string FirebaseRealtimeDatabasePath { get; set; }
         public string GeomapTilePattern { get; set; }

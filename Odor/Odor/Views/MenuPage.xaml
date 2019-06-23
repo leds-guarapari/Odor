@@ -22,7 +22,7 @@
                         <Image Grid.Column="1"
                                Grid.Row="1"
                                Source="odor.png"
-                               HeightRequest="75"
+                               HeightRequest="150"
                                HorizontalOptions="CenterAndExpand"
                                VerticalOptions="CenterAndExpand" />
                     </Grid>

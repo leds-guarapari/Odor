@@ -11,7 +11,7 @@
             <StackLayout AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                          AbsoluteLayout.LayoutFlags="All">
                 <Label Text="Cadastro de odor" Margin="10" HorizontalOptions="Center" />
-                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray"/>
+                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
                 <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
                     <Image Source="blur.png" HeightRequest="24" />
                     <Label Text="Como descreve a intensidade do odor? De qual tipo?" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
@@ -27,19 +27,24 @@
                     <Picker Grid.Row="0" Grid.Column="0" Title="Intensidade" SelectedItem="{Binding Odor.Intensity}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
+                                <x:String>Fraco</x:String>
+                                <x:String>Moderado</x:String>
                                 <x:String>Desagradável</x:String>
-                                <x:String>Muito desagradável</x:String>
-                                <x:String>Insuportável</x:String>
+                                <x:String>Forte</x:String>
+                                <x:String>Forte e insuportável</x:String>
+                                <x:String>Não sabe</x:String>
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>
                     <Picker Grid.Row="0" Grid.Column="1" Title="Tipo" SelectedItem="{Binding Odor.Type}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
-                                <x:String>Químico</x:String>
-                                <x:String>Podrido</x:String>
-                                <x:String>Fumaça</x:String>
-                                <x:String>Poeira</x:String>
+                                <x:String>Solvente</x:String>
+                                <x:String>Esgoto / Ovo podre</x:String>
+                                <x:String>Cheiro Agressivo (Ardente / Irritante)</x:String>
+                                <x:String>Cheiro de urina</x:String>
+                                <x:String>Cheiro de plástico / Asfalto queimado</x:String>
+                                <x:String>Não sabe</x:String>
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>

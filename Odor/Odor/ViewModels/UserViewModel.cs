@@ -10,7 +10,7 @@ namespace Odor.ViewModels
             this.User = new Models.User();
             MessagingCenter.Subscribe<string>(this, "GetUser", async (Id) =>
             {
-                MessagingCenter.Send((this.User = await DataStore.Get(new Models.User { Id = Id })).Id, "User");
+                MessagingCenter.Send((this.User = await DataStore.Get(new Models.User { Id = Id })).Id ?? string.Empty, "User");
             });
             MessagingCenter.Subscribe<Models.User>(this, "AddUser", async (user) =>
             {
