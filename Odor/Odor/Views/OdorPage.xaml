@@ -31,7 +31,7 @@
                                 <x:String>Moderado</x:String>
                                 <x:String>Desagradável</x:String>
                                 <x:String>Forte</x:String>
-                                <x:String>Forte e insuportável</x:String>
+                                <x:String>Insuportável</x:String>
                                 <x:String>Não sabe</x:String>
                             </x:Array>
                         </Picker.ItemsSource>
@@ -39,11 +39,11 @@
                     <Picker Grid.Row="0" Grid.Column="1" Title="Tipo" SelectedItem="{Binding Odor.Type}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
+                                <x:String>Esgoto</x:String>
                                 <x:String>Solvente</x:String>
-                                <x:String>Esgoto / Ovo podre</x:String>
-                                <x:String>Cheiro Agressivo (Ardente / Irritante)</x:String>
+                                <x:String>Cheiro irritante</x:String>
                                 <x:String>Cheiro de urina</x:String>
-                                <x:String>Cheiro de plástico / Asfalto queimado</x:String>
+                                <x:String>Plástico queimado</x:String>
                                 <x:String>Não sabe</x:String>
                             </x:Array>
                         </Picker.ItemsSource>
