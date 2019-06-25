@@ -53,7 +53,7 @@ namespace Odor.Views
                     this.Odor.Latitude = latitude;
                     this.Odor.Longitude = longitude;
                     this.Odor.Location = location;
-                    this.Odor.Address = location.Formatted ?? ConfigurationManager.Configuration.OdorAddress;
+                    this.Odor.Address = location.Formatted;
                 });
                 await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
                 {
