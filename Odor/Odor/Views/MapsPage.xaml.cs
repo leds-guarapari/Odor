@@ -19,21 +19,12 @@ namespace Odor.Views
         private readonly string Match = ConfigurationManager.Configuration.GeomapTileMatch;
         private readonly int Zoom = ConfigurationManager.Configuration.GeomapDefaultZoom;
         private readonly Models.Odor Odor;
-        private readonly Models.Odor odor;
         public string Tile { get; set; }
         public ICommand ConfirmCommand { get; private set; }
         public MapsPage(Models.Odor odor)
         {
             InitializeComponent();
-            this.odor = odor;
-            this.Odor = new Models.Odor
-            {
-                Latitude = odor.Latitude,
-                Longitude = odor.Longitude,
-                Address = odor.Address,
-                Location = odor.Location
-            };
-            this.Address = this.Odor.Address;
+            this.Odor = odor;
             this.Tile = string.Format(this.Pattern, this.Zoom, this.Odor.Latitude, this.Odor.Longitude);
             this.ConfirmCommand = new Command(async () => { await this.Dispatch(); });
             BindingContext = this;
@@ -48,17 +39,33 @@ namespace Odor.Views
         }
         async Task Confirm()
         {
-            this.odor.Latitude = this.Odor.Latitude;
-            this.odor.Longitude = this.Odor.Longitude;
-            this.odor.Address = this.Odor.Address;
-            this.odor.Location = this.Odor.Location;
-            await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
+            try
             {
-                MessagingCenter.Send(this.odor.Address, "Address");
-            }));
+                Regex expression = new Regex(this.Match);
+                Match match = expression.Match(((UrlWebViewSource) Web.Source).Url);
+                double latitude = double.Parse(match.Groups["C1"].Value);
+                double longitude = double.Parse(match.Groups["C2"].Value);
+                string language = ConfigurationManager.Configuration.GeomapResponseLanguage;
+                await Task.Run(() =>
+                {
+                    GeocoderResponse response = this.Geocoder.ReverseGeocode(latitude, longitude, language);
+                    Location location = response.Results.Last();
+                    this.Odor.Latitude = latitude;
+                    this.Odor.Longitude = longitude;
+                    this.Odor.Location = location;
+                    this.Odor.Address = location.Formatted ?? ConfigurationManager.Configuration.OdorAddress;
+                });
+                await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
+                {
+                    MessagingCenter.Send(this.Odor.Address, "Address");
+                }));
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }            
             await Navigation.PopAsync();
         }
-        private string Url = string.Empty;
         private void WebViewNavigating(object sender, WebNavigatingEventArgs args)
         {
             this.IsBusy = true;
@@ -66,17 +73,6 @@ namespace Odor.Views
         private void WebViewNavigated(object sender, WebNavigatedEventArgs args)
         {
             this.IsBusy = false;
-            this.Url = args.Url;
-        }
-        private string address = string.Empty;
-        public string Address
-        {
-            get { return this.address; }
-            set
-            {
-                this.address = value;
-                OnPropertyChanged();
-            }
         }
         private bool isBusy = false;
         public new bool IsBusy
@@ -87,36 +83,6 @@ namespace Odor.Views
                 this.isBusy = value;
                 OnPropertyChanged();
             }
-        }
-        private async void OnButtonClicked(object sender, EventArgs args)
-        {
-            if (this.IsBusy)
-            {
-                return;
-            }
-            this.IsBusy = true;
-            try
-            {
-                Regex expression = new Regex(this.Match);
-                Match match = expression.Match(this.Url);
-                double latitude = double.Parse(match.Groups["C1"].Value);
-                double longitude = double.Parse(match.Groups["C2"].Value);
-                string language = ConfigurationManager.Configuration.GeomapResponseLanguage;
-                await Task.Run(() =>
-                {
-                    GeocoderResponse response = this.Geocoder.ReverseGeocode(latitude, longitude, language);
-                    Location location = response.Results.Last();
-                    this.Odor.Location = location;
-                    this.Odor.Latitude = latitude;
-                    this.Odor.Longitude = longitude;
-                    this.Odor.Address = this.Address = location?.Formatted ?? ConfigurationManager.Configuration.OdorAddress;
-                });
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-            this.IsBusy = false;
         }
     }
 }

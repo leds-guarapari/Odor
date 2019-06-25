@@ -3,9 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Odor.App">
     <Application.Resources>
-        <ResourceDictionary>
-            <Color x:Key="ColorPrimary">#0277BD</Color>
-            <Color x:Key="ColorPrimaryDark">#01579B</Color>
-        </ResourceDictionary>
     </Application.Resources>
 </Application>

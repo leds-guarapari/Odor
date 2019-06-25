@@ -7,7 +7,7 @@
         <ContentPage Title="Odor" Padding="0">
             <ContentPage.Content>
                 <StackLayout>
-                    <Grid BackgroundColor="{StaticResource ColorPrimaryDark}">
+                    <Grid BackgroundColor="Accent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="*"/>
@@ -15,16 +15,16 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10"/>
-                            <RowDefinition Height="150"/>
+                            <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
-                        <Image Grid.Column="1"
+                        <Label Grid.Column="1"
                                Grid.Row="1"
-                               Source="odor.png"
-                               HeightRequest="150"
-                               HorizontalOptions="CenterAndExpand"
-                               VerticalOptions="CenterAndExpand" />
+                               Text="Menu"
+                               FontSize="Large"
+                               TextColor="White"
+                               VerticalOptions="Start" />
                     </Grid>
                     <TableView Intent="Menu">
                         <TableSection>

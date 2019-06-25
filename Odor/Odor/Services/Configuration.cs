@@ -82,7 +82,7 @@ namespace Odor.Services
         {
             try
             {
-                builder.Register<Location>(register => Geolocation.GetLastKnownLocationAsync().Result).SingleInstance();
+                builder.Register<Location>(register => Geolocation.GetLocationAsync().Result).SingleInstance();
             }
             catch (Exception exception)
             {

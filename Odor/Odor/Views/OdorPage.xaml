@@ -14,7 +14,7 @@
                 <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
                 <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
                     <Image Source="blur.png" HeightRequest="24" />
-                    <Label Text="Como descreve a intensidade do odor? De qual tipo?" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                    <Label Text="Como descreve a intensidade do odor? De qual tipo?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
                 <Grid Margin="10, 0">
                     <Grid.RowDefinitions>
@@ -52,12 +52,12 @@
                 <StackLayout Orientation="Horizontal" Margin="15, 20, 15, 0">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                         <Image Source="location.png" HeightRequest="38" />
-                        <Label Text="De que endereço veio o odor?" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                        <Label Text="De que endereço veio o odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                     </StackLayout>
-                    <Button Text="Mapa" Clicked="OnButtonClicked" BackgroundColor="{StaticResource ColorPrimaryDark}" HorizontalOptions="End" />
+                    <Button Text="Mapa" Clicked="OnButtonClicked" BackgroundColor="Accent" HorizontalOptions="End" />
                 </StackLayout>
                 <Label Text="{Binding Address}" Margin="15, 10, 15, 0" HorizontalOptions="Start" FontSize="Small" />
-                <Label Text="Qual o dia do odor? Qual o horário de início e término?" Margin="15, 20, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                <Label Text="Qual o dia do odor? Qual o horário de início e término?" Margin="15, 20, 15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="Accent" />
                 <Grid Margin="10, 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -73,15 +73,15 @@
                     <TimePicker Grid.Row="0" Grid.Column="2" Time="{Binding Odor.End}" />
                     <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
                         <Image Source="date.png" HeightRequest="24" />
-                        <Label Text="Data" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                        <Label Text="Data" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                     </StackLayout>
                     <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
                         <Image Source="begin.png" HeightRequest="24" />
-                        <Label Text="Início" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                        <Label Text="Início" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                     </StackLayout>
                     <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
                         <Image Source="end.png" HeightRequest="24" />
-                        <Label Text="Término" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
+                        <Label Text="Término" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                     </StackLayout>
                 </Grid>
             </StackLayout>

@@ -9,6 +9,7 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <WebView
+                x:Name="Web"
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"
                 Source="{Binding Tile}"
@@ -24,29 +25,6 @@
                 Source="place.png"
                 Margin="0, 0, 0, 38"
                 HeightRequest="38" />
-            <StackLayout
-                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
-                AbsoluteLayout.LayoutFlags="All"
-                HeightRequest="120"
-                Margin="15, 0, 15, 70"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="End">
-                <Frame OutlineColor="Accent">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Text="Endereço" VerticalOptions="Center" FontSize="Small" TextColor="{StaticResource ColorPrimaryDark}" />
-                        <Button Grid.Row="0" Grid.Column="1" Text="Obter" Clicked="OnButtonClicked" BackgroundColor="{StaticResource ColorPrimaryDark}" />
-                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Address}" VerticalOptions="End" FontSize="Small" />
-                    </Grid>
-                </Frame>
-            </StackLayout>
             <ActivityIndicator
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"

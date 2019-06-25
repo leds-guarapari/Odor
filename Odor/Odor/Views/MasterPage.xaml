@@ -21,10 +21,10 @@
                             <StackLayout Orientation="Vertical" Margin="10">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Intensity}" TextColor="Black" />
-                                    <Label Text="{Binding Type}" TextColor="{StaticResource ColorPrimaryDark}" />
+                                    <Label Text="{Binding Type}" TextColor="Accent" />
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                         <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black" FontSize="Micro" />
-                                        <Label Text="{Binding Begin, StringFormat='{}{0:hh\\:mm}'}" TextColor="{StaticResource ColorPrimaryDark}" FontSize="Micro" />
+                                        <Label Text="{Binding Begin, StringFormat='{}{0:hh\\:mm}'}" TextColor="Accent" FontSize="Micro" />
                                     </StackLayout>
                                 </StackLayout>
                                 <Label Text="{Binding Address}" HorizontalOptions="FillAndExpand" />
