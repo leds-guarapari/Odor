@@ -8,13 +8,26 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <ListView ItemsSource="{Binding Odors}" RowHeight="80" ItemSelected="OnSelectedItemChanged">
+            <ListView ItemsSource="{Binding Odors}" RowHeight="80" ItemTapped="OnItemTapped">
                 <ListView.Header>
-                    <StackLayout>
-                        <Label Text="Listagem de odores" Margin="10" HorizontalOptions="Center" />
+                    <StackLayout x:Name="Header">
+                        <Label Text="Ocorrências de odor" Margin="10" HorizontalOptions="Center" />
                         <BoxView HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 10" HeightRequest="1" Color="LightGray" />
                     </StackLayout>
                 </ListView.Header>
+                <ListView.Footer>
+                    <StackLayout x:Name="Footer">
+                        <Label Text="Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro." Margin="10" HorizontalTextAlignment="Center" />
+                        <StackLayout Orientation="Horizontal" Margin="10" HorizontalOptions="Center">
+                            <Label Text="Para nova ocorrência:" />
+                            <Label Text="Clique em Novo." TextColor="Accent">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="GoOdorPage" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </ListView.Footer>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

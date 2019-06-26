@@ -8,14 +8,22 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterPage : ContentPage
     {
+        private readonly OdorViewModel OdorViewModel;
         public MasterPage(OdorViewModel OdorViewModel)
         {
             InitializeComponent();
-            BindingContext = OdorViewModel;
+            BindingContext = this.OdorViewModel = OdorViewModel;
         }
-        private void OnSelectedItemChanged(object sender, SelectedItemChangedEventArgs args)
+        protected override void OnAppearing()
         {
-            MessagingCenter.Send(((Models.Odor)args.SelectedItem).Id, "Odor");
+            base.OnAppearing();
+            bool isEmpty = this.OdorViewModel.Odors.Count == 0;
+            Header.IsVisible = !isEmpty;
+            Footer.IsVisible = isEmpty;
+        }
+        private void OnItemTapped(object sender, ItemTappedEventArgs args)
+        {
+            MessagingCenter.Send(((Models.Odor) args.Item).Id, "Odor");
         }
         private void GoOdorPage(object sender, EventArgs args)
         {

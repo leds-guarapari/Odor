@@ -31,19 +31,25 @@
                             <ViewCell Tapped="GoUserPage">
                                 <StackLayout Orientation="Horizontal" Padding="15,10">
                                     <Image Source="person.png" />
-                                    <Label Text="Perfil" VerticalOptions="Center" />
+                                    <Label Text="Meu perfil" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell Tapped="GoOdorPage">
                                 <StackLayout Orientation="Horizontal" Padding="15,10">
+                                    <Image Source="add.png" />
+                                    <Label Text="Novo odor" VerticalOptions="Center" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Tapped="GoMasterPage">
+                                <StackLayout Orientation="Horizontal" Padding="15,10">
                                     <Image Source="blur.png" />
-                                    <Label Text="Odor" VerticalOptions="Center" />
+                                    <Label Text="Minhas ocorrências" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell Tapped="GoAboutPage">
                                 <StackLayout Orientation="Horizontal" Padding="15,10">
                                     <Image Source="about.png" />
-                                    <Label Text="Sobre" VerticalOptions="Center" />
+                                    <Label Text="Sobre o aplicativo" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                         </TableSection>

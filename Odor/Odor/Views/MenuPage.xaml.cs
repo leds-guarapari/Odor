@@ -74,6 +74,11 @@ namespace Odor.Views
         {
             MessagingCenter.Send(string.Empty, "Odor");
         }
+        private async void GoMasterPage(object sender, EventArgs args)
+        {
+            await Detail.Navigation.PopToRootAsync();
+            IsPresented = false;
+        }
         private async void GoAboutPage(object sender, EventArgs args)
         {
             await Detail.Navigation.PushAsync(new AboutPage());
