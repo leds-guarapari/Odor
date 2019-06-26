@@ -15,7 +15,7 @@ namespace Odor.Views
         }
         private void OnSelectedItemChanged(object sender, SelectedItemChangedEventArgs args)
         {
-            MessagingCenter.Send(((Models.Odor) args.SelectedItem).Id, "Odor");
+            MessagingCenter.Send(((Models.Odor)args.SelectedItem).Id, "Odor");
         }
         private void GoOdorPage(object sender, EventArgs args)
         {

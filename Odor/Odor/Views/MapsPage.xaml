@@ -23,8 +23,8 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 Source="place.png"
-                Margin="0, 0, 0, 38"
-                HeightRequest="38" />
+                Margin="0, 0, 0, 48"
+                HeightRequest="48" />
             <ActivityIndicator
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"

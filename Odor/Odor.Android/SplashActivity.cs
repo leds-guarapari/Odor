@@ -1,5 +1,4 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
 
 namespace Odor.Droid
@@ -10,7 +9,6 @@ namespace Odor.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Splash);
             StartActivity(typeof(MainActivity));
         }
     }

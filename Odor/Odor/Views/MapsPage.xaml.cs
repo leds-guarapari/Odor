@@ -42,7 +42,7 @@ namespace Odor.Views
             try
             {
                 Regex expression = new Regex(this.Match);
-                Match match = expression.Match(((UrlWebViewSource) Web.Source).Url);
+                Match match = expression.Match(((UrlWebViewSource)Web.Source).Url);
                 double latitude = double.Parse(match.Groups["C1"].Value);
                 double longitude = double.Parse(match.Groups["C2"].Value);
                 string language = ConfigurationManager.Configuration.GeomapResponseLanguage;
@@ -63,7 +63,7 @@ namespace Odor.Views
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-            }            
+            }
             await Navigation.PopAsync();
         }
         private void WebViewNavigating(object sender, WebNavigatingEventArgs args)
