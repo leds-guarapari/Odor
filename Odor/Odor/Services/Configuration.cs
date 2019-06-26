@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Module = Autofac.Module;
 
@@ -67,10 +66,7 @@ namespace Odor.Services
         {
             try
             {
-                Task.Run(async () => {
-                    Location location = await Geolocation.GetLastKnownLocationAsync();
-                    builder.Register<Location>(register => location).SingleInstance();
-                });
+                builder.Register<Location>(register => Geolocation.GetLastKnownLocationAsync().Result).SingleInstance();
             }
             catch (Exception exception)
             {
