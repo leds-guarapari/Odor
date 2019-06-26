@@ -10,12 +10,21 @@ using System.Threading.Tasks;
 [assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.UserDataStore))]
 namespace Odor.Services
 {
+    /*
+     *
+     * A class that inherits from the IDataStore interface to persist user objects.
+     * 
+     */
+    /// <summary>
+    /// A class that inherits from the IDataStore interface to persist user objects.
+    /// </summary>
     class UserDataStore : IDataStore<Models.User>
     {
+        /// <value>Using Firebase Database API.</value>
         private readonly FirebaseClient Firebase = new FirebaseClient(ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath);
-
+        /// <value>Using local device storage.</value>
         private readonly string File = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigurationManager.Configuration.UserFile);
-
+        /// <value>Gets empty user.</value>
         private Models.User user = new Models.User();
         public Task<bool> Add(Models.User user)
         {

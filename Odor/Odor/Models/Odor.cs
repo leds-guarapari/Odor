@@ -2,6 +2,14 @@
 
 namespace Odor.Models
 {
+    /*
+     *
+     * Default odor class data.
+     * 
+     */
+    /// <summary>
+    /// Default odor class data.
+    /// </summary>
     public class Odor
     {
         public string Id { get; set; }

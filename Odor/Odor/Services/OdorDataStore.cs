@@ -9,8 +9,17 @@ using System.Threading.Tasks;
 [assembly: Xamarin.Forms.Dependency(typeof(Odor.Services.OdorDataStore))]
 namespace Odor.Services
 {
+    /*
+     *
+     * A class that inherits from the IDataStore interface to persist odor objects.
+     * 
+     */
+    /// <summary>
+    /// A class that inherits from the IDataStore interface to persist odor objects.
+    /// </summary>
     class OdorDataStore : IDataStore<Models.Odor>
     {
+        /// <value>Using Firebase Database API.</value>
         private readonly FirebaseClient Firebase = new FirebaseClient(ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath);
         public Task<bool> Add(Models.Odor odor)
         {
