@@ -1,11 +1,12 @@
 ﻿using Odor.Services;
-using OpenCage.Geocode;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,7 +15,6 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapsPage : ContentPage
     {
-        private readonly Geocoder Geocoder = new Geocoder(ConfigurationManager.Configuration.GeocoderApiKey);
         private readonly string Pattern = ConfigurationManager.Configuration.GeomapTilePattern;
         private readonly string Match = ConfigurationManager.Configuration.GeomapTileMatch;
         private readonly int Zoom = ConfigurationManager.Configuration.GeomapDefaultZoom;
@@ -45,15 +45,33 @@ namespace Odor.Views
                 Match match = expression.Match(((UrlWebViewSource)Web.Source).Url);
                 double latitude = double.Parse(match.Groups["C1"].Value);
                 double longitude = double.Parse(match.Groups["C2"].Value);
-                string language = ConfigurationManager.Configuration.GeomapResponseLanguage;
-                await Task.Run(() =>
+                await Task.Run(async() =>
                 {
-                    GeocoderResponse response = this.Geocoder.ReverseGeocode(latitude, longitude, language);
-                    Location location = response.Results.Last();
-                    this.Odor.Latitude = latitude;
-                    this.Odor.Longitude = longitude;
-                    this.Odor.Location = location;
-                    this.Odor.Address = location.Formatted;
+                    IEnumerable<Placemark> placemarks = await Geocoding.GetPlacemarksAsync(latitude, longitude);
+                    Placemark placemark = (placemarks)?.FirstOrDefault();
+                    if (placemark != null)
+                    {
+                        this.Odor.Latitude = latitude;
+                        this.Odor.Longitude = longitude;
+                        this.Odor.AdminArea = placemark.AdminArea;
+                        this.Odor.CountryCode = placemark.CountryCode;
+                        this.Odor.CountryName = placemark.CountryName;
+                        this.Odor.FeatureName = placemark.FeatureName;
+                        this.Odor.Locality = placemark.Locality;
+                        this.Odor.PostalCode = placemark.PostalCode;
+                        this.Odor.SubAdminArea = placemark.SubAdminArea;
+                        this.Odor.SubLocality = placemark.SubLocality;
+                        this.Odor.SubThoroughfare = placemark.SubThoroughfare;
+                        this.Odor.Thoroughfare = placemark.Thoroughfare;
+                        this.Odor.Address = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}.",
+                            this.Odor.Thoroughfare,
+                            this.Odor.SubThoroughfare,
+                            this.Odor.SubLocality,
+                            this.Odor.SubAdminArea,
+                            this.Odor.AdminArea,
+                            this.Odor.PostalCode,
+                            this.Odor.CountryCode);
+                    }
                 });
                 await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
                 {

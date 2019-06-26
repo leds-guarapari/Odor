@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Module = Autofac.Module;
 
@@ -18,9 +18,7 @@ namespace Odor.Services
         string FirebaseRealtimeDatabasePath { get; set; }
         string GeomapTilePattern { get; set; }
         string GeomapTileMatch { get; set; }
-        string GeomapResponseLanguage { get; set; }
         int GeomapDefaultZoom { get; set; }
-        string GeocoderApiKey { get; set; }
         string OdorIntensity { get; set; }
         string OdorType { get; set; }
         double OdorLatitude { get; set; }
@@ -36,9 +34,7 @@ namespace Odor.Services
         public string FirebaseRealtimeDatabasePath { get; set; }
         public string GeomapTilePattern { get; set; }
         public string GeomapTileMatch { get; set; }
-        public string GeomapResponseLanguage { get; set; }
         public int GeomapDefaultZoom { get; set; }
-        public string GeocoderApiKey { get; set; }
         public string OdorIntensity { get; set; }
         public string OdorType { get; set; }
         public double OdorLatitude { get; set; }
@@ -71,18 +67,10 @@ namespace Odor.Services
         {
             try
             {
-                new Thread(() => GetLocation(builder)).Start();
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-        }
-        private void GetLocation(ContainerBuilder builder)
-        {
-            try
-            {
-                builder.Register<Location>(register => Geolocation.GetLocationAsync().Result).SingleInstance();
+                Task.Run(async () => {
+                    Location location = await Geolocation.GetLastKnownLocationAsync();
+                    builder.Register<Location>(register => location).SingleInstance();
+                });
             }
             catch (Exception exception)
             {
