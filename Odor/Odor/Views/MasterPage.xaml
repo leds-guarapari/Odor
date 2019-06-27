@@ -8,7 +8,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <ListView ItemsSource="{Binding Odors}" RowHeight="80" ItemTapped="OnItemTapped">
+            <ListView ItemsSource="{Binding Odors}" RowHeight="80" ItemTapped="OnItemTapped" CachingStrategy="RecycleElement">
                 <ListView.Header>
                     <StackLayout x:Name="Header">
                         <Label Text="Ocorrências de odor" Margin="10" HorizontalOptions="Center" />

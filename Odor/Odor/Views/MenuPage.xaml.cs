@@ -20,7 +20,7 @@ namespace Odor.Views
             this.OdorViewModel = new OdorViewModel();
             BindingContext = this.UserViewModel = new UserViewModel();
             Detail = new NavigationPage(new MasterPage(this.OdorViewModel));
-            MessagingCenter.Subscribe<string, string>(this, "Menu", async (Title, Message) =>
+            MessagingCenter.Subscribe<string, string>(this, "Message", async (Title, Message) =>
             {
                 await DisplayAlert(Title, Message, "Ok");
             });
@@ -60,7 +60,10 @@ namespace Odor.Views
                 }
                 else
                 {
-                    MessagingCenter.Send(Id, "QueryOdor");
+                    if (this.OdorViewModel.Odors.Count == 0)
+                    {
+                        MessagingCenter.Send(Id, "QueryOdor");
+                    }
                 }
             });
             MessagingCenter.Send(string.Empty, "GetUser");

@@ -15,11 +15,11 @@ namespace Odor.ViewModels
                 if (await DataStore.Add(odor))
                 {
                     this.Odors.Add(odor);
-                    MessagingCenter.Send("Sucesso", "Menu", "Novo odor cadastrado.");
+                    MessagingCenter.Send("Sucesso", "Message", "Novo odor cadastrado.");
                 }
                 else
                 {
-                    MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
+                    MessagingCenter.Send("Aviso", "Message", "Ocorreu um erro inesperado.");
                 }
             });
             MessagingCenter.Subscribe<Models.Odor>(this, "UpdateOdor", async (odor) =>
@@ -29,11 +29,11 @@ namespace Odor.ViewModels
                     int index = this.Odors.IndexOf(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
                     this.Odors.RemoveAt(index);
                     this.Odors.Insert(index, odor);
-                    MessagingCenter.Send("Sucesso", "Menu", "Informações sobre odor atualizados.");
+                    MessagingCenter.Send("Sucesso", "Message", "Informações sobre odor atualizados.");
                 }
                 else
                 {
-                    MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
+                    MessagingCenter.Send("Aviso", "Message", "Ocorreu um erro inesperado.");
                 }
             });
             MessagingCenter.Subscribe<Models.Odor>(this, "DeleteOdor", async (odor) =>
@@ -41,15 +41,16 @@ namespace Odor.ViewModels
                 if (await DataStore.Delete(odor))
                 {
                     this.Odors.Remove(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
-                    MessagingCenter.Send("Sucesso", "Menu", "Odor excluído.");
+                    MessagingCenter.Send("Sucesso", "Message", "Odor excluído.");
                 }
                 else
                 {
-                    MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
+                    MessagingCenter.Send("Aviso", "Message", "Ocorreu um erro inesperado.");
                 }
             });
             MessagingCenter.Subscribe<string>(this, "QueryOdor", async (Id) =>
             {
+                this.Odors.Clear();
                 foreach (Models.Odor odor in await DataStore.Query(new Models.Odor { UserId = Id }))
                 {
                     this.Odors.Add(odor);

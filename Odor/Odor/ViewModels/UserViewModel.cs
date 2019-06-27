@@ -17,11 +17,11 @@ namespace Odor.ViewModels
                 if (await DataStore.Add(user))
                 {
                     this.User = user;
-                    MessagingCenter.Send("Sucesso", "Menu", "Informações pessoais cadastradas.");
+                    MessagingCenter.Send("Sucesso", "Message", "Informações pessoais cadastradas.");
                 }
                 else
                 {
-                    MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
+                    MessagingCenter.Send("Aviso", "Message", "Ocorreu um erro inesperado.");
                 }
             });
             MessagingCenter.Subscribe<Models.User>(this, "UpdateUser", async (user) =>
@@ -29,11 +29,11 @@ namespace Odor.ViewModels
                 if (await DataStore.Update(user))
                 {
                     this.User = user;
-                    MessagingCenter.Send("Sucesso", "Menu", "Informações pessoais cadastradas.");
+                    MessagingCenter.Send("Sucesso", "Message", "Informações pessoais cadastradas.");
                 }
                 else
                 {
-                    MessagingCenter.Send("Aviso", "Menu", "Ocorreu um erro inesperado.");
+                    MessagingCenter.Send("Aviso", "Message", "Ocorreu um erro inesperado.");
                 }
             });
         }

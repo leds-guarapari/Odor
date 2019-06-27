@@ -8,16 +8,19 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterPage : ContentPage
     {
-        private readonly OdorViewModel OdorViewModel;
         public MasterPage(OdorViewModel OdorViewModel)
         {
             InitializeComponent();
-            BindingContext = this.OdorViewModel = OdorViewModel;
+            BindingContext = OdorViewModel;
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            bool isEmpty = this.OdorViewModel.Odors.Count == 0;
+            this.OnRefresh();
+        }
+        private void OnRefresh()
+        {
+            bool isEmpty = ((OdorViewModel) BindingContext).Odors.Count == 0;
             Header.IsVisible = !isEmpty;
             Footer.IsVisible = isEmpty;
         }
