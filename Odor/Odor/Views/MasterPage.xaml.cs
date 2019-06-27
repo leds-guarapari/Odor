@@ -20,13 +20,13 @@ namespace Odor.Views
         }
         private void OnRefresh()
         {
-            bool isEmpty = ((OdorViewModel) BindingContext).Odors.Count == 0;
+            bool isEmpty = ((OdorViewModel)BindingContext).Odors.Count == 0;
             Header.IsVisible = !isEmpty;
             Footer.IsVisible = isEmpty;
         }
         private void OnItemTapped(object sender, ItemTappedEventArgs args)
         {
-            MessagingCenter.Send(((Models.Odor) args.Item).Id, "Odor");
+            MessagingCenter.Send(((Models.Odor)args.Item).Id, "Odor");
         }
         private void GoOdorPage(object sender, EventArgs args)
         {

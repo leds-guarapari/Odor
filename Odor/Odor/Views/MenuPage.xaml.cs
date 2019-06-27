@@ -2,7 +2,6 @@
 using Odor.ViewModels;
 using System;
 using System.Linq;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +12,6 @@ namespace Odor.Views
     {
         private readonly OdorViewModel OdorViewModel;
         private readonly UserViewModel UserViewModel;
-        private readonly Location Location = ConfigurationManager.Location;
         public MenuPage()
         {
             InitializeComponent();
@@ -40,8 +38,6 @@ namespace Odor.Views
                                 UserId = this.UserViewModel.User.Id,
                                 Intensity = ConfigurationManager.Configuration.OdorIntensity,
                                 Type = ConfigurationManager.Configuration.OdorType,
-                                Latitude = Location.Latitude,
-                                Longitude = Location.Longitude,
                                 Address = ConfigurationManager.Configuration.OdorAddress,
                                 Date = DateTime.Today,
                                 Begin = DateTime.Now.TimeOfDay,
