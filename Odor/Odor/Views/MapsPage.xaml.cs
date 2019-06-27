@@ -19,13 +19,27 @@ namespace Odor.Views
         private readonly string Match = ConfigurationManager.Configuration.GeomapTileMatch;
         private readonly int Zoom = ConfigurationManager.Configuration.GeomapDefaultZoom;
         private readonly Models.Odor Odor;
-        public string Tile { get; set; }
         public ICommand ConfirmCommand { get; private set; }
         public MapsPage(Models.Odor odor)
         {
             InitializeComponent();
-            this.Odor = odor;
-            this.Tile = string.Format(this.Pattern, this.Zoom, this.Odor.Latitude, this.Odor.Longitude);
+            this.Odor = new Models.Odor
+            {
+                Latitude = odor.Latitude,
+                Longitude = odor.Longitude,
+                Address = odor.Address,
+                AdminArea = odor.AdminArea,
+                CountryCode = odor.CountryCode,
+                CountryName = odor.CountryName,
+                FeatureName = odor.FeatureName,
+                Locality = odor.Locality,
+                PostalCode = odor.PostalCode,
+                SubAdminArea = odor.SubAdminArea,
+                SubLocality = odor.SubLocality,
+                SubThoroughfare = odor.SubThoroughfare,
+                Thoroughfare = odor.Thoroughfare
+            };
+            Web.Source = string.Format(this.Pattern, this.Zoom, this.Odor.Latitude, this.Odor.Longitude);
             this.ConfirmCommand = new Command(async () => { await this.Dispatch(); });
             BindingContext = this;
         }
@@ -75,7 +89,7 @@ namespace Odor.Views
                 });
                 await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
                 {
-                    MessagingCenter.Send(this.Odor.Address, "Address");
+                    MessagingCenter.Send(this.Odor, "MapsOdor");
                 }));
             }
             catch (Exception exception)
@@ -99,7 +113,7 @@ namespace Odor.Views
             set
             {
                 this.isBusy = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsBusy");
             }
         }
     }

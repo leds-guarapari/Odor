@@ -12,7 +12,6 @@
                 x:Name="Web"
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"
-                Source="{Binding Tile}"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand"
                 Navigated="WebViewNavigated"

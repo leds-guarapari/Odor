@@ -37,11 +37,23 @@ namespace Odor.Views
                 Begin = odor.Begin,
                 End = odor.End
             };
-            this.Address = this.Odor.Address;
             SaveCommand = new Command(async () => { await this.Dispatch(); });
-            MessagingCenter.Subscribe<string>(this, "Address", (Address) =>
+            MessagingCenter.Subscribe<Models.Odor>(this, "MapsOdor", (Odor) =>
             {
-                this.Address = Address;
+                this.Odor.Latitude = Odor.Latitude;
+                this.Odor.Longitude = Odor.Longitude;
+                this.Odor.Address = Odor.Address;
+                this.Odor.AdminArea = Odor.AdminArea;
+                this.Odor.CountryCode = Odor.CountryCode;
+                this.Odor.CountryName = Odor.CountryName;
+                this.Odor.FeatureName = Odor.FeatureName;
+                this.Odor.Locality = Odor.Locality;
+                this.Odor.PostalCode = Odor.PostalCode;
+                this.Odor.SubAdminArea = Odor.SubAdminArea;
+                this.Odor.SubLocality = Odor.SubLocality;
+                this.Odor.SubThoroughfare = Odor.SubThoroughfare;
+                this.Odor.Thoroughfare = Odor.Thoroughfare;
+                OnPropertyChanged("Odor");
             });
             BindingContext = this;
         }
@@ -79,16 +91,6 @@ namespace Odor.Views
             }));
             await Navigation.PopToRootAsync();
         }
-        private string address = string.Empty;
-        public string Address
-        {
-            get { return this.address; }
-            set
-            {
-                this.address = value;
-                OnPropertyChanged();
-            }
-        }
         private bool isBusy = false;
         public new bool IsBusy
         {
@@ -96,7 +98,7 @@ namespace Odor.Views
             set
             {
                 isBusy = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsBusy");
             }
         }
         private async void OnButtonClicked(object sender, EventArgs args)

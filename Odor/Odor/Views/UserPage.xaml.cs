@@ -74,7 +74,7 @@ namespace Odor.Views
             set
             {
                 this.isInvalidateName = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsInvalidateName");
             }
         }
         private bool isInvalidateNumber = false;
@@ -84,7 +84,7 @@ namespace Odor.Views
             set
             {
                 this.isInvalidateNumber = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsInvalidateNumber");
             }
         }
         private bool isValidate = false;
@@ -94,7 +94,7 @@ namespace Odor.Views
             set
             {
                 this.isValidate = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsValidate");
             }
         }
         private bool isBusy = false;
@@ -104,7 +104,7 @@ namespace Odor.Views
             set
             {
                 this.isBusy = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsBusy");
             }
         }
     }
