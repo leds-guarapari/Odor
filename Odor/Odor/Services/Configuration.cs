@@ -23,8 +23,9 @@ namespace Odor.Services
         string Organization { get; set; }
         string UserFile { get; set; }
         string FirebaseRealtimeDatabasePath { get; set; }
-        string MapTileLayer { get; set; }
-        int MapDefaultZoom { get; set; }
+        string MapSource { get; set; }
+        string MapMatch { get; set; }
+        int MapZoom { get; set; }
         string OdorIntensity { get; set; }
         string OdorType { get; set; }
         double OdorLatitude { get; set; }
@@ -46,8 +47,9 @@ namespace Odor.Services
         public string Organization { get; set; }
         public string UserFile { get; set; }
         public string FirebaseRealtimeDatabasePath { get; set; }
-        public string MapTileLayer { get; set; }
-        public int MapDefaultZoom { get; set; }
+        public string MapSource { get; set; }
+        public string MapMatch { get; set; }
+        public int MapZoom { get; set; }
         public string OdorIntensity { get; set; }
         public string OdorType { get; set; }
         public double OdorLatitude { get; set; }

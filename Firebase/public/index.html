@@ -13,14 +13,19 @@
     <body>
         <div id='map'></div>
         <script>
-            location.replace("#/" + -20.209329 + "/" + -40.2644945);
-            var map = L.map('map').setView([-20.209329, -40.2644945], 13);
+            var regex = /https:\/\/cloud\-odor\.web\.app\/#([0-9]+)\/(-?[0-9]+\.[0-9]+)\/(-?[0-9]+\.[0-9]+)/;
+            var match = regex.exec(window.location.href);
+            var zoom = (match) ? match[1] : 13;
+            var latitude = (match) ? match[2] : -20.209329;
+            var longitude = (match) ? match[3] : -40.2644945;
+            location.replace("#" + zoom + "/" + latitude + "/" + longitude);
+            var map = L.map('map').setView([latitude, longitude], zoom);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
             }).addTo(map);
             map.on('moveend', function(e) {
                 var point = map.getCenter();
-                location.replace("#/" + point.lat + "/" + point.lng);
+                location.replace("#" + zoom + "/" + point.lat + "/" + point.lng);
             });
         </script>
     </body>
