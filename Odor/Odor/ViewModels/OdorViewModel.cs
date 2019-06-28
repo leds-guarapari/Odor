@@ -15,7 +15,6 @@ namespace Odor.ViewModels
                 if (await DataStore.Add(odor))
                 {
                     this.Odors.Add(odor);
-                    OnPropertyChanged("Odors");
                     MessagingCenter.Send("Sucesso", "Message", "Novo odor cadastrado.");
                 }
                 else
@@ -30,7 +29,6 @@ namespace Odor.ViewModels
                     int index = this.Odors.IndexOf(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
                     this.Odors.RemoveAt(index);
                     this.Odors.Insert(index, odor);
-                    OnPropertyChanged("Odors");
                     MessagingCenter.Send("Sucesso", "Message", "Informações sobre odor atualizados.");
                 }
                 else
@@ -43,7 +41,6 @@ namespace Odor.ViewModels
                 if (await DataStore.Delete(odor))
                 {
                     this.Odors.Remove(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
-                    OnPropertyChanged("Odors");
                     MessagingCenter.Send("Sucesso", "Message", "Odor excluído.");
                 }
                 else
@@ -58,7 +55,6 @@ namespace Odor.ViewModels
                 {
                     this.Odors.Add(odor);
                 }
-                OnPropertyChanged("Odors");
             });
         }
     }

@@ -30,28 +30,36 @@ namespace Odor.Services
         {
             try
             {
-                this.Firebase
+                return this.Firebase
                     .Child("users")
                     .PostAsync(user)
                     .ContinueWith((Task<FirebaseObject<Models.User>> task) =>
                     {
                         user.Id = task.Result.Key;
                         this.user = user;
-                        System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                        try
+                        {
+                            System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                            return task.IsCompleted;
+                        }
+                        catch (Exception exception)
+                        {
+                            Debug.WriteLine(exception);
+                        }
+                        return false;
                     });
-                return Task.FromResult(true);
             }
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-                return Task.FromResult(false);
             }
+            return Task.FromResult(false);
         }
         public Task<bool> Update(Models.User user)
         {
             try
             {
-                this.Firebase
+                return this.Firebase
                     .Child("users")
                     .Child(user.Id)
                     .PutAsync(new Models.User
@@ -63,15 +71,23 @@ namespace Odor.Services
                     .ContinueWith(task =>
                     {
                         this.user = user;
-                        System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                        try
+                        {
+                            System.IO.File.WriteAllText(this.File, JsonConvert.SerializeObject(this.user, Formatting.Indented));
+                            return task.IsCompleted;
+                        }
+                        catch (Exception exception)
+                        {
+                            Debug.WriteLine(exception);
+                        }
+                        return false;
                     });
-                return Task.FromResult(true);
             }
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-                return Task.FromResult(false);
             }
+            return Task.FromResult(false);
         }
         public Task<bool> Delete(Models.User user)
         {

@@ -25,26 +25,26 @@ namespace Odor.Services
         {
             try
             {
-                this.Firebase
+                return this.Firebase
                     .Child("odors")
                     .PostAsync(odor)
                     .ContinueWith(task =>
                     {
                         odor.Id = task.Result.Key;
+                        return task.IsCompleted;
                     });
-                return Task.FromResult(true);
             }
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-                return Task.FromResult(false);
             }
+            return Task.FromResult(false);
         }
         public Task<bool> Update(Models.Odor odor)
         {
             try
             {
-                this.Firebase
+                return this.Firebase
                     .Child("odors")
                     .Child(odor.Id)
                     .PutAsync(new Models.Odor
@@ -56,68 +56,79 @@ namespace Odor.Services
                         Date = odor.Date,
                         Begin = odor.Begin,
                         End = odor.End
+                    })
+                    .ContinueWith(task =>
+                    {
+                        return task.IsCompleted;
                     });
-                return Task.FromResult(true);
             }
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-                return Task.FromResult(false);
             }
+            return Task.FromResult(false);
         }
         public Task<bool> Delete(Models.Odor odor)
         {
             try
             {
-                this.Firebase
+                return this.Firebase
                     .Child("odors")
                     .Child(odor.Id)
-                    .DeleteAsync();
-                return Task.FromResult(true);
+                    .DeleteAsync()
+                    .ContinueWith(task =>
+                    {
+                        return task.IsCompleted;
+                    });
             }
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-                return Task.FromResult(false);
             }
+            return Task.FromResult(false);
         }
         public Task<Models.Odor> Get(Models.Odor odor)
         {
             try
             {
-                var result = this.Firebase
+                return this.Firebase
                     .Child("odors")
                     .Child(odor.Id)
                     .OnceAsync<Models.Odor>()
-                    .Result
-                    .Last();
-                Models.Odor Odor = result.Object;
-                Odor.Id = result.Key;
-                return Task.FromResult(Odor);
+                    .ContinueWith(task =>
+                    {
+                        var result = task.Result.Last();
+                        Models.Odor Odor = result.Object;
+                        Odor.Id = result.Key;
+                        return Odor;
+                    });
             }
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-                return Task.FromResult(odor);
             }
+            return Task.FromResult(odor);
         }
         public Task<IEnumerable<Models.Odor>> Query(Models.Odor odor)
         {
             IEnumerable<Models.Odor> odors = new List<Models.Odor>();
             try
             {
-                var results = this.Firebase
+                return this.Firebase
                     .Child("odors")
                     .OrderBy("UserId")
                     .EqualTo(odor.UserId)
                     .OnceAsync<Models.Odor>()
-                    .Result;
-                foreach (var result in results)
-                {
-                    Models.Odor Odor = result.Object;
-                    Odor.Id = result.Key;
-                    ((List<Models.Odor>)odors).Add(Odor);
-                }
+                    .ContinueWith(task =>
+                    {
+                        foreach (var result in task.Result)
+                        {
+                            Models.Odor Odor = result.Object;
+                            Odor.Id = result.Key;
+                            ((List<Models.Odor>)odors).Add(Odor);
+                        }
+                        return odors;
+                    });
             }
             catch (Exception exception)
             {
@@ -129,7 +140,7 @@ namespace Odor.Services
         {
             try
             {
-                var observable = this.Firebase
+                this.Firebase
                     .Child("odors")
                     .OrderBy("UserId")
                     .EqualTo(odor.UserId)
