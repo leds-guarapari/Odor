@@ -19,42 +19,13 @@ namespace Odor.Views
                 Id = odor.Id,
                 UserId = odor.UserId,
                 Intensity = odor.Intensity,
-                Latitude = odor.Latitude,
-                Longitude = odor.Longitude,
                 Address = odor.Address,
-                AdminArea = odor.AdminArea,
-                CountryCode = odor.CountryCode,
-                CountryName = odor.CountryName,
-                FeatureName = odor.FeatureName,
-                Locality = odor.Locality,
-                PostalCode = odor.PostalCode,
-                SubAdminArea = odor.SubAdminArea,
-                SubLocality = odor.SubLocality,
-                SubThoroughfare = odor.SubThoroughfare,
-                Thoroughfare = odor.Thoroughfare,
                 Type = odor.Type,
                 Date = odor.Date,
                 Begin = odor.Begin,
                 End = odor.End
             };
             SaveCommand = new Command(async () => { await this.Dispatch(); });
-            MessagingCenter.Subscribe<Models.Odor>(this, "MapsOdor", (Odor) =>
-            {
-                this.Odor.Latitude = Odor.Latitude;
-                this.Odor.Longitude = Odor.Longitude;
-                this.Odor.Address = Odor.Address;
-                this.Odor.AdminArea = Odor.AdminArea;
-                this.Odor.CountryCode = Odor.CountryCode;
-                this.Odor.CountryName = Odor.CountryName;
-                this.Odor.FeatureName = Odor.FeatureName;
-                this.Odor.Locality = Odor.Locality;
-                this.Odor.PostalCode = Odor.PostalCode;
-                this.Odor.SubAdminArea = Odor.SubAdminArea;
-                this.Odor.SubLocality = Odor.SubLocality;
-                this.Odor.SubThoroughfare = Odor.SubThoroughfare;
-                this.Odor.Thoroughfare = Odor.Thoroughfare;
-                OnPropertyChanged("Odor");
-            });
             BindingContext = this;
         }
         async Task Dispatch()
@@ -100,10 +71,6 @@ namespace Odor.Views
                 isBusy = value;
                 OnPropertyChanged("IsBusy");
             }
-        }
-        private async void OnButtonClicked(object sender, EventArgs args)
-        {
-            await Navigation.PushAsync(new MapsPage(this.Odor), true);
         }
         private async void OnDeleteButtonClicked(object sender, EventArgs e)
         {

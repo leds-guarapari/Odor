@@ -18,7 +18,6 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
-                
             </StackLayout>
             <BoxView HorizontalOptions="FillAndExpand" Margin="0, 10, 0, 0" HeightRequest="1" Color="LightGray" />
             <ListView ItemsSource="{Binding Odors}" RowHeight="80" ItemTapped="OnItemTapped" CachingStrategy="RecycleElement">

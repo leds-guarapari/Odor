@@ -17,6 +17,7 @@ namespace Odor.ViewModels
                 if (await DataStore.Add(user))
                 {
                     this.User = user;
+                    OnPropertyChanged("User");
                     MessagingCenter.Send("Sucesso", "Message", "Informações pessoais cadastradas.");
                 }
                 else
@@ -29,6 +30,7 @@ namespace Odor.ViewModels
                 if (await DataStore.Update(user))
                 {
                     this.User = user;
+                    OnPropertyChanged("User");
                     MessagingCenter.Send("Sucesso", "Message", "Informações pessoais cadastradas.");
                 }
                 else

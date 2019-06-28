@@ -22,15 +22,8 @@ namespace Odor.Services
         string Organization { get; set; }
         string UserFile { get; set; }
         string FirebaseRealtimeDatabasePath { get; set; }
-        string MapSource { get; set; }
-        string MapMatch { get; set; }
-        int MapZoom { get; set; }
-        string GeocoderApiKey { get; set; }
-        string GeocoderResponseLanguage { get; set; }
         string OdorIntensity { get; set; }
         string OdorType { get; set; }
-        double OdorLatitude { get; set; }
-        double OdorLongitude { get; set; }
         string OdorAddress { get; set; }
     }
     /*
@@ -48,15 +41,8 @@ namespace Odor.Services
         public string Organization { get; set; }
         public string UserFile { get; set; }
         public string FirebaseRealtimeDatabasePath { get; set; }
-        public string MapSource { get; set; }
-        public string MapMatch { get; set; }
-        public int MapZoom { get; set; }
-        public string GeocoderApiKey { get; set; }
-        public string GeocoderResponseLanguage { get; set; }
         public string OdorIntensity { get; set; }
         public string OdorType { get; set; }
-        public double OdorLatitude { get; set; }
-        public double OdorLongitude { get; set; }
         public string OdorAddress { get; set; }
     }
     /*
