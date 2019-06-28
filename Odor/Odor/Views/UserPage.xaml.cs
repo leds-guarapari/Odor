@@ -21,7 +21,8 @@ namespace Odor.Views
             {
                 Id = user.Id,
                 Name = user.Name,
-                Number = user.Number
+                Number = user.Number,
+                Address = user.Address
             };
             this.SaveCommand = new Command(async () => { await this.Dispatch(); });
             this.ValidateCommand = new Command(() => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });

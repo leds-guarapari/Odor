@@ -22,7 +22,6 @@ namespace Odor.Views
         {
             bool isEmpty = ((OdorViewModel)BindingContext).Odors.Count == 0;
             Header.IsVisible = !isEmpty;
-            Footer.IsVisible = isEmpty;
         }
         private void OnItemTapped(object sender, ItemTappedEventArgs args)
         {

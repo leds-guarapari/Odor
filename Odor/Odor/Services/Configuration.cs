@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Xamarin.Essentials;
 using Module = Autofac.Module;
 
 namespace Odor.Services
@@ -26,6 +25,8 @@ namespace Odor.Services
         string MapSource { get; set; }
         string MapMatch { get; set; }
         int MapZoom { get; set; }
+        string GeocoderApiKey { get; set; }
+        string GeocoderResponseLanguage { get; set; }
         string OdorIntensity { get; set; }
         string OdorType { get; set; }
         double OdorLatitude { get; set; }
@@ -50,6 +51,8 @@ namespace Odor.Services
         public string MapSource { get; set; }
         public string MapMatch { get; set; }
         public int MapZoom { get; set; }
+        public string GeocoderApiKey { get; set; }
+        public string GeocoderResponseLanguage { get; set; }
         public string OdorIntensity { get; set; }
         public string OdorType { get; set; }
         public double OdorLatitude { get; set; }
@@ -82,29 +85,6 @@ namespace Odor.Services
                     // register configuration
                     builder.Register<IConfiguration>(register => configuration).SingleInstance();
                 }
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-        }
-    }
-    /*
-     *
-     * Default location module to perform injection.
-     * 
-     */
-    /// <summary>
-    /// Default location module to perform injection.
-    /// </summary>
-    public class LocationModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            try
-            {
-                // register location by device
-                builder.Register<Location>(register => Geolocation.GetLastKnownLocationAsync().Result).SingleInstance();
             }
             catch (Exception exception)
             {
@@ -147,45 +127,6 @@ namespace Odor.Services
                     }
                 }
                 return configuration;
-            }
-        }
-        private static Location location;
-        /// <returns>
-        /// The default location.
-        /// </returns>
-        public static Location Location
-        {
-            get
-            {
-                // verify if location is valid
-                if (location == null)
-                {
-                    // create empty location
-                    location = new Location();
-                    try
-                    {
-                        // get latitude by default configuration
-                        double latitude = Configuration.OdorLatitude;
-                        // get longitude by default configuration
-                        double longitude = Configuration.OdorLongitude;
-                        // set location by default configuration
-                        location = new Location(latitude, longitude);
-                    }
-                    catch (Exception exception)
-                    {
-                        Debug.WriteLine(exception);
-                    }
-                    try
-                    {
-                        // set location by injection
-                        location = Container.Resolve<Location>();
-                    }
-                    catch (Exception exception)
-                    {
-                        Debug.WriteLine(exception);
-                    }
-                }
-                return location;
             }
         }
     }

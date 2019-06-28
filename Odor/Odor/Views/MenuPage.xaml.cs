@@ -38,7 +38,7 @@ namespace Odor.Views
                                 UserId = this.UserViewModel.User.Id,
                                 Intensity = ConfigurationManager.Configuration.OdorIntensity,
                                 Type = ConfigurationManager.Configuration.OdorType,
-                                Address = ConfigurationManager.Configuration.OdorAddress,
+                                Address = (string.IsNullOrWhiteSpace(this.UserViewModel.User.Address)) ? ConfigurationManager.Configuration.OdorAddress : this.UserViewModel.User.Address,
                                 Date = DateTime.Today,
                                 Begin = DateTime.Now.TimeOfDay,
                                 End = DateTime.Now.TimeOfDay

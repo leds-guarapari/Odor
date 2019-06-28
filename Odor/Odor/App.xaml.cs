@@ -12,7 +12,6 @@ namespace Odor
             InitializeComponent();
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterModule(new ConfigurationModule());
-            builder.RegisterModule(new LocationModule());
             ConfigurationManager.Container = builder.Build();
             MainPage = new MenuPage();
         }

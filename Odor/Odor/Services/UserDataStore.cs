@@ -57,7 +57,8 @@ namespace Odor.Services
                     .PutAsync(new Models.User
                     {
                         Name = user.Name,
-                        Number = user.Number
+                        Number = user.Number,
+                        Address = user.Address
                     })
                     .ContinueWith(task =>
                     {

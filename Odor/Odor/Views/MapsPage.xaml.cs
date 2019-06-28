@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using Odor.Services;
+﻿using Odor.Services;
+using OpenCage.Geocode;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,7 +15,6 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapsPage : ContentPage
     {
-        private readonly Location Location = ConfigurationManager.Location;
         private readonly Models.Odor Odor;
         public ICommand ConfirmCommand { get; private set; }
         public MapsPage(Models.Odor odor)
@@ -24,8 +22,8 @@ namespace Odor.Views
             InitializeComponent();
             this.Odor = new Models.Odor
             {
-                Latitude = (odor.Latitude != 0) ? odor.Latitude : Location.Latitude,
-                Longitude = (odor.Longitude != 0) ? odor.Longitude : Location.Longitude,
+                Latitude = odor.Latitude,
+                Longitude = odor.Longitude,
                 Address = odor.Address,
                 AdminArea = odor.AdminArea,
                 CountryCode = odor.CountryCode,
@@ -38,9 +36,22 @@ namespace Odor.Views
                 SubThoroughfare = odor.SubThoroughfare,
                 Thoroughfare = odor.Thoroughfare
             };
-            Web.Source = string.Format(ConfigurationManager.Configuration.MapSource, ConfigurationManager.Configuration.MapZoom, this.Odor.Latitude, this.Odor.Longitude);
             this.ConfirmCommand = new Command(async () => { await this.Dispatch(); });
             BindingContext = this;
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Device.BeginInvokeOnMainThread(async() =>
+            {
+                if (this.Odor.Latitude == 0 && this.Odor.Longitude == 0)
+                {
+                    Xamarin.Essentials.Location location = await this.GetLocationAsync();
+                    this.Odor.Latitude = location.Latitude;
+                    this.Odor.Longitude = location.Longitude;
+                }
+                Web.Source = string.Format(ConfigurationManager.Configuration.MapSource, ConfigurationManager.Configuration.MapZoom, this.Odor.Latitude, this.Odor.Longitude);
+            });
         }
         async Task Dispatch()
         {
@@ -58,33 +69,23 @@ namespace Odor.Views
                 Match match = expression.Match(((UrlWebViewSource)Web.Source).Url);
                 double latitude = double.Parse(match.Groups["C1"].Value);
                 double longitude = double.Parse(match.Groups["C2"].Value);
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
-                    IEnumerable<Placemark> placemarks = await Geocoding.GetPlacemarksAsync(latitude, longitude);
-                    Placemark placemark = (placemarks)?.FirstOrDefault();
-                    if (placemark != null)
-                    {
-                        this.Odor.Latitude = latitude;
-                        this.Odor.Longitude = longitude;
-                        this.Odor.AdminArea = placemark.AdminArea;
-                        this.Odor.CountryCode = placemark.CountryCode;
-                        this.Odor.CountryName = placemark.CountryName;
-                        this.Odor.FeatureName = placemark.FeatureName;
-                        this.Odor.Locality = placemark.Locality;
-                        this.Odor.PostalCode = placemark.PostalCode;
-                        this.Odor.SubAdminArea = placemark.SubAdminArea;
-                        this.Odor.SubLocality = placemark.SubLocality;
-                        this.Odor.SubThoroughfare = placemark.SubThoroughfare;
-                        this.Odor.Thoroughfare = placemark.Thoroughfare;
-                        this.Odor.Address = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}.",
-                            this.Odor.Thoroughfare,
-                            this.Odor.SubThoroughfare,
-                            this.Odor.SubLocality,
-                            this.Odor.SubAdminArea,
-                            this.Odor.AdminArea,
-                            this.Odor.PostalCode,
-                            this.Odor.CountryCode);
-                    }
+                    GeocoderResponse response = (new Geocoder(ConfigurationManager.Configuration.GeocoderApiKey)).ReverseGeocode(latitude, longitude, ConfigurationManager.Configuration.GeocoderResponseLanguage);
+                    OpenCage.Geocode.Location location = response.Results.Last();
+                    this.Odor.Latitude = latitude;
+                    this.Odor.Longitude = longitude;
+                    this.Odor.AdminArea = location.Components.State;
+                    this.Odor.CountryCode = location.Components.CountryCode;
+                    this.Odor.CountryName = location.Components.Country;
+                    this.Odor.FeatureName = location.Components.Type;
+                    this.Odor.Locality = location.Components.StateDistrict;
+                    this.Odor.PostalCode = location.Components.Postcode;
+                    this.Odor.SubAdminArea = location.Components.City;
+                    this.Odor.SubLocality = location.Components.County;
+                    this.Odor.SubThoroughfare = location.Components.BusStop;
+                    this.Odor.Thoroughfare = location.Components.Road;
+                    this.Odor.Address = location.Formatted;
                 });
                 await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
                 {
@@ -96,6 +97,18 @@ namespace Odor.Views
                 Debug.WriteLine(exception);
             }
             await Navigation.PopAsync();
+        }
+        private Task<Xamarin.Essentials.Location> GetLocationAsync()
+        {
+            try
+            {
+                return Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Medium));
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
+            return Task.FromResult(new Xamarin.Essentials.Location(ConfigurationManager.Configuration.OdorLatitude, ConfigurationManager.Configuration.OdorLongitude));
         }
         private void WebViewNavigating(object sender, WebNavigatingEventArgs args)
         {

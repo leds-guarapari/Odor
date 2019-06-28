@@ -9,9 +9,10 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.2" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.1" />
+    <PackageReference Include="OpenCage.Geocode.DotNetStandard" Version="1.4.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.497661" />
-    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.0.0.497661" />
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.0.0.540366" />
   </ItemGroup>
 
   <ItemGroup>
