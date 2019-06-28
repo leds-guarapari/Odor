@@ -334,3 +334,8 @@ Odor/Odor.Android/google-services.json
 
 # Configuration file
 Odor/Odor/Services/config.json
+
+# Firebase files
+Firebase/node_modules
+Firebase/.firebase
+Firebase/public/lib
