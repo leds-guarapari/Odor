@@ -19,7 +19,7 @@ namespace Odor.ViewModels
                     if (await DataStore.Add(odor))
                     {
                         this.Odors.Add(odor);
-                        MessagingCenter.Send(string.Empty, "AddedOdor");
+                        MessagingCenter.Send((this.Odors.Count > 0).ToString(), "IsVisibleOdor");
                         MessagingCenter.Send("Sucesso", "Message", "Novo odor cadastrado.");
                     }
                     else
@@ -62,7 +62,7 @@ namespace Odor.ViewModels
                     if (await DataStore.Delete(odor))
                     {
                         this.Odors.Remove(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
-                        MessagingCenter.Send((this.Odors.Count > 0).ToString(), "DeletedOdor");
+                        MessagingCenter.Send((this.Odors.Count > 0).ToString(), "IsVisibleOdor");
                         MessagingCenter.Send("Sucesso", "Message", "Odor excluído.");
                     }
                     else
@@ -85,6 +85,7 @@ namespace Odor.ViewModels
                     {
                         this.Odors.Add(odor);
                     }
+                    MessagingCenter.Send((this.Odors.Count > 0).ToString(), "IsVisibleOdor");
                 }
                 catch (Exception exception)
                 {
