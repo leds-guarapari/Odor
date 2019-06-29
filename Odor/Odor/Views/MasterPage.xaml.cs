@@ -1,6 +1,5 @@
 ﻿using Odor.ViewModels;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +12,10 @@ namespace Odor.Views
         {
             InitializeComponent();
             BindingContext = OdorViewModel;
+            MessagingCenter.Subscribe<string>(this, "AddedOdor", (IsVisible) =>
+            {
+                Header.IsVisible = true;
+            });
             MessagingCenter.Subscribe<string>(this, "DeletedOdor", (IsVisible) =>
             {
                 Header.IsVisible = bool.Parse(IsVisible);

@@ -19,6 +19,7 @@ namespace Odor.ViewModels
                     if (await DataStore.Add(odor))
                     {
                         this.Odors.Add(odor);
+                        MessagingCenter.Send(string.Empty, "AddedOdor");
                         MessagingCenter.Send("Sucesso", "Message", "Novo odor cadastrado.");
                     }
                     else
