@@ -1,5 +1,6 @@
 ﻿using Odor.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,16 +13,14 @@ namespace Odor.Views
         {
             InitializeComponent();
             BindingContext = OdorViewModel;
+            MessagingCenter.Subscribe<string>(this, "DeletedOdor", (IsVisible) =>
+            {
+                Header.IsVisible = bool.Parse(IsVisible);
+            });
         }
-        protected override void OnAppearing()
+        private void OnItemAppearing(object sender, ItemVisibilityEventArgs args)
         {
-            base.OnAppearing();
-            this.OnRefresh();
-        }
-        private void OnRefresh()
-        {
-            bool isEmpty = ((OdorViewModel)BindingContext).Odors.Count == 0;
-            Header.IsVisible = !isEmpty;
+            Header.IsVisible = true;
         }
         private void OnItemTapped(object sender, ItemTappedEventArgs args)
         {
