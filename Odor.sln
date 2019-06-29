@@ -7,20 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odor.Android", "Odor\Odor.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Odor", "Odor\Odor\Odor.csproj", "{96BD17D3-FD5B-460F-BAAF-75E9F18FD538}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firebase", "Firebase", "{A67D3DD2-374B-43D6-9856-DEE46D40A4C3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firebase", "Firebase", "{FB6A69F0-81B9-4237-B01D-16988708E02E}"
 	ProjectSection(SolutionItems) = preProject
-		Firebase\.firebaserc = Firebase\.firebaserc
-		Firebase\firebase.json = Firebase\firebase.json
+		Odor\Firebase\.firebaserc = Odor\Firebase\.firebaserc
+		Odor\Firebase\firebase.json = Odor\Firebase\firebase.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "public", "public", "{6D6BF31F-5581-416F-9697-8182CAA0A7C9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2E62817D-8742-4EAD-ADCB-FD1A02679CE2}"
 	ProjectSection(SolutionItems) = preProject
-		Firebase\public\index.html = Firebase\public\index.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{96385BB4-0BE8-41BE-9B6C-22ACC4ACB5BE}"
-	ProjectSection(SolutionItems) = preProject
-		Firebase\public\index.html = Firebase\public\index.html
+		Odor\Firebase\src\index.html = Odor\Firebase\src\index.html
 	EndProjectSection
 EndProject
 Global
@@ -44,8 +39,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6D6BF31F-5581-416F-9697-8182CAA0A7C9} = {A67D3DD2-374B-43D6-9856-DEE46D40A4C3}
-		{96385BB4-0BE8-41BE-9B6C-22ACC4ACB5BE} = {A67D3DD2-374B-43D6-9856-DEE46D40A4C3}
+		{2E62817D-8742-4EAD-ADCB-FD1A02679CE2} = {FB6A69F0-81B9-4237-B01D-16988708E02E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E93B53C-7825-4C64-AC32-5D68B3EDBB56}
