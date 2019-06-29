@@ -12,10 +12,6 @@ namespace Odor.Views
         {
             InitializeComponent();
             BindingContext = OdorViewModel;
-            MessagingCenter.Subscribe<string>(this, "IsVisibleOdor", (IsVisible) =>
-            {
-                Header.IsVisible = bool.Parse(IsVisible);
-            });
         }
         private void OnItemTapped(object sender, ItemTappedEventArgs args)
         {

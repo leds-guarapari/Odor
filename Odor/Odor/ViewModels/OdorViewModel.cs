@@ -9,9 +9,11 @@ namespace Odor.ViewModels
     public class OdorViewModel : BaseViewModel<Models.Odor>
     {
         public ObservableCollection<Models.Odor> Odors { get; set; }
+        public bool IsNotEmpty { get; set; }
         public OdorViewModel()
         {
             this.Odors = new ObservableCollection<Models.Odor>();
+            this.EvaluateIsNotEmpty();
             MessagingCenter.Subscribe<Models.Odor>(this, "AddOdor", async (odor) =>
             {
                 try
@@ -19,7 +21,7 @@ namespace Odor.ViewModels
                     if (await DataStore.Add(odor))
                     {
                         this.Odors.Add(odor);
-                        MessagingCenter.Send((this.Odors.Count > 0).ToString(), "IsVisibleOdor");
+                        this.EvaluateIsNotEmpty();
                         MessagingCenter.Send("Sucesso", "Message", "Novo odor cadastrado.");
                     }
                     else
@@ -62,7 +64,7 @@ namespace Odor.ViewModels
                     if (await DataStore.Delete(odor))
                     {
                         this.Odors.Remove(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
-                        MessagingCenter.Send((this.Odors.Count > 0).ToString(), "IsVisibleOdor");
+                        this.EvaluateIsNotEmpty();
                         MessagingCenter.Send("Sucesso", "Message", "Odor excluído.");
                     }
                     else
@@ -85,13 +87,18 @@ namespace Odor.ViewModels
                     {
                         this.Odors.Add(odor);
                     }
-                    MessagingCenter.Send((this.Odors.Count > 0).ToString(), "IsVisibleOdor");
+                    this.EvaluateIsNotEmpty();
                 }
                 catch (Exception exception)
                 {
                     Debug.WriteLine(exception);
                 }
             });
+        }
+        private void EvaluateIsNotEmpty()
+        {
+            IsNotEmpty = this.Odors.Count > 0;
+            OnPropertyChanged("IsNotEmpty");
         }
     }
 }
