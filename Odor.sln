@@ -9,13 +9,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Odor", "Odor\Odor\Odor.cspr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firebase", "Firebase", "{FB6A69F0-81B9-4237-B01D-16988708E02E}"
 	ProjectSection(SolutionItems) = preProject
+		Odor\Firebase\.eslintrc.json = Odor\Firebase\.eslintrc.json
 		Odor\Firebase\.firebaserc = Odor\Firebase\.firebaserc
 		Odor\Firebase\firebase.json = Odor\Firebase\firebase.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2E62817D-8742-4EAD-ADCB-FD1A02679CE2}"
 	ProjectSection(SolutionItems) = preProject
+		Odor\Firebase\src\firebase.js = Odor\Firebase\src\firebase.js
 		Odor\Firebase\src\index.html = Odor\Firebase\src\index.html
+		Odor\Firebase\src\index.js = Odor\Firebase\src\index.js
 	EndProjectSection
 EndProject
 Global
