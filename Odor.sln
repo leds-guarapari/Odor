@@ -11,7 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firebase", "Firebase", "{FB
 	ProjectSection(SolutionItems) = preProject
 		Odor\Firebase\.eslintrc.json = Odor\Firebase\.eslintrc.json
 		Odor\Firebase\.firebaserc = Odor\Firebase\.firebaserc
+		Odor\Firebase\database-rules.json = Odor\Firebase\database-rules.json
 		Odor\Firebase\firebase.json = Odor\Firebase\firebase.json
+		Odor\Firebase\gulpfile.js = Odor\Firebase\gulpfile.js
+		Odor\Firebase\package.json = Odor\Firebase\package.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2E62817D-8742-4EAD-ADCB-FD1A02679CE2}"

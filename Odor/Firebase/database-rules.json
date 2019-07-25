@@ -1,0 +1,19 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      ".read": false,
+      ".write": true,
+      "$uid":{  
+      }
+    },
+    "odors": {
+      ".read": true,
+      ".write": true,
+      ".indexOn": ["UserId", "Date"],
+      "$odorId":{
+      }
+    }
+  }
+}

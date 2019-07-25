@@ -1,0 +1,38 @@
+{
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.1.0",
+    "gulp-concat": "2.6.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-exec": "^3.0.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-terser": "^1.1.7",
+    "terser": "^3.17.0"
+  },
+  "name": "Odor",
+  "description": "Projeto de iniciacao cientifica referente a um aplicativo sobre a percepcao de gases odorantes.",
+  "version": "0.0.8",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leds-guarapari/Odor.git"
+  },
+  "keywords": [
+    "used",
+    "firebase"
+  ],
+  "author": {
+    "name": "Leds Guarapari",
+    "email": "leds.guarapari@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leds-guarapari/Odor/issues"
+  },
+  "homepage": "https://cloud-odor.web.app"
+}
