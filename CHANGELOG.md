@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Alterações solicitadas para segundo projeto
+
 ## 0.0.8
 
 * Verificar se não está vazia por método
