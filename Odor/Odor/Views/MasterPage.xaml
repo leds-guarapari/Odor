@@ -4,7 +4,7 @@
              x:Class="Odor.Views.MasterPage"
              Visual="Material">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Novo" Clicked="GoOdorPage" />
+        <ToolbarItem Text="Nova" Clicked="GoOdorPage" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="10">
