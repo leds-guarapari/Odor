@@ -14,41 +14,36 @@
                 <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
                 <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
                     <Image Source="blur.png" HeightRequest="24" />
-                    <Label Text="Qual a intensidade do odor? De qual tipo?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
+                    <Label Text="Qual a intensidade do odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
-                <Grid Margin="10, 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Picker Grid.Row="0" Grid.Column="0" Title="Intensidade" SelectedItem="{Binding Odor.Intensity}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Fraco</x:String>
-                                <x:String>Moderado</x:String>
-                                <x:String>Desagradável</x:String>
-                                <x:String>Forte</x:String>
-                                <x:String>Insuportável</x:String>
-                                <x:String>Não sabe</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                    <Picker Grid.Row="0" Grid.Column="1" Title="Tipo" SelectedItem="{Binding Odor.Type}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Esgoto</x:String>
-                                <x:String>Solvente</x:String>
-                                <x:String>Cheiro irritante</x:String>
-                                <x:String>Cheiro de urina</x:String>
-                                <x:String>Plástico queimado</x:String>
-                                <x:String>Não sabe</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </Grid>
+                <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Fraco</x:String>
+                            <x:String>Moderado</x:String>
+                            <x:String>Desagradável</x:String>
+                            <x:String>Forte</x:String>
+                            <x:String>Insuportável</x:String>
+                            <x:String>Não sabe</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
+                    <Image Source="blur.png" HeightRequest="24" />
+                    <Label Text="Qual o tipo do odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
+                </StackLayout>
+                <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Esgoto</x:String>
+                            <x:String>Solvente</x:String>
+                            <x:String>Cheiro irritante</x:String>
+                            <x:String>Cheiro de urina</x:String>
+                            <x:String>Plástico queimado</x:String>
+                            <x:String>Não sabe</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="15, 0">
                     <Image Source="location.png" HeightRequest="36" />
                     <Label Text="Qual o local do odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
