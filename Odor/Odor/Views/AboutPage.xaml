@@ -4,7 +4,7 @@
              x:Class="Odor.Views.AboutPage"
              Visual="Material">
     <ContentPage.Content>
-        <StackLayout Padding="10">
+        <StackLayout Padding="10" BackgroundColor="White">
             <Label Text="Informações sobre o aplicativo" Margin="10" HorizontalOptions="Center" />
             <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
             <Image Source="logo.jpg" HeightRequest="80" Margin="0, 20" HorizontalOptions="Center" />
