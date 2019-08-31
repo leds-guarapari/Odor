@@ -22,6 +22,9 @@ namespace Odor.Services
         string Organization { get; set; }
         string UserFile { get; set; }
         string FirebaseRealtimeDatabasePath { get; set; }
+        string FirebaseAPIKey { get; set; }
+        string FirebaseUser { get; set; }
+        string FirebasePassword { get; set; }
         string OdorIntensity { get; set; }
         string OdorType { get; set; }
         string OdorAddress { get; set; }
@@ -41,6 +44,9 @@ namespace Odor.Services
         public string Organization { get; set; }
         public string UserFile { get; set; }
         public string FirebaseRealtimeDatabasePath { get; set; }
+        public string FirebaseAPIKey { get; set; }
+        public string FirebaseUser { get; set; }
+        public string FirebasePassword { get; set; }
         public string OdorIntensity { get; set; }
         public string OdorType { get; set; }
         public string OdorAddress { get; set; }

@@ -12,7 +12,7 @@
                 <Label Text="Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro." HorizontalTextAlignment="Center" />
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     <Label Text="Para nova ocorrência:" />
-                    <Label Text="Clique em Novo." TextColor="Accent">
+                    <Label Text="Clique em Nova." TextColor="Accent">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoOdorPage" NumberOfTapsRequired="1" />
                         </Label.GestureRecognizers>

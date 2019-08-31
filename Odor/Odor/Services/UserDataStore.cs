@@ -1,4 +1,5 @@
-﻿using Firebase.Database;
+﻿using Firebase.Auth;
+using Firebase.Database;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
 using System;
@@ -21,7 +22,17 @@ namespace Odor.Services
     class UserDataStore : IDataStore<Models.User>
     {
         /// <value>Using Firebase Database API.</value>
-        private readonly FirebaseClient Firebase = new FirebaseClient(ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath);
+        private readonly FirebaseClient Firebase = new FirebaseClient(
+            ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath,
+            new FirebaseOptions
+            {
+                AuthTokenAsyncFactory = () =>
+                    (new FirebaseAuthProvider(new FirebaseConfig(ConfigurationManager.Configuration.FirebaseAPIKey)))
+                    .SignInWithEmailAndPasswordAsync(ConfigurationManager.Configuration.FirebaseUser,
+                                                     ConfigurationManager.Configuration.FirebasePassword)
+                    .ContinueWith(task => { return task.Result.FirebaseToken; })
+
+            });
         /// <value>Using local device storage.</value>
         private readonly string File = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigurationManager.Configuration.UserFile);
         /// <value>Gets empty user.</value>

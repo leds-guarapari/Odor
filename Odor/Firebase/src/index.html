@@ -31,6 +31,16 @@
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet"></div>
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet">
+						<h5 class="mdl-color-text--blue-800">Usuário</h5>
+						<div class="mdl-textfield mdl-js-textfield">
+							<input id="user" class="mdl-textfield__input"/>
+							<span class="mdl-textfield__error">Usuário requerido.</span>
+						</div>
+						<h5 class="mdl-color-text--blue-800">Senha</h5>
+						<div class="mdl-textfield mdl-js-textfield">
+							<input id="password" class="mdl-textfield__input" type="password"/>
+							<span class="mdl-textfield__error">Senha requerida.</span>
+						</div>
 						<h5 class="mdl-color-text--blue-800">Data inicial</h5>
 						<div class="mdl-textfield mdl-js-textfield">
 							<input id="begin" class="mdl-textfield__input" type="date"/>
@@ -49,10 +59,19 @@
 				</div>
 			</main>
 		</div>
+		<div id="message" class="mdl-js-snackbar mdl-snackbar">
+			<div class="mdl-snackbar__text"></div>
+			<button class="mdl-snackbar__action"></button>
+		</div>
+		<div id="error" class="mdl-js-snackbar mdl-snackbar">
+			<div class="mdl-snackbar__text mdl-color-text--red"></div>
+			<button class="mdl-snackbar__action"></button>
+		</div>
 		<div class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
 		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-		<script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
-		<script defer src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+		<script defer src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+		<script defer src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+		<script defer src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
 		<script defer src="index.min.js"></script>
     </body>
 </html>

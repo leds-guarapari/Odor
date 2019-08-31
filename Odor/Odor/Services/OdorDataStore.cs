@@ -1,4 +1,5 @@
-﻿using Firebase.Database;
+﻿using Firebase.Auth;
+using Firebase.Database;
 using Firebase.Database.Query;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,17 @@ namespace Odor.Services
     class OdorDataStore : IDataStore<Models.Odor>
     {
         /// <value>Using Firebase Database API.</value>
-        private readonly FirebaseClient Firebase = new FirebaseClient(ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath);
+        private readonly FirebaseClient Firebase = new FirebaseClient(
+            ConfigurationManager.Configuration.FirebaseRealtimeDatabasePath,
+            new FirebaseOptions
+            {
+                AuthTokenAsyncFactory = () =>
+                    (new FirebaseAuthProvider(new FirebaseConfig(ConfigurationManager.Configuration.FirebaseAPIKey)))
+                    .SignInWithEmailAndPasswordAsync(ConfigurationManager.Configuration.FirebaseUser,
+                                                     ConfigurationManager.Configuration.FirebasePassword)
+                    .ContinueWith(task => { return task.Result.FirebaseToken; })
+                    
+            });
         public Task<bool> Add(Models.Odor odor)
         {
             try

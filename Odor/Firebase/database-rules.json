@@ -4,13 +4,13 @@
     ".write": false,
     "users": {
       ".read": false,
-      ".write": true,
+      ".write": "auth.uid != null",
       "$uid":{  
       }
     },
     "odors": {
-      ".read": true,
-      ".write": true,
+      ".read": "auth.uid != null",
+      ".write": "auth.uid != null",
       ".indexOn": ["UserId", "Date"],
       "$odorId":{
       }
