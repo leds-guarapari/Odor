@@ -329,11 +329,12 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-# Google Services
-Odor/Odor.Android/google-services.json
-
 # Configuration file
 Odor/Odor/Services/config.json
+
+# Android files
+Odor/Odor.Android/google-services.json
+Odor/Odor.Android/Properties/AndroidManifest.xml
 
 # Firebase files
 Odor/Firebase/node_modules

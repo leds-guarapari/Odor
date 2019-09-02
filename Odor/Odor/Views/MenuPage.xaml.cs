@@ -17,7 +17,8 @@ namespace Odor.Views
             InitializeComponent();
             this.OdorViewModel = new OdorViewModel();
             BindingContext = this.UserViewModel = new UserViewModel();
-            Detail = new NavigationPage(new MasterPage(this.OdorViewModel));
+            // Detail = new NavigationPage(new MasterPage(this.OdorViewModel));
+            Detail = new NavigationPage(new HomePage());
             MessagingCenter.Subscribe<string, string>(this, "Message", async (Title, Message) =>
             {
                 await DisplayAlert(Title, Message, "Ok");

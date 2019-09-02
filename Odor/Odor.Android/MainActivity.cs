@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Xamarin;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Odor.Droid
@@ -14,6 +16,8 @@ namespace Odor.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
+            Platform.Init(this, bundle);
+            FormsMaps.Init(this, bundle);
             FormsMaterial.Init(this, bundle);
             LoadApplication(new App());
         }
