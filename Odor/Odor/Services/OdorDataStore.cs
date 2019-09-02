@@ -30,7 +30,7 @@ namespace Odor.Services
                     .SignInWithEmailAndPasswordAsync(ConfigurationManager.Configuration.FirebaseUser,
                                                      ConfigurationManager.Configuration.FirebasePassword)
                     .ContinueWith(task => { return task.Result.FirebaseToken; })
-                    
+
             });
         public Task<bool> Add(Models.Odor odor)
         {
