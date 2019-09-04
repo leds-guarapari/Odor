@@ -9,7 +9,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <maps:Map MapType="Street" />
+            <maps:Map MapType="Street" MapClicked="OnMapClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

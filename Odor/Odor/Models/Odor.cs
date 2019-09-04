@@ -17,6 +17,8 @@ namespace Odor.Models
         public string Intensity { get; set; }
         public string Type { get; set; }
         public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Begin { get; set; }
         public TimeSpan End { get; set; }
