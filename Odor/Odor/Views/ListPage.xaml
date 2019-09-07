@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Odor.Views.ListPage"
+             Visual="Material">
+    <ContentPage.Content>
+        <StackLayout Padding="5" BackgroundColor="White">
+            <Label Text="Nenhuma ocorrência cadastrada." HorizontalOptions="Center" IsVisible="{Binding IsEmpty}" />
+            <ListView ItemsSource="{Binding Odors}" ItemTapped="OnItemTapped" CachingStrategy="RecycleElement" RowHeight="75">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Intensity}" TextColor="Black" />
+                                    <Label Text="{Binding Type}" TextColor="Accent" />
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                        <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black" FontSize="Micro" />
+                                        <Label Text="{Binding Begin, StringFormat='{}{0:hh\\:mm}'}" TextColor="Accent" FontSize="Micro" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <Label Text="{Binding Address}" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

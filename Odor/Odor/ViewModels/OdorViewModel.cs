@@ -9,11 +9,11 @@ namespace Odor.ViewModels
     public class OdorViewModel : BaseViewModel<Models.Odor>
     {
         public ObservableCollection<Models.Odor> Odors { get; set; }
-        public bool IsNotEmpty { get; set; }
+        public bool IsEmpty { get; set; }
         public OdorViewModel()
         {
             this.Odors = new ObservableCollection<Models.Odor>();
-            this.EvaluateIsNotEmpty();
+            this.EvaluateIsEmpty();
             MessagingCenter.Subscribe<Models.Odor>(this, "AddOdor", async (odor) =>
             {
                 try
@@ -21,7 +21,7 @@ namespace Odor.ViewModels
                     if (await DataStore.Add(odor))
                     {
                         this.Odors.Add(odor);
-                        this.EvaluateIsNotEmpty();
+                        this.EvaluateIsEmpty();
                         MessagingCenter.Send("Sucesso", "Message", "Novo odor cadastrado.");
                     }
                     else
@@ -64,7 +64,7 @@ namespace Odor.ViewModels
                     if (await DataStore.Delete(odor))
                     {
                         this.Odors.Remove(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
-                        this.EvaluateIsNotEmpty();
+                        this.EvaluateIsEmpty();
                         MessagingCenter.Send("Sucesso", "Message", "Odor excluído.");
                     }
                     else
@@ -87,7 +87,7 @@ namespace Odor.ViewModels
                     {
                         this.Odors.Add(odor);
                     }
-                    this.EvaluateIsNotEmpty();
+                    this.EvaluateIsEmpty();
                 }
                 catch (Exception exception)
                 {
@@ -95,10 +95,10 @@ namespace Odor.ViewModels
                 }
             });
         }
-        private void EvaluateIsNotEmpty()
+        private void EvaluateIsEmpty()
         {
-            IsNotEmpty = this.Odors.Count > 0;
-            OnPropertyChanged("IsNotEmpty");
+            IsEmpty = this.Odors.Count == 0;
+            OnPropertyChanged("IsEmpty");
         }
     }
 }

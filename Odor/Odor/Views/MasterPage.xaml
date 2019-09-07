@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="Odor.Views.MasterPage"
              Visual="Material">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Nova" Clicked="GoOdorPage" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Padding="10">
+        <StackLayout Padding="5" BackgroundColor="White">
+            <maps:Map MapType="Street" MapClicked="OnMapClicked" />
             <!-- <StackLayout>
                 <Label Text="Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro." HorizontalTextAlignment="Center" />
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -18,7 +20,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
-            </StackLayout> -->
+            </StackLayout>
             <BoxView HorizontalOptions="FillAndExpand" Margin="0, 10, 0, 0" HeightRequest="1" Color="LightGray" />
             <ListView ItemsSource="{Binding Odors}" ItemTapped="OnItemTapped" CachingStrategy="RecycleElement" RowHeight="80">
                 <ListView.Header>
@@ -44,7 +46,7 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView> -->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -4,9 +4,7 @@
              x:Class="Odor.Views.AboutPage"
              Visual="Material">
     <ContentPage.Content>
-        <StackLayout Padding="10" BackgroundColor="White">
-            <Label Text="Informações sobre o aplicativo" Margin="10" HorizontalOptions="Center" />
-            <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
+        <StackLayout Padding="5" BackgroundColor="White">
             <Image Source="nqualiar.jpg" HeightRequest="120" Margin="0, 20" HorizontalOptions="Center" />
             <Label Text="Aplicativo para cadastro da percepção de odor, mau cheiro, poluição do ar, incômodos percebidos e efeitos na qualidade de vida, em locais, datas e horários informados, para fins de registro e análise técnica de especialistas." Margin="15, 10, 15, 0" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Small" />
             <Label Text="{Binding Organization}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" FontSize="Small" TextColor="Black" />

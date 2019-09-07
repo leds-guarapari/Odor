@@ -40,7 +40,7 @@
                                     <Label Text="Novo odor" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
-                            <ViewCell Tapped="GoMasterPage">
+                            <ViewCell Tapped="GoListPage">
                                 <StackLayout Orientation="Horizontal" Padding="15,10">
                                     <Image Source="blur.png" />
                                     <Label Text="Minhas ocorrências" VerticalOptions="Center" />

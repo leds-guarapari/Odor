@@ -7,16 +7,14 @@
         <ToolbarItem Text="Salvar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <AbsoluteLayout Padding="10">
+        <AbsoluteLayout Padding="5" BackgroundColor="White">
             <StackLayout AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                          AbsoluteLayout.LayoutFlags="All">
-                <Label Text="Cadastro de odor" Margin="10" HorizontalOptions="Center" />
-                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
-                <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
+                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
                     <Image Source="flare.png" HeightRequest="24" />
                     <Label Text="Qual a intensidade do odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
-                <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}" Margin="10, 0">
+                <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}" Margin="5, 0">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Fraco</x:String>
@@ -28,11 +26,11 @@
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
-                <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
+                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
                     <Image Source="blur.png" HeightRequest="24" />
                     <Label Text="Qual o tipo do odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
-                <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}" Margin="10, 0">
+                <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}" Margin="5, 0">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Esgoto</x:String>
@@ -44,12 +42,12 @@
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="15, 0">
-                    <Image Source="location.png" HeightRequest="36" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="10, 0">
+                    <Image Source="location.png" HeightRequest="24" />
                     <Label Text="Qual o local do odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
                 <Entry Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"></Entry>
-                <Label Text="Qual a data, horário de início e término?" Margin="15, 0" HorizontalOptions="Start" FontSize="Small" TextColor="Accent" />
+                <Label Text="Qual a data, horário de início e término?" Margin="10, 0" HorizontalOptions="Start" FontSize="Small" TextColor="Accent" />
                 <Grid Margin="10, 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />

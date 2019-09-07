@@ -10,15 +10,16 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : MasterDetailPage
     {
+        private readonly MapsViewModel MapsViewModel;
         private readonly OdorViewModel OdorViewModel;
         private readonly UserViewModel UserViewModel;
         public MenuPage()
         {
             InitializeComponent();
+            this.MapsViewModel = new MapsViewModel();
             this.OdorViewModel = new OdorViewModel();
             BindingContext = this.UserViewModel = new UserViewModel();
-            // Detail = new NavigationPage(new MasterPage(this.OdorViewModel));
-            Detail = new NavigationPage(new HomePage());
+            Detail = new NavigationPage(new MasterPage(this.MapsViewModel));
             MessagingCenter.Subscribe<string, string>(this, "Message", async (Title, Message) =>
             {
                 await DisplayAlert(Title, Message, "Ok");
@@ -39,6 +40,8 @@ namespace Odor.Views
                                 UserId = this.UserViewModel.User.Id,
                                 Intensity = ConfigurationManager.Configuration.OdorIntensity,
                                 Type = ConfigurationManager.Configuration.OdorType,
+                                Latitude = this.MapsViewModel.Position.Latitude,
+                                Longitude = this.MapsViewModel.Position.Longitude,
                                 Address = (string.IsNullOrWhiteSpace(this.UserViewModel.User.Address)) ? ConfigurationManager.Configuration.OdorAddress : this.UserViewModel.User.Address,
                                 Date = DateTime.Today,
                                 Begin = DateTime.Now.TimeOfDay,
@@ -70,13 +73,14 @@ namespace Odor.Views
             await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
             IsPresented = false;
         }
-        private void GoOdorPage(object sender, EventArgs args)
-        {
-            MessagingCenter.Send(string.Empty, "Odor");
-        }
-        private async void GoMasterPage(object sender, EventArgs args)
+        private async void GoOdorPage(object sender, EventArgs args)
         {
             await Detail.Navigation.PopToRootAsync();
+            IsPresented = false;
+        }
+        private async void GoListPage(object sender, EventArgs args)
+        {
+            await Detail.Navigation.PushAsync(new ListPage(this.OdorViewModel));
             IsPresented = false;
         }
         private async void GoAboutPage(object sender, EventArgs args)

@@ -7,24 +7,22 @@
         <ToolbarItem Text="Salvar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <AbsoluteLayout Padding="10">
+        <AbsoluteLayout Padding="5" BackgroundColor="White">
             <StackLayout AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                          AbsoluteLayout.LayoutFlags="All">
-                <Label Text="Cadastro de informações pessoais" Margin="10" HorizontalOptions="Center" />
-                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Color="LightGray" />
-                <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
+                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
                     <Image Source="person.png" HeightRequest="24" />
                     <Label Text="Digite o nome e sobrenome" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
                 <Entry Text="{Binding User.Name}" Margin="10, 0" Placeholder="Nome completo" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" TextChanged="NameTextChanged"></Entry>
                 <Label Text="O nome é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateName}" HorizontalOptions="Start" FontSize="Small" />
-                <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
+                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
                     <Image Source="phone.png" HeightRequest="24" />
                     <Label Text="Digite o telefone com DDD" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
                 <Entry Text="{Binding User.Number}" Margin="10, 0" Keyboard="Telephone" Placeholder="Telefone" TextChanged="NumberTextChanged"></Entry>
                 <Label Text="O telefone é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateNumber}" HorizontalOptions="Start" FontSize="Small" />
-                <StackLayout Orientation="Horizontal" Margin="15, 10, 15, 0">
+                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
                     <Image Source="location.png" HeightRequest="24" />
                     <Label Text="Digite o endereço completo" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
                 </StackLayout>
