@@ -136,9 +136,6 @@
     <AndroidResource Include="Resources\drawable\about.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\location.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\date.png" />
   </ItemGroup>
   <ItemGroup>

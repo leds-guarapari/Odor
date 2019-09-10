@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="Odor.Views.MapsPage"
+             Visual="Material">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Confirm" Command="{Binding ConfirmCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <maps:Map x:Name="Maps"
+                      MapType="Street"
+                      MapClicked="OnMapClicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

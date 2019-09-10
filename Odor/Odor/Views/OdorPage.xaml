@@ -45,6 +45,7 @@
                 <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Margin="10, 0">
                     <Image Source="location.png" HeightRequest="24" />
                     <Label Text="Qual o local do odor?" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
+                    <Button Text="Mapa" HorizontalOptions="EndAndExpand" WidthRequest="100" BackgroundColor="Accent"></Button>
                 </StackLayout>
                 <Entry Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"></Entry>
                 <Label Text="Qual a data, horário de início e término?" Margin="10, 0" HorizontalOptions="Start" FontSize="Small" TextColor="Accent" />

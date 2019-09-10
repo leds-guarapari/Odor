@@ -1,5 +1,5 @@
 ﻿using Odor.ViewModels;
-using System;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -7,17 +7,14 @@ using Xamarin.Forms.Xaml;
 namespace Odor.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterPage : ContentPage
+    public partial class MapsPage : ContentPage
     {
         private readonly MapsViewModel MapsViewModel;
-        public MasterPage(MapsViewModel MapsViewModel)
+        public ICommand ConfirmCommand { get; private set; }
+        public MapsPage(MapsViewModel MapsViewModel)
         {
             InitializeComponent();
             BindingContext = this.MapsViewModel = MapsViewModel;
-        }
-        private void GoOdorPage(object sender, EventArgs args)
-        {
-            MessagingCenter.Send(string.Empty, "Odor");
         }
         private void OnMapClicked(object sender, MapClickedEventArgs args)
         {

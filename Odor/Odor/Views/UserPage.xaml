@@ -25,6 +25,7 @@
                 <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
                     <Image Source="location.png" HeightRequest="24" />
                     <Label Text="Digite o endereço completo" VerticalOptions="Center" FontSize="Small" TextColor="Accent" />
+                    <Button Text="Mapa" HorizontalOptions="EndAndExpand" WidthRequest="100" BackgroundColor="Accent"></Button>
                 </StackLayout>
                 <Entry Text="{Binding User.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"></Entry>
             </StackLayout>

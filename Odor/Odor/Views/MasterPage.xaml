@@ -8,45 +8,31 @@
         <ToolbarItem Text="Nova" Clicked="GoOdorPage" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Padding="5" BackgroundColor="White">
-            <maps:Map MapType="Street" MapClicked="OnMapClicked" />
-            <!-- <StackLayout>
+        <AbsoluteLayout>
+            <maps:Map x:Name="Maps"
+                      MapType="Street"
+                      MapClicked="OnMapClicked"
+                      MoveToLastRegionOnLayoutChange="false"
+                      AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+                      AbsoluteLayout.LayoutFlags="All" />
+            <StackLayout Opacity=".9"
+                         Margin="10"
+                         Padding="10"
+                         BackgroundColor="White"
+                         AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+                         AbsoluteLayout.LayoutFlags="All"
+                         HorizontalOptions="Center"
+                         VerticalOptions="StartAndExpand">
                 <Label Text="Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro." HorizontalTextAlignment="Center" />
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Para nova ocorrência:" />
-                    <Label Text="Clique em Nova." TextColor="Accent">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                    <Label Text="Selecione o local e clique em" />
+                    <Label Text="Nova." TextColor="Accent">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoOdorPage" NumberOfTapsRequired="1" />
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
             </StackLayout>
-            <BoxView HorizontalOptions="FillAndExpand" Margin="0, 10, 0, 0" HeightRequest="1" Color="LightGray" />
-            <ListView ItemsSource="{Binding Odors}" ItemTapped="OnItemTapped" CachingStrategy="RecycleElement" RowHeight="80">
-                <ListView.Header>
-                    <StackLayout IsVisible="{Binding IsNotEmpty}">
-                        <Label Text="Ocorrências de odor" Margin="10" HorizontalOptions="Center" />
-                        <BoxView HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 10" HeightRequest="1" Color="LightGray" />
-                    </StackLayout>
-                </ListView.Header>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Vertical" Margin="10">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Intensity}" TextColor="Black" />
-                                    <Label Text="{Binding Type}" TextColor="Accent" />
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                                        <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black" FontSize="Micro" />
-                                        <Label Text="{Binding Begin, StringFormat='{}{0:hh\\:mm}'}" TextColor="Accent" FontSize="Micro" />
-                                    </StackLayout>
-                                </StackLayout>
-                                <Label Text="{Binding Address}" HorizontalOptions="FillAndExpand" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView> -->
-        </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
