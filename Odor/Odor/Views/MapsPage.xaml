@@ -5,13 +5,26 @@
              x:Class="Odor.Views.MapsPage"
              Visual="Material">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Confirm" Command="{Binding ConfirmCommand}" />
+        <ToolbarItem Text="Confirmar" Command="{Binding ConfirmCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
+        <AbsoluteLayout>
             <maps:Map x:Name="Maps"
                       MapType="Street"
-                      MapClicked="OnMapClicked" />
-        </StackLayout>
+                      MapClicked="OnMapClicked"
+                      MoveToLastRegionOnLayoutChange="false"
+                      AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+                      AbsoluteLayout.LayoutFlags="All" />
+            <ActivityIndicator
+                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+                AbsoluteLayout.LayoutFlags="All"
+                HorizontalOptions="Center"
+                VerticalOptions="EndAndExpand"
+                Color="LightGray"
+                Margin="0, 5"
+                WidthRequest="50" HeightRequest="50"
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}" />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

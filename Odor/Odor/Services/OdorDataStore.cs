@@ -64,6 +64,8 @@ namespace Odor.Services
                         Intensity = odor.Intensity,
                         Type = odor.Type,
                         Address = odor.Address,
+                        Latitude = odor.Latitude,
+                        Longitude = odor.Longitude,
                         Date = odor.Date,
                         Begin = odor.Begin,
                         End = odor.End

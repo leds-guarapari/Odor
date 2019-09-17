@@ -1,4 +1,5 @@
 ﻿using Odor.ViewModels;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -14,11 +15,50 @@ namespace Odor.Views
         public MapsPage(MapsViewModel MapsViewModel)
         {
             InitializeComponent();
-            BindingContext = this.MapsViewModel = MapsViewModel;
+            this.MapsViewModel = new MapsViewModel
+            {
+                Position = MapsViewModel.Position,
+                Address = MapsViewModel.Address
+            };
+            ConfirmCommand = new Command(async () => { await this.Dispatch(); });
+            BindingContext = this;
+            Task.Run(() => Device.BeginInvokeOnMainThread(async () =>
+            {
+                this.IsBusy = true;
+                this.Maps.MoveToRegion(MapSpan.FromCenterAndRadius(this.MapsViewModel.Position, Distance.FromKilometers(1)));
+                await this.MapsViewModel.Pinned(this.Maps, this.MapsViewModel.Position);
+                this.IsBusy = false;
+            }));
         }
-        private void OnMapClicked(object sender, MapClickedEventArgs args)
+        async Task Dispatch()
         {
-            this.MapsViewModel.Pinned((Map)sender, args.Position);
+            if (!this.IsBusy)
+            {
+                this.IsBusy = true;
+                await this.Confirm();
+            }
+        }
+        async Task Confirm()
+        {
+            await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
+            {
+                MessagingCenter.Send(this.MapsViewModel, "ConfirmPosition");
+            }));
+            await Navigation.PopAsync();
+        }
+        private async void OnMapClicked(object sender, MapClickedEventArgs args)
+        {
+            this.IsBusy = true;
+            await this.MapsViewModel.Pinned((Map) sender, args.Position);
+            this.IsBusy = false;
+        }
+        private bool isBusy = false;
+        public new bool IsBusy {
+            get { return isBusy; }
+            set {
+                isBusy = value;
+                OnPropertyChanged("IsBusy");
+            }
         }
     }
 }

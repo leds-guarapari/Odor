@@ -77,7 +77,9 @@ namespace Odor.Services
                     {
                         Name = user.Name,
                         Number = user.Number,
-                        Address = user.Address
+                        Address = user.Address,
+                        Latitude = user.Latitude,
+                        Longitude = user.Longitude
                     })
                     .ContinueWith(task =>
                     {

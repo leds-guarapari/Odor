@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Odor.ViewModels;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace Odor.Views
@@ -20,12 +22,21 @@ namespace Odor.Views
                 UserId = odor.UserId,
                 Intensity = odor.Intensity,
                 Address = odor.Address,
+                Latitude = odor.Latitude,
+                Longitude = odor.Longitude,
                 Type = odor.Type,
                 Date = odor.Date,
                 Begin = odor.Begin,
                 End = odor.End
             };
             SaveCommand = new Command(async () => { await this.Dispatch(); });
+            MessagingCenter.Subscribe<MapsViewModel>(this, "ConfirmPosition", (MapsViewModel) =>
+            {
+                this.Odor.Address = MapsViewModel.Address;
+                this.Odor.Latitude = MapsViewModel.Position.Latitude;
+                this.Odor.Longitude = MapsViewModel.Position.Longitude;
+                OnPropertyChanged("Odor");
+            });
             BindingContext = this;
         }
         async Task Dispatch()
@@ -79,6 +90,13 @@ namespace Odor.Views
                 this.IsBusy = true;
                 await this.Delete();
             }
+        }
+        private async void GoMapsPage(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new MapsPage(new ViewModels.MapsViewModel {
+                Position = new Position(this.Odor.Latitude, this.Odor.Longitude),
+                Address = this.Odor.Address
+            }));
         }
     }
 }

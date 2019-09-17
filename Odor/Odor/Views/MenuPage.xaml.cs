@@ -42,7 +42,11 @@ namespace Odor.Views
                                 Type = ConfigurationManager.Configuration.OdorType,
                                 Latitude = this.MapsViewModel.Position.Latitude,
                                 Longitude = this.MapsViewModel.Position.Longitude,
-                                Address = (string.IsNullOrWhiteSpace(this.UserViewModel.User.Address)) ? ConfigurationManager.Configuration.OdorAddress : this.UserViewModel.User.Address,
+                                Address = (string.IsNullOrWhiteSpace(this.MapsViewModel.Address))
+                                            ? (string.IsNullOrWhiteSpace(this.UserViewModel.User.Address))
+                                            ? ConfigurationManager.Configuration.OdorAddress
+                                            : this.UserViewModel.User.Address
+                                            : this.MapsViewModel.Address,
                                 Date = DateTime.Today,
                                 Begin = DateTime.Now.TimeOfDay,
                                 End = DateTime.Now.TimeOfDay

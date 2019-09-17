@@ -33,6 +33,16 @@
                     </Label>
                 </StackLayout>
             </StackLayout>
+            <ActivityIndicator
+                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
+                AbsoluteLayout.LayoutFlags="All"
+                HorizontalOptions="Center"
+                VerticalOptions="EndAndExpand"
+                Color="LightGray"
+                Margin="0, 5"
+                WidthRequest="50" HeightRequest="50"
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}" />
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,7 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Odor.ViewModels;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace Odor.Views
@@ -22,12 +28,21 @@ namespace Odor.Views
                 Id = user.Id,
                 Name = user.Name,
                 Number = user.Number,
-                Address = user.Address
+                Address = user.Address,
+                Latitude = user.Latitude,
+                Longitude = user.Longitude
             };
             this.SaveCommand = new Command(async () => { await this.Dispatch(); });
             this.ValidateCommand = new Command(() => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });
             this.InvalidateNameCommand = new Command(() => { this.IsInvalidateName = string.IsNullOrWhiteSpace(this.User.Name); });
             this.InvalidateNumberCommand = new Command(() => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
+            MessagingCenter.Subscribe<MapsViewModel>(this, "ConfirmPosition", (MapsViewModel) =>
+            {
+                this.User.Address = MapsViewModel.Address;
+                this.User.Latitude = MapsViewModel.Position.Latitude;
+                this.User.Longitude = MapsViewModel.Position.Longitude;
+                OnPropertyChanged("User");
+            });
             BindingContext = this;
         }
         private void NameTextChanged(object sender, TextChangedEventArgs args)
@@ -106,6 +121,44 @@ namespace Odor.Views
             {
                 this.isBusy = value;
                 OnPropertyChanged("IsBusy");
+            }
+        }
+        private async void GoMapsPage(object sender, EventArgs args)
+        {
+            if (string.IsNullOrWhiteSpace(this.User.Id) || (this.User.Latitude == 0 && this.User.Longitude == 0))
+            {
+                this.IsBusy = true;
+                try
+                {
+                    Location location = await Geolocation.GetLastKnownLocationAsync();
+                    if (location == null)
+                    {
+                        location = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best));
+                    }
+                    if (location != null)
+                    {
+                        Position position = new Position(location.Latitude, location.Longitude);
+                        await Navigation.PushAsync(new MapsPage(new ViewModels.MapsViewModel
+                        {
+                            Position = position,
+                            Address = (await (new Geocoder()).GetAddressesForPositionAsync(position)).LastOrDefault()
+                        }));
+                    }
+                }
+                catch (Exception exception)
+                {
+                    MessagingCenter.Send("Aviso", "Message", "Sem conexão com a Internet.");
+                    Debug.WriteLine(exception);
+                }
+                this.IsBusy = false;
+            }
+            else
+            {
+                await Navigation.PushAsync(new MapsPage(new ViewModels.MapsViewModel
+                {
+                    Position = new Position(this.User.Latitude, this.User.Longitude),
+                    Address = this.User.Address
+                }));
             }
         }
     }
