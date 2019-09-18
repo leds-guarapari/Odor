@@ -16,7 +16,7 @@
   },
   "name": "Odor",
   "description": "Projeto de iniciacao cientifica referente a um aplicativo sobre a percepcao de gases odorantes.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",
@@ -34,5 +34,5 @@
   "bugs": {
     "url": "https://github.com/leds-guarapari/Odor/issues"
   },
-  "homepage": "https://cloud-odor.web.app"
+  "homepage": "https://github.com/leds-guarapari/Odor"
 }
