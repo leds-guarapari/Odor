@@ -41,7 +41,7 @@ firebase.initializeApp({
 }
 ```
 ### Odor.Android\google-services.json
-Faça o download do arquivo no Firebase do Projeto.
+Faça o download do arquivo no projeto do Firebase.
 ### Odor.Android\Properties\AndroidManifest.xml
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
