@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Acerto da imagem de localização
+
 ## 0.1.0
 
 * Correções de envio de mensagens no mapa
