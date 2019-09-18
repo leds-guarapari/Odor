@@ -4,9 +4,9 @@
              x:Class="Odor.Views.ListPage"
              Visual="Material">
     <ContentPage.Content>
-        <StackLayout Padding="5" BackgroundColor="White">
+        <StackLayout Padding="10" BackgroundColor="White">
             <Label Text="Nenhuma ocorrência cadastrada." HorizontalOptions="Center" IsVisible="{Binding IsEmpty}" />
-            <ListView ItemsSource="{Binding Odors}" ItemTapped="OnItemTapped" CachingStrategy="RecycleElement" RowHeight="75">
+            <ListView ItemsSource="{Binding Odors}" ItemTapped="OnItemTapped" CachingStrategy="RecycleElement" RowHeight="70">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

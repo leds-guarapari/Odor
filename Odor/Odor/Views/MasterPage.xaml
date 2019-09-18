@@ -25,7 +25,7 @@
                          VerticalOptions="StartAndExpand">
                 <Label Text="Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro." HorizontalTextAlignment="Center" />
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
-                    <Label Text="Selecione o local e clique em" />
+                    <Label Text="Selecione o local da ocorrência e clique em" />
                     <Label Text="Nova." TextColor="Accent">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoOdorPage" NumberOfTapsRequired="1" />

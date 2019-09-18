@@ -15,6 +15,7 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserPage : ContentPage, INotifyPropertyChanged
     {
+        private readonly string Message = "UserMaps";
         public Models.User User { get; set; }
         public ICommand SaveCommand { get; private set; }
         public ICommand ValidateCommand { get; private set; }
@@ -36,7 +37,7 @@ namespace Odor.Views
             this.ValidateCommand = new Command(() => { this.IsValidate = !this.IsInvalidateName && !this.IsInvalidateNumber; });
             this.InvalidateNameCommand = new Command(() => { this.IsInvalidateName = string.IsNullOrWhiteSpace(this.User.Name); });
             this.InvalidateNumberCommand = new Command(() => { this.IsInvalidateNumber = string.IsNullOrWhiteSpace(this.User.Number); });
-            MessagingCenter.Subscribe<MapsViewModel>(this, "ConfirmPosition", (MapsViewModel) =>
+            MessagingCenter.Subscribe<MapsViewModel>(this, this.Message, (MapsViewModel) =>
             {
                 this.User.Address = MapsViewModel.Address;
                 this.User.Latitude = MapsViewModel.Position.Latitude;
@@ -142,7 +143,7 @@ namespace Odor.Views
                         {
                             Position = position,
                             Address = (await (new Geocoder()).GetAddressesForPositionAsync(position)).LastOrDefault()
-                        }));
+                        }, this.Message));
                     }
                 }
                 catch (Exception exception)
@@ -158,7 +159,7 @@ namespace Odor.Views
                 {
                     Position = new Position(this.User.Latitude, this.User.Longitude),
                     Address = this.User.Address
-                }));
+                }, this.Message));
             }
         }
     }

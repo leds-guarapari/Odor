@@ -72,11 +72,6 @@ namespace Odor.Views
             });
             MessagingCenter.Send(string.Empty, "GetUser");
         }
-        private async void GoUserPage(object sender, EventArgs args)
-        {
-            await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
-            IsPresented = false;
-        }
         private async void GoOdorPage(object sender, EventArgs args)
         {
             await Detail.Navigation.PopToRootAsync();
@@ -85,6 +80,11 @@ namespace Odor.Views
         private async void GoListPage(object sender, EventArgs args)
         {
             await Detail.Navigation.PushAsync(new ListPage(this.OdorViewModel));
+            IsPresented = false;
+        }
+        private async void GoUserPage(object sender, EventArgs args)
+        {
+            await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
             IsPresented = false;
         }
         private async void GoAboutPage(object sender, EventArgs args)

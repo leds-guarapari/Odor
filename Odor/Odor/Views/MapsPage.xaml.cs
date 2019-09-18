@@ -11,8 +11,9 @@ namespace Odor.Views
     public partial class MapsPage : ContentPage
     {
         private readonly MapsViewModel MapsViewModel;
+        private readonly string Message;
         public ICommand ConfirmCommand { get; private set; }
-        public MapsPage(MapsViewModel MapsViewModel)
+        public MapsPage(MapsViewModel MapsViewModel, string Message)
         {
             InitializeComponent();
             this.MapsViewModel = new MapsViewModel
@@ -20,6 +21,7 @@ namespace Odor.Views
                 Position = MapsViewModel.Position,
                 Address = MapsViewModel.Address
             };
+            this.Message = Message;
             ConfirmCommand = new Command(async () => { await this.Dispatch(); });
             BindingContext = this;
             Task.Run(() => Device.BeginInvokeOnMainThread(async () =>
@@ -42,7 +44,7 @@ namespace Odor.Views
         {
             await Task.Run(() => Device.BeginInvokeOnMainThread(() =>
             {
-                MessagingCenter.Send(this.MapsViewModel, "ConfirmPosition");
+                MessagingCenter.Send(this.MapsViewModel, this.Message);
             }));
             await Navigation.PopAsync();
         }

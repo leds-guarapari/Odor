@@ -11,6 +11,7 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdorPage : ContentPage
     {
+        private readonly string Message = "OdorMaps";
         public Models.Odor Odor { get; set; }
         public ICommand SaveCommand { get; private set; }
         public OdorPage(Models.Odor odor)
@@ -30,7 +31,7 @@ namespace Odor.Views
                 End = odor.End
             };
             SaveCommand = new Command(async () => { await this.Dispatch(); });
-            MessagingCenter.Subscribe<MapsViewModel>(this, "ConfirmPosition", (MapsViewModel) =>
+            MessagingCenter.Subscribe<MapsViewModel>(this, this.Message, (MapsViewModel) =>
             {
                 this.Odor.Address = MapsViewModel.Address;
                 this.Odor.Latitude = MapsViewModel.Position.Latitude;
@@ -96,7 +97,7 @@ namespace Odor.Views
             await Navigation.PushAsync(new MapsPage(new ViewModels.MapsViewModel {
                 Position = new Position(this.Odor.Latitude, this.Odor.Longitude),
                 Address = this.Odor.Address
-            }));
+            }, this.Message));
         }
     }
 }

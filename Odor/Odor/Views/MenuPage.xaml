@@ -28,22 +28,22 @@
                     </Grid>
                     <TableView Intent="Menu">
                         <TableSection>
-                            <ViewCell Tapped="GoUserPage">
-                                <StackLayout Orientation="Horizontal" Padding="15,10">
-                                    <Image Source="person.png" />
-                                    <Label Text="Meu perfil" VerticalOptions="Center" />
-                                </StackLayout>
-                            </ViewCell>
                             <ViewCell Tapped="GoOdorPage">
                                 <StackLayout Orientation="Horizontal" Padding="15,10">
                                     <Image Source="add.png" />
-                                    <Label Text="Novo odor" VerticalOptions="Center" />
+                                    <Label Text="Nova ocorrência" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell Tapped="GoListPage">
                                 <StackLayout Orientation="Horizontal" Padding="15,10">
                                     <Image Source="blur.png" />
                                     <Label Text="Minhas ocorrências" VerticalOptions="Center" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Tapped="GoUserPage">
+                                <StackLayout Orientation="Horizontal" Padding="15,10">
+                                    <Image Source="person.png" />
+                                    <Label Text="Meu perfil" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
                             <ViewCell Tapped="GoAboutPage">

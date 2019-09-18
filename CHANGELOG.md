@@ -1,3 +1,7 @@
+## 0.1.0
+
+* Correções de envio de mensagens no mapa
+
 ## 0.0.9
 
 * Alterações solicitadas para segundo projeto
