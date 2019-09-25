@@ -61,6 +61,7 @@ namespace Odor.Services
                     .PutAsync(new Models.Odor
                     {
                         UserId = odor.UserId,
+                        UserName = odor.UserName,
                         Intensity = odor.Intensity,
                         Type = odor.Type,
                         Address = odor.Address,

@@ -21,6 +21,7 @@ namespace Odor.Views
             {
                 Id = odor.Id,
                 UserId = odor.UserId,
+                UserName = odor.UserName,
                 Intensity = odor.Intensity,
                 Address = odor.Address,
                 Latitude = odor.Latitude,
@@ -94,7 +95,7 @@ namespace Odor.Views
         }
         private async void GoMapsPage(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new MapsPage(new ViewModels.MapsViewModel {
+            await Navigation.PushAsync(new MapsPage(new MapsViewModel {
                 Position = new Position(this.Odor.Latitude, this.Odor.Longitude),
                 Address = this.Odor.Address
             }, this.Message));

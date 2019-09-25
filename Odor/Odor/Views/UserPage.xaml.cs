@@ -1,11 +1,8 @@
 ﻿using Odor.ViewModels;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -126,41 +123,11 @@ namespace Odor.Views
         }
         private async void GoMapsPage(object sender, EventArgs args)
         {
-            if (string.IsNullOrWhiteSpace(this.User.Id) || (this.User.Latitude == 0 && this.User.Longitude == 0))
+            await Navigation.PushAsync(new MapsPage(new MapsViewModel
             {
-                this.IsBusy = true;
-                try
-                {
-                    Location location = await Geolocation.GetLastKnownLocationAsync();
-                    if (location == null)
-                    {
-                        location = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best));
-                    }
-                    if (location != null)
-                    {
-                        Position position = new Position(location.Latitude, location.Longitude);
-                        await Navigation.PushAsync(new MapsPage(new ViewModels.MapsViewModel
-                        {
-                            Position = position,
-                            Address = (await (new Geocoder()).GetAddressesForPositionAsync(position)).LastOrDefault()
-                        }, this.Message));
-                    }
-                }
-                catch (Exception exception)
-                {
-                    MessagingCenter.Send("Aviso", "Message", "Sem conexão com a Internet.");
-                    Debug.WriteLine(exception);
-                }
-                this.IsBusy = false;
-            }
-            else
-            {
-                await Navigation.PushAsync(new MapsPage(new ViewModels.MapsViewModel
-                {
-                    Position = new Position(this.User.Latitude, this.User.Longitude),
-                    Address = this.User.Address
-                }, this.Message));
-            }
+                Position = new Position(this.User.Latitude, this.User.Longitude),
+                Address = this.User.Address
+            }, this.Message));
         }
     }
 }
