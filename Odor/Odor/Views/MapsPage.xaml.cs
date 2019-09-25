@@ -1,6 +1,9 @@
 ﻿using Odor.ViewModels;
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -27,6 +30,27 @@ namespace Odor.Views
             Task.Run(() => Device.BeginInvokeOnMainThread(async () =>
             {
                 this.IsBusy = true;
+                if (this.MapsViewModel.Position.Latitude == 0 && this.MapsViewModel.Position.Longitude == 0)
+                {
+                    try
+                    {
+                        Location location = await Geolocation.GetLastKnownLocationAsync();
+                        if (location == null)
+                        {
+                            location = await Geolocation.GetLocationAsync(new GeolocationRequest(GeolocationAccuracy.Best));
+                        }
+                        if (location != null)
+                        {
+                            Position position = new Position(location.Latitude, location.Longitude);
+                            this.MapsViewModel.Position = position;
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        MessagingCenter.Send("Aviso", "Message", "Não foi possível obter a localização.");
+                        Debug.WriteLine(exception);
+                    }
+                }
                 this.Maps.MoveToRegion(MapSpan.FromCenterAndRadius(this.MapsViewModel.Position, Distance.FromKilometers(1)));
                 await this.MapsViewModel.Pinned(this.Maps, this.MapsViewModel.Position);
                 this.IsBusy = false;
@@ -51,7 +75,7 @@ namespace Odor.Views
         private async void OnMapClicked(object sender, MapClickedEventArgs args)
         {
             this.IsBusy = true;
-            await this.MapsViewModel.Pinned((Map) sender, args.Position);
+            await this.MapsViewModel.Pinned((Xamarin.Forms.Maps.Map) sender, args.Position);
             this.IsBusy = false;
         }
         private bool isBusy = false;

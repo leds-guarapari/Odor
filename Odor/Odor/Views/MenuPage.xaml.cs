@@ -10,16 +10,14 @@ namespace Odor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : MasterDetailPage
     {
-        private readonly MapsViewModel MapsViewModel;
         private readonly OdorViewModel OdorViewModel;
         private readonly UserViewModel UserViewModel;
         public MenuPage()
         {
             InitializeComponent();
-            this.MapsViewModel = new MapsViewModel();
             this.OdorViewModel = new OdorViewModel();
             BindingContext = this.UserViewModel = new UserViewModel();
-            Detail = new NavigationPage(new MasterPage(this.MapsViewModel));
+            Detail = new NavigationPage(new MasterPage());
             MessagingCenter.Subscribe<string, string>(this, "Message", async (Title, Message) =>
             {
                 await DisplayAlert(Title, Message, "Ok");
@@ -38,15 +36,14 @@ namespace Odor.Views
                             new Models.Odor
                             {
                                 UserId = this.UserViewModel.User.Id,
+                                UserName = this.UserViewModel.User.Name,
                                 Intensity = ConfigurationManager.Configuration.OdorIntensity,
                                 Type = ConfigurationManager.Configuration.OdorType,
-                                Latitude = this.MapsViewModel.Position.Latitude,
-                                Longitude = this.MapsViewModel.Position.Longitude,
-                                Address = (string.IsNullOrWhiteSpace(this.MapsViewModel.Address))
-                                            ? (string.IsNullOrWhiteSpace(this.UserViewModel.User.Address))
+                                Latitude = this.UserViewModel.User.Latitude,
+                                Longitude = this.UserViewModel.User.Longitude,
+                                Address = (string.IsNullOrWhiteSpace(this.UserViewModel.User.Address))
                                             ? ConfigurationManager.Configuration.OdorAddress
-                                            : this.UserViewModel.User.Address
-                                            : this.MapsViewModel.Address,
+                                            : this.UserViewModel.User.Address,
                                 Date = DateTime.Today,
                                 Begin = DateTime.Now.TimeOfDay,
                                 End = DateTime.Now.TimeOfDay
@@ -72,10 +69,9 @@ namespace Odor.Views
             });
             MessagingCenter.Send(string.Empty, "GetUser");
         }
-        private async void GoOdorPage(object sender, EventArgs args)
+        private void GoOdorPage(object sender, EventArgs args)
         {
-            await Detail.Navigation.PopToRootAsync();
-            IsPresented = false;
+            MessagingCenter.Send(string.Empty, "Odor");
         }
         private async void GoListPage(object sender, EventArgs args)
         {
@@ -85,11 +81,6 @@ namespace Odor.Views
         private async void GoUserPage(object sender, EventArgs args)
         {
             await Detail.Navigation.PushAsync(new UserPage(this.UserViewModel.User));
-            IsPresented = false;
-        }
-        private async void GoAboutPage(object sender, EventArgs args)
-        {
-            await Detail.Navigation.PushAsync(new AboutPage());
             IsPresented = false;
         }
     }

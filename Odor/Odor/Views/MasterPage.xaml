@@ -1,31 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="Odor.Views.MasterPage"
              Visual="Material">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Nova" Clicked="GoOdorPage" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <maps:Map x:Name="Maps"
-                      MapType="Street"
-                      MapClicked="OnMapClicked"
-                      MoveToLastRegionOnLayoutChange="false"
-                      AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
-                      AbsoluteLayout.LayoutFlags="All" />
-            <StackLayout Opacity=".9"
-                         Margin="10"
-                         Padding="10"
-                         BackgroundColor="White"
-                         AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
-                         AbsoluteLayout.LayoutFlags="All"
-                         HorizontalOptions="Center"
-                         VerticalOptions="StartAndExpand">
+        <StackLayout Padding="10" BackgroundColor="White">
+            <StackLayout HorizontalOptions="Center">
                 <Label Text="Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro." HorizontalTextAlignment="Center" />
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
-                    <Label Text="Selecione o local da ocorrência e clique em" />
+                    <Label Text="Para nova ocorrência, clique em" />
                     <Label Text="Nova." TextColor="Accent">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoOdorPage" NumberOfTapsRequired="1" />
@@ -33,16 +19,9 @@
                     </Label>
                 </StackLayout>
             </StackLayout>
-            <ActivityIndicator
-                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
-                AbsoluteLayout.LayoutFlags="All"
-                HorizontalOptions="Center"
-                VerticalOptions="EndAndExpand"
-                Color="LightGray"
-                Margin="0, 5"
-                WidthRequest="50" HeightRequest="50"
-                IsVisible="{Binding IsBusy}"
-                IsRunning="{Binding IsBusy}" />
-        </AbsoluteLayout>
+            <Image Source="nqualiar.jpg" HeightRequest="120" Margin="0, 20" HorizontalOptions="Center" />
+            <Label Text="Aplicativo para cadastro da percepção de odor, mau cheiro, poluição do ar, incômodos percebidos e efeitos na qualidade de vida, em locais, datas e horários informados, para fins de registro e análise técnica de especialistas." Margin="15, 10, 15, 0" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Small" />
+            <Label Text="{Binding Organization}" HorizontalOptions="Center" VerticalOptions="EndAndExpand" FontSize="Small" TextColor="Black" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

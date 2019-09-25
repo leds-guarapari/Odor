@@ -46,12 +46,6 @@
                                     <Label Text="Meu perfil" VerticalOptions="Center" />
                                 </StackLayout>
                             </ViewCell>
-                            <ViewCell Tapped="GoAboutPage">
-                                <StackLayout Orientation="Horizontal" Padding="15,10">
-                                    <Image Source="about.png" />
-                                    <Label Text="Sobre o aplicativo" VerticalOptions="Center" />
-                                </StackLayout>
-                            </ViewCell>
                         </TableSection>
                     </TableView>
                 </StackLayout>
