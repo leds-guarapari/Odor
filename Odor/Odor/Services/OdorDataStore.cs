@@ -62,6 +62,7 @@ namespace Odor.Services
                     {
                         UserId = odor.UserId,
                         UserName = odor.UserName,
+                        UserType = odor.UserType,
                         Intensity = odor.Intensity,
                         Type = odor.Type,
                         Address = odor.Address,

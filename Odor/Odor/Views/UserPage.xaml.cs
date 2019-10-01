@@ -79,6 +79,7 @@ namespace Odor.Views
                     MessagingCenter.Send(this.User, "UpdateUser");
                 }
             }));
+            MessagingCenter.Unsubscribe<MapsViewModel>(this, this.Message);
             await Navigation.PopToRootAsync();
         }
         private bool isInvalidateName = false;

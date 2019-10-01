@@ -16,7 +16,7 @@
   },
   "name": "Odor",
   "description": "Projeto de iniciacao cientifica referente a um aplicativo sobre a percepcao de gases odorantes.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",

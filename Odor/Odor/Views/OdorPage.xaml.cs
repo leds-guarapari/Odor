@@ -1,4 +1,5 @@
-﻿using Odor.ViewModels;
+﻿using Odor.Services;
+using Odor.ViewModels;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -22,6 +23,7 @@ namespace Odor.Views
                 Id = odor.Id,
                 UserId = odor.UserId,
                 UserName = odor.UserName,
+                UserType = odor.UserType,
                 Intensity = odor.Intensity,
                 Address = odor.Address,
                 Latitude = odor.Latitude,
@@ -31,6 +33,7 @@ namespace Odor.Views
                 Begin = odor.Begin,
                 End = odor.End
             };
+            this.IsUserType = this.Odor.Type == ConfigurationManager.Configuration.OdorUserType;
             SaveCommand = new Command(async () => { await this.Dispatch(); });
             MessagingCenter.Subscribe<MapsViewModel>(this, this.Message, (MapsViewModel) =>
             {
@@ -62,6 +65,7 @@ namespace Odor.Views
                     MessagingCenter.Send(this.Odor, "UpdateOdor");
                 }
             }));
+            MessagingCenter.Unsubscribe<MapsViewModel>(this, this.Message);
             await Navigation.PopToRootAsync();
         }
         async Task Delete()
@@ -73,6 +77,7 @@ namespace Odor.Views
                     MessagingCenter.Send(this.Odor, "DeleteOdor");
                 }
             }));
+            MessagingCenter.Unsubscribe<MapsViewModel>(this, this.Message);
             await Navigation.PopToRootAsync();
         }
         private bool isBusy = false;
@@ -85,7 +90,25 @@ namespace Odor.Views
                 OnPropertyChanged("IsBusy");
             }
         }
-        private async void OnDeleteButtonClicked(object sender, EventArgs e)
+        private bool isUserType = false;
+        public bool IsUserType
+        {
+            get { return isUserType; }
+            set
+            {
+                isUserType = value;
+                OnPropertyChanged("IsUserType");
+            }
+        }
+        private void OnSelectedIndexChanged(object sender, EventArgs args)
+        {
+            if (!(this.IsUserType = this.Odor.Type == ConfigurationManager.Configuration.OdorUserType))
+            {
+                this.Odor.UserType = string.Empty;
+                OnPropertyChanged("Odor");
+            }
+        }
+        private async void OnDeleteButtonClicked(object sender, EventArgs args)
         {
             if (await this.DisplayAlert("Confirmação", "Você realmente quer excluir este odor?", "Excluir", "Cancelar"))
             {

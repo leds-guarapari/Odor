@@ -30,7 +30,7 @@ namespace Odor.ViewModels
             }
             catch (Exception exception)
             {
-                MessagingCenter.Send("Aviso", "Message", "Sem conexão com a Internet.");
+                MessagingCenter.Send("Aviso", "Message", "Não foi possível obter o endereço.");
                 Debug.WriteLine(exception);
             }
         }

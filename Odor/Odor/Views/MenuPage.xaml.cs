@@ -37,6 +37,7 @@ namespace Odor.Views
                             {
                                 UserId = this.UserViewModel.User.Id,
                                 UserName = this.UserViewModel.User.Name,
+                                UserType = string.Empty,
                                 Intensity = ConfigurationManager.Configuration.OdorIntensity,
                                 Type = ConfigurationManager.Configuration.OdorType,
                                 Latitude = this.UserViewModel.User.Latitude,

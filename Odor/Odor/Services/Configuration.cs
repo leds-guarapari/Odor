@@ -27,6 +27,7 @@ namespace Odor.Services
         string FirebasePassword { get; set; }
         string OdorIntensity { get; set; }
         string OdorType { get; set; }
+        string OdorUserType { get; set; }
         string OdorAddress { get; set; }
         string LocalizedAddress { get; set; }
         string LocalizingAddress { get; set; }
@@ -51,6 +52,7 @@ namespace Odor.Services
         public string FirebasePassword { get; set; }
         public string OdorIntensity { get; set; }
         public string OdorType { get; set; }
+        public string OdorUserType { get; set; }
         public string OdorAddress { get; set; }
         public string LocalizedAddress { get; set; }
         public string LocalizingAddress { get; set; }
