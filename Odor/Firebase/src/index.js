@@ -141,26 +141,73 @@ document.querySelector("button").addEventListener("click", async (event) => {
 				.then(async () => {
 					// make get promise 
 					await database.ref("odors").orderByChild("Date").startAt(begin.value).endAt(end.value).once("value").then((snapshot) => {
-						// make an array of rows data
-						let rows = [];
+						// make an work book object
+						let wb = new ExcelJS.Workbook();
+						// make an work sheet object
+						let ws = wb.addWorksheet("odor");
+						// make a array to columns width
+						let columns = [40, 60, 16, 16, 24, 24, 24, 28, 32, 32, 40];
+						// add headers row in work sheet
+						ws.addRow(["Nome", "Bairro", "Latitude (º)", "Longitude (º)", "Data da Ocorrência", "Horário da Ocorrência", "Horário Final", "Duração da Ocorrência", "Intensidade do Odor", "Característica do Odor", "Detalhe"]);
+						// format columns and headers row
+						for (let i = 0; i < 11; i++) {
+							// set column width
+							ws.getColumn(i + 1).width = columns[i];
+							// set header row font
+							ws.getCell(String.fromCharCode('A'.charCodeAt(0) + i) + "1").font = {
+								name: "Calibri",
+								color: {argb: "FFFFFFFF"},
+								family: 4,
+								size: 12,
+								bold: true
+							};
+							// set header row border
+							ws.getCell(String.fromCharCode('A'.charCodeAt(0) + i) + "1").border = {
+								top: {style: "thin"},
+								left: {style: "thin"},
+								bottom: {style: "thin"},
+								right: {style: "thin"}
+							};
+							// set header row background color
+							ws.getCell(String.fromCharCode('A'.charCodeAt(0) + i) + "1").fill = {
+								type: "pattern",
+								pattern: "solid",
+								fgColor: {argb: "FF0070c0"}
+							};
+						}
 						// get values of result
 						let odors = snapshot.val();
 						// for all odors
 						for (key in odors) {
-							// make an array of odor data
-							let row = [];
-							// for all header of odor data
-							for (header in odors[key]) {
-								// add data in odor array
-								row.push(odors[key][header]);
+							// get begin date
+							let begin = moment(moment.duration(odors[key]["Begin"]).format("*HH:mm:ss"), "HH:mm:ss");
+							// get end date
+							let end = moment(moment.duration(odors[key]["End"]).format("*HH:mm:ss"), "HH:mm:ss");
+							// verify end before begin
+							if (end.isBefore(begin)) {
+								// add day to end date
+								end.add(1, "day");
 							}
-							// add row data in odors array
-							rows.push(row.join("\t"));
+							// add data row in work sheet
+							ws.addRow([
+								odors[key]["UserName"],
+								odors[key]["Address"],
+								Number((odors[key]["Latitude"]).toFixed(5)),
+								Number((odors[key]["Longitude"]).toFixed(5)),
+								new Date(odors[key]["Date"]),
+								moment.duration(odors[key]["Begin"]).format("*HH:mm:ss"),
+								moment.duration(odors[key]["End"]).format("*HH:mm:ss"),
+								moment.duration(end.diff(begin)).format("*HH:mm:ss"),
+								odors[key]["Intensity"],
+								odors[key]["Type"],
+								odors[key]["UserType"]
+							]);
 						}
-						// make an binary object that represents odors data
-						let blob = new Blob(["\ufeff", rows.join("\r\n")], {type: "text/csv"});
-						// save data in file
-						save(blob, "odor.csv");
+						// save work sheet
+						wb.xlsx.writeBuffer().then(function (data) {
+							let blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+							save(blob, "odor.xlsx");
+			   });
 					})
 					.finally(async () => {
 						// dispatch authentication sign out
