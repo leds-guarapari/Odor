@@ -1,3 +1,7 @@
+## 0.1.4
+
+* Inserção do tipo de odor Fumacê
+
 ## 0.1.3
 
 * Alteração para suportar Outro como tipo de odor
