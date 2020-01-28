@@ -32,7 +32,7 @@ firebase.initializeApp({
 	"FirebaseRealtimeDatabasePath" : "https://YOUR-PROJECT-ID-IN-FIREBASE.firebaseio.com/",
 	"FirebaseAPIKey" : "YOUR-PROJECT-API-KEY-IN-FIREBASE",
 	"FirebaseUser" : "YOUR-PROJECT-EMAIL-USER-IN-FIREBASE",
-    "FirebasePassword" : "YOUR-PROJECT-PASSWORD-USER-IN-FIREBASE",
+	"FirebasePassword" : "YOUR-PROJECT-PASSWORD-USER-IN-FIREBASE",
 	"OdorIntensity" : "Não sabe",
 	"OdorType" : "Não sabe",
 	"OdorAddress" : "Não informado",
