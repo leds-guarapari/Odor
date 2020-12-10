@@ -7,7 +7,7 @@
         <ContentPage Title="Odor" Padding="0">
             <ContentPage.Content>
                 <StackLayout>
-                    <Grid BackgroundColor="Accent">
+                    <Grid BackgroundColor="#01579B">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="*"/>

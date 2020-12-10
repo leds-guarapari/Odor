@@ -24,11 +24,14 @@ namespace Odor.Views
                 UserId = odor.UserId,
                 UserName = odor.UserName,
                 UserType = odor.UserType,
+                UserOrigin = odor.UserOrigin,
                 Intensity = odor.Intensity,
+                Nuisance = odor.Nuisance,
+                Type = odor.Type,
+                Origin = odor.Origin,
                 Address = odor.Address,
                 Latitude = odor.Latitude,
                 Longitude = odor.Longitude,
-                Type = odor.Type,
                 Date = odor.Date,
                 Begin = odor.Begin,
                 End = odor.End
@@ -83,7 +86,7 @@ namespace Odor.Views
         private bool isBusy = false;
         public new bool IsBusy
         {
-            get { return isBusy; }
+            get => isBusy;
             set
             {
                 isBusy = value;
@@ -93,18 +96,36 @@ namespace Odor.Views
         private bool isUserType = false;
         public bool IsUserType
         {
-            get { return isUserType; }
+            get => isUserType;
             set
             {
                 isUserType = value;
                 OnPropertyChanged("IsUserType");
             }
         }
-        private void OnSelectedIndexChanged(object sender, EventArgs args)
+        private bool isUserOrigin = false;
+        public bool IsUserOrigin
+        {
+            get => isUserOrigin;
+            set
+            {
+                isUserOrigin = value;
+                OnPropertyChanged("IsUserOrigin");
+            }
+        }
+        private void OnUserTypeSelectedIndexChanged(object sender, EventArgs args)
         {
             if (!(this.IsUserType = this.Odor.Type == ConfigurationManager.Configuration.OdorUserType))
             {
                 this.Odor.UserType = string.Empty;
+                OnPropertyChanged("Odor");
+            }
+        }
+        private void OnUserOriginSelectedIndexChanged(object sender, EventArgs args)
+        {
+            if (!(this.IsUserOrigin = this.Odor.Origin == ConfigurationManager.Configuration.OdorUserOrigin))
+            {
+                this.Odor.UserOrigin = string.Empty;
                 OnPropertyChanged("Odor");
             }
         }

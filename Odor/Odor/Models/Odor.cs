@@ -16,8 +16,11 @@ namespace Odor.Models
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string UserType { get; set; }
+        public string UserOrigin { get; set; }
         public string Intensity { get; set; }
+        public string Nuisance { get; set; }
         public string Type { get; set; }
+        public string Origin { get; set; }
         public string Address { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

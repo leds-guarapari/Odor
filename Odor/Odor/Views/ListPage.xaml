@@ -12,11 +12,11 @@
                         <ViewCell>
                             <StackLayout Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Type}" TextColor="Accent" />
+                                    <Label Text="{Binding Type}" TextColor="#01579B" />
                                     <Label Text="{Binding Intensity}" TextColor="Black" />
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                         <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black" FontSize="Micro" />
-                                        <Label Text="{Binding Begin, StringFormat='{}{0:hh\\:mm}'}" TextColor="Accent" FontSize="Micro" />
+                                        <Label Text="{Binding Begin, StringFormat='{}{0:hh\\:mm}'}" TextColor="#01579B" FontSize="Micro" />
                                     </StackLayout>
                                 </StackLayout>
                                 <Label Text="{Binding Address}" HorizontalOptions="FillAndExpand" />

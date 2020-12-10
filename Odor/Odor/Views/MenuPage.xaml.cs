@@ -38,8 +38,11 @@ namespace Odor.Views
                                 UserId = this.UserViewModel.User.Id,
                                 UserName = this.UserViewModel.User.Name,
                                 UserType = string.Empty,
+                                UserOrigin = string.Empty,
                                 Intensity = ConfigurationManager.Configuration.OdorIntensity,
+                                Nuisance = ConfigurationManager.Configuration.OdorNuisance,
                                 Type = ConfigurationManager.Configuration.OdorType,
+                                Origin = ConfigurationManager.Configuration.OdorOrigin,
                                 Latitude = this.UserViewModel.User.Latitude,
                                 Longitude = this.UserViewModel.User.Longitude,
                                 Address = (string.IsNullOrWhiteSpace(this.UserViewModel.User.Address))
