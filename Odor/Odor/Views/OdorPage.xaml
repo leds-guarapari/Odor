@@ -28,7 +28,7 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-                        <Entry Text="{Binding Odor.UserType}" Margin="10, 0" Placeholder="Digite outro tipo" IsEnabled="{Binding IsUserType}" IsVisible="{Binding IsUserType}"></Entry>
+                        <Entry Text="{Binding Odor.UserType}" Margin="10, 0" Placeholder="Digite outro tipo" IsEnabled="{Binding IsUserType}" IsVisible="{Binding IsUserType}" />
                     </StackLayout>
                     <StackLayout Padding="5" BackgroundColor="White">
                         <Label Text="Qual foi a intensidade do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
@@ -62,9 +62,17 @@
                     </StackLayout>
                     <StackLayout Padding="5" BackgroundColor="White">
                         <Label Text="Qual foi o local do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                        <Entry Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" />
+                        <Button Text="Mapa" HorizontalOptions="Center" WidthRequest="100" BackgroundColor="#01579B" TextColor="White" Clicked="GoMapsPage" />
                     </StackLayout>
                     <StackLayout Padding="5" BackgroundColor="White">
                         <Label Text="Qual foi a data, horário de início e término do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                        <Label Text="Data" Margin="10, 0" FontSize="Small" />
+                        <DatePicker Date="{Binding Odor.Date}" />
+                        <Label Text="Horário de início" Margin="10, 0" FontSize="Small" />
+                        <TimePicker Time="{Binding Odor.Begin}" />
+                        <Label Text="Horário de término" Margin="10, 0" FontSize="Small" />
+                        <TimePicker Time="{Binding Odor.End}" />
                     </StackLayout>
                     <StackLayout Padding="5" BackgroundColor="White">
                         <Label Text="Consegue descrever a origem do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
@@ -83,10 +91,10 @@
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
-                        <Entry Text="{Binding Odor.UserOrigin}" Margin="10, 0" Placeholder="Digite outra origem" IsEnabled="{Binding IsUserOrigin}" IsVisible="{Binding IsUserOrigin}"></Entry>
-                    </StackLayout>
-                    <StackLayout Padding="5" BackgroundColor="White">
-                        <Label Text="Confirma o odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                        <Entry Text="{Binding Odor.UserOrigin}" Margin="10, 0" Placeholder="Digite outra origem" IsEnabled="{Binding IsUserOrigin}" IsVisible="{Binding IsUserOrigin}" />
+                        <Button Text="Salvar" Margin="20, 0" HorizontalOptions="Center" WidthRequest="100" BackgroundColor="#01579B" TextColor="White" Command="{Binding SaveCommand}" />
+                        <ImageButton HorizontalOptions="End" VerticalOptions="EndAndExpand" BackgroundColor="Transparent" Source="delete.png" Clicked="OnDeleteButtonClicked" />
+                        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="End" Color="LightGray" WidthRequest="50" HeightRequest="50" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
                     </StackLayout>
                 </x:Array>
             </controls:CarouselViewControl.ItemsSource>
