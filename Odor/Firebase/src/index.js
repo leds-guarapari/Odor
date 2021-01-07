@@ -146,9 +146,9 @@ document.querySelector("button").addEventListener("click", async (event) => {
 						// make an work sheet object
 						let ws = wb.addWorksheet("odor");
 						// make a array to columns width
-						let columns = [40, 60, 16, 16, 24, 24, 24, 28, 32, 32, 40];
+						let columns = [40, 60, 16, 16, 24, 24, 24, 28, 32, 32, 40, 32, 32, 40];
 						// add headers row in work sheet
-						ws.addRow(["Nome", "Bairro", "Latitude (º)", "Longitude (º)", "Data da Ocorrência", "Horário da Ocorrência", "Horário Final", "Duração da Ocorrência", "Intensidade do Odor", "Característica do Odor", "Detalhe"]);
+						ws.addRow(["Nome", "Endereço", "Latitude (º)", "Longitude (º)", "Data da Ocorrência", "Horário da Ocorrência", "Horário Final", "Duração da Ocorrência", "Intensidade do Odor", "Característica do Odor", "Detalhe da Característica", "Incômodo", "Origem", "Detalhe da Origem"]);
 						// format columns and headers row
 						for (let i = 0; i < 11; i++) {
 							// set column width
@@ -200,7 +200,10 @@ document.querySelector("button").addEventListener("click", async (event) => {
 								moment.duration(end.diff(begin)).format("*HH:mm:ss"),
 								odors[key]["Intensity"],
 								odors[key]["Type"],
-								odors[key]["UserType"]
+								odors[key]["UserType"],
+								odors[key]["Nuisance"],
+								odors[key]["Origin"],
+								odors[key]["UserOrigin"]
 							]);
 						}
 						// save work sheet
