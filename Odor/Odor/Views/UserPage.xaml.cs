@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
-using Xamarin.Forms.Xaml;
 
 namespace Odor.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserPage : ContentPage, INotifyPropertyChanged
     {
         private readonly string Message = "UserMaps";
@@ -18,6 +16,11 @@ namespace Odor.Views
         public ICommand ValidateCommand { get; private set; }
         public ICommand InvalidateNameCommand { get; private set; }
         public ICommand InvalidateNumberCommand { get; private set; }
+        public enum CarouselSelectedIndex : int {
+            Name = 0,
+            Number = 1,
+            Address = 2
+        }
         public UserPage(Models.User user)
         {
             InitializeComponent();
@@ -55,15 +58,45 @@ namespace Odor.Views
         }
         async Task Dispatch()
         {
-            if (this.IsValidate && !this.IsBusy)
+            CarouselSelectedIndex index = (CarouselSelectedIndex) carousel.SelectedIndex;
+            switch (index)
             {
-                this.IsBusy = true;
-                await this.Save();
-            }
-            else
-            {
-                this.InvalidateNameCommand.Execute(null);
-                this.InvalidateNumberCommand.Execute(null);
+                case CarouselSelectedIndex.Name:
+                    this.InvalidateNameCommand.Execute(null);
+                    if (!IsInvalidateName)
+                    {
+                        ++carousel.SelectedIndex;
+                    }
+                    break;
+                case CarouselSelectedIndex.Number:
+                    this.InvalidateNumberCommand.Execute(null);
+                    if (!IsInvalidateNumber)
+                    {
+                        ++carousel.SelectedIndex;
+                    }
+                    break;
+                case CarouselSelectedIndex.Address:
+                    this.InvalidateNameCommand.Execute(null);
+                    this.InvalidateNumberCommand.Execute(null);
+                    this.ValidateCommand.Execute(null);
+                    if (this.IsValidate && !this.IsBusy)
+                    {
+                        this.IsBusy = true;
+                        await this.Save();
+                    }
+                    else
+                    {
+                        if (IsInvalidateName)
+                        {
+                            carousel.SelectedIndex = 0;
+                        } else if(IsInvalidateNumber)
+                        {
+                            carousel.SelectedIndex = 1;
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
         }
         async Task Save()

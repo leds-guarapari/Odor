@@ -2,7 +2,6 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using CarouselView.FormsPlugin.Droid;
 using Xamarin;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -20,7 +19,6 @@ namespace Odor.Droid
             Forms.Init(this, bundle);
             Platform.Init(this, bundle);
             FormsMaps.Init(this, bundle);
-            CarouselViewRenderer.Init();
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

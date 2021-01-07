@@ -1,226 +1,120 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              x:Class="Odor.Views.OdorPage">
-    <!--
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActiveIndicator" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#01579B" />
+            </Style>
+            <Style x:Key="InactiveIndicator" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="OutlineColor" Value="#01579B" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salvar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
-    -->
     <ContentPage.Content>
-        <controls:CarouselViewControl Orientation="Horizontal" InterPageSpacing="10" Position="0" ShowArrows="True" ShowIndicators="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <controls:CarouselViewControl.ItemsSource>
-                <x:Array Type="{x:Type View}">
-                    <StackLayout Padding="5" BackgroundColor="White">
-                        <Label Text="Qual foi o tipo de odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
-                        <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}" Margin="10, 0" SelectedIndexChanged="OnUserTypeSelectedIndexChanged">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Esgoto</x:String>
-                                    <x:String>Solvente</x:String>
-                                    <x:String>Cheiro irritante</x:String>
-                                    <x:String>Cheiro de urina</x:String>
-                                    <x:String>Plástico queimado</x:String>
-                                    <x:String>Fumacê</x:String>
-                                    <x:String>Não sabe</x:String>
-                                    <x:String>Outro</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                        <Entry Text="{Binding Odor.UserType}" Margin="10, 0" Placeholder="Digite outro tipo" IsEnabled="{Binding IsUserType}" IsVisible="{Binding IsUserType}" />
-                    </StackLayout>
-                    <StackLayout Padding="5" BackgroundColor="White">
-                        <Label Text="Qual foi a intensidade do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
-                        <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}" Margin="10, 0">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Fraco</x:String>
-                                    <x:String>Moderado</x:String>
-                                    <x:String>Desagradável</x:String>
-                                    <x:String>Forte</x:String>
-                                    <x:String>Insuportável</x:String>
-                                    <x:String>Não sabe</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                    </StackLayout>
-                    <StackLayout Padding="5" BackgroundColor="White">
-                        <Label Text="Sentiu-se incomodado com o odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
-                        <Picker Title="Incômodo" SelectedItem="{Binding Odor.Nuisance}" Margin="10, 0">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Nada</x:String>
-                                    <x:String>Pouco</x:String>
-                                    <x:String>Moderado</x:String>
-                                    <x:String>Muito</x:String>
-                                    <x:String>Extremamente</x:String>
-                                    <x:String>Não sabe</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                    </StackLayout>
-                    <StackLayout Padding="5" BackgroundColor="White">
-                        <Label Text="Qual foi o local do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
-                        <Entry Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" />
-                        <Button Text="Mapa" HorizontalOptions="Center" WidthRequest="100" BackgroundColor="#01579B" TextColor="White" Clicked="GoMapsPage" />
-                    </StackLayout>
-                    <StackLayout Padding="5" BackgroundColor="White">
-                        <Label Text="Qual foi a data, horário de início e término do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
-                        <Label Text="Data" Margin="10, 0" FontSize="Small" />
-                        <DatePicker Date="{Binding Odor.Date}" />
-                        <Label Text="Horário de início" Margin="10, 0" FontSize="Small" />
-                        <TimePicker Time="{Binding Odor.Begin}" />
-                        <Label Text="Horário de término" Margin="10, 0" FontSize="Small" />
-                        <TimePicker Time="{Binding Odor.End}" />
-                    </StackLayout>
-                    <StackLayout Padding="5" BackgroundColor="White">
-                        <Label Text="Consegue descrever a origem do odor ou mau cheiro?" Margin="20, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
-                        <Picker Title="Origem" SelectedItem="{Binding Odor.Origin}" Margin="10, 0" SelectedIndexChanged="OnUserOriginSelectedIndexChanged">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Posto de gasolina</x:String>
-                                    <x:String>Tratamento de esgoto</x:String>
-                                    <x:String>Pelotização (minério de ferro)</x:String>
-                                    <x:String>Siderúrgica (produção de aço)</x:String>
-                                    <x:String>Indústria de produtos químicos</x:String>
-                                    <x:String>Indústria alimentícia</x:String>
-                                    <x:String>Atividade portuária</x:String>
-                                    <x:String>Não sabe</x:String>
-                                    <x:String>Outro</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                        <Entry Text="{Binding Odor.UserOrigin}" Margin="10, 0" Placeholder="Digite outra origem" IsEnabled="{Binding IsUserOrigin}" IsVisible="{Binding IsUserOrigin}" />
-                        <Button Text="Salvar" Margin="20, 0" HorizontalOptions="Center" WidthRequest="100" BackgroundColor="#01579B" TextColor="White" Command="{Binding SaveCommand}" />
-                        <ImageButton HorizontalOptions="End" VerticalOptions="EndAndExpand" BackgroundColor="Transparent" Source="delete.png" Clicked="OnDeleteButtonClicked" />
-                        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="End" Color="LightGray" WidthRequest="50" HeightRequest="50" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
-                    </StackLayout>
-                </x:Array>
-            </controls:CarouselViewControl.ItemsSource>
-        </controls:CarouselViewControl>
-        <!--
         <AbsoluteLayout Padding="5" BackgroundColor="White">
-            <ScrollView
-                VerticalOptions="StartAndExpand"
-                VerticalScrollBarVisibility="Always"
-                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 0.9"
-                AbsoluteLayout.LayoutFlags="All">
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
-                        <Image Source="blur.png" HeightRequest="24" />
-                        <Label Text="Qual o tipo do odor?" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                    </StackLayout>
-                    <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}" Margin="10, 0" SelectedIndexChanged="OnUserTypeSelectedIndexChanged">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Esgoto</x:String>
-                                <x:String>Solvente</x:String>
-                                <x:String>Cheiro irritante</x:String>
-                                <x:String>Cheiro de urina</x:String>
-                                <x:String>Plástico queimado</x:String>
-                                <x:String>Fumacê</x:String>
-                                <x:String>Não sabe</x:String>
-                                <x:String>Outro</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                    <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0" IsVisible="{Binding IsUserType}">
-                        <Image Source="add.png" HeightRequest="24" />
-                        <Label Text="Digite o outro tipo de odor" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                    </StackLayout>
-                    <Entry Text="{Binding Odor.UserType}" Margin="10, 0" Placeholder="Outro tipo de odor" IsEnabled="{Binding IsUserType}" IsVisible="{Binding IsUserType}"></Entry>
-                    <BoxView VerticalOptions="Center" Margin="10, 10" HorizontalOptions="Center" HeightRequest="1" WidthRequest="100" Color="LightGray"></BoxView>
-                    <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
-                        <Image Source="flare.png" HeightRequest="24" />
-                        <Label Text="Qual a intensidade do odor?" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                    </StackLayout>
-                    <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}" Margin="10, 0">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Fraco</x:String>
-                                <x:String>Moderado</x:String>
-                                <x:String>Desagradável</x:String>
-                                <x:String>Forte</x:String>
-                                <x:String>Insuportável</x:String>
-                                <x:String>Não sabe</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                    <BoxView VerticalOptions="Center" Margin="10, 10" HorizontalOptions="Center" HeightRequest="1" WidthRequest="100" Color="LightGray"></BoxView>
-                    <Label Text="Se sente incomodado com o odor?" Margin="10, 5, 10, 0" HorizontalOptions="Start" FontSize="Small" TextColor="#01579B" />
-                    <Picker Title="Incômodo" SelectedItem="{Binding Odor.Nuisance}" Margin="10, 0">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Nada</x:String>
-                                <x:String>Pouco</x:String>
-                                <x:String>Moderado</x:String>
-                                <x:String>Muito</x:String>
-                                <x:String>Extremamente</x:String>
-                                <x:String>Não sabe</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                    <BoxView VerticalOptions="Center" Margin="10, 10" HorizontalOptions="Center" HeightRequest="1" WidthRequest="100" Color="LightGray"></BoxView>
-                    <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
-                        <Image Source="location.png" HeightRequest="24" />
-                        <Label Text="Qual o local do odor?" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                        <Button Text="Mapa" HorizontalOptions="EndAndExpand" WidthRequest="100" BackgroundColor="#01579B" Clicked="GoMapsPage"></Button>
-                    </StackLayout>
-                    <Entry Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"></Entry>
-                    <BoxView VerticalOptions="Center" Margin="10, 10" HorizontalOptions="Center" HeightRequest="1" WidthRequest="100" Color="LightGray"></BoxView>
-                    <Label Text="Qual a data, horário de início e término?" Margin="10, 0" HorizontalOptions="Start" FontSize="Small" TextColor="#01579B" />
-                    <Grid Margin="10, 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"  />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <DatePicker Grid.Row="0" Grid.Column="0" Date="{Binding Odor.Date}" />
-                        <TimePicker Grid.Row="0" Grid.Column="1" Time="{Binding Odor.Begin}" />
-                        <TimePicker Grid.Row="0" Grid.Column="2" Time="{Binding Odor.End}" />
-                        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
-                            <Image Source="date.png" HeightRequest="24" />
-                            <Label Text="Data" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
+            <cards:CarouselView
+                x:Name="carousel"
+                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 0.9" 
+                AbsoluteLayout.LayoutFlags="All"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <cards:CarouselView.ItemsSource>
+                    <x:Array Type="{x:Type View}">
+                        <StackLayout>
+                            <Label Text="Qual foi o tipo de odor ou mau cheiro?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Picker Title="Tipo" SelectedItem="{Binding Odor.Type}" Margin="10, 0" SelectedIndexChanged="OnUserTypeSelectedIndexChanged">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Esgoto</x:String>
+                                        <x:String>Solvente</x:String>
+                                        <x:String>Cheiro irritante</x:String>
+                                        <x:String>Cheiro de urina</x:String>
+                                        <x:String>Plástico queimado</x:String>
+                                        <x:String>Fumacê</x:String>
+                                        <x:String>Não sabe</x:String>
+                                        <x:String>Outro</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                            <Entry Text="{Binding Odor.UserType}" Margin="10, 0" Placeholder="Digite o outro tipo de odor" IsEnabled="{Binding IsUserType}" IsVisible="{Binding IsUserType}" />
                         </StackLayout>
-                        <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
-                            <Image Source="begin.png" HeightRequest="24" />
-                            <Label Text="Início" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
+                        <StackLayout>
+                            <Label Text="Quanto foi a intensidade do odor ou mau cheiro?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Picker Title="Intensidade" SelectedItem="{Binding Odor.Intensity}" Margin="10, 0">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Fraco</x:String>
+                                        <x:String>Moderado</x:String>
+                                        <x:String>Desagradável</x:String>
+                                        <x:String>Forte</x:String>
+                                        <x:String>Insuportável</x:String>
+                                        <x:String>Não sabe</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
                         </StackLayout>
-                        <StackLayout Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
-                            <Image Source="end.png" HeightRequest="24" />
-                            <Label Text="Término" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
+                        <StackLayout>
+                            <Label Text="Sentiu-se incomodado com o odor ou mau cheiro?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Picker Title="Incômodo" SelectedItem="{Binding Odor.Nuisance}" Margin="10, 0">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Nada</x:String>
+                                        <x:String>Pouco</x:String>
+                                        <x:String>Moderado</x:String>
+                                        <x:String>Muito</x:String>
+                                        <x:String>Extremamente</x:String>
+                                        <x:String>Não sabe</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
                         </StackLayout>
-                    </Grid>
-                    <BoxView VerticalOptions="Center" Margin="10, 10" HorizontalOptions="Center" HeightRequest="1" WidthRequest="100" Color="LightGray"></BoxView>
-                    <Label Text="Consegue descrever a origem do odor?" Margin="10, 5, 10, 0" HorizontalOptions="Start" FontSize="Small" TextColor="#01579B" />
-                    <Picker Title="Origem" SelectedItem="{Binding Odor.Origin}" Margin="10, 0" SelectedIndexChanged="OnUserOriginSelectedIndexChanged">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Posto de gasolina</x:String>
-                                <x:String>Tratamento de esgoto</x:String>
-                                <x:String>Pelotização (minério de ferro)</x:String>
-                                <x:String>Siderúrgica (produção de aço)</x:String>
-                                <x:String>Indústria de produtos químicos</x:String>
-                                <x:String>Indústria alimentícia</x:String>
-                                <x:String>Atividade portuária</x:String>
-                                <x:String>Não sabe</x:String>
-                                <x:String>Outro</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                    <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0" IsVisible="{Binding IsUserOrigin}">
-                        <Image Source="add.png" HeightRequest="24" />
-                        <Label Text="Digite a outra origem de odor" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                    </StackLayout>
-                    <Entry Text="{Binding Odor.UserOrigin}" Margin="10, 0" Placeholder="Outro tipo de odor" IsEnabled="{Binding IsUserOrigin}" IsVisible="{Binding IsUserOrigin}"></Entry>
-                    <BoxView VerticalOptions="Center" Margin="10, 10" HorizontalOptions="Center" HeightRequest="1" WidthRequest="100" Color="LightGray"></BoxView>
-                </StackLayout>
-            </ScrollView>
+                        <StackLayout>
+                            <Label Text="Onde foi o odor ou mau cheiro?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Editor Text="{Binding Odor.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" />
+                            <Button Text="Mapa" Margin="10, 20" HorizontalOptions="EndAndExpand" WidthRequest="75" HeightRequest="40" BackgroundColor="#01579B" TextColor="White" Clicked="GoMapsPage" />
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text="Quando foi o odor ou mau cheiro?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Label Text="Data" Margin="10, 0" FontSize="Small" TextColor="#01579B" />
+                            <DatePicker Margin="10, 10" Date="{Binding Odor.Date}" />
+                            <Label Text="Horário de Início" Margin="10, 0" FontSize="Small" TextColor="#01579B" />
+                            <TimePicker Margin="10, 10" Time="{Binding Odor.Begin}" />
+                            <Label Text="Horário de Término" Margin="10, 0" FontSize="Small" TextColor="#01579B" />
+                            <TimePicker Margin="10, 10" Time="{Binding Odor.End}" />
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text="Consegue descrever a origem do odor ou mau cheiro?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Picker Title="Origem" SelectedItem="{Binding Odor.Origin}" Margin="10, 0" SelectedIndexChanged="OnUserOriginSelectedIndexChanged">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Posto de gasolina</x:String>
+                                        <x:String>Tratamento de esgoto</x:String>
+                                        <x:String>Pelotização (minério de ferro)</x:String>
+                                        <x:String>Siderúrgica (produção de aço)</x:String>
+                                        <x:String>Indústria de produtos químicos</x:String>
+                                        <x:String>Indústria alimentícia</x:String>
+                                        <x:String>Atividade portuária</x:String>
+                                        <x:String>Não sabe</x:String>
+                                        <x:String>Outro</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                            <Entry Text="{Binding Odor.UserOrigin}" Margin="10, 0" Placeholder="Digite a outra origem de odor" IsEnabled="{Binding IsUserOrigin}" IsVisible="{Binding IsUserOrigin}" />
+                        </StackLayout>
+                    </x:Array>
+                </cards:CarouselView.ItemsSource>
+                <controls:IndicatorsControl
+                    SelectedIndicatorStyle="{StaticResource ActiveIndicator}"
+                    UnselectedIndicatorStyle="{StaticResource InactiveIndicator}" />
+            </cards:CarouselView>
             <ImageButton
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"
@@ -239,6 +133,5 @@
                 IsVisible="{Binding IsBusy}"
                 IsRunning="{Binding IsBusy}" />
         </AbsoluteLayout>
-        -->
     </ContentPage.Content>
 </ContentPage>

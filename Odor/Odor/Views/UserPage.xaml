@@ -1,33 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              x:Class="Odor.Views.UserPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ActiveIndicator" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#01579B" />
+            </Style>
+            <Style x:Key="InactiveIndicator" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="OutlineColor" Value="#01579B" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salvar" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout Padding="5" BackgroundColor="White">
-            <StackLayout AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
-                         AbsoluteLayout.LayoutFlags="All">
-                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
-                    <Image Source="person.png" HeightRequest="24" />
-                    <Label Text="Digite o nome e sobrenome" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                </StackLayout>
-                <Entry Text="{Binding User.Name}" Margin="10, 0" Placeholder="Nome completo" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" TextChanged="NameTextChanged"></Entry>
-                <Label Text="O nome é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateName}" HorizontalOptions="Start" FontSize="Small" />
-                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
-                    <Image Source="phone.png" HeightRequest="24" />
-                    <Label Text="Digite o telefone com DDD" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                </StackLayout>
-                <Entry Text="{Binding User.Number}" Margin="10, 0" Keyboard="Telephone" Placeholder="Telefone" TextChanged="NumberTextChanged"></Entry>
-                <Label Text="O telefone é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateNumber}" HorizontalOptions="Start" FontSize="Small" />
-                <StackLayout Orientation="Horizontal" Margin="10, 5, 10, 0">
-                    <Image Source="location.png" HeightRequest="24" />
-                    <Label Text="Digite o endereço completo" VerticalOptions="Center" FontSize="Small" TextColor="#01579B" />
-                    <Button Text="Mapa" HorizontalOptions="EndAndExpand" WidthRequest="100" BackgroundColor="#01579B" Clicked="GoMapsPage"></Button>
-                </StackLayout>
-                <Entry Text="{Binding User.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"></Entry>
-            </StackLayout>
+            <cards:CarouselView
+                x:Name="carousel"
+                AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 0.9" 
+                AbsoluteLayout.LayoutFlags="All"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <cards:CarouselView.ItemsSource>
+                    <x:Array Type="{x:Type View}">
+                        <StackLayout>
+                            <Label Text="Qual seu nome e sobrenome?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Entry Text="{Binding User.Name}" Margin="10, 0" Placeholder="Nome completo" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" TextChanged="NameTextChanged" />
+                            <Label Text="O nome é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateName}" HorizontalOptions="Start" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text="Qual seu telefone com DDD?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Entry Text="{Binding User.Number}" Margin="10, 0" Keyboard="Telephone" Placeholder="Telefone" TextChanged="NumberTextChanged" />
+                            <Label Text="O telefone é requerido" TextColor="Red" Margin="15, 0" IsVisible="{Binding IsInvalidateNumber}" HorizontalOptions="Start" FontSize="Small" />
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text="Qual seu endereço completo?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
+                            <Editor Text="{Binding User.Address}" Margin="10, 0" Placeholder="Endereço" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" AutoSize="TextChanges" />
+                            <Button Text="Mapa" Margin="10, 20" HorizontalOptions="EndAndExpand" WidthRequest="75" HeightRequest="40" BackgroundColor="#01579B" TextColor="White" Clicked="GoMapsPage" />
+                        </StackLayout>
+                    </x:Array>
+                </cards:CarouselView.ItemsSource>
+                <controls:IndicatorsControl
+                    SelectedIndicatorStyle="{StaticResource ActiveIndicator}"
+                    UnselectedIndicatorStyle="{StaticResource InactiveIndicator}" />
+            </cards:CarouselView>
             <ActivityIndicator
                 AbsoluteLayout.LayoutBounds="0.0, 0.0, 1.0, 1.0"
                 AbsoluteLayout.LayoutFlags="All"

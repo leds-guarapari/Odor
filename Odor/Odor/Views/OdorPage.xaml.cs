@@ -5,16 +5,23 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
-using Xamarin.Forms.Xaml;
 
 namespace Odor.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdorPage : ContentPage
     {
         private readonly string Message = "OdorMaps";
         public Models.Odor Odor { get; set; }
         public ICommand SaveCommand { get; private set; }
+        public enum CarouselSelectedIndex : int
+        {
+            Type = 0,
+            Intensity = 1,
+            Nuisance = 2,
+            Address = 3,
+            Date = 4,
+            Origin = 5
+        }
         public OdorPage(Models.Odor odor)
         {
             InitializeComponent();
@@ -49,10 +56,19 @@ namespace Odor.Views
         }
         async Task Dispatch()
         {
-            if (!this.IsBusy)
+            CarouselSelectedIndex index = (CarouselSelectedIndex) carousel.SelectedIndex;
+            switch (index)
             {
-                this.IsBusy = true;
-                await this.Save();
+                case CarouselSelectedIndex.Origin:
+                    if (!this.IsBusy)
+                    {
+                        this.IsBusy = true;
+                        await this.Save();
+                    }
+                    break;
+                default:
+                    ++carousel.SelectedIndex;
+                    break;
             }
         }
         async Task Save()

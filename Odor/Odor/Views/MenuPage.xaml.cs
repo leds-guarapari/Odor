@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace Odor.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MenuPage : MasterDetailPage
+    public partial class MenuPage : FlyoutPage
     {
         private readonly OdorViewModel OdorViewModel;
         private readonly UserViewModel UserViewModel;
