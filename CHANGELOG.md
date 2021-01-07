@@ -1,3 +1,7 @@
+## 0.1.5
+
+* Atualização de pacotes e perguntas sobre incômodo e origem
+
 ## 0.1.4
 
 * Inserção do tipo de odor Fumacê

@@ -4,7 +4,7 @@ Projeto de iniciação científica referente a um aplicativo sobre a percepção
 ## Instalação
 Crie um projeto no [Firebase](https://firebase.google.com/). Modifique os arquivos de acordo com as configurações do projeto criado.
 
-### Firebase\.firebaserc
+### Firebase\\.firebaserc
 ```json
 {
   "projects": {
@@ -34,8 +34,12 @@ firebase.initializeApp({
 	"FirebaseUser" : "YOUR-PROJECT-EMAIL-USER-IN-FIREBASE",
 	"FirebasePassword" : "YOUR-PROJECT-PASSWORD-USER-IN-FIREBASE",
 	"OdorIntensity" : "Não sabe",
+	"OdorNuisance" : "Não sabe",
 	"OdorType" : "Não sabe",
+	"OdorOrigin" : "Não sabe",
 	"OdorAddress" : "Não informado",
+	"OdorUserType" : "Outro",
+	"OdorUserOrigin" : "Outro",
 	"LocalizedAddress" : "Local selecionado",
 	"LocalizingAddress" : "Localizando endereço..."
 }
@@ -46,7 +50,7 @@ Faça o download do arquivo no Firebase do Projeto.
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="YOUR-VERSION-CODE" android:versionName="YOUR-VERSION-NAME" package="YOUR-PACKAGE" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="30" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
