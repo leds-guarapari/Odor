@@ -150,7 +150,7 @@ document.querySelector("button").addEventListener("click", async (event) => {
 						// add headers row in work sheet
 						ws.addRow(["Nome", "Endereço", "Latitude (º)", "Longitude (º)", "Data da Ocorrência", "Horário da Ocorrência", "Horário Final", "Duração da Ocorrência", "Intensidade do Odor", "Característica do Odor", "Detalhe da Característica", "Incômodo", "Origem", "Detalhe da Origem"]);
 						// format columns and headers row
-						for (let i = 0; i < 11; i++) {
+						for (let i = 0; i < columns.length; i++) {
 							// set column width
 							ws.getColumn(i + 1).width = columns[i];
 							// set header row font
