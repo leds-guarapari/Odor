@@ -342,4 +342,4 @@ Odor/Firebase/.firebaserc
 Odor/Firebase/public
 Odor/Firebase/package-lock.json
 Odor/Firebase/firebase-debug.log
-Odor/Firebase/src/firebase.js
+Odor/Firebase/src/services/config.js
