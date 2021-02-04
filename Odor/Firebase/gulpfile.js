@@ -66,7 +66,7 @@ task("lib/polyfill", () => {
  * 
  */
 task("minified", function () {
-  return src(["src/firebase.js", "src/index.js"])
+  return src(["src/controls/index.js"])
     .pipe(concat("index.min.js"))
     .pipe(eslint())
     .pipe(terser())
@@ -79,7 +79,7 @@ task("minified", function () {
  * 
  */
 task("build", function () {
-  return src("src/index.html")
+  return src("src/views/*.html")
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest("public/"));
 });
