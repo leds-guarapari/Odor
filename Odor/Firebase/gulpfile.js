@@ -1,5 +1,4 @@
 const { task, src, dest, series, parallel } = require("gulp");
-const concat = require("gulp-concat");
 const csso = require("gulp-csso");
 const eslint = require("gulp-eslint");
 const htmlmin = require("gulp-htmlmin");
@@ -37,9 +36,9 @@ task("lib/material-design-icons", () => {
 });
 task("lib/material-icons", () => {
   return src("node_modules/material-design-icons/iconfont/material-icons.css")
-   .pipe(csso())
-   .pipe(rename("material-icons.min.css"))
-   .pipe(dest("public/lib/material-design-icons/iconfont/"));
+    .pipe(csso())
+    .pipe(rename("material-icons.min.css"))
+    .pipe(dest("public/lib/material-design-icons/iconfont/"));
 });
 task("lib/moment", () => {
   return src("node_modules/moment/min/moment.min.js")
@@ -65,12 +64,35 @@ task("lib/polyfill", () => {
  * Task of minified from source and generate distribution file.
  * 
  */
-task("minified", function () {
-  return src(["src/controls/index.js"])
-    .pipe(concat("index.min.js"))
+task("minified/controls", function () {
+  return src(["src/controls/*.js"])
     .pipe(eslint())
     .pipe(terser())
-    .pipe(dest("public/"));
+    .pipe(rename({
+      prefix: "controls.",
+      suffix: ".min"
+    }))
+    .pipe(dest("public/js/"));
+});
+task("minified/models", function () {
+  return src(["src/models/*.js"])
+    .pipe(eslint())
+    .pipe(terser())
+    .pipe(rename({
+      prefix: "models.",
+      suffix: ".min"
+    }))
+    .pipe(dest("public/js/"));
+});
+task("minified/services", function () {
+  return src(["src/services/*.js"])
+    .pipe(eslint())
+    .pipe(terser())
+    .pipe(rename({
+      prefix: "services.",
+      suffix: ".min"
+    }))
+    .pipe(dest("public/js/"));
 });
 
 /**
@@ -89,4 +111,4 @@ task("build", function () {
  * Default task.
  * 
  */
-task("default", series(parallel("lib/exceljs", "lib/firebase", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), "minified", "build"));
+task("default", series(parallel("lib/exceljs", "lib/firebase", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services"), "build"));

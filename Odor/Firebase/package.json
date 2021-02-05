@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "exceljs": "^4.2.0",
-    "firebase": "^8.2.2",
+    "firebase": "^8.2.6",
     "material-components-web": "^9.0.0",
     "material-design-icons": "^3.0.1",
     "moment": "^2.29.1",
@@ -16,7 +16,6 @@
     "eslint-plugin-promise": "^4.1.1",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
-    "gulp-concat": "2.6.1",
     "gulp-csso": "^4.0.1",
     "gulp-eslint": "^5.0.0",
     "gulp-exec": "^3.0.2",

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="google" content="notranslate" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Ative o aplicativo Odor com o código informado pelos administradores." />
+	<title>Ativação</title>
+	<!-- Default Style Sheet Web -->
+	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
+	<style>
+		:root {
+			--mdc-theme-primary: #01579B;
+			--mdc-theme-background: white;
+		}
+
+		body {
+			margin: 0;
+			background: var(--mdc-theme-background);
+		}
+
+		header {
+			color: var(--mdc-theme-primary);
+		}
+	</style>
+</head>
+
+<body class="mdc-typography">
+	<header>
+		<h1 class="mdc-typography--headline5">Qual o código de ativação?</h1>
+	</header>
+	<main>
+		<div>
+			<label id="code" class="mdc-text-field mdc-text-field--filled">
+				<span class="mdc-text-field__ripple"></span>
+				<span class="mdc-floating-label" id="code-label">Código de ativação</span>
+				<input class="mdc-text-field__input" type="password" aria-labelledby="code-label"
+					aria-controls="code-helper-text" aria-describedby="code-helper-text" required />
+				<span class="mdc-line-ripple"></span>
+			</label>
+			<div class="mdc-text-field-helper-line">
+				<div id="code-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+					aria-hidden="true">
+					O código de ativação é requerido.
+				</div>
+			</div>
+		</div>
+		<div>
+			<label class="mdc-typography--body2">Ative o aplicativo Odor com o código informado pelos
+				administradores.</label>
+		</div>
+		<div class="mdc-touch-target-wrapper">
+			<button class="mdc-button mdc-button--raised mdc-button--touch">
+				<span class="mdc-button__ripple"></span>
+				<span class="mdc-button__label">Ativar</span>
+				<span class="mdc-button__touch"></span>
+			</button>
+		</div>
+	</main>
+	<footer>
+		<div role="progressbar" class="mdc-linear-progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+			<div class="mdc-linear-progress__buffer">
+				<div class="mdc-linear-progress__buffer-bar"></div>
+				<div class="mdc-linear-progress__buffer-dots"></div>
+			</div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+		</div>
+	</footer>
+	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
+	<script defer src="lib/firebase/firebase-app.js"></script>
+	<script defer src="lib/firebase/firebase-auth.js"></script>
+	<script type="module" src="js/controls.activation.min.js"></script>
+</body>
+
+</html>
