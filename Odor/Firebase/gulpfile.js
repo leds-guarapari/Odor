@@ -94,14 +94,24 @@ task("minified/services", function () {
     }))
     .pipe(dest("public/js/"));
 });
+task("minified/views", function () {
+  return src(["src/views/*.js"])
+    .pipe(eslint())
+    .pipe(terser())
+    .pipe(rename({
+      prefix: "views.",
+      suffix: ".min"
+    }))
+    .pipe(dest("public/js/"));
+});
 
 /**
  * 
- * Task of build from source and generate distribution file.
+ * Task of build from page sources and generate distribution files.
  * 
  */
 task("build", function () {
-  return src("src/views/*.html")
+  return src("src/pages/*.html")
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest("public/"));
 });
@@ -111,4 +121,4 @@ task("build", function () {
  * Default task.
  * 
  */
-task("default", series(parallel("lib/exceljs", "lib/firebase", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services"), "build"));
+task("default", series(parallel("lib/exceljs", "lib/firebase", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
