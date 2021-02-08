@@ -19,6 +19,15 @@ export class IndexControl {
 		this._view = new IndexView();
 		// initialize firebase service
 		this._firebase = new FirebaseService(odor.configuration.firebase);
+		// bind an event handler to verify authentication user
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				// user is signed in
+			} else {
+				// redirect to activation page
+				window.location.replace("/activation.html"); 
+			}
+		});
 	}
 
 	/**
