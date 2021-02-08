@@ -4,6 +4,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@glidejs/glide": "^3.4.1",
+    "@googlemaps/js-api-loader": "^1.11.1",
     "exceljs": "^4.2.0",
     "firebase": "^8.2.6",
     "material-components-web": "^9.0.0",
