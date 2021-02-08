@@ -15,17 +15,10 @@ export class IndexControl {
 	 * 
 	 */
 	constructor() {
-		// initialize firebase service
-		this._firebase = new FirebaseService(odor.configuration.firebase);
 		// initialize view listener
 		this._view = new IndexView();
-	}
-
-	/**
-	 * @returns {Object} firebase
-	 */
-	get firebase() {
-		return this._firebase;
+		// initialize firebase service
+		this._firebase = new FirebaseService(odor.configuration.firebase);
 	}
 
 	/**
@@ -33,6 +26,13 @@ export class IndexControl {
 	 */
 	get view() {
 		return this._view;
+	}
+
+	/**
+	 * @returns {Object} firebase
+	 */
+	get firebase() {
+		return this._firebase;
 	}
 
 }
