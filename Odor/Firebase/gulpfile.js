@@ -7,7 +7,17 @@ const terser = require("gulp-terser");
 
 /**
  * 
- * Tasks of build from library and generate public files.
+ * Task of copy from images and generate distribution files.
+ * 
+ */
+task("images", function () {
+  return src(["images/*.png", "images/*.jpg", "images/*.ico"])
+    .pipe(dest("public/images/"));
+});
+
+/**
+ * 
+ * Tasks of build from libraries and generate public files.
  * 
  */
 task("lib/exceljs", () => {
@@ -61,11 +71,11 @@ task("lib/polyfill", () => {
 
 /**
  * 
- * Task of minified from source and generate distribution file.
+ * Task of minified from code sources and generate distribution files.
  * 
  */
 task("minified/controls", function () {
-  return src(["src/controls/*.js"])
+  return src("src/controls/*.js")
     .pipe(eslint())
     .pipe(terser())
     .pipe(rename({
@@ -75,7 +85,7 @@ task("minified/controls", function () {
     .pipe(dest("public/js/"));
 });
 task("minified/models", function () {
-  return src(["src/models/*.js"])
+  return src("src/models/*.js")
     .pipe(eslint())
     .pipe(terser())
     .pipe(rename({
@@ -85,7 +95,7 @@ task("minified/models", function () {
     .pipe(dest("public/js/"));
 });
 task("minified/services", function () {
-  return src(["src/services/*.js"])
+  return src("src/services/*.js")
     .pipe(eslint())
     .pipe(terser())
     .pipe(rename({
@@ -95,7 +105,7 @@ task("minified/services", function () {
     .pipe(dest("public/js/"));
 });
 task("minified/views", function () {
-  return src(["src/views/*.js"])
+  return src("src/views/*.js")
     .pipe(eslint())
     .pipe(terser())
     .pipe(rename({
@@ -121,4 +131,4 @@ task("build", function () {
  * Default task.
  * 
  */
-task("default", series(parallel("lib/exceljs", "lib/firebase", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
+task("default", series("images", parallel("lib/exceljs", "lib/firebase", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
