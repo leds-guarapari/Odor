@@ -30,6 +30,15 @@ task("lib/firebase", () => {
     "node_modules/firebase/firebase-database.js"])
     .pipe(dest("public/lib/firebase/"));
 });
+task("lib/glide", () => {
+  return src(["node_modules/@glidejs/glide/dist/glide.min.js",
+    "node_modules/@glidejs/glide/dist/css/glide.core.min.css"])
+    .pipe(dest("public/lib/glide/dist/"));
+});
+task("lib/googlemaps", () => {
+  return src("node_modules/@googlemaps/js-api-loader/dist/index.min.js")
+    .pipe(dest("public/lib/googlemaps/dist/"));
+});
 task("lib/material-components-web", () => {
   return src(["node_modules/material-components-web/dist/material-components-web.min.css",
     "node_modules/material-components-web/dist/material-components-web.min.js"])
@@ -131,4 +140,4 @@ task("build", function () {
  * Default task.
  * 
  */
-task("default", series("images", parallel("lib/exceljs", "lib/firebase", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
+task("default", series("images", parallel("lib/exceljs", "lib/firebase", "lib/glide", "lib/googlemaps", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
