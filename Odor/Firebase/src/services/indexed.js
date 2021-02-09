@@ -118,7 +118,7 @@ export class IndexedDBService extends DataStore {
 			// return query transaction
 			return this.transaction(this.store(data, "readonly").getAll());
 		};
-		// create promise to sync events when opening IndexedDB
+		// make promise to sync events when opening IndexedDB
 		return new Promise((resolve, reject) => {
 			// local database resource
 			this._database = window.indexedDB ||

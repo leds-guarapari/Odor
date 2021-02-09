@@ -4,7 +4,7 @@ import { IndexView } from "./views.index.min.js";
 
 /**
 	* 
-	* A final control class for acts on both model and view.
+	* A control class for acts on both model and view.
 	* 
 	*/
 export class IndexControl {

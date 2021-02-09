@@ -6,8 +6,8 @@
 export class DataStore {
 
 	/**
-			* @returns {Promise} The event represents a promise of adding some object.
-			*/
+		* @returns {Promise} The event represents a promise of adding some object.
+		*/
 	get add() {
 		return this._add;
 	}
@@ -20,8 +20,8 @@ export class DataStore {
 	}
 
 	/**
-			* @returns {Promise} The event represents a promise of updating some object.
-			*/
+		* @returns {Promise} The event represents a promise of updating some object.
+		*/
 	get update() {
 		return this._update;
 	}
@@ -49,8 +49,8 @@ export class DataStore {
 	}
 
 	/**
-			* @returns {Promise} The event represents a promise of querying objects.
-			*/
+		* @returns {Promise} The event represents a promise of querying objects.
+		*/
 	get query() {
 		return this._query;
 	}

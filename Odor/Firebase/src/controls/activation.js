@@ -1,10 +1,11 @@
 import { config } from "./services.config.min.js";
 import { FirebaseService } from "./services.firebase.min.js";
+import { UserIndexedDBService, UserDataStore } from "./services.user.min.js";
 import { ActivationView } from "./views.activation.min.js";
 
 /**
 	* 
-	* A final control class for acts on both model and view.
+	* A control class for acts on both model and view.
 	* 
 	*/
 export class ActivationControl {
@@ -19,13 +20,23 @@ export class ActivationControl {
 		this._view = new ActivationView();
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
-	}
-
-	/**
-		* @returns {Object} view
-		*/
-	get view() {
-		return this._view;
+		// make promise to sync events
+		return new Promise((resolve, reject) => {
+			// dispatch indexed service to listener 
+			new UserIndexedDBService().then((indexed) => {
+				// set indexed service
+				this._indexed = indexed;
+				// initialize user data store
+				this._store = new UserDataStore(indexed);
+				// resolve promise
+				resolve(this);
+			})
+				// request is incorrectly returned
+				.catch(() => {
+					// reject promise
+					reject(this);
+				});
+		});
 	}
 
 	/**
@@ -35,7 +46,32 @@ export class ActivationControl {
 		return this._firebase;
 	}
 
+	/**
+		* @returns {Object} indexed
+		*/
+	get indexed() {
+		return this._indexed;
+	}
+
+	/**
+		* @returns {Object} store
+		*/
+	get store() {
+		return this._store;
+	}
+
+	/**
+		* @returns {Object} view
+		*/
+	get view() {
+		return this._view;
+	}
+
 }
 
 // make a control listener
-export const control = new ActivationControl();
+export const control = new ActivationControl().then((activation) => {
+	console.log(activation);
+	return activation;
+});
+// TODO catch message
