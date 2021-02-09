@@ -46,7 +46,7 @@ export class IndexedDBStore {
 
 /**
  * 
- * The final class represents database methods in IndexedDB for persisting data.
+ * A class represents database methods in IndexedDB for persisting data.
  * 
  */
 export class IndexedDBService {
@@ -56,8 +56,6 @@ export class IndexedDBService {
      * @param {Array} stores
      */
     constructor(name, stores) {
-        // run constructor in parent class
-        super();
         // create promise to sync events when opening IndexedDB
         return new Promise((resolve, reject) => {
             // local database resource
