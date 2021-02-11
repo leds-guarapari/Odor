@@ -26,8 +26,11 @@ task("lib/exceljs", () => {
 });
 task("lib/firebase", () => {
   return src(["node_modules/firebase/firebase-app.js",
+    "node_modules/firebase/firebase-app.js.map",
     "node_modules/firebase/firebase-auth.js",
-    "node_modules/firebase/firebase-database.js"])
+    "node_modules/firebase/firebase-auth.js.map",
+    "node_modules/firebase/firebase-database.js",
+    "node_modules/firebase/firebase-database.js.map"])
     .pipe(dest("public/lib/firebase/"));
 });
 task("lib/glide", () => {

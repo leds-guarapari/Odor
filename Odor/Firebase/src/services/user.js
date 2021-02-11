@@ -1,3 +1,4 @@
+import { User } from "./models.user.min.js";
 import { DataStore } from "./services.store.min.js";
 import { IndexedDBStore, IndexedDBService } from "./services.indexed.min.js";
 
@@ -10,7 +11,7 @@ export class UserIndexedDBService extends IndexedDBService {
 
 	constructor() {
 		// run constructor in parent class
-		super("odor", [new IndexedDBStore("user", "_id")]);
+		super("Odor", [new IndexedDBStore("User", "_id")]);
 	}
 
 }
@@ -23,8 +24,8 @@ export class UserIndexedDBService extends IndexedDBService {
 export class UserDataStore extends DataStore {
 
 	/**
-	* @param {UserIndexedDBService} indexed
-	*/
+		* @param {UserIndexedDBService} indexed
+		*/
 	constructor(indexed) {
 		// run constructor in parent class
 		super();
@@ -111,6 +112,34 @@ export class UserDataStore extends DataStore {
 		*/
 	get indexed() {
 		return this._indexed;
+	}
+
+	/**
+		* @returns {User} user
+		*/
+	get user() {
+		// dispatch query transaction
+		return this.query(User.prototype).then((event) => {
+			// make user data
+			let user = new User();
+			// for all result
+			event.target.result.forEach(data => {
+				// set user identifier 
+				user.id = data._id;
+				// set user name
+				user.name = data._name;
+				// set user number
+				user.number = data._number;
+				// set user address
+				user.address = data._address;
+				// set user latitude
+				user.latitude = data._latitude;
+				// set user longitude
+				user.longitude = data._longitude;
+			});
+			// return user
+			return user;
+		});
 	}
 
 }

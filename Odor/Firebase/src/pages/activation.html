@@ -33,7 +33,6 @@
 		}
 
 		footer {
-			display: none;
 			position: fixed;
 			bottom: 0;
 			width: 100%;
@@ -104,6 +103,13 @@
 			</div>
 		</div>
 	</footer>
+	<div class="mdc-snackbar">
+		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+			<div class="mdc-snackbar__label" aria-atomic="false"></div>
+		</div>
+	</div>
+	<data id="invalid" value="Código inválido." />
+	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
 	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
 	<script defer src="lib/firebase/firebase-app.js"></script>
 	<script defer src="lib/firebase/firebase-auth.js"></script>
