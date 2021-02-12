@@ -20,13 +20,19 @@ export class UserView {
 		// initialize glide
 		this._glide = new Glide(".glide").mount();
 		// initialize page button
-		// this._button = new mdc.ripple.MDCRipple(document.querySelector(".mdc-button"));
+		this._button = new mdc.ripple.MDCRipple(document.querySelector("#button"));
 		// add event listener in button
-		// this._button.listen("click", this.click);
+		//this._button.listen("click", this.click);
 		// initialize dispatch with simple promise
-		// this._dispatch = () => { return Promise.resolve(); };
+		this._dispatch = () => { return Promise.resolve(); };
 		// initialize handler with simple function
-		// this._handler = () => { };
+		this._handler = () => { };
+		// initialize user name
+		this._name = new mdc.textField.MDCTextField(document.querySelector("#name"));
+		// initialize user name
+		this._number = new mdc.textField.MDCTextField(document.querySelector("#number"));
+		// initialize user address
+		this._address = new mdc.textField.MDCTextField(document.querySelector("#address"));
 		// initialize page snackbar
 		this._snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
 		// close progress
@@ -94,6 +100,27 @@ export class UserView {
 		*/
 	set busy(busy) {
 		this._busy = busy;
+	}
+
+	/**
+		* @returns {Object} name
+		*/
+	get name() {
+		return this._name;
+	}
+
+	/**
+		* @returns {Object} number
+		*/
+	get number() {
+		return this._number;
+	}
+
+	/**
+		* @returns {Object} address
+		*/
+	get address() {
+		return this._address;
 	}
 
 	/**
