@@ -13,6 +13,8 @@ export class ActivationView {
 	constructor() {
 		// initialize busy
 		this._busy = false;
+		// initialize page progress
+		this._progress = new mdc.linearProgress.MDCLinearProgress(document.querySelector(".mdc-linear-progress"));
 		// initialize page code
 		this._code = new mdc.textField.MDCTextField(document.querySelector("#code"));
 		// initialize visibility code
@@ -27,12 +29,10 @@ export class ActivationView {
 		this._dispatch = () => { return Promise.resolve(); };
 		// initialize handler with simple function
 		this._handler = () => { };
-		// initialize page progress
-		this._progress = new mdc.linearProgress.MDCLinearProgress(document.querySelector(".mdc-linear-progress"));
-		// close progress
-		this._progress.close();
 		// initialize page snackbar
 		this._snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
+		// close progress
+		this._progress.close();
 	}
 
 	/**

@@ -35,7 +35,8 @@ task("lib/firebase", () => {
 });
 task("lib/glide", () => {
   return src(["node_modules/@glidejs/glide/dist/glide.min.js",
-    "node_modules/@glidejs/glide/dist/css/glide.core.min.css"])
+    "node_modules/@glidejs/glide/dist/css/glide.core.min.css",
+    "node_modules/@glidejs/glide/dist/css/glide.theme.min.css"])
     .pipe(dest("public/lib/glide/dist/"));
 });
 task("lib/googlemaps", () => {

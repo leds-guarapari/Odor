@@ -124,17 +124,12 @@ export class UserDataStore extends DataStore {
 			let user = new User();
 			// for all result
 			event.target.result.forEach(data => {
-				// set user identifier 
+				// set data user
 				user.id = data._id;
-				// set user name
 				user.name = data._name;
-				// set user number
 				user.number = data._number;
-				// set user address
 				user.address = data._address;
-				// set user latitude
 				user.latitude = data._latitude;
-				// set user longitude
 				user.longitude = data._longitude;
 			});
 			// return user

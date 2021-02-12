@@ -41,7 +41,14 @@ export class IndexControl {
 							window.location.replace("/user.html");
 						}
 					});
-				});
+				})
+					// request is incorrectly returned
+					.catch(() => {
+						// close progress
+						this._view.progress.close();
+						// dispatch view exception
+						this._view.exception();
+					});
 			} else {
 				// redirect to activation page
 				window.location.replace("/activation.html");
