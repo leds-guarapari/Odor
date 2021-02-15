@@ -25,6 +25,8 @@ export class UserView {
 		this._arrow.listen("click", this.back);
 		// initialize glide
 		this._glide = new Glide(".glide").mount();
+		// disable keyboard in glide
+		this._glide.keyboard = false;
 		// initialize indexes
 		this._indexes = Object.freeze({ "name": 0, "number": 1, "address": 2 });
 		// initialize page button
