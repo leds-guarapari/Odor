@@ -85,10 +85,8 @@ export class ActivationView {
 			if (!this.busy) {
 				// verify is valid code
 				if (this.code.value) {
-					// set busy
-					this.busy = true;
-					// open progress
-					this.progress.open();
+					// lock page
+					this.lock();
 					// dispatch event to listener
 					await this.dispatch(this.code.value).then(() => {
 						// response handler callback
@@ -107,10 +105,8 @@ export class ActivationView {
 						})
 						// finally request
 						.finally(() => {
-							// set busy
-							this.busy = false;
-							// close progress
-							this.progress.close();
+							// release page
+							this.release();
 						});
 				} else {
 					// set valid code
@@ -184,6 +180,16 @@ export class ActivationView {
 		this.busy = false;
 		// close progress
 		this.progress.close();;
+	}
+
+	/**
+		* lock page
+		*/
+	lock() {
+		// set busy
+		this.busy = true;
+		// open progress
+		this.progress.open();;
 	}
 
 	/**

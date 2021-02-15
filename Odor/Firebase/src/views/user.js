@@ -88,68 +88,67 @@ export class UserView {
 		return async (event) => {
 			// event prevent default
 			event.preventDefault();
-			// switch index glide
-			switch (this.glide.index) {
-				case this.indexes.name:
-					// verify name is valid
-					if (!this.name.value) {
-						// set invalid name
-						this.name.valid = false;
-					} else {
-						// move one forward
-						this.glide.go(">");
-					}
-					break;
-				case this.indexes.number:
-					// verify number is valid
-					if (!this.number.value) {
-						// set invalid name
-						this.number.valid = false;
-					} else {
-						// move one forward
-						this.glide.go(">");
-					}
-					break;
-				case this.indexes.address:
-					// verify name is valid
-					if (!this.name.value) {
-						// set invalid name
-						this.name.valid = false;
-						// move to first slide
-						this.glide.go("=0");
-					}
-					// verify number is valid
-					else if (!this.number.value) {
-						// set invalid name
-						this.number.valid = false;
-						// move to second slide
-						this.glide.go("=1");
-					} else {
-						// set busy
-						this.busy = true;
-						// open progress
-						this.progress.open();
-						// dispatch event to listener
-						await this.dispatch(this.user).then(() => {
-							// response handler callback
-							this.handler();
-						})
-							// request is incorrectly returned
-							.catch(() => {
-								// dispatch exception
-								this.exception();
+			// verify is busy
+			if (!this.busy) {
+				// switch index glide
+				switch (this.glide.index) {
+					case this.indexes.name:
+						// verify name is valid
+						if (!this.name.value) {
+							// set invalid name
+							this.name.valid = false;
+						} else {
+							// move one forward
+							this.glide.go(">");
+						}
+						break;
+					case this.indexes.number:
+						// verify number is valid
+						if (!this.number.value) {
+							// set invalid name
+							this.number.valid = false;
+						} else {
+							// move one forward
+							this.glide.go(">");
+						}
+						break;
+					case this.indexes.address:
+						// verify name is valid
+						if (!this.name.value) {
+							// set invalid name
+							this.name.valid = false;
+							// move to first slide
+							this.glide.go("=0");
+						}
+						// verify number is valid
+						else if (!this.number.value) {
+							// set invalid name
+							this.number.valid = false;
+							// move to second slide
+							this.glide.go("=1");
+						} else {
+							// lock page
+							this.lock();
+							// dispatch event to listener
+							await this.dispatch(this.user).then(() => {
+								// response handler callback
+								this.handler();
 							})
-							// finally request
-							.finally(() => {
-								// set busy
-								this.busy = false;
-								// close progress
-								this.progress.close();
-							});
-					}
-					break;
-				default:
-					break;
+								// request is incorrectly returned
+								.catch(() => {
+									// dispatch exception
+									this.exception();
+								})
+								// finally request
+								.finally(() => {
+									// release page
+									this.release();
+								});
+						}
+						break;
+					default:
+						break;
+				}
 			}
 		};
 	}

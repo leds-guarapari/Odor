@@ -45,6 +45,7 @@ task("lib/googlemaps", () => {
 });
 task("lib/material-components-web", () => {
   return src(["node_modules/material-components-web/dist/material-components-web.min.css",
+    "node_modules/material-components-web/dist/material-components-web.min.css.map",
     "node_modules/material-components-web/dist/material-components-web.min.js"])
     .pipe(dest("public/lib/material-components-web/dist/"));
 });
