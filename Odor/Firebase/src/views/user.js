@@ -336,7 +336,17 @@ export class UserView {
 		// set busy
 		this.busy = false;
 		// close progress
-		this.progress.close();;
+		this.progress.close();
+	}
+
+	/**
+		* lock page
+		*/
+	lock() {
+		// set busy
+		this.busy = true;
+		// open progress
+		this.progress.open();
 	}
 
 	/**

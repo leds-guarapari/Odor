@@ -179,8 +179,24 @@ export class IndexedDBService extends DataStore {
 		* @returns {any} store 
 		*/
 	store(data, type) {
+		// make dispatch with transaction
+		this.dipatch = this.target.transaction([data.constructor.name], type);
 		// open a transaction store of type
-		return this.target.transaction([data.constructor.name], type).objectStore(data.constructor.name);
+		return this.dipatch.objectStore(data.constructor.name);
+	}
+
+	/**
+		* @param {Object} dipatch
+		*/
+	set dipatch(dipatch) {
+		this._dipatch = dipatch;
+	}
+
+	/**
+		* @returns {Object} dipatch
+		*/
+	get dipatch() {
+		return this._dipatch;
 	}
 
 	/**
@@ -207,31 +223,21 @@ export class IndexedDBService extends DataStore {
 	transaction(store) {
 		// make promise
 		return new Promise((resolve, reject) => {
-			// set result
-			this.result = false;
 			// report success of transaction
-			store.onsuccess = () => {
+			store.onsuccess = (result) => {
 				// set result
-				this.result = true;
+				this.result = result;
 			};
 			// report error of transaction
-			store.onerror = () => {
-				// set result
-				this.result = false;
+			this.dipatch.onerror = (error) => {
+				// resolve promise
+				reject(error);
 			};
 			// report complete of transaction
-			store.oncomplete = (event) => {
-				// verify result
-				if (this.result) {
-					// resolve promise
-					resolve(event);
-				}
-				else {
-					// resolve promise
-					reject(event);
-				}
+			this.dipatch.oncomplete = () => {
+				// resolve promise
+				resolve(this.result);
 			};
-
 		});
 	}
 

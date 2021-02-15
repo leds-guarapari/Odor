@@ -179,7 +179,7 @@ export class ActivationView {
 		// set busy
 		this.busy = false;
 		// close progress
-		this.progress.close();;
+		this.progress.close();
 	}
 
 	/**
@@ -189,7 +189,7 @@ export class ActivationView {
 		// set busy
 		this.busy = true;
 		// open progress
-		this.progress.open();;
+		this.progress.open();
 	}
 
 	/**

@@ -22,10 +22,10 @@ export class IndexControl {
 		this._firebase = new FirebaseService(config.firebase);
 		// bind an event handler to verify authentication user
 		firebase.auth().onAuthStateChanged((authentication) => {
-			// initialize authentication
-			this._authentication = authentication;
 			// verify user is signed in
 			if (authentication) {
+				// initialize authentication
+				this._authentication = authentication;
 				// dispatch indexed service to listener 
 				this._service = new UserIndexedDBService().then((indexed) => {
 					// set indexed service
@@ -48,8 +48,8 @@ export class IndexControl {
 				})
 					// request is incorrectly returned
 					.catch(() => {
-						// close progress
-						this._view.progress.close();
+						// release view page
+						this._view.release();
 						// dispatch view exception
 						this._view.exception();
 					});

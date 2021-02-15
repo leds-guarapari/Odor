@@ -32,6 +32,14 @@ export class IndexView {
 	}
 
 	/**
+		* release page
+		*/
+	release() {
+		// close progress
+		this.progress.close();
+	}
+
+	/**
 		* @param {string} id
 		* @returns {any} element
 		*/
