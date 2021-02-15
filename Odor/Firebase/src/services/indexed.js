@@ -184,6 +184,20 @@ export class IndexedDBService extends DataStore {
 	}
 
 	/**
+		* @param {boolean} result
+		*/
+	set result(result) {
+		this._result = result;
+	}
+
+	/**
+		* @returns {boolean} result
+		*/
+	get result() {
+		return this._result;
+	}
+
+	/**
 		* 
 		* Make IndexedDB transaction.
 		* 
@@ -193,16 +207,31 @@ export class IndexedDBService extends DataStore {
 	transaction(store) {
 		// make promise
 		return new Promise((resolve, reject) => {
-			// report complete of transaction
-			store.oncomplete = (event) => {
-				// resolve promise
-				resolve(event);
+			// set result
+			this.result = false;
+			// report success of transaction
+			store.onsuccess = () => {
+				// set result
+				this.result = true;
 			};
 			// report error of transaction
-			store.onerror = (event) => {
-				// reject promise
-				reject(event);
-			}
+			store.onerror = () => {
+				// set result
+				this.result = false;
+			};
+			// report complete of transaction
+			store.oncomplete = (event) => {
+				// verify result
+				if (this.result) {
+					// resolve promise
+					resolve(event);
+				}
+				else {
+					// resolve promise
+					reject(event);
+				}
+			};
+
 		});
 	}
 
