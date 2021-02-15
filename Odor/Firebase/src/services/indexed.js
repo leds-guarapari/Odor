@@ -193,12 +193,12 @@ export class IndexedDBService extends DataStore {
 	transaction(store) {
 		// make promise
 		return new Promise((resolve, reject) => {
-			// report the success of our transaction
-			store.onsuccess = (event) => {
+			// report complete of transaction
+			store.oncomplete = (event) => {
 				// resolve promise
 				resolve(event);
 			};
-			// report the error of our transaction
+			// report error of transaction
 			store.onerror = (event) => {
 				// reject promise
 				reject(event);

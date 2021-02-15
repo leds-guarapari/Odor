@@ -36,7 +36,7 @@ export class UserDataStore extends DataStore {
 			return new Promise((resolve, reject) => {
 				try {
 					// make a new user reference with an auto-generated id
-					let transaction = firebase.database().ref("user").push();
+					let transaction = firebase.database().ref("users").push();
 					// dispatch set event to listener
 					transaction.set({
 						Name: user.name,
@@ -74,7 +74,7 @@ export class UserDataStore extends DataStore {
 			return new Promise((resolve, reject) => {
 				try {
 					// dispatch set event to listener
-					firebase.database().ref("user/" + user.id).set({
+					firebase.database().ref("users/" + user.id).set({
 						Name: user.name,
 						Number: user.number,
 						Address: user.address,
@@ -135,6 +135,120 @@ export class UserDataStore extends DataStore {
 			// return user
 			return user;
 		});
+	}
+
+}
+
+/**
+	* 
+	* Default data manipulation in session store.
+	* 
+	*/
+export class UserSession {
+
+	/**
+		* @param {string} user
+		*/
+	set user(user) {
+		window.sessionStorage.setItem("user", user);
+	}
+
+	/**
+		* @returns {string} user
+		*/
+	get user() {
+		return window.sessionStorage.getItem("user");
+	}
+
+	/**
+		* @param {string} id
+		*/
+	set id(id) {
+		window.sessionStorage.setItem("id", id);
+	}
+
+	/**
+		* @returns {string} id
+		*/
+	get id() {
+		return window.sessionStorage.getItem("id");
+	}
+
+	/**
+		* @param {string} name
+		*/
+	set name(name) {
+		window.sessionStorage.setItem("name", name);
+	}
+
+	/**
+		* @returns {string} name
+		*/
+	get name() {
+		return window.sessionStorage.getItem("name");
+	}
+
+	/**
+		* @param {string} number
+		*/
+	set number(number) {
+		window.sessionStorage.setItem("number", number);
+	}
+
+	/**
+		* @returns {string} number
+		*/
+	get number() {
+		return window.sessionStorage.getItem("number");
+	}
+
+	/**
+		* @param {string} address
+		*/
+	set address(address) {
+		window.sessionStorage.setItem("address", address);
+	}
+
+	/**
+		* @returns {string} address
+		*/
+	get address() {
+		return window.sessionStorage.getItem("address");
+	}
+
+	/**
+		* @param {number} latitude
+		*/
+	set latitude(latitude) {
+		window.sessionStorage.setItem("latitude", latitude.toString(10));
+	}
+
+	/**
+		* @returns {number} latitude
+		*/
+	get latitude() {
+		return Number(window.sessionStorage.getItem("latitude") || "0");
+	}
+
+	/**
+		* @param {number} longitude
+		*/
+	set longitude(longitude) {
+		window.sessionStorage.setItem("longitude", longitude.toString(10));
+	}
+
+	/**
+		* @returns {number} longitude
+		*/
+	get longitude() {
+		return Number(window.sessionStorage.getItem("longitude") || "0");
+	}
+
+	/**
+		* remove all saved data from session
+		*/
+	clear() {
+		window.sessionStorage.clear();
 	}
 
 }

@@ -12,7 +12,7 @@ export class ActivationView {
 		*/
 	constructor() {
 		// initialize busy
-		this._busy = false;
+		this._busy = true;
 		// initialize page progress
 		this._progress = new mdc.linearProgress.MDCLinearProgress(document.querySelector(".mdc-linear-progress"));
 		// initialize page code
@@ -31,8 +31,6 @@ export class ActivationView {
 		this._handler = () => { };
 		// initialize page snackbar
 		this._snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
-		// close progress
-		this._progress.close();
 	}
 
 	/**
@@ -176,6 +174,16 @@ export class ActivationView {
 		*/
 	get snackbar() {
 		return this._snackbar;
+	}
+
+	/**
+		* release page
+		*/
+	release() {
+		// set busy
+		this.busy = false;
+		// close progress
+		this.progress.close();;
 	}
 
 	/**

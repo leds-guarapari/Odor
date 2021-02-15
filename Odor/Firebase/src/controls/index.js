@@ -21,9 +21,11 @@ export class IndexControl {
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
 		// bind an event handler to verify authentication user
-		firebase.auth().onAuthStateChanged((user) => {
+		firebase.auth().onAuthStateChanged((authentication) => {
+			// initialize authentication
+			this._authentication = authentication;
 			// verify user is signed in
-			if (user) {
+			if (authentication) {
 				// dispatch indexed service to listener 
 				this._service = new UserIndexedDBService().then((indexed) => {
 					// set indexed service
@@ -31,9 +33,11 @@ export class IndexControl {
 					// initialize user data store
 					this._store = new UserDataStore(indexed);
 					// dispatch query to user stored
-					this._store.user.then((result) => {
+					this._store.user.then((user) => {
+						// initialize user
+						this._user = user;
 						// verify user is stored
-						if (result.id) {
+						if (user.id) {
 							// redirect to master page
 							window.location.replace("/master.html");
 						} else {
@@ -61,6 +65,20 @@ export class IndexControl {
 		*/
 	get firebase() {
 		return this._firebase;
+	}
+
+	/**
+	* @returns {Object} authentication
+	*/
+	get authentication() {
+		return this._authentication;
+	}
+
+	/**
+		* @returns {Object} user
+		*/
+	get user() {
+		return this._user;
 	}
 
 	/**

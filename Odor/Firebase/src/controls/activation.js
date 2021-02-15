@@ -23,6 +23,17 @@ export class ActivationControl {
 		this._view.handler = this.handler;
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
+		// bind an event handler to verify authentication user
+		firebase.auth().onAuthStateChanged((authentication) => {
+			// verify user is signed out
+			if (!authentication) {
+				// release view page
+				this._view.release();
+			} else {
+				// redirect to root page
+				window.location.replace("/");
+			}
+		});
 	}
 
 	/**

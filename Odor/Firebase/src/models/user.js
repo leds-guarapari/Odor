@@ -34,14 +34,14 @@ export class User {
 	}
 
 	/**
-		* @param {number} number
+		* @param {string} number
 		*/
 	set number(number) {
 		this._number = number;
 	}
 
 	/**
-		* @returns {number} number
+		* @returns {string} number
 		*/
 	get number() {
 		return this._number;
