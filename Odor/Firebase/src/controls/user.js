@@ -41,7 +41,7 @@ export class UserControl {
 					// initialize user data store
 					this._store = new UserDataStore(indexed);
 					// dispatch query to user stored
-					this._store.user.then((user) => {
+					return this._store.user.then((user) => {
 						// initialize user
 						this._user = user;
 						// verify user is in session
@@ -56,14 +56,16 @@ export class UserControl {
 							// set user
 							this._user = user;
 						}
-						// release view page
-						this._view.release();
 					});
 				})
 					// request is incorrectly returned
 					.catch(() => {
 						// dispatch view exception
 						this._view.exception();
+					})
+					.finally(() => {
+						// release view page
+						this._view.release();
 					});
 			} else {
 				// redirect to activation page
