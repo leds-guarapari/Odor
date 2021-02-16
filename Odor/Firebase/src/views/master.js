@@ -11,6 +11,11 @@ export class MasterView {
 		* 
 		*/
 	constructor() {
+		// verify compatibility push state
+		if (window.history.pushState) {
+			// modify history entries
+			window.history.pushState(null, null, window.location.href);
+		}
 		// initialize busy
 		this._busy = true;
 		// initialize page progress
@@ -22,14 +27,26 @@ export class MasterView {
 		// set scroll page
 		this._bar.setScrollTarget(document.querySelector("main"));
 		// add event listener in menu
-		this._bar.listen("MDCTopAppBar:nav", () => {
-			// open or close drawer
-			this._drawer.open = !this._drawer.open;
-		});
+		this._bar.listen("MDCTopAppBar:nav", this.menu);
+		// add event listener in arrow browser button
+		window.addEventListener("popstate", this.menu);
 		// initialize page button
 		this._button = new mdc.ripple.MDCRipple(document.querySelector("#button"));
 		// initialize page snackbar
 		this._snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
+	}
+
+	/**
+		* @returns {Event} menu
+		*/
+	get menu() {
+		// make event
+		return (event) => {
+			// event prevent default
+			event.preventDefault();
+			// open or close drawer
+			this.drawer.open = !this.drawer.open;
+		};
 	}
 
 	/**

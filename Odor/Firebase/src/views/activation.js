@@ -11,6 +11,11 @@ export class ActivationView {
 		* 
 		*/
 	constructor() {
+		// verify compatibility push state
+		if (window.history.pushState) {
+			// modify history entries
+			window.history.pushState(null, null, window.location.href);
+		}
 		// initialize busy
 		this._busy = true;
 		// initialize page progress
@@ -25,6 +30,8 @@ export class ActivationView {
 		this._button = new mdc.ripple.MDCRipple(document.querySelector(".mdc-button"));
 		// add event listener in button
 		this._button.listen("click", this.click);
+		// add event listener in arrow browser button
+		window.addEventListener("popstate", (event) => { event.preventDefault(); });
 		// initialize dispatch with simple promise
 		this._dispatch = () => { return Promise.resolve(); };
 		// initialize handler with simple function

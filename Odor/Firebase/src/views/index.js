@@ -11,8 +11,15 @@ export class IndexView {
 		* 
 		*/
 	constructor() {
+		// verify compatibility push state
+		if (window.history.pushState) {
+			// modify history entries
+			window.history.pushState(null, null, window.location.href);
+		}
 		// initialize page progress
 		this._progress = new mdc.linearProgress.MDCLinearProgress(document.querySelector(".mdc-linear-progress"));
+		// add event listener in arrow browser button
+		window.addEventListener("popstate", (event) => { event.preventDefault(); });
 		// initialize page snackbar
 		this._snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
 	}

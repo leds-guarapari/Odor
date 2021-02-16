@@ -13,6 +13,11 @@ export class UserView {
 		* 
 		*/
 	constructor() {
+		// verify compatibility push state
+		if (window.history.pushState) {
+			// modify history entries
+			window.history.pushState(null, null, window.location.href);
+		}
 		// initialize busy
 		this._busy = true;
 		// initialize page progress
@@ -23,6 +28,10 @@ export class UserView {
 		this._arrow = new mdc.ripple.MDCRipple(document.querySelector("#arrow"));
 		// add event listener in arrow button
 		this._arrow.listen("click", this.back);
+		// add event listener in arrow browser button
+		window.addEventListener("popstate", this.back);
+		// initialize backward with simple function
+		this._backward = () => { };
 		// initialize glide
 		this._glide = new Glide(".glide").mount();
 		// disable keyboard in glide
@@ -43,6 +52,12 @@ export class UserView {
 		this._number = new mdc.textField.MDCTextField(document.querySelector("#number"));
 		// initialize user address
 		this._address = new mdc.textField.MDCTextField(document.querySelector("#address"));
+		// initialize maps button
+		this._maps = new mdc.ripple.MDCRipple(document.querySelector("#maps"));
+		// add event listener in maps button
+		this._maps.listen("click", this.go);
+		// initialize browse with simple function
+		this._browse = () => { };
 		// initialize page snackbar
 		this._snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
 	}
@@ -80,6 +95,13 @@ export class UserView {
 		*/
 	get button() {
 		return this._button;
+	}
+
+	/**
+		* @returns {Object} maps
+		*/
+	get maps() {
+		return this._maps;
 	}
 
 	/**
@@ -169,17 +191,18 @@ export class UserView {
 	}
 
 	/**
-		* @returns {function} backward
+		* @returns {Event} go
 		*/
-	get backward() {
-		return this._backward;
-	}
-
-	/**
-		* @param {function} backward
-		*/
-	set backward(backward) {
-		this._backward = backward;
+	get go() {
+		// make event
+		return (event) => {
+			// event prevent default
+			event.preventDefault();
+			// lock page
+			this.lock();
+			// dispatch event to listener
+			this.browse();
+		};
 	}
 
 	/**
@@ -208,6 +231,34 @@ export class UserView {
 		*/
 	set handler(handler) {
 		this._handler = handler;
+	}
+
+	/**
+		* @returns {function} backward
+		*/
+	get backward() {
+		return this._backward;
+	}
+
+	/**
+		* @param {function} backward
+		*/
+	set backward(backward) {
+		this._backward = backward;
+	}
+
+	/**
+		* @returns {function} browse
+		*/
+	get browse() {
+		return this._browse;
+	}
+
+	/**
+		* @param {function} browse
+		*/
+	set browse(browse) {
+		this._browse = browse;
 	}
 
 	/**
@@ -337,6 +388,14 @@ export class UserView {
 		this.busy = false;
 		// close progress
 		this.progress.close();
+	}
+
+	/**
+		* return to maps in page
+		*/
+	return() {
+		// move to third slide
+		this.glide.go("=2");
 	}
 
 	/**

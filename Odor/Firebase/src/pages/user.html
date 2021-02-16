@@ -93,12 +93,12 @@
 			cursor: default;
 		}
 
-		.mdc-touch-target-wrapper {
+		#maps-wrapper {
 			padding-top: 20px;
 			transform: translateX(100px);
 		}
 
-		.mdc-touch-target-wrapper,
+		#maps-wrapper,
 		.mdc-text-field-helper-line {
 			display: inherit;
 		}
@@ -109,13 +109,17 @@
 	<header class="mdc-top-app-bar mdc-top-app-bar--dense">
 		<div class="mdc-top-app-bar__row">
 			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-				<button id="arrow" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
+				<button id="arrow"
+					class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
 			</section>
 			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-				<button id="button" class="mdc-button">
-					<span class="mdc-button__ripple"></span>
-					<span class="mdc-button__label">Salvar</span>
-				</button>
+				<div class="mdc-touch-target-wrapper">
+					<button id="button" class="mdc-button mdc-button--touch">
+						<span class="mdc-button__ripple"></span>
+						<span class="mdc-button__label">Salvar</span>
+						<span class="mdc-button__touch"></span>
+					</button>
+				</div>
 			</section>
 		</div>
 	</header>
@@ -162,11 +166,11 @@
 						<label id="address" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea">
 							<span class="mdc-text-field__ripple"></span>
 							<span class="mdc-floating-label" id="address-label">Endereço completo</span>
-							<textarea class="mdc-text-field__input" aria-labelledby="address-label" rows="4"></textarea>
+							<textarea class="mdc-text-field__input" aria-labelledby="address-label" rows="5"></textarea>
 							<span class="mdc-line-ripple"></span>
 						</label>
-						<div id="maps" class="mdc-touch-target-wrapper">
-							<button class="mdc-button mdc-button--raised mdc-button--touch">
+						<div id="maps-wrapper" class="mdc-touch-target-wrapper">
+							<button id="maps" class="mdc-button mdc-button--raised mdc-button--touch">
 								<span class="mdc-button__ripple"></span>
 								<span class="mdc-button__label">Mapa</span>
 								<span class="mdc-button__touch"></span>

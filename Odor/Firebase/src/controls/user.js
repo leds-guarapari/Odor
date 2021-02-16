@@ -24,6 +24,8 @@ export class UserControl {
 		this._view.dispatch = this.dispatch;
 		// set view handler
 		this._view.handler = this.handler;
+		// set view browse
+		this._view.browse = this.browse;
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
 		// bind an event handler to verify authentication user
@@ -48,6 +50,8 @@ export class UserControl {
 						if (this._session.user) {
 							// set user data in view
 							this._view.user = this._session;
+							// return to maps in page
+							this._view.return();
 						}
 						// verify user is stored
 						else if (user.id) {
@@ -103,6 +107,20 @@ export class UserControl {
 	}
 
 	/**
+		* @param {User} user
+		*/
+	set session(user) {
+		// set user data in session
+		this.session.user = "user";
+		this.session.id = user.id;
+		this.session.name = user.name;
+		this.session.number = user.number;
+		this.session.address = user.address;
+		this.session.latitude = user.latitude;
+		this.session.longitude = user.longitude;
+	}
+
+	/**
 		* @returns {Object} view
 		*/
 	get view() {
@@ -135,6 +153,8 @@ export class UserControl {
 		*/
 	get backward() {
 		return () => {
+			// clear session
+			this.session.clear();
 			// redirect to root page
 			window.location.replace("/");
 		};
@@ -190,6 +210,20 @@ export class UserControl {
 		return () => {
 			// redirect to master page
 			window.location.replace("/master.html");
+		};
+	}
+
+	/**
+		* @returns {function} browse
+		*/
+	get browse() {
+		return () => {
+			// clear session
+			this.session.clear();
+			// set user data in session
+			this.session = this.view.user;
+			// redirect to maps page
+			window.location.replace("/maps.html");
 		};
 	}
 
