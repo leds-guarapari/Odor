@@ -251,6 +251,13 @@ export class UserView extends View {
 	}
 
 	/**
+		* @param {string} address
+		*/
+	set address(address) {
+		this.address.value = address;
+	}
+
+	/**
 		* @returns {Object} address
 		*/
 	get address() {

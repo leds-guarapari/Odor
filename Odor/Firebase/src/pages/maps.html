@@ -1,19 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 	<meta charset="utf-8" />
- <meta http-equiv="X-UA-Compatible" content="IE=edge" />
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <meta name="google" content="notranslate" />
- <meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Aplicativo sobre a percepção de gases odorantes." />
-	<title>Odor</title>
-	<link rel="stylesheet" href="lib/material-design-icons/iconfont/material-icons.min.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="google" content="notranslate" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Selecione uma localização no mapa." />
+	<title>Mapa</title>
+	<!-- Default Shortcut Icon -->
+	<link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
+	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+	<link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+	<!-- Default Style Sheet Web -->
+	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
+	<style>
+		:root {
+			--mdc-theme-primary: #01579B;
+			--mdc-theme-background: white;
+		}
+
+		body {
+			margin: 0;
+			text-align: center;
+			background: var(--mdc-theme-background);
+		}
+
+		footer {
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.mdc-top-app-bar--fixed-adjust {
+			padding-top: 48px;
+		}
+
+		#button {
+			cursor: pointer;
+			color: var(--mdc-theme-background);
+		}
+
+		#maps {
+			height: -moz-calc(100vh - 48px);
+			height: -webkit-calc(100vh - 48px);
+			height: -o-calc(100vh - 48px);
+			height: calc(100vh - 48px);
+		}
+
+		#fab {
+			position: fixed;
+			bottom: 2rem;
+			left: 1rem;
+		}
+	</style>
 </head>
-<body>
+
+<body class="mdc-typography">
+	<header class="mdc-top-app-bar mdc-top-app-bar--dense">
+		<div class="mdc-top-app-bar__row">
+			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+				<button id="arrow"
+					class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
+			</section>
+			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+				<div class="mdc-touch-target-wrapper">
+					<button id="button" class="mdc-button mdc-button--touch">
+						<span class="mdc-button__ripple"></span>
+						<span class="mdc-button__label">Confirmar</span>
+						<span class="mdc-button__touch"></span>
+					</button>
+				</div>
+			</section>
+		</div>
+	</header>
+	<main class="mdc-top-app-bar--fixed-adjust">
+		<div id="maps"></div>
+	</main>
+	<footer>
+		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+			<div class="mdc-linear-progress__buffer">
+				<div class="mdc-linear-progress__buffer-bar"></div>
+				<div class="mdc-linear-progress__buffer-dots"></div>
+			</div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+		</div>
+	</footer>
+	<div id="fab" class="mdc-touch-target-wrapper">
+		<button class="mdc-fab mdc-fab--mini mdc-fab--touch">
+			<div class="mdc-fab__ripple"></div>
+			<span class="material-icons mdc-fab__icon">gps_fixed</span>
+			<div class="mdc-fab__touch"></div>
+		</button>
+	</div>
+	<div class="mdc-snackbar">
+		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+			<div class="mdc-snackbar__label" aria-atomic="false"></div>
+		</div>
+	</div>
+	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
 	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
-	<script defer src="lib/firebase/firebase-app.js"></script>
-	<script defer src="lib/firebase/firebase-auth.js"></script>
-	<script defer src="lib/firebase/firebase-database.js"></script>
+	<script type="module" src="js/controls.maps.min.js"></script>
 </body>
+
 </html>
