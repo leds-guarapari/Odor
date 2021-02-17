@@ -17,6 +17,8 @@ export class MasterControl {
 	constructor() {
 		// initialize view listener
 		this._view = new MasterView();
+		// set view backward
+		this._view.backward = this.backward;
 		// set organization text in view page
 		this._view.organization = config.organization;
 		// initialize firebase service
@@ -51,17 +53,20 @@ export class MasterControl {
 	}
 
 	/**
-		* @returns {Object} user
-		*/
-	get user() {
-		return this._user;
-	}
-
-	/**
 		* @returns {Object} view
 		*/
 	get view() {
 		return this._view;
+	}
+
+	/**
+		* @returns {function} backward
+		*/
+	get backward() {
+		return () => {
+			// redirect to root page
+			window.location.replace("/");
+		};
 	}
 
 }
