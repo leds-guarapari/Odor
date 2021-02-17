@@ -18,6 +18,8 @@ export class IndexControl {
 	constructor() {
 		// initialize view listener
 		this._view = new IndexView();
+		// set view backward
+		this._view.backward = this.backward;
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
 		// bind an event handler to verify authentication user
@@ -107,6 +109,16 @@ export class IndexControl {
 		*/
 	get store() {
 		return this._store;
+	}
+
+	/**
+		* @returns {function} backward
+		*/
+	get backward() {
+		return () => {
+			// redirect to root page
+			window.location.replace("/");
+		};
 	}
 
 }

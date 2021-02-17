@@ -1,11 +1,12 @@
 import { User } from "./models.user.min.js";
+import { View } from "./views.view.min.js";
 
 /**
 	* 
 	* A view class for user page manipulation.
 	* 
 	*/
-export class UserView {
+export class UserView extends View {
 
 	/**
 		* 
@@ -13,25 +14,14 @@ export class UserView {
 		* 
 		*/
 	constructor() {
-		// verify compatibility push state
-		if (window.history.pushState) {
-			// modify history entries
-			window.history.pushState(null, null, window.location.href);
-		}
-		// initialize busy
-		this._busy = true;
-		// initialize page progress
-		this._progress = new mdc.linearProgress.MDCLinearProgress(document.querySelector(".mdc-linear-progress"));
+		// run constructor in parent class
+		super();
 		// initialize app bar
 		this._bar = new mdc.topAppBar.MDCTopAppBar(document.querySelector(".mdc-top-app-bar"));
 		// initialize arrow button
 		this._arrow = new mdc.ripple.MDCRipple(document.querySelector("#arrow"));
 		// add event listener in arrow button
 		this._arrow.listen("click", this.back);
-		// add event listener in arrow browser button
-		window.addEventListener("popstate", this.back);
-		// initialize backward with simple function
-		this._backward = () => { };
 		// initialize glide
 		this._glide = new Glide(".glide").mount();
 		// disable keyboard in glide
@@ -58,8 +48,6 @@ export class UserView {
 		this._maps.listen("click", this.go);
 		// initialize browse with simple function
 		this._browse = () => { };
-		// initialize page snackbar
-		this._snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector(".mdc-snackbar"));
 	}
 
 	/**
@@ -178,19 +166,6 @@ export class UserView {
 	}
 
 	/**
-		* @returns {Event} back
-		*/
-	get back() {
-		// make event
-		return (event) => {
-			// event prevent default
-			event.preventDefault();
-			// dispatch event to listener
-			this.backward();
-		};
-	}
-
-	/**
 		* @returns {Event} go
 		*/
 	get go() {
@@ -234,20 +209,6 @@ export class UserView {
 	}
 
 	/**
-		* @returns {function} backward
-		*/
-	get backward() {
-		return this._backward;
-	}
-
-	/**
-		* @param {function} backward
-		*/
-	set backward(backward) {
-		this._backward = backward;
-	}
-
-	/**
 		* @returns {function} browse
 		*/
 	get browse() {
@@ -259,20 +220,6 @@ export class UserView {
 		*/
 	set browse(browse) {
 		this._browse = browse;
-	}
-
-	/**
-		* @returns {boolean} busy
-		*/
-	get busy() {
-		return this._busy;
-	}
-
-	/**
-		* @param {boolean} busy
-		*/
-	set busy(busy) {
-		this._busy = busy;
 	}
 
 	/**
@@ -367,69 +314,11 @@ export class UserView {
 	}
 
 	/**
-		* @returns {Object} progress
-		*/
-	get progress() {
-		return this._progress;
-	}
-
-	/**
-		* @returns {Object} snackbar
-		*/
-	get snackbar() {
-		return this._snackbar;
-	}
-
-	/**
-		* release page
-		*/
-	release() {
-		// set busy
-		this.busy = false;
-		// close progress
-		this.progress.close();
-	}
-
-	/**
 		* return to maps in page
 		*/
 	return() {
 		// move to third slide
 		this.glide.go("=2");
-	}
-
-	/**
-		* lock page
-		*/
-	lock() {
-		// set busy
-		this.busy = true;
-		// open progress
-		this.progress.open();
-	}
-
-	/**
-		* @param {string} id
-		* @returns {any} element
-		*/
-	element(id) {
-		// get page element of id
-		return document.getElementById(id);
-	}
-
-	/**
-		* @param {string} text 
-		*/
-	message(text) {
-		// set text in snackbar
-		this.snackbar.labelText = text;
-		// open snackbar
-		this.snackbar.open();
-	}
-
-	exception() {
-		// send exception message
-		this.message(this.element("exception").value);
 	}
 
 }

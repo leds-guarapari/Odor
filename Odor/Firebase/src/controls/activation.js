@@ -17,6 +17,8 @@ export class ActivationControl {
 	constructor() {
 		// initialize view listener
 		this._view = new ActivationView();
+		// set view backward
+		this._view.backward = this.backward;
 		// set view dispatch
 		this._view.dispatch = this.dispatch;
 		// set view handler
@@ -87,6 +89,13 @@ export class ActivationControl {
 		* @returns {function} handler
 		*/
 	get handler() {
+		return this.backward;
+	}
+
+	/**
+		* @returns {function} backward
+		*/
+	get backward() {
 		return () => {
 			// redirect to root page
 			window.location.replace("/");
