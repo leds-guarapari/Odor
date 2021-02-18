@@ -44,7 +44,7 @@
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
-                            <Entry Text="{Binding Odor.UserType}" Margin="10, 0" Placeholder="Digite o outro tipo de odor" IsEnabled="{Binding IsUserType}" IsVisible="{Binding IsUserType}" />
+                            <Entry Text="{Binding Odor.UserType}" Margin="10, 0" Placeholder="Digite outro tipo de odor" IsEnabled="{Binding IsUserType}" IsVisible="{Binding IsUserType}" />
                         </StackLayout>
                         <StackLayout>
                             <Label Text="Quanto foi a intensidade do odor ou mau cheiro?" Margin="10, 20" HorizontalTextAlignment="Center" FontSize="Title" TextColor="#01579B" />
@@ -107,7 +107,7 @@
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
-                            <Entry Text="{Binding Odor.UserOrigin}" Margin="10, 0" Placeholder="Digite a outra origem de odor" IsEnabled="{Binding IsUserOrigin}" IsVisible="{Binding IsUserOrigin}" />
+                            <Entry Text="{Binding Odor.UserOrigin}" Margin="10, 0" Placeholder="Digite outra origem de odor" IsEnabled="{Binding IsUserOrigin}" IsVisible="{Binding IsUserOrigin}" />
                         </StackLayout>
                     </x:Array>
                 </cards:CarouselView.ItemsSource>
