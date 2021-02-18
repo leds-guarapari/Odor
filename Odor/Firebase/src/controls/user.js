@@ -26,8 +26,6 @@ export class UserControl {
 		this._view.handler = this.handler;
 		// set view browse
 		this._view.browse = this.browse;
-		// set default address
-		this._view.address = config.odor.address;
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
 		// bind an event handler to verify authentication user

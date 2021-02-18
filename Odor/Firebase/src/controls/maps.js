@@ -123,8 +123,6 @@ export class MapsControl {
 			this.view.latitude = position.lat;
 			// set longitude
 			this.view.longitude = position.lng;
-			// set default address
-			this.view.address = config.odor.address;
 			// send view message
 			this.view.message(config.address.localizing);
 			// human-readable address into a location on maps

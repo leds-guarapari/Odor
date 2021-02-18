@@ -174,42 +174,42 @@ export class Odor {
 	}
 
 	/**
-		* @param {datetime} date
+		* @param {string} date
 		*/
 	set date(date) {
 		this._date = date;
 	}
 
 	/**
-		* @returns {datetime} date
+		* @returns {string} date
 		*/
 	get date() {
 		return this._date;
 	}
 
 	/**
-		* @param {timespan} begin
+		* @param {string} begin
 		*/
 	set begin(begin) {
 		this._begin = begin;
 	}
 
 	/**
-		* @returns {timespan} begin
+		* @returns {string} begin
 		*/
 	get begin() {
 		return this._begin;
 	}
 
 	/**
-		* @param {timespan} end
+		* @param {string} end
 		*/
 	set end(end) {
 		this._end = end;
 	}
 
 	/**
-		* @returns {timespan} end
+		* @returns {string} end
 		*/
 	get end() {
 		return this._end;
