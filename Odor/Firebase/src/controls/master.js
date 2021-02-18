@@ -29,6 +29,7 @@ export class MasterControl {
 			if (authentication) {
 				// initialize authentication
 				this._authentication = authentication;
+				// TODO odor session with user
 				// release view page
 				this._view.release();
 			} else {
