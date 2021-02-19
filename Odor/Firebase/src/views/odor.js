@@ -44,14 +44,34 @@ export class OdorView extends View {
 		this._usertype = new mdc.textField.MDCTextField(document.querySelector("#usertype"));
 		// disable user type
 		this._usertype.disabled = true;
-		// initialize odor name
-		//this._number = new mdc.textField.MDCTextField(document.querySelector("#number"));
+		// initialize intensities list
+		this._intensities = new mdc.list.MDCList(document.querySelector("#intensities"));
+		// instantiate ripples on list items
+		this._intensities.listElements.map((item) => new mdc.ripple.MDCRipple(item));
+		// initialize nuisances list
+		this._nuisances = new mdc.list.MDCList(document.querySelector("#nuisances"));
+		// instantiate ripples on list items
+		this._nuisances.listElements.map((item) => new mdc.ripple.MDCRipple(item));
 		// initialize odor address
 		this._address = new mdc.textField.MDCTextField(document.querySelector("#address"));
 		// initialize maps button
 		this._maps = new mdc.ripple.MDCRipple(document.querySelector("#maps"));
 		// add event listener in maps button
-		//this._maps.listen("click", this.go);
+		this._maps.listen("click", this.go);
+		// initialize date
+		this._date = new mdc.textField.MDCTextField(document.querySelector("#date"));
+		// initialize begin
+		this._begin = new mdc.textField.MDCTextField(document.querySelector("#begin"));
+		// initialize end
+		this._end = new mdc.textField.MDCTextField(document.querySelector("#end"));
+		// initialize origins list
+		this._origins = new mdc.list.MDCList(document.querySelector("#origins"));
+		// instantiate ripples on list items
+		this._origins.listElements.map((item) => new mdc.ripple.MDCRipple(item));
+		// initialize user origin
+		this._userorigin = new mdc.textField.MDCTextField(document.querySelector("#userorigin"));
+		// disable user origin
+		this._userorigin.disabled = true;
 		// initialize browse with simple function
 		this._browse = () => { };
 	}

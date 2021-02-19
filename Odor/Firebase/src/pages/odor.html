@@ -43,7 +43,7 @@
 		}
 
 		h1 {
-			padding-bottom: 15px;
+			padding-bottom: 10px;
 			padding-right: 10px;
 			padding-left: 10px;
 			color: var(--mdc-theme-primary);
@@ -56,10 +56,6 @@
 		#button {
 			cursor: pointer;
 			color: var(--mdc-theme-background);
-		}
-
-		.glide__slide {
-			height: 80vh;
 		}
 
 		.glide__slides {
@@ -102,18 +98,44 @@
 			margin-right: auto;
 		}
 
-		#usertype {
+		.mdc-list--dense .mdc-list-item {
+			height: 36px;
+		}
+
+		.mdc-list--dense .mdc-list-item__graphic {
+			margin-left: 0;
+			margin-right: 18px;
+			width: 20px;
+			height: 20px;
+			transform: translateY(-4px);
+		}
+
+		.mdc-list--dense {
+			font-size: .9rem;
+		}
+
+		#usertype,
+		#userorigin {
 			margin-top: 10px;
+			margin-bottom: 4em;
 		}
 
 		#maps-wrapper {
 			padding-top: 20px;
+			margin-bottom: 4em;
 			transform: translateX(100px);
 		}
 
 		#maps-wrapper,
 		.mdc-text-field-helper-line {
 			display: inherit;
+		}
+
+		#date,
+		#begin,
+		#end {
+			min-width: 180px;
+			margin-bottom: 15px;
 		}
 	</style>
 </head>
@@ -282,23 +304,231 @@
 						</ul>
 						<label id="usertype" class="mdc-text-field mdc-text-field--filled">
 							<span class="mdc-text-field__ripple"></span>
-							<span class="mdc-floating-label" id="usertype-label">Digite outro tipo de odor</span>
+							<span class="mdc-floating-label" id="usertype-label">Digite outro tipo</span>
 							<input class="mdc-text-field__input" type="text" aria-labelledby="usertype-label" />
 							<span class="mdc-line-ripple"></span>
 						</label>
 					</li>
 					<li class="glide__slide">
 						<h1 class="mdc-typography--headline5">Quanto foi a intensidade do odor ou mau cheiro?</h1>
+						<ul id="intensities" class="mdc-list mdc-list--dense" role="radiogroup">
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="intensity-1"
+												name="intensities" value="Fraco" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="intensity-1">Fraco</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="intensity-2"
+												name="intensities" value="Moderado" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="intensity-2">Moderado</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="intensity-3"
+												name="intensities" value="Desagradável" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="intensity-3">Desagradável</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="intensity-4"
+												name="intensities" value="Forte" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="intensity-4">Forte</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="intensity-5"
+												name="intensities" value="Insuportável" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="intensity-5">Insuportável</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="true">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="intensity-6"
+												name="intensities" value="Não sabe" checked />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="intensity-6">Não sabe</label>
+							</li>
+						</ul>
 					</li>
 					<li class="glide__slide">
 						<h1 class="mdc-typography--headline5">Sentiu-se incomodado com o odor ou mau cheiro?</h1>
+						<ul id="nuisances" class="mdc-list mdc-list--dense" role="radiogroup">
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="nuisance-1"
+												name="nuisances" value="Nada" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="nuisance-1">Nada</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="nuisance-2"
+												name="nuisances" value="Pouco" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="nuisance-2">Pouco</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="nuisance-3"
+												name="nuisances" value="Moderado" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="nuisance-3">Moderado</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="nuisance-4"
+												name="nuisances" value="Muito" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="nuisance-4">Muito</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="nuisance-5"
+												name="nuisances" value="Extremamente" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="nuisance-5">Extremamente</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="true">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="nuisance-6"
+												name="nuisances" value="Não sabe" checked />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="nuisance-6">Não sabe</label>
+							</li>
+						</ul>
 					</li>
 					<li class="glide__slide">
 						<h1 class="mdc-typography--headline5">Onde foi o odor ou mau cheiro?</h1>
 						<label id="address" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea">
 							<span class="mdc-text-field__ripple"></span>
 							<span class="mdc-floating-label" id="address-label">Endereço completo</span>
-							<textarea class="mdc-text-field__input" aria-labelledby="address-label" rows="5"></textarea>
+							<textarea class="mdc-text-field__input" aria-labelledby="address-label" rows="5" cols="25"></textarea>
 							<span class="mdc-line-ripple"></span>
 						</label>
 						<div id="maps-wrapper" class="mdc-touch-target-wrapper">
@@ -311,9 +541,194 @@
 					</li>
 					<li class="glide__slide">
 						<h1 class="mdc-typography--headline5">Quando foi o odor ou mau cheiro?</h1>
+						<div>
+							<label id="date" class="mdc-text-field mdc-text-field--filled">
+								<span class="mdc-text-field__ripple"></span>
+								<span class="mdc-floating-label" id="date-label">Data</span>
+								<input class="mdc-text-field__input" type="date" aria-labelledby="date-label" />
+								<span class="mdc-line-ripple"></span>
+							</label>
+						</div>
+						<div>
+							<label id="begin" class="mdc-text-field mdc-text-field--filled">
+								<span class="mdc-text-field__ripple"></span>
+								<span class="mdc-floating-label" id="begin-label">Horário de Início</span>
+								<input class="mdc-text-field__input" type="time" aria-labelledby="begin-label" />
+								<span class="mdc-line-ripple"></span>
+							</label>
+						</div>
+						<div>
+							<label id="end" class="mdc-text-field mdc-text-field--filled">
+								<span class="mdc-text-field__ripple"></span>
+								<span class="mdc-floating-label" id="end-label">Horário de Término</span>
+								<input class="mdc-text-field__input" type="time" aria-labelledby="end-label" />
+								<span class="mdc-line-ripple"></span>
+							</label>
+						</div>
 					</li>
 					<li class="glide__slide">
-						<h1 class="mdc-typography--headline5">Consegue descrever a origem do odor ou mau cheiro?</h1>
+						<h1 class="mdc-typography--headline5">Consegue descrever a origem do odor?</h1>
+						<ul id="origins" class="mdc-list mdc-list--dense" role="radiogroup">
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-1"
+												name="origins" value="Posto de gasolina" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-1">Posto de gasolina</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-2"
+												name="origins" value="Tratamento de esgoto" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-2">Tratamento de esgoto</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-3"
+												name="origins" value="Pelotização (minério de ferro)" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-3">Pelotização (minério de ferro)</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-4"
+												name="origins" value="Siderúrgica (produção de aço)" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-4">Siderúrgica (produção de aço)</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-5"
+												name="origins" value="Indústria de produtos químicos" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-5">Indústria de produtos químicos</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-6"
+												name="origins" value="Indústria alimentícia" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-6">Indústria alimentícia</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-7"
+												name="origins" value="Atividade portuária" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-7">Atividade portuária</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="true">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-8"
+												name="origins" value="Não sabe" checked />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-8">Não sabe</label>
+							</li>
+							<li class="mdc-list-item" role="radio" aria-checked="false">
+								<span class="mdc-list-item__ripple"></span>
+								<span class="mdc-list-item__graphic">
+									<div class="mdc-touch-target-wrapper">
+										<div class="mdc-radio mdc-radio--touch">
+											<input class="mdc-radio__native-control" type="radio" id="origin-9"
+												name="origins" value="Outro" />
+											<div class="mdc-radio__background">
+												<div class="mdc-radio__outer-circle"></div>
+												<div class="mdc-radio__inner-circle"></div>
+											</div>
+											<div class="mdc-radio__ripple"></div>
+										</div>
+									</div>
+								</span>
+								<label class="mdc-list-item__text" for="origin-9">Outro</label>
+							</li>
+						</ul>
+						<label id="userorigin" class="mdc-text-field mdc-text-field--filled">
+							<span class="mdc-text-field__ripple"></span>
+							<span class="mdc-floating-label" id="userorigin-label">Digite outra origem</span>
+							<input class="mdc-text-field__input" origin="text" aria-labelledby="userorigin-label" />
+							<span class="mdc-line-ripple"></span>
+						</label>
 					</li>
 				</ul>
 			</div>
