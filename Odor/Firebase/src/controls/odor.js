@@ -1,5 +1,6 @@
 import { config } from "./services.config.min.js";
 import { FirebaseService } from "./services.firebase.min.js";
+import { OdorDataStore, OdorSession } from "./services.odor.min.js";
 import { OdorView } from "./views.odor.min.js";
 
 /**
@@ -27,8 +28,19 @@ export class OdorControl {
 			if (authentication) {
 				// initialize authentication
 				this._authentication = authentication;
-				// release view page
-				this._view.release();
+				// initialize session
+				this._session = new OdorSession();
+				// verify odor is in session
+				if (this._session.odor) {
+					// TODO
+					// release view page
+					this._view.release();
+				} else {
+					// clear session
+					this._session.clear();
+					// redirect to master page
+					window.location.replace("/master.html");
+				}
 			} else {
 				// redirect to activation page
 				window.location.replace("/activation.html");
@@ -48,6 +60,13 @@ export class OdorControl {
 		*/
 	get authentication() {
 		return this._authentication;
+	}
+
+	/**
+		* @returns {Object} session
+		*/
+	get session() {
+		return this._session;
 	}
 
 	/**

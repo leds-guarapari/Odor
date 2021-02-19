@@ -50,6 +50,16 @@ export class MapsControl {
 	}
 
 	/**
+		* @param {Object} data
+		*/
+	set session(data) {
+		// set data in session
+		this.session.address = data.address;
+		this.session.latitude = data.latitude;
+		this.session.longitude = data.longitude;
+	}
+
+	/**
 		* @returns {Object} view
 		*/
 	get view() {
@@ -71,9 +81,11 @@ export class MapsControl {
 			return new Promise((resolve, reject) => {
 				try {
 					// set data in session
-					this.session.address = address;
-					this.session.latitude = latitude;
-					this.session.longitude = longitude;
+					this.session = {
+						address: address,
+						latitude: latitude,
+						longitude: longitude
+					};
 					// resolve promise
 					resolve();
 				} catch (error) {

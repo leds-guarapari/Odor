@@ -35,11 +35,11 @@ export class IndexControl {
 					// initialize user data store
 					this._store = new UserDataStore(indexed);
 					// dispatch query to user stored
-					this._store.user.then((user) => {
+					return this._store.user.then((user) => {
 						// initialize user
 						this._user = user;
 						// verify user is stored
-						if (user.id) {
+						if (this._user.id) {
 							// redirect to master page
 							window.location.replace("/master.html");
 						} else {
@@ -50,10 +50,12 @@ export class IndexControl {
 				})
 					// request is incorrectly returned
 					.catch(() => {
-						// release view page
-						this._view.release();
 						// dispatch view exception
 						this._view.exception();
+					})
+					.finally(() => {
+						// release view page
+						this._view.release();
 					});
 			} else {
 				// redirect to activation page

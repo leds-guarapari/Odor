@@ -54,11 +54,9 @@ export class UserControl {
 							this._view.return();
 						}
 						// verify user is stored
-						else if (user.id) {
+						else if (this._user.id) {
 							// set user data in view
-							this._view.user = user;
-							// set user
-							this._user = user;
+							this._view.user = this._user;
 						}
 					});
 				})
