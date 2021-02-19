@@ -237,10 +237,24 @@ export class UserView extends View {
 	}
 
 	/**
+		* @param {string} name
+		*/
+	set name(name) {
+		this.name.value = name;
+	}
+
+	/**
 		* @returns {Object} name
 		*/
 	get name() {
 		return this._name;
+	}
+
+	/**
+		* @param {string} number
+		*/
+	set number(number) {
+		this.number.value = number;
 	}
 
 	/**
@@ -298,9 +312,9 @@ export class UserView extends View {
 	set user(user) {
 		// set user data in page
 		this.id = user.id;
-		this.name.value = user.name;
-		this.number.value = user.number;
-		this.address.value = user.address;
+		this.name = user.name;
+		this.number = user.number;
+		this.address = user.address;
 		this.latitude = user.latitude;
 		this.longitude = user.longitude;
 	}

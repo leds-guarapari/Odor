@@ -101,15 +101,15 @@ export class MapsControl {
 		*/
 	get backward() {
 		return () => {
-			// verify session with user
-			if (this.session.user) {
-				// redirect to root page
-				window.location.replace("/user.html");
-			}
 			// verify session with odor
-			else if (this.session.odor) {
+			if (this.session.odor) {
 				// redirect to root page
 				window.location.replace("/odor.html");
+			}
+			// verify session with user
+			else if (this.session.user) {
+				// redirect to root page
+				window.location.replace("/user.html");
 			} else {
 				// clear session
 				this.session.clear();

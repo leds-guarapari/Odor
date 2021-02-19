@@ -109,17 +109,17 @@ export class MasterControl {
 		this.session.odor = "odor";
 		this.session.userid = user.id;
 		this.session.username = user.name;
-		this.session.usertype = config.odor.user.type;
-		this.session.userorigin = config.odor.user.origin;
+		this.session.usertype = "";
+		this.session.userorigin = "";
 		this.session.intensity = config.odor.intensity;
 		this.session.nuisance = config.odor.nuisance;
 		this.session.type = config.odor.type;
 		this.session.origin = config.odor.origin;
-		this.session.address = config.odor.address;
-		this.session.latitude = 0;
-		this.session.longitude = 0;
+		this.session.address = user.address || config.odor.address;
+		this.session.latitude = user.latitude || 0;
+		this.session.longitude = user.longitude || 0;
 		let date = new Date();
-		this.session.date = date.toLocaleDateString();
+		this.session.date = date.toJSON();
 		this.session.begin = date.toLocaleTimeString();
 		this.session.end = date.toLocaleTimeString();
 	}

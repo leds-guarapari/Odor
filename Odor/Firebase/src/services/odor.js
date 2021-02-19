@@ -244,6 +244,20 @@ export class OdorDataStore extends DataStore {
 export class OdorSession {
 
 	/**
+		* @param {string} user
+		*/
+	set user(user) {
+		window.sessionStorage.setItem("user", user);
+	}
+
+	/**
+		* @returns {string} user
+		*/
+	get user() {
+		return window.sessionStorage.getItem("user");
+	}
+
+	/**
 		* @param {string} odor
 		*/
 	set odor(odor) {

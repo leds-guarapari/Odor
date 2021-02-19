@@ -110,7 +110,7 @@ export class UserControl {
 	set session(user) {
 		// set user data in session
 		this.session.user = "user";
-		this.session.id = user.id;
+		this.session.id = user.id || "";
 		this.session.name = user.name;
 		this.session.number = user.number;
 		this.session.address = user.address;

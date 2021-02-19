@@ -20,6 +20,12 @@ export class OdorControl {
 		this._view = new OdorView();
 		// set view backward
 		this._view.backward = this.backward;
+		// set view dispatch
+		this._view.dispatch = this.dispatch;
+		// set view handler
+		this._view.handler = this.handler;
+		// set view browse
+		this._view.browse = this.browse;
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
 		// bind an event handler to verify authentication user
@@ -28,11 +34,19 @@ export class OdorControl {
 			if (authentication) {
 				// initialize authentication
 				this._authentication = authentication;
+				// initialize odor data store
+				this._store = new OdorDataStore();
 				// initialize session
 				this._session = new OdorSession();
 				// verify odor is in session
 				if (this._session.odor) {
-					// TODO
+					// set odor data in view
+					this._view.odor = this._session;
+					// verify user is in session
+					if (this._session.user) {
+						// return to maps in page
+						this._view.return();
+					}
 					// release view page
 					this._view.release();
 				} else {
@@ -70,6 +84,30 @@ export class OdorControl {
 	}
 
 	/**
+		* @param {Odor} odor
+		*/
+	set session(odor) {
+		// set odor data in session
+		this.session.user = "user";
+		this.session.odor = "odor";
+		this.session.id = odor.id || "";
+		this.session.userid = odor.userid;
+		this.session.username = odor.username;
+		this.session.usertype = odor.usertype;
+		this.session.userorigin = odor.userorigin;
+		this.session.intensity = odor.intensity;
+		this.session.nuisance = odor.nuisance;
+		this.session.type = odor.type;
+		this.session.origin = odor.origin;
+		this.session.address = odor.address;
+		this.session.latitude = odor.latitude;
+		this.session.longitude = odor.longitude;
+		this.session.date = odor.date;
+		this.session.begin = odor.begin;
+		this.session.end = odor.end;
+	}
+
+	/**
 		* @returns {Object} view
 		*/
 	get view() {
@@ -77,13 +115,87 @@ export class OdorControl {
 	}
 
 	/**
+		* @returns {Object} store
+		*/
+	get store() {
+		return this._store;
+	}
+
+	/**
 		* @returns {function} backward
 		*/
 	get backward() {
 		return () => {
-			// redirect to root page
-			// TODO
-			window.location.replace("/");
+			// verify view identifier
+			if (this.view.id) {
+				// redirect to list page
+				window.location.replace("/list.html");
+			} else {
+				// redirect to master page
+				window.location.replace("/master.html");
+			}
+		};
+	}
+
+	/**
+		* @returns {function} dispatch
+		*/
+	get dispatch() {
+		return (odor) => {
+			return new Promise((resolve, reject) => {
+				try {
+					// verify identifier odor
+					if (!odor.id) {
+						// add odor in store
+						this.store.add(odor).then((result) => {
+							// clear session
+							this.session.clear();
+							// resolve promise
+							resolve(result);
+						})
+							// request is incorrectly returned
+							.catch((error) => {
+								// reject promise
+								reject(error);
+							});
+					} else {
+						// update odor in store
+						this.store.update(odor).then((result) => {
+							// resolve promise
+							resolve(result);
+						})
+							// request is incorrectly returned
+							.catch((error) => {
+								// reject promise
+								reject(error);
+							});
+					}
+				} catch (error) {
+					// reject promise
+					reject(error);
+				}
+			});
+		};
+	}
+
+	/**
+		* @returns {function} handler
+		*/
+	get handler() {
+		return this.backward;
+	}
+
+	/**
+		* @returns {function} browse
+		*/
+	get browse() {
+		return () => {
+			// clear session
+			this.session.clear();
+			// set odor data in session
+			this.session = this.view.odor;
+			// redirect to maps page
+			window.location.replace("/maps.html");
 		};
 	}
 

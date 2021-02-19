@@ -27,7 +27,7 @@ export class OdorView extends View {
 		// disable keyboard in glide
 		this._glide.keyboard = false;
 		// initialize indexes
-		this._indexes = Object.freeze({ "name": 0, "number": 1, "address": 2 });
+		this._indexes = Object.freeze({ "type": 0, "intensity": 1, "nuisance": 2, "address": 3, "date": 4, "origin": 5 });
 		// initialize page button
 		this._button = new mdc.ripple.MDCRipple(document.querySelector("#button"));
 		// add event listener in button
@@ -40,6 +40,13 @@ export class OdorView extends View {
 		this._types = new mdc.list.MDCList(document.querySelector("#types"));
 		// instantiate ripples on list items
 		this._types.listElements.map((item) => new mdc.ripple.MDCRipple(item));
+		// add event listener in types
+		this._types.listen("MDCList:action", (event) => {
+			// event prevent default
+			event.preventDefault();
+			// turn usertype when selected last option
+			this.turn(event.detail.index === (this._types.listElements.length - 1), this.usertype, true);
+		});
 		// initialize user type
 		this._usertype = new mdc.textField.MDCTextField(document.querySelector("#usertype"));
 		// disable user type
@@ -68,6 +75,13 @@ export class OdorView extends View {
 		this._origins = new mdc.list.MDCList(document.querySelector("#origins"));
 		// instantiate ripples on list items
 		this._origins.listElements.map((item) => new mdc.ripple.MDCRipple(item));
+		// add event listener in origins
+		this._origins.listen("MDCList:action", (event) => {
+			// event prevent default
+			event.preventDefault();
+			// turn usertype when selected last option
+			this.turn(event.detail.index === (this._origins.listElements.length - 1), this.userorigin, true);
+		});
 		// initialize user origin
 		this._userorigin = new mdc.textField.MDCTextField(document.querySelector("#userorigin"));
 		// disable user origin
@@ -129,63 +143,27 @@ export class OdorView extends View {
 			// verify is busy
 			if (!this.busy) {
 				// switch index glide
-				switch (this.glide.index) {
-					case this.indexes.name:
-						// verify name is valid
-						if (!this.name.value) {
-							// set invalid name
-							this.name.valid = false;
-						} else {
-							// move one forward
-							this.glide.go(">");
-						}
-						break;
-					case this.indexes.number:
-						// verify number is valid
-						if (!this.number.value) {
-							// set invalid name
-							this.number.valid = false;
-						} else {
-							// move one forward
-							this.glide.go(">");
-						}
-						break;
-					case this.indexes.address:
-						// verify name is valid
-						if (!this.name.value) {
-							// set invalid name
-							this.name.valid = false;
-							// move to first slide
-							this.glide.go("=0");
-						}
-						// verify number is valid
-						else if (!this.number.value) {
-							// set invalid name
-							this.number.valid = false;
-							// move to second slide
-							this.glide.go("=1");
-						} else {
-							// lock page
-							this.lock();
-							// dispatch event to listener
-							await this.dispatch(this.odor).then(() => {
-								// response handler callback
-								this.handler();
-							})
-								// request is incorrectly returned
-								.catch(() => {
-									// dispatch exception
-									this.exception();
-								})
-								// finally request
-								.finally(() => {
-									// release page
-									this.release();
-								});
-						}
-						break;
-					default:
-						break;
+				if (this.glide.index === this.indexes.origin) {
+					// lock page
+					this.lock();
+					// dispatch event to listener
+					await this.dispatch(this.odor).then(() => {
+						// response handler callback
+						this.handler();
+					})
+						// request is incorrectly returned
+						.catch(() => {
+							// dispatch exception
+							this.exception();
+						})
+						// finally request
+						.finally(() => {
+							// release page
+							this.release();
+						});
+				} else {
+					// move one forward
+					this.glide.go(">");
 				}
 			}
 		};
@@ -263,17 +241,171 @@ export class OdorView extends View {
 	}
 
 	/**
-		* @returns {Object} name
+		* @param {string} userid
 		*/
-	get name() {
-		return this._name;
+	set userid(userid) {
+		this._userid = userid;
 	}
 
 	/**
-		* @returns {Object} number
+		* @returns {string} userid
 		*/
-	get number() {
-		return this._number;
+	get userid() {
+		return this._userid;
+	}
+
+	/**
+		* @param {string} username
+		*/
+	set username(username) {
+		this._username = username;
+	}
+
+	/**
+		* @returns {string} username
+		*/
+	get username() {
+		return this._username;
+	}
+
+	/**
+		* @param {string} usertype
+		*/
+	set usertype(usertype) {
+		this.usertype.value = usertype;
+	}
+
+	/**
+		* @returns {Object} usertype
+		*/
+	get usertype() {
+		return this._usertype;
+	}
+
+	/**
+		* @param {string} userorigin
+		*/
+	set userorigin(userorigin) {
+		this.userorigin.value = userorigin;
+	}
+
+	/**
+		* @returns {Object} userorigin
+		*/
+	get userorigin() {
+		return this._userorigin;
+	}
+
+	/**
+		* @returns {Object} intensities
+		*/
+	get intensities() {
+		return this._intensities;
+	}
+
+	/**
+		* @param {string} intensity
+		*/
+	set intensity(intensity) {
+		let selectedIndex = this.intensities.selectedIndex;
+		this.intensities.listElements.map((item, index) => {
+			if (item.innerText === intensity) {
+				selectedIndex = index;
+			}
+		});
+		this.intensities.selectedIndex = selectedIndex;
+	}
+
+	/**
+		* @returns {Object} intensity
+		*/
+	get intensity() {
+		return this.intensities.listElements[this.intensities.selectedIndex].innerText;
+	}
+
+	/**
+		* @returns {Object} nuisances
+		*/
+	get nuisances() {
+		return this._nuisances;
+	}
+
+	/**
+		* @param {string} nuisance
+		*/
+	set nuisance(nuisance) {
+		let selectedIndex = this.nuisances.selectedIndex;
+		this.nuisances.listElements.map((item, index) => {
+			if (item.innerText === nuisance) {
+				selectedIndex = index;
+			}
+		});
+		this.nuisances.selectedIndex = selectedIndex;
+	}
+
+	/**
+		* @returns {string} nuisance
+		*/
+	get nuisance() {
+		return this.nuisances.listElements[this.nuisances.selectedIndex].innerText;
+	}
+
+	/**
+		* @returns {Object} types
+		*/
+	get types() {
+		return this._types;
+	}
+
+	/**
+		* @param {string} type
+		*/
+	set type(type) {
+		let selectedIndex = this.types.selectedIndex;
+		this.types.listElements.map((item, index) => {
+			if (item.innerText === type) {
+				selectedIndex = index;
+			}
+		});
+		this.types.selectedIndex = selectedIndex;
+		// turn usertype when selected last option
+		this.turn(selectedIndex === (this.types.listElements.length - 1), this.usertype, false);
+	}
+
+	/**
+		* @returns {string} type
+		*/
+	get type() {
+		return this.types.listElements[this.types.selectedIndex].innerText;
+	}
+
+	/**
+		* @returns {Object} origins
+		*/
+	get origins() {
+		return this._origins;
+	}
+
+	/**
+		* @param {string} origin
+		*/
+	set origin(origin) {
+		let selectedIndex = this.origins.selectedIndex;
+		this.origins.listElements.map((item, index) => {
+			if (item.innerText === origin) {
+				selectedIndex = index;
+			}
+		});
+		this.origins.selectedIndex = selectedIndex;
+		// turn userorigin when selected last option
+		this.turn(selectedIndex === (this.origins.listElements.length - 1), this.userorigin, false);
+	}
+
+	/**
+		* @returns {string} origin
+		*/
+	get origin() {
+		return this.origins.listElements[this.origins.selectedIndex].innerText;
 	}
 
 	/**
@@ -319,16 +451,67 @@ export class OdorView extends View {
 	}
 
 	/**
+		* @param {string} date
+		*/
+	set date(date) {
+		this.date.value = moment(new Date(date)).format("YYYY-MM-DD");
+	}
+
+	/**
+		* @returns {Object} date
+		*/
+	get date() {
+		return this._date;
+	}
+
+	/**
+		* @param {string} begin
+		*/
+	set begin(begin) {
+		this.begin.value = moment.duration(begin).format("*HH:mm");
+	}
+
+	/**
+		* @returns {Object} begin
+		*/
+	get begin() {
+		return this._begin;
+	}
+
+	/**
+		* @param {string} end
+		*/
+	set end(end) {
+		this.end.value = moment.duration(end).format("*HH:mm");
+	}
+
+	/**
+		* @returns {Object} end
+		*/
+	get end() {
+		return this._end;
+	}
+
+	/**
 	* @param {Odor} odor
 	*/
 	set odor(odor) {
 		// set odor data in page
 		this.id = odor.id;
-		this.name.value = odor.name;
-		this.number.value = odor.number;
-		this.address.value = odor.address;
+		this.userid = odor.userid;
+		this.username = odor.username;
+		this.usertype = odor.usertype;
+		this.userorigin = odor.userorigin;
+		this.intensity = odor.intensity;
+		this.nuisance = odor.nuisance;
+		this.type = odor.type;
+		this.origin = odor.origin;
+		this.address = odor.address;
 		this.latitude = odor.latitude;
 		this.longitude = odor.longitude;
+		this.date = odor.date;
+		this.begin = odor.begin;
+		this.end = odor.end;
 	}
 
 	/**
@@ -338,12 +521,43 @@ export class OdorView extends View {
 		// make odor data
 		let odor = new Odor();
 		odor.id = this.id;
-		odor.name = this.name.value;
-		odor.number = this.number.value;
+		odor.userid = this.userid;
+		odor.username = this.username;
+		odor.usertype = this.usertype.value;
+		odor.userorigin = this.userorigin.value;
+		odor.intensity = this.intensity;
+		odor.nuisance = this.nuisance;
+		odor.type = this.type;
+		odor.origin = this.origin;
 		odor.address = this.address.value;
 		odor.latitude = this.latitude;
 		odor.longitude = this.longitude;
+		odor.date = moment(this.date.value).toDate().toJSON();
+		odor.begin = moment.duration(this.begin.value, "*HH:mm").format("*HH:mm:ss");
+		odor.end = moment.duration(this.end.value, "*HH:mm").format("*HH:mm:ss");
 		return odor;
+	}
+
+	/**
+		* @param {boolean} condition
+		* @param {Object} component 
+		*/
+	turn(condition, component, focus) {
+		// verify condition
+		if (condition) {
+			// disable component
+			component.disabled = false;
+			// verify focus
+			if (focus) {
+				// focuses component
+				component.focus();
+			}
+		} else {
+			// set component with empty
+			component.value = "";
+			// disable component
+			component.disabled = true;
+		}
 	}
 
 	/**
@@ -351,7 +565,7 @@ export class OdorView extends View {
 		*/
 	return() {
 		// move to third slide
-		this.glide.go("=2");
+		this.glide.go("=3");
 	}
 
 }
