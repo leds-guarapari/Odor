@@ -198,4 +198,14 @@ export class ListView extends View {
 		};
 	}
 
+	/**
+		* @param {boolean} visible 
+		*/
+	empty(visible) {
+		// get empty in page
+		let empty = this.element("empty");
+		// set display empty
+		empty.style.display = (visible) ? "block" : "none";
+	}
+
 }

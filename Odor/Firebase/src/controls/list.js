@@ -157,6 +157,8 @@ export class ListControl {
 		return (odor) => {
 			// update odor in odors maps
 			this.odors.set(odor.id, odor);
+			// set display empty in view
+			this.view.empty(false);
 			// add odor in view
 			this.view.added(odor);
 		};
@@ -183,6 +185,8 @@ export class ListControl {
 			this.odors.delete(id);
 			// remove odor in view
 			this.view.removed(id);
+			// set display empty in view
+			this.view.empty(!this.odors.size);
 		};
 	}
 

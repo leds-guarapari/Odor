@@ -43,10 +43,16 @@
 		.date {
 			color: var(--mdc-theme-primary);
 		}
+
+		#empty {
+			display: block;
+			text-align: center;
+			color: var(--mdc-theme-text-secondary-on-background);
+		}
 	</style>
 </head>
 
-<body>
+<body class="mdc-typography">
 	<header class="mdc-top-app-bar mdc-top-app-bar--dense">
 		<div class="mdc-top-app-bar__row">
 			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -56,6 +62,7 @@
 		</div>
 	</header>
 	<main class="mdc-top-app-bar--fixed-adjust">
+		<span id="empty" class="mdc-typography--body2">Nenhuma ocorrência exibida.</span>
 		<ul class="mdc-list mdc-list--dense mdc-list--two-line"></ul>
 		<template>
 			<span class="mdc-list-item__ripple"></span>

@@ -150,8 +150,6 @@ export class OdorControl {
 					if (!odor.id) {
 						// add odor in store
 						this.store.add(odor).then((result) => {
-							// clear session
-							this.session.clear();
 							// resolve promise
 							resolve(result);
 						})
@@ -210,8 +208,6 @@ export class OdorControl {
 			if (odor.id) {
 				// remove odor in store
 				await this.store.remove(odor).then(() => {
-					// clear session
-					this.session.clear();
 					// response handler callback
 					this.handler();
 				})
