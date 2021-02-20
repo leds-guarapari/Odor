@@ -137,6 +137,12 @@
 			min-width: 180px;
 			margin-bottom: 15px;
 		}
+
+		#fab {
+			position: fixed;
+			bottom: 2rem;
+			right: 1rem;
+		}
 	</style>
 </head>
 
@@ -757,6 +763,34 @@
 			</div>
 		</div>
 	</footer>
+	<div id="fab" class="mdc-touch-target-wrapper">
+		<button class="mdc-fab mdc-fab--mini mdc-fab--touch">
+			<div class="mdc-fab__ripple"></div>
+			<span class="material-icons mdc-fab__icon">delete</span>
+			<div class="mdc-fab__touch"></div>
+		</button>
+	</div>
+	<div class="mdc-dialog">
+		<div class="mdc-dialog__container">
+			<div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="dialog-title"
+				aria-describedby="dialog-content">
+				<div class="mdc-dialog__content" id="dialog-content">
+					Você realmente quer excluir este odor?
+				</div>
+				<div class="mdc-dialog__actions">
+					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="confirm">
+						<div class="mdc-button__ripple"></div>
+						<span class="mdc-button__label">Confirmar</span>
+					</button>
+					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+						<div class="mdc-button__ripple"></div>
+						<span class="mdc-button__label">Cancelar</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="mdc-dialog__scrim"></div>
+	</div>
 	<div class="mdc-snackbar">
 		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
 			<div class="mdc-snackbar__label" aria-atomic="false"></div>

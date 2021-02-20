@@ -26,6 +26,8 @@ export class OdorControl {
 		this._view.handler = this.handler;
 		// set view browse
 		this._view.browse = this.browse;
+		// set view remove
+		this._view.remove = this.remove;
 		// initialize firebase service
 		this._firebase = new FirebaseService(config.firebase);
 		// bind an event handler to verify authentication user
@@ -196,6 +198,39 @@ export class OdorControl {
 			this.session = this.view.odor;
 			// redirect to maps page
 			window.location.replace("/maps.html");
+		};
+	}
+
+	/**
+		* @returns {function} remove
+		*/
+	get remove() {
+		return async (odor) => {
+			// verify odor identifier
+			if (odor.id) {
+				// remove odor in store
+				await this.store.remove(odor).then(() => {
+					// clear session
+					this.session.clear();
+					// response handler callback
+					this.handler();
+				})
+					// request is incorrectly returned
+					.catch(() => {
+						// dispatch view exception
+						this.view.exception();
+					})
+					// finally request
+					.finally(() => {
+						// release page
+						this.view.release();
+					});
+			} else {
+				// clear session
+				this.session.clear();
+				// response handler callback
+				this.handler();
+			}
 		};
 	}
 

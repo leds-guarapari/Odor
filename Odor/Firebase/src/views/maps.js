@@ -101,6 +101,13 @@ export class MapsView extends View {
 		return this._marker;
 	}
 
+	/**
+		* @returns {Object} fab
+		*/
+	get fab() {
+		return this._fab;
+	}
+
 	init() {
 		// append script element in page
 		document.head.appendChild(this.script);

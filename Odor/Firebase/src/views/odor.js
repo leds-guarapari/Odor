@@ -88,6 +88,16 @@ export class OdorView extends View {
 		this._userorigin.disabled = true;
 		// initialize browse with simple function
 		this._browse = () => { };
+		// initialize fab button
+		this._fab = new mdc.ripple.MDCRipple(document.querySelector(".mdc-fab"));
+		// add event listener in fab button
+		this._fab.listen("click", this.open);
+		// initialize dialog
+		this._dialog = new mdc.dialog.MDCDialog(document.querySelector(".mdc-dialog"));
+		// add event listener in dialog
+		this._dialog.listen("MDCDialog:closed", this.close);
+		// initialize remove with simple function
+		this._remove = () => { };
 	}
 
 	/**
@@ -130,6 +140,20 @@ export class OdorView extends View {
 		*/
 	get maps() {
 		return this._maps;
+	}
+
+	/**
+		* @returns {Object} fab
+		*/
+	get fab() {
+		return this._fab;
+	}
+
+	/**
+		* @returns {Object} dialog
+		*/
+	get dialog() {
+		return this._dialog;
 	}
 
 	/**
@@ -224,6 +248,52 @@ export class OdorView extends View {
 		*/
 	set browse(browse) {
 		this._browse = browse;
+	}
+
+	/**
+		* @returns {function} remove
+		*/
+	get remove() {
+		return this._remove;
+	}
+
+	/**
+		* @param {function} remove
+		*/
+	set remove(remove) {
+		this._remove = remove;
+	}
+
+	/**
+		* @returns {Event} open
+		*/
+	get open() {
+		// make event
+		return (event) => {
+			// event prevent default
+			event.preventDefault();
+			// open dialog
+			this.dialog.open();
+		};
+	}
+
+	/**
+		* @returns {Event} close
+		*/
+	get close() {
+		// make event
+		return (event) => {
+			// verify confirm
+			if (event.detail.action === "confirm") {
+				// lock page
+				this.lock();
+				// make odor data
+				let odor = new Odor();
+				odor.id = this.id;
+				// dispatch event to listener
+				this.remove(odor);
+			}
+		};
 	}
 
 	/**
