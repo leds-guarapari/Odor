@@ -21,6 +21,8 @@ export class MasterControl {
 		this._view = new MasterView();
 		// set view backward
 		this._view.backward = this.backward;
+		// set view logout
+		this._view.logout = this.logout;
 		// set organization text in view page
 		this._view.organization = config.organization;
 		// initialize firebase service
@@ -162,6 +164,26 @@ export class MasterControl {
 			// redirect to root page
 			window.location.replace("/");
 		};
+	}
+
+	/**
+		* @returns {function} logout
+		*/
+	get logout() {
+		return async () => {
+			// dispatch authentication sign out
+			await firebase.auth().signOut().then(() => { })
+				// request is incorrectly returned
+				.catch(() => {
+					// dispatch view exception
+					this.view.exception();
+				})
+				// finally request
+				.finally(() => {
+					// release page
+					this.view.release();
+				});
+		}
 	}
 
 }

@@ -25,6 +25,16 @@ export class MasterView extends View {
 		this._bar.listen("MDCTopAppBar:nav", this.menu);
 		// initialize page button
 		this._button = new mdc.ripple.MDCRipple(document.querySelector("#button"));
+		// initialize dialog
+		this._dialog = new mdc.dialog.MDCDialog(document.querySelector(".mdc-dialog"));
+		// add event listener in dialog
+		this._dialog.listen("MDCDialog:closed", this.close);
+		// initialize logout with simple function
+		this._logout = () => { };
+		// initialize close button
+		this._cose = new mdc.ripple.MDCRipple(document.querySelector("#close"));
+		// add event listener in close button
+		this._cose.listen("click", this.open);
 	}
 
 	/**
@@ -62,11 +72,61 @@ export class MasterView extends View {
 	}
 
 	/**
+		* @returns {Object} dialog
+		*/
+	get dialog() {
+		return this._dialog;
+	}
+
+	/**
 		* @param {string} organization
 		*/
 	set organization(organization) {
 		// set organization text in page
 		this.element("organization").textContent = organization;
+	}
+
+	/**
+		* @returns {function} logout
+		*/
+	get logout() {
+		return this._logout;
+	}
+
+	/**
+		* @param {function} logout
+		*/
+	set logout(logout) {
+		this._logout = logout;
+	}
+
+	/**
+		* @returns {Event} open
+		*/
+	get open() {
+		// make event
+		return (event) => {
+			// event prevent default
+			event.preventDefault();
+			// open dialog
+			this.dialog.open();
+		};
+	}
+
+	/**
+		* @returns {Event} close
+		*/
+	get close() {
+		// make event
+		return (event) => {
+			// verify confirm
+			if (event.detail.action === "confirm") {
+				// lock page
+				this.lock();
+				// dispatch event to listener
+				this.logout();
+			}
+		};
 	}
 
 }

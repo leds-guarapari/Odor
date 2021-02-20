@@ -142,7 +142,7 @@
 					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</em>
 					<span class="mdc-list-item__text">Meu perfil</span>
 				</a>
-				<a class="mdc-list-item" href="#" aria-current="page">
+				<a id="close" class="mdc-list-item" aria-current="page">
 					<span class="mdc-list-item__ripple"></span>
 					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">close</em>
 					<span class="mdc-list-item__text">Sair</span>
@@ -180,6 +180,27 @@
 			</div>
 		</div>
 	</footer>
+	<div class="mdc-dialog">
+		<div class="mdc-dialog__container">
+			<div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="dialog-title"
+				aria-describedby="dialog-content">
+				<div class="mdc-dialog__content" id="dialog-content">
+					Você realmente quer sair do aplicativo?
+				</div>
+				<div class="mdc-dialog__actions">
+					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="confirm">
+						<div class="mdc-button__ripple"></div>
+						<span class="mdc-button__label">Confirmar</span>
+					</button>
+					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+						<div class="mdc-button__ripple"></div>
+						<span class="mdc-button__label">Cancelar</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="mdc-dialog__scrim"></div>
+	</div>
 	<div class="mdc-snackbar">
 		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
 			<div class="mdc-snackbar__label" aria-atomic="false"></div>
