@@ -131,7 +131,6 @@ export class MasterControl {
 		return this._view;
 	}
 
-
 	/**
 		* @returns {Object} indexed
 		*/

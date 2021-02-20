@@ -1,6 +1,5 @@
 import { config } from "./services.config.min.js";
 import { FirebaseService } from "./services.firebase.min.js";
-import { Odor } from "./models.odor.min.js";
 import { OdorSession } from "./services.odor.min.js";
 import { ListView } from "./views.list.min.js";
 
@@ -31,10 +30,6 @@ export class ListControl {
 				this._authentication = authentication;
 				// initialize session
 				this._session = new OdorSession();
-				// initialize odor
-				this._odor = new Odor();
-				// set user identifier
-				this._odor.userid = this._session.userid;
 				// release view page
 				this._view.release();
 			} else {
@@ -63,20 +58,6 @@ export class ListControl {
 		*/
 	get session() {
 		return this._session;
-	}
-
-	/**
-		* @param {Odor} odor
-		*/
-	set odor(odor) {
-		this._odor = odor;
-	}
-
-	/**
-		* @returns {Odor} type
-		*/
-	get odor() {
-		return this._odor;
 	}
 
 	/**
