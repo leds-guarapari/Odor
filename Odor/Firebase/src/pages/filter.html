@@ -1,83 +1,236 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 	<meta charset="utf-8" />
-	<meta name="google" content="notranslate" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="Gerar planilha de odores por intervalo de datas." />
-	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-	<title>Odor</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.grey-indigo.min.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="google" content="notranslate" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Listagem das todas ocorrências de odor ou mau cheiro." />
+	<title>Todas ocorrências</title>
+	<!-- Default Shortcut Icon -->
+	<link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
+	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+	<link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+	<!-- Default Style Sheet Web -->
+	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
 	<style>
-		p {
-			margin: 5px 0px -15px 0px;
+		:root {
+			--mdc-theme-primary: #01579B;
+			--mdc-theme-background: white;
 		}
-		.md-footer {
-			margin-top: 16px;
+
+		body {
+			margin: 0;
+			background: var(--mdc-theme-background);
 		}
-		.mdl-progress {
-			width: 100%;
-			display: none;
+
+		footer {
 			position: fixed;
-			left: 0;
 			bottom: 0;
+			width: 100%;
+		}
+
+		main {
+			max-width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#button {
+			cursor: pointer;
+			color: var(--mdc-theme-background);
+		}
+
+		.type,
+		.date,
+		.odor {
+			color: var(--mdc-theme-primary);
+		}
+
+		#filter {
+			text-align: center;
+			margin-bottom: 15px;
+		}
+
+		#begin,
+		#end {
+			min-width: 180px;
+			margin-top: 10px;
+		}
+
+		#save {
+			display: none;
+		}
+
+		.mdc-text-field-helper-line {
+			display: inherit;
 		}
 	</style>
 </head>
-<body>
-	<div class="mdl-layout mdl-js-layout">
-		<main class="mdl-layout__content">
-			<div class="mdl-grid">
-				<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet"></div>
-				<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet">
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input id="user" class="mdl-textfield__input" type="email" />
-						<label class="mdl-textfield__label" for="user">E-mail</label>
-						<span class="mdl-textfield__error">E-mail requerido.</span>
-					</div>
-					<br />
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input id="password" class="mdl-textfield__input" type="password" />
-						<label class="mdl-textfield__label" for="password">Senha</label>
-						<span class="mdl-textfield__error">Senha requerida.</span>
-					</div>
-					<p class="mdl-color-text--blue-800">Data inicial</p>
-					<div class="mdl-textfield mdl-js-textfield">
-						<input id="begin" class="mdl-textfield__input" type="date" />
-						<span class="mdl-textfield__error">Data inicial requerida.</span>
-					</div>
-					<p class="mdl-color-text--blue-800">Data final</p>
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input id="end" class="mdl-textfield__input" type="date" />
-						<span class="mdl-textfield__error">Data final requerida.</span>
-					</div>
-					<div class="md-footer">
-						<button
-							class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--white">Download</button>
+
+<body class="mdc-typography">
+	<header class="mdc-top-app-bar mdc-top-app-bar--dense">
+		<div class="mdc-top-app-bar__row">
+			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+				<button id="arrow"
+					class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
+			</section>
+			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+				<div class="mdc-touch-target-wrapper">
+					<button id="button" class="mdc-button mdc-button--touch">
+						<span class="mdc-button__ripple"></span>
+						<span class="mdc-button__label">Exportar</span>
+						<span class="mdc-button__touch"></span>
+					</button>
+				</div>
+			</section>
+		</div>
+	</header>
+	<main class="mdc-top-app-bar--fixed-adjust">
+		<div id="filter">
+			<div>
+				<label id="begin" class="mdc-text-field mdc-text-field--filled">
+					<span class="mdc-text-field__ripple"></span>
+					<span class="mdc-floating-label" id="begin-label">Data inicial</span>
+					<input class="mdc-text-field__input" type="date" aria-labelledby="begin-label"
+						aria-controls="begin-helper-text" aria-describedby="begin-helper-text" required />
+					<span class="mdc-line-ripple"></span>
+				</label>
+				<div class="mdc-text-field-helper-line">
+					<div id="begin-helper-text"
+						class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+						aria-hidden="true">
+						O data inicial é requerida.
 					</div>
 				</div>
-				<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet"></div>
 			</div>
-		</main>
+			<div>
+				<label id="end" class="mdc-text-field mdc-text-field--filled">
+					<span class="mdc-text-field__ripple"></span>
+					<span class="mdc-floating-label" id="end-label">Data final</span>
+					<input class="mdc-text-field__input" type="date" aria-labelledby="end-label"
+						aria-controls="end-helper-text" aria-describedby="end-helper-text" required />
+					<span class="mdc-line-ripple"></span>
+				</label>
+				<div class="mdc-text-field-helper-line">
+					<div id="end-helper-text"
+						class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+						aria-hidden="true">
+						O data final é requerida.
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul class="mdc-list mdc-list--dense mdc-list--two-line"></ul>
+		<template>
+			<span class="mdc-list-item__ripple"></span>
+			<span class="mdc-list-item__text">
+				<span class="mdc-list-item__primary-text">
+					<span class="type"></span>
+					<span class="mdc-list-divider--inset-padding"></span>
+					<span class="intensity"></span>
+				</span>
+				<span class="mdc-list-item__secondary-text"></span>
+			</span>
+			<span class="mdc-list-item__meta">
+				<span class="date"></span>
+				<span class="mdc-list-divider"></span>
+				<span class="begin"></span>
+			</span>
+		</template>
+	</main>
+	<footer>
+		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+			<div class="mdc-linear-progress__buffer">
+				<div class="mdc-linear-progress__buffer-bar"></div>
+				<div class="mdc-linear-progress__buffer-dots"></div>
+			</div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+		</div>
+	</footer>
+	<div class="mdc-snackbar">
+		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+			<div class="mdc-snackbar__label" aria-atomic="false"></div>
+		</div>
 	</div>
-	<div id="message" class="mdl-js-snackbar mdl-snackbar">
-		<div class="mdl-snackbar__text"></div>
-		<button class="mdl-snackbar__action"></button>
+	<div class="mdc-dialog">
+		<div class="mdc-dialog__container">
+			<div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-describedby="dialog-content">
+				<div class="mdc-dialog__content mdc-typography--body2" id="dialog-content">
+					<div>
+						<span class="odor">Nome:</span>
+						<span id="dialog-username"></span>
+					</div>
+					<div>
+						<span class="odor">Endereço:</span>
+						<span id="dialog-address"></span>
+					</div>
+					<div>
+						<span class="odor">Latitude:</span>
+						<span id="dialog-latitude"></span>
+					</div>
+					<div>
+						<span class="odor">Longitude:</span>
+						<span id="dialog-longitude"></span>
+					</div>
+					<div>
+						<span class="odor">Data:</span>
+						<span id="dialog-date"></span>
+					</div>
+					<div>
+						<span class="odor">Início:</span>
+						<span id="dialog-begin"></span>
+					</div>
+					<div>
+						<span class="odor">Fim:</span>
+						<span id="dialog-end"></span>
+					</div>
+					<div>
+						<span class="odor">Intensidade:</span>
+						<span id="dialog-intensity"></span>
+					</div>
+					<div>
+						<span class="odor">Característica:</span>
+						<span id="dialog-type"></span>
+					</div>
+					<div>
+						<span class="odor">Incômodo:</span>
+						<span id="dialog-nuisance"></span>
+					</div>
+					<div>
+						<span class="odor">Origem:</span>
+						<span id="dialog-origin"></span>
+					</div>
+				</div>
+				<div class="mdc-dialog__actions">
+					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+						<div class="mdc-button__ripple"></div>
+						<span class="mdc-button__label">Fechar</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="mdc-dialog__scrim"></div>
 	</div>
-	<div id="error" class="mdl-js-snackbar mdl-snackbar">
-		<div class="mdl-snackbar__text mdl-color-text--red"></div>
-		<button class="mdl-snackbar__action"></button>
-	</div>
-	<div class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-	<script defer src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
-	<script defer src="https://www.gstatic.com/firebasejs/6.6.1/firebase-auth.js"></script>
-	<script defer src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
-	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.8.3/polyfill.min.js"></script>
-	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
-	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.3.2/moment-duration-format.min.js"></script>
-	<script defer src="index.min.js"></script>
+	<a id="save"></a>
+	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
+	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
+	<script defer src="lib/firebase/firebase-app.js"></script>
+	<script defer src="lib/firebase/firebase-auth.js"></script>
+	<script defer src="lib/firebase/firebase-database.js"></script>
+	<script defer src="lib/polyfill/dist/polyfill.min.js"></script>
+	<script defer src="lib/exceljs/dist/exceljs.min.js"></script>
+	<script defer src="lib/moment/moment.min.js"></script>
+	<script defer src="lib/moment-duration-format/moment-duration-format.min.js"></script>
+	<script type="module" src="js/controls.filter.min.js"></script>
 </body>
+
 </html>

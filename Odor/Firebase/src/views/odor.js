@@ -563,8 +563,8 @@ export class OdorView extends View {
 	}
 
 	/**
-	* @param {Odor} odor
-	*/
+		* @param {Odor} odor
+		*/
 	set odor(odor) {
 		// set odor data in page
 		this.id = odor.id;

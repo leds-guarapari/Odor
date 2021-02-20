@@ -38,7 +38,7 @@ export class UserView extends View {
 		this._handler = () => { };
 		// initialize user name
 		this._name = new mdc.textField.MDCTextField(document.querySelector("#name"));
-		// initialize user name
+		// initialize user number
 		this._number = new mdc.textField.MDCTextField(document.querySelector("#number"));
 		// initialize user address
 		this._address = new mdc.textField.MDCTextField(document.querySelector("#address"));
