@@ -24,7 +24,6 @@
 
 		body {
 			margin: 0;
-			text-align: center;
 			background: var(--mdc-theme-background);
 		}
 
@@ -39,6 +38,11 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
+
+		.type,
+		.date {
+			color: var(--mdc-theme-primary);
+		}
 	</style>
 </head>
 
@@ -52,6 +56,23 @@
 		</div>
 	</header>
 	<main class="mdc-top-app-bar--fixed-adjust">
+		<ul class="mdc-list mdc-list--dense mdc-list--two-line"></ul>
+		<template>
+			<span class="mdc-list-item__ripple"></span>
+			<span class="mdc-list-item__text">
+				<span class="mdc-list-item__primary-text">
+					<span class="type"></span>
+					<span class="mdc-list-divider--inset-padding"></span>
+					<span class="intensity"></span>
+				</span>
+				<span class="mdc-list-item__secondary-text"></span>
+			</span>
+			<span class="mdc-list-item__meta">
+				<span class="date"></span>
+				<span class="mdc-list-divider"></span>
+				<span class="begin"></span>
+			</span>
+		</template>
 	</main>
 	<footer>
 		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
@@ -77,6 +98,8 @@
 	<script defer src="lib/firebase/firebase-app.js"></script>
 	<script defer src="lib/firebase/firebase-auth.js"></script>
 	<script defer src="lib/firebase/firebase-database.js"></script>
+	<script defer src="lib/moment/moment.min.js"></script>
+	<script defer src="lib/moment-duration-format/moment-duration-format.min.js"></script>
 	<script type="module" src="js/controls.list.min.js"></script>
 </body>
 
