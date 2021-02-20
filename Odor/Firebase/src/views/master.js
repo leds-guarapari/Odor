@@ -129,4 +129,14 @@ export class MasterView extends View {
 		};
 	}
 
+	/**
+		* @param {boolean} visible 
+		*/
+	filter(visible) {
+		// get filter in page
+		let filter = this.element("filter");
+		// set display empty
+		filter.style.display = (visible) ? "flex" : "none";
+	}
+
 }

@@ -33,6 +33,8 @@ export class MasterControl {
 			if (authentication) {
 				// initialize authentication
 				this._authentication = authentication;
+				// set display filter in view
+				this._view.filter(this._authentication.email === config.admin);
 				// initialize session
 				this._session = new UserSession();
 				// clear session

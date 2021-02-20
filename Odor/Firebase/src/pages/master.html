@@ -79,7 +79,7 @@
 		}
 
 		#new {
-			cursor: pointer;
+			text-decoration: none;
 			color: var(--mdc-theme-primary);
 		}
 
@@ -107,11 +107,11 @@
 			</section>
 			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
 				<div class="mdc-touch-target-wrapper">
-					<button id="button" class="mdc-button mdc-button--touch">
+					<a id="button" class="mdc-button mdc-button--touch" href="/odor.html">
 						<span class="mdc-button__ripple"></span>
 						<span class="mdc-button__label">Nova</span>
 						<span class="mdc-button__touch"></span>
-					</button>
+					</a>
 				</div>
 			</section>
 		</div>
@@ -132,7 +132,7 @@
 					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">blur_circular</em>
 					<span class="mdc-list-item__text">Minhas ocorrências</span>
 				</a>
-				<a class="mdc-list-item" href="/filter.html" aria-current="page">
+				<a id="filter" class="mdc-list-item" href="/filter.html" aria-current="page">
 					<span class="mdc-list-item__ripple"></span>
 					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">blur_linear</em>
 					<span class="mdc-list-item__text">Todas ocorrências</span>
@@ -156,7 +156,7 @@
 			Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro.
 		</div>
 		<div class="mdc-typography--subtitle2">
-			Para nova ocorrência, clique em <span id="new">Nova</span>.
+			Para nova ocorrência, clique em <a id="new" href="/odor.html">Nova</a>.
 		</div>
 		<div id="image"></div>
 		<div id="description" class="mdc-typography--subtitle2">
