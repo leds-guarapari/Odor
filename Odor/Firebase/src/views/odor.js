@@ -172,8 +172,10 @@ export class OdorView extends View {
 					this.lock();
 					// dispatch event to listener
 					await this.dispatch(this.odor).then(() => {
+						// dispatch success
+						this.success();
 						// response handler callback
-						this.handler();
+						setTimeout(this.handler, 2000);
 					})
 						// request is incorrectly returned
 						.catch(() => {

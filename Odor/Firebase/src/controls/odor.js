@@ -208,8 +208,10 @@ export class OdorControl {
 			if (odor.id) {
 				// remove odor in store
 				await this.store.remove(odor).then(() => {
+					// dispatch view warning
+					this.view.warning();
 					// response handler callback
-					this.handler();
+					setTimeout(this.handler, 2000);
 				})
 					// request is incorrectly returned
 					.catch(() => {

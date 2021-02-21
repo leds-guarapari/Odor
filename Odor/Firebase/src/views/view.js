@@ -128,4 +128,14 @@ export class View {
 		this.message(this.element("exception").value);
 	}
 
+	success() {
+		// send success message
+		this.message(this.element("success").value);
+	}
+
+	warning() {
+		// send warning message
+		this.message(this.element("warning").value);
+	}
+
 }

@@ -44,7 +44,7 @@ namespace Odor.ViewModels
                         int index = this.Odors.IndexOf(this.Odors.Where(element => element.Id.Equals(odor.Id)).FirstOrDefault());
                         this.Odors.RemoveAt(index);
                         this.Odors.Insert(index, odor);
-                        MessagingCenter.Send("Sucesso", "Message", "Informações sobre odor atualizados.");
+                        MessagingCenter.Send("Sucesso", "Message", "Informações sobre odor atualizadas.");
                     }
                     else
                     {
