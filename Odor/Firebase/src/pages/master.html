@@ -2,214 +2,214 @@
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="google" content="notranslate" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Aplicativo sobre a percepção de gases odorantes." />
-	<title>Odor</title>
-	<!-- Default Shortcut Icon -->
-	<link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
-	<!-- Default Style Sheet Web -->
-	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
-	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
-	<style>
-		:root {
-			--mdc-theme-primary: #01579B;
-			--mdc-theme-background: white;
-		}
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="google" content="notranslate" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="description" content="Aplicativo sobre a percepção de gases odorantes." />
+ <title>Odor</title>
+ <!-- Default Shortcut Icon -->
+ <link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+ <!-- Default Style Sheet Web -->
+ <link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+ <link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
+ <style>
+  :root {
+   --mdc-theme-primary: #01579B;
+   --mdc-theme-background: white;
+  }
 
-		body {
-			margin: 0;
-			text-align: center;
-			background: var(--mdc-theme-background);
-		}
+  body {
+   margin: 0;
+   text-align: center;
+   background: var(--mdc-theme-background);
+  }
 
-		footer {
-			position: fixed;
-			bottom: 0;
-			width: 100%;
-		}
+  footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+  }
 
-		main {
-			max-width: 800px;
-			margin-left: auto;
-			margin-right: auto;
-		}
+  main {
+   max-width: 800px;
+   margin-left: auto;
+   margin-right: auto;
+  }
 
-		#button {
-			cursor: pointer;
-			color: var(--mdc-theme-background);
-		}
+  #button {
+   cursor: pointer;
+   color: var(--mdc-theme-background);
+  }
 
-		.mdc-drawer {
-			padding-top: 0px;
-		}
+  .mdc-drawer {
+   padding-top: 0px;
+  }
 
-		.mdc-drawer__header {
-			text-align: left;
-			background-color: var(--mdc-theme-primary);
-		}
+  .mdc-drawer__header {
+   text-align: left;
+   background-color: var(--mdc-theme-primary);
+  }
 
-		.mdc-drawer .mdc-drawer__title {
-			color: var(--mdc-theme-background);
-		}
+  .mdc-drawer .mdc-drawer__title {
+   color: var(--mdc-theme-background);
+  }
 
-		.mdc-list-item__graphic {
-			margin-right: 10px;
-		}
+  .mdc-list-item__graphic {
+   margin-right: 10px;
+  }
 
-		.mdc-typography--subtitle2 {
-			padding: 10px 15px;
-			color: var(--mdc-theme-text-secondary-on-background);
-			line-height: var(--mdc-typography-subtitle2-line-height, 1.15rem);
-		}
+  .mdc-typography--subtitle2 {
+   padding: 10px 15px;
+   color: var(--mdc-theme-text-secondary-on-background);
+   line-height: var(--mdc-typography-subtitle2-line-height, 1.15rem);
+  }
 
-		#image {
-			margin-top: 20px;
-			margin-bottom: 40px;
-			min-height: 120px;
-			background-image: url("images/nqualiar.jpg");
-			background-repeat: no-repeat;
-			background-size: contain;
-			background-position: center;
-		}
+  #image {
+   margin-top: 20px;
+   margin-bottom: 40px;
+   min-height: 120px;
+   background-image: url("images/nqualiar.jpg");
+   background-repeat: no-repeat;
+   background-size: contain;
+   background-position: center;
+  }
 
-		#new {
-			text-decoration: none;
-			color: var(--mdc-theme-primary);
-		}
+  #new {
+   text-decoration: none;
+   color: var(--mdc-theme-primary);
+  }
 
-		#description {
-			margin-bottom: 4em;
-		}
+  #description {
+   margin-bottom: 4em;
+  }
 
-		#organization {
-			position: fixed;
-			bottom: 2em;
-			color: black;
-			width: 100%;
-			padding: 0px;
-			max-width: 800px;
-			font-size: var(--mdc-typography-subtitle2-font-size, 0.75rem)
-		}
-	</style>
+  #organization {
+   position: fixed;
+   bottom: 2em;
+   color: black;
+   width: 100%;
+   padding: 0px;
+   max-width: 800px;
+   font-size: var(--mdc-typography-subtitle2-font-size, 0.75rem)
+  }
+ </style>
 </head>
 
 <body class="mdc-typography">
-	<header class="mdc-top-app-bar mdc-top-app-bar--dense">
-		<div class="mdc-top-app-bar__row">
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-				<button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-			</section>
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-				<div class="mdc-touch-target-wrapper">
-					<a id="button" class="mdc-button mdc-button--touch" href="/odor.html">
-						<span class="mdc-button__ripple"></span>
-						<span class="mdc-button__label">Nova</span>
-						<span class="mdc-button__touch"></span>
-					</a>
-				</div>
-			</section>
-		</div>
-	</header>
-	<aside class="mdc-drawer mdc-drawer--modal mdc-top-app-bar--fixed-adjust">
-		<div class="mdc-drawer__header">
-			<h3 class="mdc-drawer__title">Menu</h3>
-		</div>
-		<div class="mdc-drawer__content">
-			<div class="mdc-list">
-				<a class="mdc-list-item mdc-list-item--activated" href="/odor.html" aria-current="page">
-					<span class="mdc-list-item__ripple"></span>
-					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">add_circle_outline</em>
-					<span class="mdc-list-item__text">Nova ocorrência</span>
-				</a>
-				<a class="mdc-list-item" href="/list.html" aria-current="page">
-					<span class="mdc-list-item__ripple"></span>
-					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">blur_circular</em>
-					<span class="mdc-list-item__text">Minhas ocorrências</span>
-				</a>
-				<a id="filter" class="mdc-list-item" href="/filter.html" aria-current="page">
-					<span class="mdc-list-item__ripple"></span>
-					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">blur_linear</em>
-					<span class="mdc-list-item__text">Todas ocorrências</span>
-				</a>
-				<a class="mdc-list-item" href="/user.html" aria-current="page">
-					<span class="mdc-list-item__ripple"></span>
-					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</em>
-					<span class="mdc-list-item__text">Meu perfil</span>
-				</a>
-				<a id="close" class="mdc-list-item" aria-current="page">
-					<span class="mdc-list-item__ripple"></span>
-					<em class="material-icons mdc-list-item__graphic" aria-hidden="true">close</em>
-					<span class="mdc-list-item__text">Sair</span>
-				</a>
-			</div>
-		</div>
-	</aside>
-	<div class="mdc-drawer-scrim"></div>
-	<main class="mdc-top-app-bar--fixed-adjust">
-		<div class="mdc-typography--subtitle2">
-			Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro.
-		</div>
-		<div class="mdc-typography--subtitle2">
-			Para nova ocorrência, clique em <a id="new" href="/odor.html">Nova</a>.
-		</div>
-		<div id="image"></div>
-		<div id="description" class="mdc-typography--subtitle2">
-			Aplicativo para cadastro da percepção de odor, mau cheiro, poluição do ar, incômodos percebidos e efeitos na
-			qualidade de vida, em locais, datas e horários informados, para fins de registro e análise técnica de
-			especialistas.
-		</div>
-		<div id="organization" class="mdc-typography--subtitle2"></div>
-	</main>
-	<footer>
-		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-			<div class="mdc-linear-progress__buffer">
-				<div class="mdc-linear-progress__buffer-bar"></div>
-				<div class="mdc-linear-progress__buffer-dots"></div>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-		</div>
-	</footer>
-	<div class="mdc-dialog">
-		<div class="mdc-dialog__container">
-			<div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-describedby="dialog-content">
-				<div class="mdc-dialog__content" id="dialog-content">
-					Você realmente quer sair deste aplicativo?
-				</div>
-				<div class="mdc-dialog__actions">
-					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
-						<div class="mdc-button__ripple"></div>
-						<span class="mdc-button__label">Cancelar</span>
-					</button>
-					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="confirm">
-						<div class="mdc-button__ripple"></div>
-						<span class="mdc-button__label">Sair</span>
-					</button>
-				</div>
-			</div>
-		</div>
-		<div class="mdc-dialog__scrim"></div>
-	</div>
-	<div class="mdc-snackbar">
-		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-			<div class="mdc-snackbar__label" aria-atomic="false"></div>
-		</div>
-	</div>
-	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
-	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
-	<script defer src="lib/firebase/firebase-app.js"></script>
-	<script defer src="lib/firebase/firebase-auth.js"></script>
-	<script type="module" src="js/controls.master.min.js"></script>
+ <header class="mdc-top-app-bar mdc-top-app-bar--dense">
+  <div class="mdc-top-app-bar__row">
+   <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+   </section>
+   <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+    <div class="mdc-touch-target-wrapper">
+     <a id="button" class="mdc-button mdc-button--touch" href="/odor.html">
+      <span class="mdc-button__ripple"></span>
+      <span class="mdc-button__label">Nova</span>
+      <span class="mdc-button__touch"></span>
+     </a>
+    </div>
+   </section>
+  </div>
+ </header>
+ <aside class="mdc-drawer mdc-drawer--modal mdc-top-app-bar--fixed-adjust">
+  <div class="mdc-drawer__header">
+   <h3 class="mdc-drawer__title">Menu</h3>
+  </div>
+  <div class="mdc-drawer__content">
+   <div class="mdc-list">
+    <a class="mdc-list-item mdc-list-item--activated" href="/odor.html" aria-current="page">
+     <span class="mdc-list-item__ripple"></span>
+     <em class="material-icons mdc-list-item__graphic" aria-hidden="true">add_circle_outline</em>
+     <span class="mdc-list-item__text">Nova ocorrência</span>
+    </a>
+    <a class="mdc-list-item" href="/list.html" aria-current="page">
+     <span class="mdc-list-item__ripple"></span>
+     <em class="material-icons mdc-list-item__graphic" aria-hidden="true">blur_circular</em>
+     <span class="mdc-list-item__text">Minhas ocorrências</span>
+    </a>
+    <a id="filter" class="mdc-list-item" href="/filter.html" aria-current="page">
+     <span class="mdc-list-item__ripple"></span>
+     <em class="material-icons mdc-list-item__graphic" aria-hidden="true">blur_linear</em>
+     <span class="mdc-list-item__text">Todas ocorrências</span>
+    </a>
+    <a class="mdc-list-item" href="/user.html" aria-current="page">
+     <span class="mdc-list-item__ripple"></span>
+     <em class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</em>
+     <span class="mdc-list-item__text">Meu perfil</span>
+    </a>
+    <a id="close" class="mdc-list-item" aria-current="page">
+     <span class="mdc-list-item__ripple"></span>
+     <em class="material-icons mdc-list-item__graphic" aria-hidden="true">close</em>
+     <span class="mdc-list-item__text">Sair</span>
+    </a>
+   </div>
+  </div>
+ </aside>
+ <div class="mdc-drawer-scrim"></div>
+ <main class="mdc-top-app-bar--fixed-adjust">
+  <div class="mdc-typography--subtitle2">
+   Você acessou este aplicativo porque percebeu algum tipo de odor ou mau cheiro.
+  </div>
+  <div class="mdc-typography--subtitle2">
+   Para nova ocorrência, clique em <a id="new" href="/odor.html">Nova</a>.
+  </div>
+  <div id="image"></div>
+  <div id="description" class="mdc-typography--subtitle2">
+   Aplicativo para cadastro da percepção de odor, mau cheiro, poluição do ar, incômodos percebidos e efeitos na
+   qualidade de vida, em locais, datas e horários informados, para fins de registro e análise técnica de
+   especialistas.
+  </div>
+  <div id="organization" class="mdc-typography--subtitle2"></div>
+ </main>
+ <footer>
+  <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+   <div class="mdc-linear-progress__buffer">
+    <div class="mdc-linear-progress__buffer-bar"></div>
+    <div class="mdc-linear-progress__buffer-dots"></div>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+  </div>
+ </footer>
+ <div class="mdc-dialog">
+  <div class="mdc-dialog__container">
+   <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-describedby="dialog-content">
+    <div class="mdc-dialog__content" id="dialog-content">
+     Você realmente quer sair deste aplicativo?
+    </div>
+    <div class="mdc-dialog__actions">
+     <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">Cancelar</span>
+     </button>
+     <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="confirm">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">Sair</span>
+     </button>
+    </div>
+   </div>
+  </div>
+  <div class="mdc-dialog__scrim"></div>
+ </div>
+ <div class="mdc-snackbar">
+  <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+   <div class="mdc-snackbar__label" aria-atomic="false"></div>
+  </div>
+ </div>
+ <data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
+ <script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
+ <script defer src="lib/firebase/firebase-app.js"></script>
+ <script defer src="lib/firebase/firebase-auth.js"></script>
+ <script type="module" src="js/controls.master.min.js"></script>
 </body>
 
 </html>

@@ -2,81 +2,81 @@
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="google" content="notranslate" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Aplicativo sobre a percepção de gases odorantes." />
-	<meta property="og:url" content="https://cloud-odor.web.app/" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Odor" />
-	<meta property="og:description" content="Aplicativo sobre a percepção de gases odorantes." />
-	<meta property="og:image" content="https://cloud-odor.web.app/images/odor-slide.png" />
-	<title>Odor</title>
-	<!-- Default Shortcut Icon -->
-	<link href="images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
-	<link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-	<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
-	<link href="images/odor-57x57.png" rel="apple-touch-icon" sizes="57x57" />
-	<link href="images/odor-60x60.png" rel="apple-touch-icon" sizes="60x60" />
-	<link href="images/odor-72x72.png" rel="apple-touch-icon" sizes="72x72" />
-	<link href="images/odor-76x76.png" rel="apple-touch-icon" sizes="76x76" />
-	<link href="images/odor-114x114.png" rel="apple-touch-icon" sizes="114x114" />
-	<link href="images/odor-120x120.png" rel="apple-touch-icon" sizes="120x120" />
-	<link href="images/odor-144x144.png" rel="apple-touch-icon" sizes="144x144" />
-	<link href="images/odor-152x152.png" rel="apple-touch-icon" sizes="152x152" />
-	<link href="images/odor-180x180.png" rel="apple-touch-icon" sizes="180x180" />
-	<link href="images/odor-192x192.png" rel="icon" type="image/png" sizes="192x192" />
-	<link href="images/odor-32x32.png" rel="icon" type="image/png" sizes="32x32" />
-	<link href="images/odor-96x96.png" rel="icon" type="image/png" sizes="96x96" />
-	<link href="images/odor-16x16.png" rel="icon" type="image/png" sizes="16x16" />
-	<!-- Default Style Sheet Web -->
-	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
-	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
-	<style>
-		:root {
-			--mdc-theme-primary: #01579B;
-			--mdc-theme-background: white;
-		}
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="google" content="notranslate" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="description" content="Aplicativo sobre a percepção de gases odorantes." />
+ <meta property="og:url" content="https://cloud-odor.web.app/" />
+ <meta property="og:type" content="website" />
+ <meta property="og:title" content="Odor" />
+ <meta property="og:description" content="Aplicativo sobre a percepção de gases odorantes." />
+ <meta property="og:image" content="https://cloud-odor.web.app/images/odor-slide.png" />
+ <title>Odor</title>
+ <!-- Default Shortcut Icon -->
+ <link href="images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
+ <link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+ <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+ <link href="images/odor-57x57.png" rel="apple-touch-icon" sizes="57x57" />
+ <link href="images/odor-60x60.png" rel="apple-touch-icon" sizes="60x60" />
+ <link href="images/odor-72x72.png" rel="apple-touch-icon" sizes="72x72" />
+ <link href="images/odor-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+ <link href="images/odor-114x114.png" rel="apple-touch-icon" sizes="114x114" />
+ <link href="images/odor-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+ <link href="images/odor-144x144.png" rel="apple-touch-icon" sizes="144x144" />
+ <link href="images/odor-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+ <link href="images/odor-180x180.png" rel="apple-touch-icon" sizes="180x180" />
+ <link href="images/odor-192x192.png" rel="icon" type="image/png" sizes="192x192" />
+ <link href="images/odor-32x32.png" rel="icon" type="image/png" sizes="32x32" />
+ <link href="images/odor-96x96.png" rel="icon" type="image/png" sizes="96x96" />
+ <link href="images/odor-16x16.png" rel="icon" type="image/png" sizes="16x16" />
+ <!-- Default Style Sheet Web -->
+ <link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+ <link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
+ <style>
+  :root {
+   --mdc-theme-primary: #01579B;
+   --mdc-theme-background: white;
+  }
 
-		body {
-			background: var(--mdc-theme-background);
-		}
+  body {
+   background: var(--mdc-theme-background);
+  }
 
-		footer {
-			position: fixed;
-			bottom: 0;
-			width: 100%;
-		}
-	</style>
+  footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+  }
+ </style>
 </head>
 
 <body>
-	<footer>
-		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-			<div class="mdc-linear-progress__buffer">
-				<div class="mdc-linear-progress__buffer-bar"></div>
-				<div class="mdc-linear-progress__buffer-dots"></div>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-		</div>
-	</footer>
-	<div class="mdc-snackbar">
-		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-			<div class="mdc-snackbar__label" aria-atomic="false"></div>
-		</div>
-	</div>
-	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
-	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
-	<script defer src="lib/firebase/firebase-app.js"></script>
-	<script defer src="lib/firebase/firebase-auth.js"></script>
-	<script type="module" src="js/controls.index.min.js"></script>
+ <footer>
+  <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+   <div class="mdc-linear-progress__buffer">
+    <div class="mdc-linear-progress__buffer-bar"></div>
+    <div class="mdc-linear-progress__buffer-dots"></div>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+  </div>
+ </footer>
+ <div class="mdc-snackbar">
+  <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+   <div class="mdc-snackbar__label" aria-atomic="false"></div>
+  </div>
+ </div>
+ <data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
+ <script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
+ <script defer src="lib/firebase/firebase-app.js"></script>
+ <script defer src="lib/firebase/firebase-auth.js"></script>
+ <script type="module" src="js/controls.index.min.js"></script>
 </body>
 
 </html>

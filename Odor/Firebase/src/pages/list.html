@@ -2,112 +2,111 @@
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="google" content="notranslate" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Listagem das minhas ocorrências de odor ou mau cheiro." />
-	<title>Minhas ocorrências</title>
-	<!-- Default Shortcut Icon -->
-	<link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
-	<!-- Default Style Sheet Web -->
-	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
-	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
-	<style>
-		:root {
-			--mdc-theme-primary: #01579B;
-			--mdc-theme-background: white;
-		}
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="google" content="notranslate" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="description" content="Listagem das minhas ocorrências de odor ou mau cheiro." />
+ <title>Minhas ocorrências</title>
+ <!-- Default Shortcut Icon -->
+ <link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+ <!-- Default Style Sheet Web -->
+ <link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+ <link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
+ <style>
+  :root {
+   --mdc-theme-primary: #01579B;
+   --mdc-theme-background: white;
+  }
 
-		body {
-			margin: 0;
-			background: var(--mdc-theme-background);
-		}
+  body {
+   margin: 0;
+   background: var(--mdc-theme-background);
+  }
 
-		footer {
-			position: fixed;
-			bottom: 0;
-			width: 100%;
-		}
+  footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+  }
 
-		main {
-			max-width: 800px;
-			margin-left: auto;
-			margin-right: auto;
-		}
+  main {
+   max-width: 800px;
+   margin-left: auto;
+   margin-right: auto;
+  }
 
-		.type,
-		.date {
-			color: var(--mdc-theme-primary);
-		}
+  .type,
+  .date {
+   color: var(--mdc-theme-primary);
+  }
 
-		#empty {
-			display: block;
-			text-align: center;
-			color: var(--mdc-theme-text-secondary-on-background);
-		}
-	</style>
+  #empty {
+   display: block;
+   text-align: center;
+   color: var(--mdc-theme-text-secondary-on-background);
+  }
+ </style>
 </head>
 
 <body class="mdc-typography">
-	<header class="mdc-top-app-bar mdc-top-app-bar--dense">
-		<div class="mdc-top-app-bar__row">
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-				<button id="arrow"
-					class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
-			</section>
-		</div>
-	</header>
-	<main class="mdc-top-app-bar--fixed-adjust">
-		<span id="empty" class="mdc-typography--body2">Nenhuma ocorrência exibida.</span>
-		<ul class="mdc-list mdc-list--dense mdc-list--two-line"></ul>
-		<template>
-			<span class="mdc-list-item__ripple"></span>
-			<span class="mdc-list-item__text">
-				<span class="mdc-list-item__primary-text">
-					<span class="type"></span>
-					<span class="mdc-list-divider--inset-padding"></span>
-					<span class="intensity"></span>
-				</span>
-				<span class="mdc-list-item__secondary-text"></span>
-			</span>
-			<span class="mdc-list-item__meta">
-				<span class="date"></span>
-				<span class="mdc-list-divider"></span>
-				<span class="begin"></span>
-			</span>
-		</template>
-	</main>
-	<footer>
-		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-			<div class="mdc-linear-progress__buffer">
-				<div class="mdc-linear-progress__buffer-bar"></div>
-				<div class="mdc-linear-progress__buffer-dots"></div>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-		</div>
-	</footer>
-	<div class="mdc-snackbar">
-		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-			<div class="mdc-snackbar__label" aria-atomic="false"></div>
-		</div>
-	</div>
-	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
-	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
-	<script defer src="lib/firebase/firebase-app.js"></script>
-	<script defer src="lib/firebase/firebase-auth.js"></script>
-	<script defer src="lib/firebase/firebase-database.js"></script>
-	<script defer src="lib/moment/moment.min.js"></script>
-	<script defer src="lib/moment-duration-format/moment-duration-format.min.js"></script>
-	<script type="module" src="js/controls.list.min.js"></script>
+ <header class="mdc-top-app-bar mdc-top-app-bar--dense">
+  <div class="mdc-top-app-bar__row">
+   <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+    <button id="arrow" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
+   </section>
+  </div>
+ </header>
+ <main class="mdc-top-app-bar--fixed-adjust">
+  <span id="empty" class="mdc-typography--body2">Nenhuma ocorrência exibida.</span>
+  <ul class="mdc-list mdc-list--dense mdc-list--two-line"></ul>
+  <template>
+   <span class="mdc-list-item__ripple"></span>
+   <span class="mdc-list-item__text">
+    <span class="mdc-list-item__primary-text">
+     <span class="type"></span>
+     <span class="mdc-list-divider--inset-padding"></span>
+     <span class="intensity"></span>
+    </span>
+    <span class="mdc-list-item__secondary-text"></span>
+   </span>
+   <span class="mdc-list-item__meta">
+    <span class="date"></span>
+    <span class="mdc-list-divider"></span>
+    <span class="begin"></span>
+   </span>
+  </template>
+ </main>
+ <footer>
+  <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+   <div class="mdc-linear-progress__buffer">
+    <div class="mdc-linear-progress__buffer-bar"></div>
+    <div class="mdc-linear-progress__buffer-dots"></div>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+  </div>
+ </footer>
+ <div class="mdc-snackbar">
+  <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+   <div class="mdc-snackbar__label" aria-atomic="false"></div>
+  </div>
+ </div>
+ <data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
+ <script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
+ <script defer src="lib/firebase/firebase-app.js"></script>
+ <script defer src="lib/firebase/firebase-auth.js"></script>
+ <script defer src="lib/firebase/firebase-database.js"></script>
+ <script defer src="lib/moment/moment.min.js"></script>
+ <script defer src="lib/moment-duration-format/moment-duration-format.min.js"></script>
+ <script type="module" src="js/controls.list.min.js"></script>
 </body>
 
 </html>

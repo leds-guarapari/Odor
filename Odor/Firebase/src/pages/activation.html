@@ -2,124 +2,124 @@
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="google" content="notranslate" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Ative o aplicativo Odor com o código informado pelos administradores." />
-	<title>Ativação</title>
-	<!-- Default Shortcut Icon -->
-	<link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
-	<!-- Default Style Sheet Web -->
-	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
-	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
-	<style>
-		:root {
-			--mdc-theme-primary: #01579B;
-			--mdc-theme-background: white;
-		}
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="google" content="notranslate" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="description" content="Ative o aplicativo Odor com o código informado pelos administradores." />
+ <title>Ativação</title>
+ <!-- Default Shortcut Icon -->
+ <link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+ <!-- Default Style Sheet Web -->
+ <link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+ <link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
+ <style>
+  :root {
+   --mdc-theme-primary: #01579B;
+   --mdc-theme-background: white;
+  }
 
-		body {
-			margin: 0;
-			text-align: center;
-			background: var(--mdc-theme-background);
-		}
+  body {
+   margin: 0;
+   text-align: center;
+   background: var(--mdc-theme-background);
+  }
 
-		footer {
-			position: fixed;
-			bottom: 0;
-			width: 100%;
-		}
+  footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+  }
 
-		main {
-			max-width: 800px;
-			margin-left: auto;
-			margin-right: auto;
-		}
+  main {
+   max-width: 800px;
+   margin-left: auto;
+   margin-right: auto;
+  }
 
-		h1 {
-			padding-top: 30px;
-			padding-bottom: 10px;
-			padding-right: 10px;
-			padding-left: 10px;
-			color: var(--mdc-theme-primary);
-		}
+  h1 {
+   padding-top: 30px;
+   padding-bottom: 10px;
+   padding-right: 10px;
+   padding-left: 10px;
+   color: var(--mdc-theme-primary);
+  }
 
-		#button {
-			cursor: pointer;
-		}
+  #button {
+   cursor: pointer;
+  }
 
-		.mdc-typography--body2 {
-			margin: 20px 10px;
-		}
+  .mdc-typography--body2 {
+   margin: 20px 10px;
+  }
 
-		.mdc-text-field-helper-line {
-			display: inherit;
-		}
-	</style>
+  .mdc-text-field-helper-line {
+   display: inherit;
+  }
+ </style>
 </head>
 
 <body class="mdc-typography">
-	<header>
-		<h1 class="mdc-typography--headline5">Qual é o código de ativação?</h1>
-	</header>
-	<main>
-		<div>
-			<label id="code" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-trailing-icon">
-				<span class="mdc-text-field__ripple"></span>
-				<span class="mdc-floating-label" id="code-label">Código de ativação</span>
-				<input class="mdc-text-field__input" type="password" aria-labelledby="code-label"
-					aria-controls="code-helper-text" aria-describedby="code-helper-text" required />
-				<em class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0"
-					role="button" id="code-visibility">visibility</em>
-				<span class="mdc-line-ripple"></span>
-			</label>
-			<div class="mdc-text-field-helper-line">
-				<div id="code-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
-					aria-hidden="true">
-					O código de ativação é requerido.
-				</div>
-			</div>
-		</div>
-		<div class="mdc-typography--body2">
-			Ative o aplicativo Odor com o código informado pelos administradores.
-		</div>
-		<div class="mdc-touch-target-wrapper">
-			<button id="button" class="mdc-button mdc-button--raised mdc-button--touch">
-				<span class="mdc-button__ripple"></span>
-				<span class="mdc-button__label">Ativar</span>
-				<span class="mdc-button__touch"></span>
-			</button>
-		</div>
-	</main>
-	<footer>
-		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-			<div class="mdc-linear-progress__buffer">
-				<div class="mdc-linear-progress__buffer-bar"></div>
-				<div class="mdc-linear-progress__buffer-dots"></div>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-		</div>
-	</footer>
-	<div class="mdc-snackbar">
-		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-			<div class="mdc-snackbar__label" aria-atomic="false"></div>
-		</div>
-	</div>
-	<data id="invalid" value="Código inválido." />
-	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
-	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
-	<script defer src="lib/firebase/firebase-app.js"></script>
-	<script defer src="lib/firebase/firebase-auth.js"></script>
-	<script type="module" src="js/controls.activation.min.js"></script>
+ <header>
+  <h1 class="mdc-typography--headline5">Qual é o código de ativação?</h1>
+ </header>
+ <main>
+  <div>
+   <label id="code" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-trailing-icon">
+    <span class="mdc-text-field__ripple"></span>
+    <span class="mdc-floating-label" id="code-label">Código de ativação</span>
+    <input class="mdc-text-field__input" type="password" aria-labelledby="code-label" aria-controls="code-helper-text"
+     aria-describedby="code-helper-text" required />
+    <em class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button"
+     id="code-visibility">visibility</em>
+    <span class="mdc-line-ripple"></span>
+   </label>
+   <div class="mdc-text-field-helper-line">
+    <div id="code-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+     aria-hidden="true">
+     O código de ativação é requerido.
+    </div>
+   </div>
+  </div>
+  <div class="mdc-typography--body2">
+   Ative o aplicativo Odor com o código informado pelos administradores.
+  </div>
+  <div class="mdc-touch-target-wrapper">
+   <button id="button" class="mdc-button mdc-button--raised mdc-button--touch">
+    <span class="mdc-button__ripple"></span>
+    <span class="mdc-button__label">Ativar</span>
+    <span class="mdc-button__touch"></span>
+   </button>
+  </div>
+ </main>
+ <footer>
+  <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+   <div class="mdc-linear-progress__buffer">
+    <div class="mdc-linear-progress__buffer-bar"></div>
+    <div class="mdc-linear-progress__buffer-dots"></div>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+  </div>
+ </footer>
+ <div class="mdc-snackbar">
+  <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+   <div class="mdc-snackbar__label" aria-atomic="false"></div>
+  </div>
+ </div>
+ <data id="invalid" value="Código inválido." />
+ <data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
+ <script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
+ <script defer src="lib/firebase/firebase-app.js"></script>
+ <script defer src="lib/firebase/firebase-auth.js"></script>
+ <script type="module" src="js/controls.activation.min.js"></script>
 </body>
 
 </html>

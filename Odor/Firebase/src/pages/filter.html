@@ -2,235 +2,232 @@
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="google" content="notranslate" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Listagem das todas ocorrências de odor ou mau cheiro." />
-	<title>Todas ocorrências</title>
-	<!-- Default Shortcut Icon -->
-	<link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
-	<!-- Default Style Sheet Web -->
-	<link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
-	<link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
-	<style>
-		:root {
-			--mdc-theme-primary: #01579B;
-			--mdc-theme-background: white;
-		}
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="google" content="notranslate" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="description" content="Listagem das todas ocorrências de odor ou mau cheiro." />
+ <title>Todas ocorrências</title>
+ <!-- Default Shortcut Icon -->
+ <link href="/images/favicon.ico" rel="icon" type="image/x-icon" sizes="16x16" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+ <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+ <!-- Default Style Sheet Web -->
+ <link href="lib/material-components-web/dist/material-components-web.min.css" rel="stylesheet" />
+ <link href="lib/material-design-icons/iconfont/material-icons.min.css" rel="stylesheet" />
+ <style>
+  :root {
+   --mdc-theme-primary: #01579B;
+   --mdc-theme-background: white;
+  }
 
-		body {
-			margin: 0;
-			background: var(--mdc-theme-background);
-		}
+  body {
+   margin: 0;
+   background: var(--mdc-theme-background);
+  }
 
-		footer {
-			position: fixed;
-			bottom: 0;
-			width: 100%;
-		}
+  footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+  }
 
-		main {
-			max-width: 800px;
-			margin-left: auto;
-			margin-right: auto;
-		}
+  main {
+   max-width: 800px;
+   margin-left: auto;
+   margin-right: auto;
+  }
 
-		#button {
-			cursor: pointer;
-			color: var(--mdc-theme-background);
-		}
+  #button {
+   cursor: pointer;
+   color: var(--mdc-theme-background);
+  }
 
-		.type,
-		.date,
-		.odor {
-			color: var(--mdc-theme-primary);
-		}
+  .type,
+  .date,
+  .odor {
+   color: var(--mdc-theme-primary);
+  }
 
-		#filter {
-			text-align: center;
-			margin-bottom: 15px;
-		}
+  #filter {
+   text-align: center;
+   margin-bottom: 15px;
+  }
 
-		#begin,
-		#end {
-			min-width: 180px;
-			margin-top: 10px;
-		}
+  #begin,
+  #end {
+   min-width: 180px;
+   margin-top: 10px;
+  }
 
-		#save {
-			display: none;
-		}
+  #save {
+   display: none;
+  }
 
-		.mdc-text-field-helper-line {
-			display: inherit;
-		}
-	</style>
+  .mdc-text-field-helper-line {
+   display: inherit;
+  }
+ </style>
 </head>
 
 <body class="mdc-typography">
-	<header class="mdc-top-app-bar mdc-top-app-bar--dense">
-		<div class="mdc-top-app-bar__row">
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-				<button id="arrow"
-					class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
-			</section>
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-				<div class="mdc-touch-target-wrapper">
-					<button id="button" class="mdc-button mdc-button--touch">
-						<span class="mdc-button__ripple"></span>
-						<span class="mdc-button__label">Exportar</span>
-						<span class="mdc-button__touch"></span>
-					</button>
-				</div>
-			</section>
-		</div>
-	</header>
-	<main class="mdc-top-app-bar--fixed-adjust">
-		<div id="filter">
-			<div>
-				<label id="begin" class="mdc-text-field mdc-text-field--filled">
-					<span class="mdc-text-field__ripple"></span>
-					<span class="mdc-floating-label" id="begin-label">Data inicial</span>
-					<input class="mdc-text-field__input" type="date" aria-labelledby="begin-label"
-						aria-controls="begin-helper-text" aria-describedby="begin-helper-text" required />
-					<span class="mdc-line-ripple"></span>
-				</label>
-				<div class="mdc-text-field-helper-line">
-					<div id="begin-helper-text"
-						class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
-						aria-hidden="true">
-						O data inicial é requerida.
-					</div>
-				</div>
-			</div>
-			<div>
-				<label id="end" class="mdc-text-field mdc-text-field--filled">
-					<span class="mdc-text-field__ripple"></span>
-					<span class="mdc-floating-label" id="end-label">Data final</span>
-					<input class="mdc-text-field__input" type="date" aria-labelledby="end-label"
-						aria-controls="end-helper-text" aria-describedby="end-helper-text" required />
-					<span class="mdc-line-ripple"></span>
-				</label>
-				<div class="mdc-text-field-helper-line">
-					<div id="end-helper-text"
-						class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
-						aria-hidden="true">
-						O data final é requerida.
-					</div>
-				</div>
-			</div>
-		</div>
-		<ul class="mdc-list mdc-list--dense mdc-list--two-line"></ul>
-		<template>
-			<span class="mdc-list-item__ripple"></span>
-			<span class="mdc-list-item__text">
-				<span class="mdc-list-item__primary-text">
-					<span class="type"></span>
-					<span class="mdc-list-divider--inset-padding"></span>
-					<span class="intensity"></span>
-				</span>
-				<span class="mdc-list-item__secondary-text"></span>
-			</span>
-			<span class="mdc-list-item__meta">
-				<span class="date"></span>
-				<span class="mdc-list-divider"></span>
-				<span class="begin"></span>
-			</span>
-		</template>
-	</main>
-	<footer>
-		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-			<div class="mdc-linear-progress__buffer">
-				<div class="mdc-linear-progress__buffer-bar"></div>
-				<div class="mdc-linear-progress__buffer-dots"></div>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-				<span class="mdc-linear-progress__bar-inner"></span>
-			</div>
-		</div>
-	</footer>
-	<div class="mdc-snackbar">
-		<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-			<div class="mdc-snackbar__label" aria-atomic="false"></div>
-		</div>
-	</div>
-	<div class="mdc-dialog">
-		<div class="mdc-dialog__container">
-			<div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-describedby="dialog-content">
-				<div class="mdc-dialog__content mdc-typography--body2" id="dialog-content">
-					<div>
-						<span class="odor">Nome:</span>
-						<span id="dialog-username"></span>
-					</div>
-					<div>
-						<span class="odor">Endereço:</span>
-						<span id="dialog-address"></span>
-					</div>
-					<div>
-						<span class="odor">Latitude:</span>
-						<span id="dialog-latitude"></span>
-					</div>
-					<div>
-						<span class="odor">Longitude:</span>
-						<span id="dialog-longitude"></span>
-					</div>
-					<div>
-						<span class="odor">Data:</span>
-						<span id="dialog-date"></span>
-					</div>
-					<div>
-						<span class="odor">Início:</span>
-						<span id="dialog-begin"></span>
-					</div>
-					<div>
-						<span class="odor">Fim:</span>
-						<span id="dialog-end"></span>
-					</div>
-					<div>
-						<span class="odor">Intensidade:</span>
-						<span id="dialog-intensity"></span>
-					</div>
-					<div>
-						<span class="odor">Característica:</span>
-						<span id="dialog-type"></span>
-					</div>
-					<div>
-						<span class="odor">Incômodo:</span>
-						<span id="dialog-nuisance"></span>
-					</div>
-					<div>
-						<span class="odor">Origem:</span>
-						<span id="dialog-origin"></span>
-					</div>
-				</div>
-				<div class="mdc-dialog__actions">
-					<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
-						<div class="mdc-button__ripple"></div>
-						<span class="mdc-button__label">Fechar</span>
-					</button>
-				</div>
-			</div>
-		</div>
-		<div class="mdc-dialog__scrim"></div>
-	</div>
-	<a id="save"></a>
-	<data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
-	<script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
-	<script defer src="lib/firebase/firebase-app.js"></script>
-	<script defer src="lib/firebase/firebase-auth.js"></script>
-	<script defer src="lib/firebase/firebase-database.js"></script>
-	<script defer src="lib/polyfill/dist/polyfill.min.js"></script>
-	<script defer src="lib/exceljs/dist/exceljs.min.js"></script>
-	<script defer src="lib/moment/moment.min.js"></script>
-	<script defer src="lib/moment-duration-format/moment-duration-format.min.js"></script>
-	<script type="module" src="js/controls.filter.min.js"></script>
+ <header class="mdc-top-app-bar mdc-top-app-bar--dense">
+  <div class="mdc-top-app-bar__row">
+   <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+    <button id="arrow" class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">arrow_back</button>
+   </section>
+   <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+    <div class="mdc-touch-target-wrapper">
+     <button id="button" class="mdc-button mdc-button--touch">
+      <span class="mdc-button__ripple"></span>
+      <span class="mdc-button__label">Exportar</span>
+      <span class="mdc-button__touch"></span>
+     </button>
+    </div>
+   </section>
+  </div>
+ </header>
+ <main class="mdc-top-app-bar--fixed-adjust">
+  <div id="filter">
+   <div>
+    <label id="begin" class="mdc-text-field mdc-text-field--filled">
+     <span class="mdc-text-field__ripple"></span>
+     <span class="mdc-floating-label" id="begin-label">Data inicial</span>
+     <input class="mdc-text-field__input" type="date" aria-labelledby="begin-label" aria-controls="begin-helper-text"
+      aria-describedby="begin-helper-text" required />
+     <span class="mdc-line-ripple"></span>
+    </label>
+    <div class="mdc-text-field-helper-line">
+     <div id="begin-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+      aria-hidden="true">
+      O data inicial é requerida.
+     </div>
+    </div>
+   </div>
+   <div>
+    <label id="end" class="mdc-text-field mdc-text-field--filled">
+     <span class="mdc-text-field__ripple"></span>
+     <span class="mdc-floating-label" id="end-label">Data final</span>
+     <input class="mdc-text-field__input" type="date" aria-labelledby="end-label" aria-controls="end-helper-text"
+      aria-describedby="end-helper-text" required />
+     <span class="mdc-line-ripple"></span>
+    </label>
+    <div class="mdc-text-field-helper-line">
+     <div id="end-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+      aria-hidden="true">
+      O data final é requerida.
+     </div>
+    </div>
+   </div>
+  </div>
+  <ul class="mdc-list mdc-list--dense mdc-list--two-line"></ul>
+  <template>
+   <span class="mdc-list-item__ripple"></span>
+   <span class="mdc-list-item__text">
+    <span class="mdc-list-item__primary-text">
+     <span class="type"></span>
+     <span class="mdc-list-divider--inset-padding"></span>
+     <span class="intensity"></span>
+    </span>
+    <span class="mdc-list-item__secondary-text"></span>
+   </span>
+   <span class="mdc-list-item__meta">
+    <span class="date"></span>
+    <span class="mdc-list-divider"></span>
+    <span class="begin"></span>
+   </span>
+  </template>
+ </main>
+ <footer>
+  <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+   <div class="mdc-linear-progress__buffer">
+    <div class="mdc-linear-progress__buffer-bar"></div>
+    <div class="mdc-linear-progress__buffer-dots"></div>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+   <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+   </div>
+  </div>
+ </footer>
+ <div class="mdc-snackbar">
+  <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+   <div class="mdc-snackbar__label" aria-atomic="false"></div>
+  </div>
+ </div>
+ <div class="mdc-dialog">
+  <div class="mdc-dialog__container">
+   <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-describedby="dialog-content">
+    <div class="mdc-dialog__content mdc-typography--body2" id="dialog-content">
+     <div>
+      <span class="odor">Nome:</span>
+      <span id="dialog-username"></span>
+     </div>
+     <div>
+      <span class="odor">Endereço:</span>
+      <span id="dialog-address"></span>
+     </div>
+     <div>
+      <span class="odor">Latitude:</span>
+      <span id="dialog-latitude"></span>
+     </div>
+     <div>
+      <span class="odor">Longitude:</span>
+      <span id="dialog-longitude"></span>
+     </div>
+     <div>
+      <span class="odor">Data:</span>
+      <span id="dialog-date"></span>
+     </div>
+     <div>
+      <span class="odor">Início:</span>
+      <span id="dialog-begin"></span>
+     </div>
+     <div>
+      <span class="odor">Fim:</span>
+      <span id="dialog-end"></span>
+     </div>
+     <div>
+      <span class="odor">Intensidade:</span>
+      <span id="dialog-intensity"></span>
+     </div>
+     <div>
+      <span class="odor">Característica:</span>
+      <span id="dialog-type"></span>
+     </div>
+     <div>
+      <span class="odor">Incômodo:</span>
+      <span id="dialog-nuisance"></span>
+     </div>
+     <div>
+      <span class="odor">Origem:</span>
+      <span id="dialog-origin"></span>
+     </div>
+    </div>
+    <div class="mdc-dialog__actions">
+     <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">Fechar</span>
+     </button>
+    </div>
+   </div>
+  </div>
+  <div class="mdc-dialog__scrim"></div>
+ </div>
+ <a id="save"></a>
+ <data id="exception" value="Ocorreu um erro, tente novamente mais tarde." />
+ <script defer src="lib/material-components-web/dist/material-components-web.min.js"></script>
+ <script defer src="lib/firebase/firebase-app.js"></script>
+ <script defer src="lib/firebase/firebase-auth.js"></script>
+ <script defer src="lib/firebase/firebase-database.js"></script>
+ <script defer src="lib/polyfill/dist/polyfill.min.js"></script>
+ <script defer src="lib/exceljs/dist/exceljs.min.js"></script>
+ <script defer src="lib/moment/moment.min.js"></script>
+ <script defer src="lib/moment-duration-format/moment-duration-format.min.js"></script>
+ <script type="module" src="js/controls.filter.min.js"></script>
 </body>
 
 </html>
