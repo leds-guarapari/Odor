@@ -7,6 +7,7 @@
 const version = "0.1.6";
 
 const files = [
+ "/",
  "/activation",
  "/favicon.ico",
  "/filter",
