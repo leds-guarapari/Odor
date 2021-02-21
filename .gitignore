@@ -339,6 +339,7 @@ Odor/Odor.Android/Properties/AndroidManifest.xml
 # Firebase files
 Odor/Firebase/node_modules
 Odor/Firebase/.firebaserc
+Odor/Firebase/files
 Odor/Firebase/public
 Odor/Firebase/package-lock.json
 Odor/Firebase/firebase-debug.log

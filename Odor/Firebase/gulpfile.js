@@ -7,11 +7,15 @@ const terser = require("gulp-terser");
 
 /**
  * 
- * Task of copy from images and generate distribution files.
+ * Task of copy from icon, files, images and generate distribution files.
  * 
  */
 task("icon", function () {
  return src("images/favicon.ico")
+  .pipe(dest("public/"));
+});
+task("files", function () {
+ return src("files/*")
   .pipe(dest("public/"));
 });
 task("images", function () {
@@ -34,7 +38,9 @@ task("lib/firebase", () => {
   "node_modules/firebase/firebase-auth.js",
   "node_modules/firebase/firebase-auth.js.map",
   "node_modules/firebase/firebase-database.js",
-  "node_modules/firebase/firebase-database.js.map"])
+  "node_modules/firebase/firebase-database.js.map",
+  "node_modules/firebase/firebase-messaging.js",
+  "node_modules/firebase/firebase-messaging.js.map"])
   .pipe(dest("public/lib/firebase/"));
 });
 task("lib/glide", () => {
@@ -149,4 +155,4 @@ task("build", function () {
  * Default task.
  * 
  */
-task("default", series("icon", "images", parallel("lib/exceljs", "lib/firebase", "lib/glide", "lib/googlemaps", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
+task("default", series("icon", "files", "images", parallel("lib/exceljs", "lib/firebase", "lib/glide", "lib/googlemaps", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
