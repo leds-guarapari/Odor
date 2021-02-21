@@ -2,6 +2,7 @@ import { config } from "./services.config.min.js";
 import { FirebaseService } from "./services.firebase.min.js";
 import { UserIndexedDBService, UserDataStore, UserSession } from "./services.user.min.js";
 import { OdorSession } from "./services.odor.min.js";
+import { WorkerService } from "./services.worker.min.js";
 import { MasterView } from "./views.master.min.js";
 
 /**
@@ -33,6 +34,8 @@ export class MasterControl {
    if (authentication) {
     // initialize authentication
     this._authentication = authentication;
+    // initialize worker
+    this._worker = new WorkerService(this._authentication, config);
     // set display filter in view
     this._view.filter(this._authentication.email === config.admin);
     // initialize session
@@ -89,6 +92,13 @@ export class MasterControl {
   */
  get authentication() {
   return this._authentication;
+ }
+
+ /**
+  * @returns {Object} worker
+  */
+ get worker() {
+  return this._worker;
  }
 
  /**
