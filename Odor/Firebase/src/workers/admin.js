@@ -7,11 +7,9 @@
 const version = "0.1.6";
 
 const files = [
- "/activation.html",
- "/activation",
- "/favicon.ico",
- "/filter.html",
- "/filter",
+ "activation.html",
+ "favicon.ico",
+ "filter.html",
  "/images/favicon.ico",
  "/images/nqualiar.jpg",
  "/images/odor-1024x1024.png",
@@ -34,8 +32,7 @@ const files = [
  "/images/odor-background.png",
  "/images/odor.png",
  "/images/odor-slide.png",
- "/index.html",
- "/",
+ "index.html",
  "/js/controls.activation.min.js",
  "/js/controls.filter.min.js",
  "/js/controls.index.min.js",
@@ -89,17 +86,12 @@ const files = [
  "/lib/moment/moment.min.js",
  "/lib/moment-duration-format/moment-duration-format.min.js",
  "/lib/polyfill/dist/polyfill.min.js",
- "/list.html",
- "/list",
- "/manifest.json",
- "/maps.html",
- "/maps",
- "/master.html",
- "/master",
- "/odor.html",
- "/odor",
- "/user.html",
- "/user"
+ "list.html",
+ "manifest.json",
+ "maps.html",
+ "master.html",
+ "odor.html",
+ "user.html"
 ];
 
 // make install listener
