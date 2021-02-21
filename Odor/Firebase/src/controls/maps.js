@@ -19,6 +19,8 @@ export class MapsControl {
   this._source = "https://maps.googleapis.com/maps/api/js?key=" + config.firebase.apiKey + "&callback=initMap"
   // initialize view listener
   this._view = new MapsView(this._source);
+  // initialize session
+  this._session = new MapsSession();
   // set view backward
   this._view.backward = this.backward;
   // set view dispatch
@@ -185,14 +187,12 @@ export class MapsControl {
   return async (google) => {
    // initialize geocoder
    this._geocoder = new google.maps.Geocoder();
-   // initialize session
-   this._session = new MapsSession();
    // verify session
-   if (this._session.latitude !== 0 && this._session.longitude !== 0) {
+   if (this.session.latitude !== 0 && this.session.longitude !== 0) {
     // set position
     await this.position({
-     lat: this._session.latitude,
-     lng: this._session.longitude,
+     lat: this.session.latitude,
+     lng: this.session.longitude,
     });
    } else {
     // dispatch receive to listener
