@@ -146,7 +146,7 @@ task("minified/workers", function () {
    prefix: "workers.",
    suffix: ".min"
   }))
-  .pipe(dest("public/"));
+  .pipe(dest("public/js/"));
 });
 
 /**

@@ -14,7 +14,7 @@ export class WorkerService {
    // verify administrator
    if (administrator) {
     // registry service worker
-    window.navigator.serviceWorker.register("./workers.admin.min.js").then((registration) => {
+    window.navigator.serviceWorker.register("./js/workers.admin.min.js").then((registration) => {
      // initialize registration
      this._registration = registration;
      // update messaging with service worker
@@ -30,7 +30,7 @@ export class WorkerService {
     });
    } else {
     // registry service worker
-    window.navigator.serviceWorker.register("./workers.user.min.js").then((registration) => {
+    window.navigator.serviceWorker.register("./js/workers.user.min.js").then((registration) => {
      // initialize registration
      this._registration = registration;
     });

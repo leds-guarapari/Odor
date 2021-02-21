@@ -4,7 +4,7 @@
  * 
  */
 
-self.importScripts("/workers.files.min.js");
+self.importScripts("/js/workers.files.min.js");
 self.importScripts("/js/services.config.min.js");
 self.importScripts("/js/services.firebase.min.js");
 self.importScripts("/lib/firebase/firebase-app.js");
