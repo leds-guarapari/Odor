@@ -4,7 +4,7 @@
  * 
  */
 
-self.importScripts("/js/workers.files.min.js");
+self.importScripts("/workers.files.min.js");
 self.importScripts("/js/services.config.min.js");
 
 // make install listener
