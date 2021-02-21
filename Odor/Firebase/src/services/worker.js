@@ -1,92 +1,48 @@
 /**
  * 
- * A class represents database methods in Firebase for persisting data.
+ * A class represents a listener to registry service workers.
  * 
  */
 export class WorkerService {
 
  /**
-  * @param {Object} authentication
-  * @param {Object} configuration
+  * @param {boolean} administrator
   */
- constructor(authentication, configuration) {
-  // initialize files
-  this._files = [];
-  // make install listener
-  self.addEventListener("install", (event) => {
-   self.skipWaiting();
-   event.waitUntil(
-    caches.open(configuration.version).then((cache) => {
-     return cache.addAll(this._files);
-    })
-   );
-  });
-  // make activate listener
-  self.addEventListener("activate", (event) => {
-   event.waitUntil(
-    caches.keys().then((list) => {
-     return Promise.all(list.map((key) => {
-      if (key !== version) {
-       return caches.delete(key);
-      }
-     }));
-    })
-   );
-  });
-  // make fetch listener
-  self.addEventListener("fetch", (event) => {
-   event.respondWith(
-    caches.open(version).then((cache) => {
-     return cache.match(event.request).then((response) => {
-      return response || fetch(event.request).then((reply) => {
-       let pathname = new URL(event.request.url).pathname;
-       if (event.request.method === "GET" && !/__/.test(pathname) && !/_\/scs/.test(pathname) && !/js\/api.js/.test(pathname)) {
-        cache.put(event.request, reply.clone());
-       }
-       return reply;
-      }).catch(() => {
-       return caches.match("/index.html");
-      });
+ constructor(administrator) {
+  // verify if service worker is valid
+  if (window.navigator.serviceWorker) {
+   // verify administrator
+   if (administrator) {
+    // registry service worker
+    window.navigator.serviceWorker.register("./js/workers.admin.min.js").then((registration) => {
+     // initialize registration
+     this._registration = registration;
+     // update messaging with service worker
+     firebase.messaging().useServiceWorker(registration);
+     // request permission to notification
+     firebase.messaging().requestPermission().then(() => {
+      firebase.messaging().getToken();
      });
-    })
-   );
-  });
-  // verify authentication is adminstrator
-  if (authentication.email === configuration.admin) {
-   // make messaging with firebase
-   this._messaging = firebase.messaging();
-   // update messaging with background message handler
-   this._messaging.setBackgroundMessageHandler(() => { });
-   // make push listener
-   self.addEventListener("push", (event) => {
-    event.waitUntil(
-     // make promise
-     new Promise(() => {
-      // make current message
-      let message = event.data.json();
-      // show notification
-      return self.registration.showNotification(message.data.title, {
-       body: message.data.body,
-       icon: "/images/odor-256x256.png"
-      });
-     })
-    );
-   });
+     // callback fired if instance token is updated
+     firebase.messaging().onTokenRefresh(() => {
+      firebase.messaging().getToken();
+     });
+    });
+   } else {
+    // registry service worker
+    window.navigator.serviceWorker.register("./js/workers.user.min.js").then((registration) => {
+     // initialize registration
+     this._registration = registration;
+    });
+   }
   }
  }
 
  /**
-  * @returns {Array} files
+  * @returns {Object} registration
   */
- get files() {
-  return this._files;
- }
-
- /**
-  * @returns {Object} messaging
-  */
- get messaging() {
-  return this._messaging;
+ get registration() {
+  return this._registration;
  }
 
 }

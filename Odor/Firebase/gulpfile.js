@@ -138,6 +138,16 @@ task("minified/views", function () {
   }))
   .pipe(dest("public/js/"));
 });
+task("minified/workers", function () {
+ return src("src/workers/*.js")
+  .pipe(eslint())
+  .pipe(terser())
+  .pipe(rename({
+   prefix: "workers.",
+   suffix: ".min"
+  }))
+  .pipe(dest("public/js/"));
+});
 
 /**
  * 
@@ -155,4 +165,4 @@ task("build", function () {
  * Default task.
  * 
  */
-task("default", series("icon", "files", "images", parallel("lib/exceljs", "lib/firebase", "lib/glide", "lib/googlemaps", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views"), "build"));
+task("default", series("icon", "files", "images", parallel("lib/exceljs", "lib/firebase", "lib/glide", "lib/googlemaps", "lib/material-components-web", "lib/material-design-icons", "lib/material-icons", "lib/moment", "lib/moment-duration-format", "lib/polyfill"), parallel("minified/controls", "minified/models", "minified/services", "minified/views", "minified/workers"), "build"));
