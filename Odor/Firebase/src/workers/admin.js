@@ -120,17 +120,16 @@ self.addEventListener("activate", (event) => {
 // make fetch listener
 self.addEventListener("fetch", (event) => {
  event.respondWith(
-  caches.open(version).then((cache) => {
-   return cache.match(event.request).then((response) => {
-    return response || fetch(event.request).then((reply) => {
-     let pathname = new URL(event.request.url).pathname;
-     if (event.request.method === "GET" && !/__/.test(pathname) && !/_\/scs/.test(pathname) && !/js\/api.js/.test(pathname)) {
-      cache.put(event.request, reply.clone());
-     }
-     return reply;
-    }).catch(() => {
-     return caches.match("/index.html");
-    });
+  caches.open(version).then(async (cache) => {
+   const response = await cache.match(event.request);
+   return response || fetch(event.request).then((reply) => {
+    let pathname = new URL(event.request.url).pathname;
+    if (event.request.method === "GET" && !/__/.test(pathname) && !/_\/scs/.test(pathname) && !/js\/api.js/.test(pathname)) {
+     cache.put(event.request, reply.clone());
+    }
+    return reply;
+   }).catch(() => {
+    return caches.match("/index.html");
    });
   })
  );
