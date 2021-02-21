@@ -52,11 +52,11 @@ export class FilterControl {
      this.filter();
     } else {
      // redirect to master page
-     window.location.replace("/master.html");
+     window.location.replace("/master");
     }
    } else {
     // redirect to activation page
-    window.location.replace("/activation.html");
+    window.location.replace("/activation");
    }
   });
  }
@@ -155,7 +155,7 @@ export class FilterControl {
  get backward() {
   return () => {
    // redirect to master page
-   window.location.replace("/master.html");
+   window.location.replace("/master");
   };
  }
 

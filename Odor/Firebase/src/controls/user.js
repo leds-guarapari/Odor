@@ -71,7 +71,7 @@ export class UserControl {
      });
    } else {
     // redirect to activation page
-    window.location.replace("/activation.html");
+    window.location.replace("/activation");
    }
   });
  }
@@ -153,8 +153,8 @@ export class UserControl {
   return () => {
    // clear session
    this.session.clear();
-   // redirect to root page
-   window.location.replace("/");
+   // redirect to master page
+   window.location.replace("/master");
   };
  }
 
@@ -207,7 +207,7 @@ export class UserControl {
  get handler() {
   return () => {
    // redirect to master page
-   window.location.replace("/master.html");
+   window.location.replace("/master");
   };
  }
 
@@ -221,7 +221,7 @@ export class UserControl {
    // set user data in session
    this.session = this.view.user;
    // redirect to maps page
-   window.location.replace("/maps.html");
+   window.location.replace("/maps");
   };
  }
 

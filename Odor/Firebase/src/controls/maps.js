@@ -103,18 +103,18 @@ export class MapsControl {
   return () => {
    // verify session with odor
    if (this.session.odor) {
-    // redirect to root page
-    window.location.replace("/odor.html");
+    // redirect to odor page
+    window.location.replace("/odor");
    }
    // verify session with user
    else if (this.session.user) {
-    // redirect to root page
-    window.location.replace("/user.html");
+    // redirect to user page
+    window.location.replace("/user");
    } else {
     // clear session
     this.session.clear();
-    // redirect to root page
-    window.location.replace("/");
+    // redirect to master page
+    window.location.replace("/master");
    }
   };
  }

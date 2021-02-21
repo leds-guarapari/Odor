@@ -62,7 +62,7 @@ export class MasterControl {
        this.session = this._user;
       } else {
        // redirect to user page
-       window.location.replace("/user.html");
+       window.location.replace("/user");
       }
      });
     })
@@ -77,7 +77,7 @@ export class MasterControl {
      });
    } else {
     // redirect to activation page
-    window.location.replace("/activation.html");
+    window.location.replace("/activation");
    }
   });
  }
@@ -182,8 +182,8 @@ export class MasterControl {
   return () => {
    // clear session
    this.session.clear();
-   // redirect to root page
-   window.location.replace("/");
+   // redirect to master page
+   window.location.replace("/master");
   };
  }
 

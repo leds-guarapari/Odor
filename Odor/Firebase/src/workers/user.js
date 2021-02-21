@@ -7,9 +7,9 @@
 const version = "0.1.6";
 
 const files = [
- "activation.html",
- "favicon.ico",
- "filter.html",
+ "/activation",
+ "/favicon.ico",
+ "/filter",
  "/images/favicon.ico",
  "/images/nqualiar.jpg",
  "/images/odor-1024x1024.png",
@@ -32,7 +32,6 @@ const files = [
  "/images/odor-background.png",
  "/images/odor.png",
  "/images/odor-slide.png",
- "index.html",
  "/js/controls.activation.min.js",
  "/js/controls.filter.min.js",
  "/js/controls.index.min.js",
@@ -86,12 +85,12 @@ const files = [
  "/lib/moment/moment.min.js",
  "/lib/moment-duration-format/moment-duration-format.min.js",
  "/lib/polyfill/dist/polyfill.min.js",
- "list.html",
- "manifest.json",
- "maps.html",
- "master.html",
- "odor.html",
- "user.html"
+ "/list",
+ "/manifest.json",
+ "/maps",
+ "/master",
+ "/odor",
+ "/user"
 ];
 
 // make install listener
@@ -129,7 +128,7 @@ self.addEventListener("fetch", (event) => {
     }
     return reply;
    }).catch(() => {
-    return caches.match("/index.html");
+    return caches.match("/master");
    });
   })
  );

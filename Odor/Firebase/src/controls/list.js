@@ -63,7 +63,7 @@ export class ListControl {
      });
    } else {
     // redirect to activation page
-    window.location.replace("/activation.html");
+    window.location.replace("/activation");
    }
   });
  }
@@ -74,7 +74,7 @@ export class ListControl {
  get handler() {
   return () => {
    // redirect to odor page
-   window.location.replace("/odor.html");
+   window.location.replace("/odor");
   };
  }
 
@@ -210,7 +210,7 @@ export class ListControl {
  get backward() {
   return () => {
    // redirect to master page
-   window.location.replace("/master.html");
+   window.location.replace("/master");
   };
  }
 

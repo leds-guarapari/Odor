@@ -41,10 +41,10 @@ export class IndexControl {
       // verify user is stored
       if (this._user.id) {
        // redirect to master page
-       window.location.replace("/master.html");
+       window.location.replace("/master");
       } else {
        // redirect to user page
-       window.location.replace("/user.html");
+       window.location.replace("/user");
       }
      });
     })
@@ -59,7 +59,7 @@ export class IndexControl {
      });
    } else {
     // redirect to activation page
-    window.location.replace("/activation.html");
+    window.location.replace("/activation");
    }
   });
  }
@@ -118,8 +118,8 @@ export class IndexControl {
   */
  get backward() {
   return () => {
-   // redirect to root page
-   window.location.replace("/");
+   // redirect to master page
+   window.location.replace("/master");
   };
  }
 

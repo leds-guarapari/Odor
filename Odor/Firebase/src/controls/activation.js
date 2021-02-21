@@ -32,8 +32,8 @@ export class ActivationControl {
     // release view page
     this._view.release();
    } else {
-    // redirect to root page
-    window.location.replace("/");
+    // dispatch backward
+    this.backward();
    }
   });
  }
@@ -97,8 +97,8 @@ export class ActivationControl {
   */
  get backward() {
   return () => {
-   // redirect to root page
-   window.location.replace("/");
+   // redirect to master page
+   window.location.replace("/master");
   };
  }
 

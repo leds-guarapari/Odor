@@ -55,11 +55,11 @@ export class OdorControl {
      // clear session
      this._session.clear();
      // redirect to master page
-     window.location.replace("/master.html");
+     window.location.replace("/master");
     }
    } else {
     // redirect to activation page
-    window.location.replace("/activation.html");
+    window.location.replace("/activation");
    }
   });
  }
@@ -131,10 +131,10 @@ export class OdorControl {
    // verify view identifier
    if (this.view.id) {
     // redirect to list page
-    window.location.replace("/list.html");
+    window.location.replace("/list");
    } else {
     // redirect to master page
-    window.location.replace("/master.html");
+    window.location.replace("/master");
    }
   };
  }
@@ -195,7 +195,7 @@ export class OdorControl {
    // set odor data in session
    this.session = this.view.odor;
    // redirect to maps page
-   window.location.replace("/maps.html");
+   window.location.replace("/maps");
   };
  }
 
