@@ -7,7 +7,7 @@
   "cleanUrls": true,
   "headers": [
    {
-    "source": "**/*.@(js|css|jpg|jpeg|gif|png)",
+    "source": "**/*.@(js|css|jpg|jpeg|gif|png|ico)",
     "headers": [
      {
       "key": "Cache-Control",
