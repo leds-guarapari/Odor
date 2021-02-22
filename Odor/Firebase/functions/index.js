@@ -9,13 +9,14 @@ exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate((snapsh
  // initialize odor
  let odor = snapshot.val();
  // initialize message
- let message = {
-  data: {
+ let payload = {
+  notification: {
    title: odor.type,
    body: odor.username
-  },
-  topic: 'Odor'
+  }
  };
+ console.log(payload);
  // return send message
- return admin.messaging().send(message);
+ // return admin.messaging().send(payload);
+ return Promise.resolve();
 });
