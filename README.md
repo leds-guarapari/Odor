@@ -12,17 +12,39 @@ Crie um projeto no [Firebase](https://firebase.google.com/). Modifique os arquiv
   }
 }
 ```
-### Firebase\src\firebase.js
+### Firebase\src\services\config.js
 ```javascript
-firebase.initializeApp({
-    apiKey: "YOUR-PROJECT-API-KEY-IN-FIREBASE",
-    authDomain: "YOUR-PROJECT-ID-IN-FIREBASE.firebaseapp.com",
-    databaseURL: "https://YOUR-PROJECT-ID-IN-FIREBASE.firebaseio.com",
-    projectId: "YOUR-PROJECT-ID-IN-FIREBASE",
-    storageBucket: "YOUR-PROJECT-ID-IN-FIREBASE.appspot.com",
-    messagingSenderId: "YOUR-PROJECT-MESSAGING-SENDER-ID-IN-FIREBASE",
-    appId: "YOUR-PROJECT-APP-ID-IN-FIREBASE"
-});
+export const config = {
+ organization: "YOUR-NAME-ORGANIZATION",
+ user: "YOUR-PROJECT-EMAIL-USER-IN-FIREBASE",
+ admin: "YOUR-PROJECT-EMAIL-ADMIN-IN-FIREBASE",
+ version: "VERSION",
+ firebase: {
+  apiKey: "YOUR-PROJECT-API-KEY-IN-FIREBASE",
+  authDomain: "YOUR-PROJECT-ID-IN-FIREBASE.firebaseapp.com",
+  databaseURL: "https://YOUR-PROJECT-ID-IN-FIREBASE.firebaseio.com",
+  projectId: "YOUR-PROJECT-ID-IN-FIREBASE",
+  storageBucket: "YOUR-PROJECT-ID-IN-FIREBASE.appspot.com",
+  messagingSenderId: "YOUR-PROJECT-MESSAGING-SENDER-ID-IN-FIREBASE",
+  appId: "YOUR-PROJECT-APP-ID-IN-FIREBASE"
+ },
+ vapidKey: "YOUR-PROJECT-VAPID-KEY-IN-FIREBASE",
+ odor: {
+  intensity: "Não sabe",
+  nuisance: "Não sabe",
+  type: "Não sabe",
+  origin: "Não sabe",
+  address: "Não informado",
+  user: {
+   type: "Outro",
+   origin: "Outro"
+  },
+ },
+ address: {
+  localized: "Local selecionado",
+  localizing: "Localizando endereço..."
+ }
+};
 ```
 ### Odor\Services\config.json
 ```json
