@@ -49,6 +49,7 @@ const files = [
  "/js/services.maps.min.js",
  "/js/services.odor.min.js",
  "/js/services.store.min.js",
+ "/js/services.token.min.js",
  "/js/services.user.min.js",
  "/js/services.worker.min.js",
  "/js/views.activation.min.js",

@@ -8,15 +8,22 @@ admin.initializeApp();
 exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate((snapshot) => {
  // initialize odor
  let odor = snapshot.val();
- // initialize message
+ // initialize payload
  let payload = {
-  notification: {
-   title: odor.type,
-   body: odor.username
+  data: {
+   title: odor.Type,
+   body: odor.UserName
   }
  };
  console.log(payload);
+ // initialize tokens
+ let tokens;
+ // get list of device notification tokens
+ await admin.database().ref('/tokens').once('value').then((result) => {
+  tokens = Object.keys(result.val());
+ });
+ console.log(tokens);
  // return send message
- // return admin.messaging().send(payload);
+ // return admin.messaging().sendToDevice(tokens, payload);
  return Promise.resolve();
 });

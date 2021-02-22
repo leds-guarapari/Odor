@@ -1,3 +1,5 @@
+import { TokenDataStore } from "./services.token.min.js";
+
 /**
  * 
  * A class represents a listener to registry service workers.
@@ -12,6 +14,8 @@ export class WorkerService {
  constructor(administrator, vapidKey) {
   // verify if service worker is valid
   if (window.navigator.serviceWorker) {
+   // initialize token data store
+   this._store = new TokenDataStore();
    // verify administrator
    if (administrator) {
     // registry service worker
@@ -26,6 +30,8 @@ export class WorkerService {
       firebase.messaging().getToken({ vapidKey: vapidKey }).then((token) => {
        // initialize token
        this._token = token;
+       // dispatch update token in listener
+       return this._store.update(this._token);
       });
      });
      // callback fired if instance token is updated
@@ -34,6 +40,8 @@ export class WorkerService {
       firebase.messaging().getToken({ vapidKey: vapidKey }).then((token) => {
        // initialize token
        this._token = token;
+       // dispatch update token in listener
+       return this._store.update(this._token);
       });
      });
     });
@@ -45,6 +53,13 @@ export class WorkerService {
     });
    }
   }
+ }
+
+ /**
+  * @returns {Object} store
+  */
+ get store() {
+  return this._store;
  }
 
  /**
