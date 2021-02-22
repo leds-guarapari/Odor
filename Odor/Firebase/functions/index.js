@@ -13,7 +13,8 @@ exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate((snapsh
   data: {
    title: odor.type,
    body: odor.username
-  }
+  },
+  topic: 'Odor'
  };
  // return send message
  return admin.messaging().send(message);
