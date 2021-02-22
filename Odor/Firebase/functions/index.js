@@ -5,9 +5,9 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate((snap) => {
+exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate((snapshot) => {
  // initialize odor
- let odor = snap.data().original;
+ let odor = snapshot.val();
  // initialize message
  let message = {
   data: {
