@@ -37,7 +37,7 @@ export class MasterControl {
     // initialize administrator
     this._administrator = (this._authentication.email === config.admin);
     // initialize worker
-    this._worker = new WorkerService(this._administrator);
+    this._worker = new WorkerService(this._administrator, config.vapidKey);
     // set display filter in view
     this._view.filter(this._administrator);
     // initialize session
