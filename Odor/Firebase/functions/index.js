@@ -5,7 +5,7 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate((snapshot) => {
+exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate(async (snapshot) => {
  // initialize odor
  let odor = snapshot.val();
  // initialize payload
@@ -15,15 +15,36 @@ exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate((snapsh
    body: odor.UserName
   }
  };
- console.log(payload);
  // initialize tokens
- let tokens;
+ let tokens = [];
  // get list of device notification tokens
  await admin.database().ref('/tokens').once('value').then((result) => {
   tokens = Object.keys(result.val());
  });
- console.log(tokens);
- // return send message
- // return admin.messaging().sendToDevice(tokens, payload);
- return Promise.resolve();
+ // verify tokens
+ if (tokens.length) {
+  // send notifications to all tokens
+  let response = await admin.messaging().sendToDevice(tokens, payload);
+  // initialize removes
+  let removes = [];
+  // for each message check if there was an error
+  response.results.forEach((result, index) => {
+   // initialize error
+   let error = result.error;
+   // verify error
+   if (error) {
+    // cleanup the tokens who are not registered anymore
+    if (error.code === 'messaging/invalid-registration-token' ||
+     error.code === 'messaging/registration-token-not-registered') {
+     // push remove promise
+     removes.push(admin.database().ref('/tokens').child(tokens[index]).remove());
+    }
+   }
+  });
+  // dispatch all removes
+  return Promise.all(removes);
+ } else {
+  // resolve promise
+  return Promise.resolve();
+ }
 });
