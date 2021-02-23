@@ -19,7 +19,11 @@ exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate(async (
  let tokens = [];
  // get list of device notification tokens
  await admin.database().ref('/tokens').once('value').then((result) => {
-  tokens = Object.keys(result.val());
+  // verify result
+  if (result.hasChildren()) {
+   // listing all tokens as an array
+   tokens = Object.keys(result.val());
+  }
  });
  // verify tokens
  if (tokens.length) {
