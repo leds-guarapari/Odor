@@ -1,3 +1,7 @@
+## 0.1.6
+
+* Reconfiguração para suporte em PWA (Progressive Web Apps)
+
 ## 0.1.5
 
 * Atualização de pacotes e perguntas sobre incômodo e origem
