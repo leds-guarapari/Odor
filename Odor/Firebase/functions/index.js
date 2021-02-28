@@ -12,7 +12,7 @@ exports.sendMessage = functions.database.ref('/odors/{odorId}').onCreate(async (
  let payload = {
   data: {
    title: odor.Type,
-   body: odor.UserName
+   body: odor.Address
   }
  };
  // initialize tokens

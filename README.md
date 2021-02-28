@@ -1,5 +1,5 @@
 # Odor
-Projeto de iniciação científica referente a um aplicativo sobre a percepção de gases odorantes.
+Projeto referente a um aplicativo sobre a percepção de gases odorantes.
 
 ## Instalação
 Crie um projeto no [Firebase](https://firebase.google.com/). Modifique os arquivos de acordo com as configurações do projeto criado.
