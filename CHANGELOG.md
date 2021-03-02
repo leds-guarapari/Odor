@@ -1,3 +1,7 @@
+## 0.1.7
+
+* Correções visuais, como ícone, fontes e formatações.
+
 ## 0.1.6
 
 * Reconfiguração para suporte em PWA (Progressive Web Apps)
