@@ -18,6 +18,7 @@ const files = [
  "/images/odor-120x120.png",
  "/images/odor-144x144.png",
  "/images/odor-152x152.png",
+ "/images/odor-167x167.png",
  "/images/odor-16x16.png",
  "/images/odor-180x180.png",
  "/images/odor-192x192.png",

@@ -6,7 +6,7 @@
  "display": "standalone",
  "orientation": "portrait",
  "theme_color": "#01579B",
- "background_color": "white",
+ "background_color": "#01579B",
  "description": "Aplicativo sobre a percepção de gases odorantes.",
  "gcm_sender_id": "340900223923",
  "icons": [
@@ -68,6 +68,11 @@
   {
    "src": "images/odor-152x152.png",
    "sizes": "152x152",
+   "type": "image/png"
+  },
+  {
+   "src": "images/odor-167x167.png",
+   "sizes": "167x167",
    "type": "image/png"
   },
   {
